@@ -4,7 +4,7 @@ author: "A.J. Brown"
 date: "`r Sys.Date()`"
 output: html_document
 ---
-
+# Sampler Comparison Analysis Using Bayesian Inference
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -14,17 +14,18 @@ knitr::opts_chunk$set(echo = TRUE)
 library(rethinking)
 ```
 
+## Data Import and Preparation
 ```{r}
 # load simulated data for testing
 # note that this script places the working directory in the 2_code folder, not the root of the project
 d <- read.csv("../1_data/sim_data.csv")
 ```
 
-
 ```{r}
 # parse data into sub dataframes for each analyte_abbr
 d_list <- split(d, d$analyte_abbr)
-# commented out to use one at a time
+# commented out to use one at a time or all at once
+# dat <- d
  dat <- d_list$NO3
 # dat <- d_list$NO2
 # dat <- d_list$TKN
@@ -36,10 +37,86 @@ d_list <- split(d, d$analyte_abbr)
 # dat <- d_list$TDS
 ```
 
-```{r}
-# fit model
+## Model Generation
 
-## R code 15.3
+```{r}
+# create data list for ulam models
+dlist <- list(
+    C_obs = standardize(dat$result),
+    #C_sd = d$Divorce.SE / sd( d$Divorce ), # we don't have SE from our sample
+    S = as.numeric(as.factor(dat$method.name)),
+    TRT = as.numeric(as.factor(dat$treatment)),
+    I = as.numeric(as.factor(dat$event.count)),
+    N = nrow(dat)
+)
+```
+
+
+```{r}
+# fit model 1.0, treating C_true as observed data
+m1.0 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(mu, sigma),
+        sigma ~ dexp(1),
+        
+        mu <- a + bS[S] + bTRT[TRT],
+        a ~ dnorm(0,0.2),
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5)
+        
+        
+    ) , data=dlist , chains=4 , cores=4 )
+```
+
+```{r}
+# fit model 2.0, using partial pooling around irrigation event count (centered)
+m2.0 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(mu, sigma),
+        sigma ~ dexp(1),
+        
+        mu <- a[I] + bS[S] + bTRT[TRT],
+        # regular priors
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5),
+        # adaptive priors
+        a[I] ~ dnorm(a_bar,sigma_a),
+        # hyper-priors
+        a_bar ~ dnorm(0,0.5),
+        sigma_a ~ dexp(1)
+        
+    ), data=dlist , chains=4 , cores=4)
+```
+
+```{r}
+# fit model 2.1, using partial pooling around irrigation event count (non-centered)
+m2.1 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(mu, sigma),
+        sigma ~ dexp(1),
+        # model
+        mu <- a_bar + z[I]*sigma_a + bS[S] + bTRT[TRT],
+        # regular priors
+        a_bar ~ dnorm(0,0.5),
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5),
+        z[I] ~ dnorm(0,1),
+        sigma_a ~ dexp(1),
+        gq> vector[I]:a <<- a_bar + z[I]*sigma_a
+        # adaptive priors
+        # none
+        # hyper-priors
+        # none
+        
+    ), data=dlist , chains=4 , cores=4 )
+```
+
+```{r}
+# fit model 3.0, treating C_true as unobserved data
+
 dlist <- list(
     C_obs = standardize(dat$result),
     #C_sd = d$Divorce.SE / sd( d$Divorce ), # we don't have SE from our sample
@@ -48,42 +125,71 @@ dlist <- list(
     N = nrow(dat)
 )
 
-m15.1 <- ulam(
+m3.0 <- ulam(
     alist(
         # model for C* (observed results)
-        C_obs ~ dnorm(C_true , C_sd),
-
+        C_obs ~ dnorm(C_true, C_sd),
+        C_sd ~ dexp(1), # need a prior for C_sd
+        
         # model for D (unobserved)
         vector[N]:C_true ~ dnorm(mu , sigma),
-        mu <- a + bS*S + bTRT*TRT,
+        mu <- a + bS[S] + bTRT[TRT],
         a ~ dnorm(0,0.2),
-        bS ~ dnorm(0,0.5),
-        bTRT ~ dnorm(0,0.5),
-        sigma ~ dexp(1),
-        C_sd ~ dexp(1) # adding this here, since we don't have this in dat
-    ) , data=dlist , chains=4 , cores=4 )
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5),
+        sigma ~ dexp(1)
+        
+    ) , data=dlist , chains=4 , cores=4)
 ```
 
-
+## Model Summaries
 ```{r}
-# summarize results
-precis(m15.1 , depth=2)
-
-# traceplots
-trankplot(m15.1, n_cols=2, lwd=1)
+# model 1.0 - no partial pooling by irrigation
+precis(m1.0 , depth=2)
 ```
 
 ```{r}
-# plot impacts of method and treatment
+# model 2.0 - centered
+precis(m2.0 , depth=2)
+```
+
+```{r}
+# model 2.1 - non-centered
+precis(m2.1 , depth=2)
+```
+
+```{r}
+# model 3.0 - true value unobserved
+precis(m3.0 , depth=2)
+```
+
+## Graphing Results
+```{r}
 # extract posterior predictions
-post <- extract.samples(m15.1)
+post <- extract.samples(m2.1)
 
+# make dataframes
+bS_df <- as.data.frame(post$bS)
+
+bTRT_df <- as.data.frame(post$bTRT)
+```
+
+### Effect of Sample Method
+```{r}
 # plot effect of S
-dens(post$bS, lwd=4, col=2, xlab='bS (Effect of Sample Method)', ylab='Density')
+dens(bS_df$V1, lwd=4, col=2, xlab="bS (Effect of Sample Method)") # Red: Grab Sample
+dens(bS_df$V2, lwd=4, col=4, xlab="bS (Effect of Sample Method)", add=TRUE) # Blue: Hourly Grab
+dens(bS_df$V3, lwd=4, col=6, xlab="bS (Effect of Sample Method)", add=TRUE) # Purple: ISCO
+dens(bS_df$V4, lwd=4, col=8, xlab="bS (Effect of Sample Method)", add=TRUE) # Gray: Low-Cost Sampler
 abline(v=0,lty=3)
+```
 
+### Effect of Tillage
+```{r}
 # plot effect of TRT
-dens(post$bTRT, lwd=4, col=2, xlab='bTRT (Effect of Tillage)', ylab='Density')
+dens(bTRT_df$V1, lwd=4, col=2, xlab="bS (Effect of Tillage)") # Red: CT
+dens(bTRT_df$V2, lwd=4, col=4, xlab="bS (Effect of Tillage)", add=TRUE) # Blue: MT
+dens(bTRT_df$V3, lwd=4, col=6, xlab="bS (Effect of Tillage)", add=TRUE) # Purple: ST
 abline(v=0,lty=3)
 
 ```
