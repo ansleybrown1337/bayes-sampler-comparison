@@ -78,7 +78,38 @@ The script can be found in `2_code/data_sim.R`, and the results can be found in 
 ### Create a causal model
 Produced by [dagitty.net](https://www.dagitty.net/dags.html#), the causal model is a directed acyclic graph (DAG) that represents the relationships between the variables in the study.  This model will be used to create the statistical model in R.
 
+![Figure 3: Causal Model](figs/dag.png)
+
+Where sampler method (S) and tillage treatment (T) influence the unobserved true concentration (C), which in turn influences the observed concentration (C*). The observed concentration is also influenced by measurement error (*e*).
+
+Here was the code used to generate the DAG:
+
+```{r}
+dag {
+"Measurement Error" [pos="0.158,-1.083"]
+"Obs. Conc." [outcome,pos="-0.414,-0.561"]
+"Sampler Method" [exposure,pos="-1.296,-0.978"]
+"Tillage Treatment" [exposure,pos="-1.270,-0.285"]
+"True Conc." [latent,pos="-0.918,-0.566"]
+"Measurement Error" -> "Obs. Conc."
+"Sampler Method" -> "True Conc."
+"Tillage Treatment" -> "True Conc."
+"True Conc." -> "Obs. Conc."
+}
+```
+
 ### Create the statistical model
+The statistical model is created using the DAG and the following assumptions:
+$$ C_i \sim Normal(\mu_i, \sigma) $$
+$$ \mu_i = \alpha + \beta_{S}S_i + \beta_{T_i}T_i $$
+$$ C* = C_i + e_{C,i} $$
+$$ e_{C,i} \sim Normal(0, \sigma_{C}) $$
+
+Because the a feature of normal distributions is that the sum of two normal distributions is also normal, we can simplify the model to:
+$$ C_i \sim Normal(\mu_i, \sigma) $$
+$$ \mu_i = \alpha + \beta_{S}S_i + \beta_{T_i}T_i $$
+$$ C* \sim Normal(D_i, \sigma_{C}) $$
+
 
 
 ### Create the statistical model in R

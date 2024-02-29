@@ -1,0 +1,90 @@
+---
+title: "analysis"
+author: "A.J. Brown"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, include=FALSE}
+# load libraries
+library(rethinking)
+```
+
+```{r}
+# load simulated data for testing
+# note that this script places the working directory in the 2_code folder, not the root of the project
+d <- read.csv("../1_data/sim_data.csv")
+```
+
+
+```{r}
+# parse data into sub dataframes for each analyte_abbr
+d_list <- split(d, d$analyte_abbr)
+# commented out to use one at a time
+ dat <- d_list$NO3
+# dat <- d_list$NO2
+# dat <- d_list$TKN
+# dat <- d_list$TP
+# dat <- d_list$OP
+# dat <- d_list$TSS
+# dat <- d_list$EC
+# dat <- d_list$pH
+# dat <- d_list$TDS
+```
+
+```{r}
+# fit model
+
+## R code 15.3
+dlist <- list(
+    C_obs = standardize(dat$result),
+    #C_sd = d$Divorce.SE / sd( d$Divorce ), # we don't have SE from our sample
+    S = as.numeric(as.factor(dat$method.name)),
+    TRT = as.numeric(as.factor(dat$treatment)),
+    N = nrow(dat)
+)
+
+m15.1 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(C_true , C_sd),
+
+        # model for D (unobserved)
+        vector[N]:C_true ~ dnorm(mu , sigma),
+        mu <- a + bS*S + bTRT*TRT,
+        a ~ dnorm(0,0.2),
+        bS ~ dnorm(0,0.5),
+        bTRT ~ dnorm(0,0.5),
+        sigma ~ dexp(1),
+        C_sd ~ dexp(1) # adding this here, since we don't have this in dat
+    ) , data=dlist , chains=4 , cores=4 )
+```
+
+
+```{r}
+# summarize results
+precis(m15.1 , depth=2)
+
+# traceplots
+trankplot(m15.1, n_cols=2, lwd=1)
+```
+
+```{r}
+# plot impacts of method and treatment
+# extract posterior predictions
+post <- extract.samples(m15.1)
+
+# plot effect of S
+dens(post$bS, lwd=4, col=2, xlab='bS (Effect of Sample Method)', ylab='Density')
+abline(v=0,lty=3)
+
+# plot effect of TRT
+dens(post$bTRT, lwd=4, col=2, xlab='bTRT (Effect of Tillage)', ylab='Density')
+abline(v=0,lty=3)
+
+```
+
