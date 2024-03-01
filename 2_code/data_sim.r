@@ -30,7 +30,7 @@ all_combinations <- expand.grid(event.count=event.count,
 
 # Assuming we define some multiplicative offsets for demonstration
 method_offsets <- list("Low-Cost Sampler" = 0.8, "Grab Sample" = 1, "Hourly Grab" = .98, "ISCO" = 0.9)
-treatment_offsets <- list("CT" = 1.5, "MT" = 1, "ST" = 0.9)
+treatment_offsets <- list("CT" = 1, "MT" = 1, "ST" = 1)
 
 # Function to adjust mean based on method and treatment
 adjust_mean <- function(base_mean, method, treatment) {

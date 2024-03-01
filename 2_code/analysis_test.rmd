@@ -93,9 +93,10 @@ m2.0 <- ulam(
         bTRT[TRT] ~ dnorm(0,0.5),
         # adaptive priors
         a[I] ~ dnorm(a_bar, sigma_a),
-        g[A] ~ dnorm(0, sigma_g),
+        g[A] ~ dnorm(g_bar, sigma_g),
         # hyper-priors
         a_bar ~ dnorm(0,0.5),
+        g_bar ~ dnorm(0,0.5),
         sigma_a ~ dexp(1),
         sigma_g ~ dexp(1)
         
@@ -253,16 +254,16 @@ p_mu
 ```
 ```{r}
 # Modified function to loop through method.name levels and calculate mean results
-calculate_mean_results_for_methods <- function(data, analyte_abbr, event_count, treatment) {
+calculate_mean_results_for_methods <- function(data, analyte, event_count, trt) {
   method_names <- c("Low-Cost Sampler", "Hourly Grab", "Grab Sample", "ISCO")
   
   results <- sapply(method_names, function(method_name) {
     filtered_data <- data %>%
-      filter(analyte_abbr == analyte_abbr,
+      filter(analyte_abbr == analyte,
              event.count == event_count,
              method.name == method_name,
-             treatment == treatment)
-    
+             treatment == trt)
+    print(filtered_data)
     mean_result <- mean(filtered_data$result, na.rm = TRUE)
     
     return(mean_result)
@@ -275,9 +276,9 @@ calculate_mean_results_for_methods <- function(data, analyte_abbr, event_count, 
 
 # Call the function
 mean_results <- calculate_mean_results_for_methods(d, 
-                                                   analyte_abbr = 'NO3', 
+                                                   analyte = 'NO3', 
                                                    event_count = 'Irrigation 1', 
-                                                   treatment = 'CT')
+                                                   trt = 'CT')
 
 # Print the mean results for each method.name
 print(mean_results)
