@@ -71,9 +71,9 @@ The procedure will be as follows:
 7. Interpret the results
 
 ### Simulate data
-Simulated data come from an r script specifically built to represent a similar scenario with similar data, but with known values.  This will allow us to test the model and ensure it is functioning properly before using real data.
+Simulated data come from an r script specifically built to represent a similar scenario with similar data, but with known influences of each variable on the result (e.g., make each sampler type have it's own bias on analyte concentration).  This will allow us to test the model and ensure it is functioning properly before using real data.
 
-The script can be found in `2_code/data_sim.R`, and the results can be found in `0_data/sim_data.csv`.
+The script to generate the simulated can be found in `2_code/data_sim.R`, and the results can be found in `0_data/sim_data.csv`.
 
 ### Create a causal model
 Produced by [dagitty.net](https://www.dagitty.net/dags.html#), the causal model is a directed acyclic graph (DAG) that represents the relationships between the variables in the study.  This model will be used to create the statistical model in R.
@@ -110,7 +110,11 @@ $$ C_i \sim Normal(\mu_i, \sigma) $$
 $$ \mu_i = \alpha + \beta_{S}S_i + \beta_{T_i}T_i $$
 $$ C* \sim Normal(D_i, \sigma_{C}) $$
 
+**A comment on clusters v. features:**
 
+*Clusters* are kinds of groups within the data (e.g., irrigation event count or analyte type)
+
+*Features* are aspects of the model (parameters) that vary by cluster (e.g., the effect of sampler method or tillage treatment on the observed concentration)
 
 ### Create the statistical model in R
 The source code for the statistical model can be found in `2_code/analysis.Rmd` and `2_code/analysis_test.Rmd`.

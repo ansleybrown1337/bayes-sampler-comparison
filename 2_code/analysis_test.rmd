@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo=FALSE, include=FALSE}
 # load libraries
 library(rethinking)
+library(dplyr)
 ```
 
 ## Data Import and Preparation
@@ -22,11 +23,18 @@ d <- read.csv("../1_data/sim_data.csv")
 ```
 
 ```{r}
+# standardize analytes
+d <- d %>%
+  group_by(analyte_abbr) %>%
+  mutate(result_ctr = standardize(result)) %>%
+  ungroup()
+
 # parse data into sub dataframes for each analyte_abbr
 d_list <- split(d, d$analyte_abbr)
+
 # commented out to use one at a time or all at once
-# dat <- d
- dat <- d_list$NO3
+dat <- d
+# dat <- d_list$NO3
 # dat <- d_list$NO2
 # dat <- d_list$TKN
 # dat <- d_list$TP
@@ -42,28 +50,30 @@ d_list <- split(d, d$analyte_abbr)
 ```{r}
 # create data list for ulam models
 dlist <- list(
-    C_obs = standardize(dat$result),
+    C_obs = dat$result_ctr, #use standardized results
     #C_sd = d$Divorce.SE / sd( d$Divorce ), # we don't have SE from our sample
     S = as.numeric(as.factor(dat$method.name)),
     TRT = as.numeric(as.factor(dat$treatment)),
     I = as.numeric(as.factor(dat$event.count)),
+    A = as.numeric(as.factor(dat$analyte_abbr)),
     N = nrow(dat)
 )
 ```
 
-
 ```{r}
-# fit model 1.0, treating C_true as observed data
+# fit model 1.0, simple model with no partial pooling
 m1.0 <- ulam(
     alist(
         # model for C* (observed results)
         C_obs ~ dnorm(mu, sigma),
         sigma ~ dexp(1),
-        
+        # model
         mu <- a + bS[S] + bTRT[TRT],
+        # regular priors
         a ~ dnorm(0,0.2),
         bS[S] ~ dnorm(0,0.5),
-        bTRT[TRT] ~ dnorm(0,0.5)
+        bTRT[TRT] ~ dnorm(0,0.5),
+        bA[A] ~ dnorm(0,0.5)
         
         
     ) , data=dlist , chains=4 , cores=4 )
@@ -77,15 +87,17 @@ m2.0 <- ulam(
         C_obs ~ dnorm(mu, sigma),
         sigma ~ dexp(1),
         
-        mu <- a[I] + bS[S] + bTRT[TRT],
+        mu <- a[I] + g[A] + bS[S] + bTRT[TRT],
         # regular priors
         bS[S] ~ dnorm(0,0.5),
         bTRT[TRT] ~ dnorm(0,0.5),
         # adaptive priors
-        a[I] ~ dnorm(a_bar,sigma_a),
+        a[I] ~ dnorm(a_bar, sigma_a),
+        g[A] ~ dnorm(0, sigma_g),
         # hyper-priors
         a_bar ~ dnorm(0,0.5),
-        sigma_a ~ dexp(1)
+        sigma_a ~ dexp(1),
+        sigma_g ~ dexp(1)
         
     ), data=dlist , chains=4 , cores=4)
 ```
@@ -146,27 +158,34 @@ m3.0 <- ulam(
 ```{r}
 # model 1.0 - no partial pooling by irrigation
 precis(m1.0 , depth=2)
+plot(precis(m1.0 , depth=2))
 ```
 
 ```{r}
 # model 2.0 - centered
 precis(m2.0 , depth=2)
+plot(precis(m2.0 , depth=2))
 ```
 
 ```{r}
 # model 2.1 - non-centered
 precis(m2.1 , depth=2)
+plot(precis(m2.1 , depth=2))
 ```
 
 ```{r}
 # model 3.0 - true value unobserved
 precis(m3.0 , depth=2)
+plot(precis(m3.0 , depth=2))
 ```
 
 ## Graphing Results
 ```{r}
 # extract posterior predictions
-post <- extract.samples(m2.1)
+#post <- extract.samples(m1.0)
+post <- extract.samples(m2.0)
+#post <- extract.samples(m2.1)
+#post <- extract.samples(m3.0)
 
 # make dataframes
 bS_df <- as.data.frame(post$bS)
@@ -192,5 +211,83 @@ dens(bTRT_df$V2, lwd=4, col=4, xlab="bS (Effect of Tillage)", add=TRUE) # Blue: 
 dens(bTRT_df$V3, lwd=4, col=6, xlab="bS (Effect of Tillage)", add=TRUE) # Purple: ST
 abline(v=0,lty=3)
 
+```
+
+### Analyte Prediction
+```{r}
+# make legends for clusters and factors
+# Function to generate and print legend for a given column
+generate_legend <- function(data, column_name) {
+  factor_version <- as.factor(data[[column_name]])
+  legend <- setNames(as.character(levels(factor_version)), seq_along(levels(factor_version)))
+  cat("\nLegend for", column_name, ":\n")
+  print(legend)
+}
+
+# Your data frame: dat
+# Specify columns for which to generate legends
+columns_to_process <- c("analyte_abbr", "event.count", "method.name", "treatment")
+
+# Loop through the specified columns and generate+print legends
+for(column_name in columns_to_process) {
+  generate_legend(dat, column_name)
+}
+
+```
+
+
+```{r}
+# plot analytes concentration by sample method
+
+# create link function to extract specific predictions
+p_link <- function(posterior_samples, I=1, A=1, S=1, TRT=1) {
+  mu <- with(posterior_samples,
+             a[,I] + g[,A] + bS[,S] + bTRT[,TRT])
+  return(mu)
+}
+
+p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=1, A=3, S=i, TRT=1))
+p_mu <- apply(p_raw, 2, mean)
+p_ci <- apply(p_raw, 2, PI)
+p_mu
+```
+```{r}
+# Modified function to loop through method.name levels and calculate mean results
+calculate_mean_results_for_methods <- function(data, analyte_abbr, event_count, treatment) {
+  method_names <- c("Low-Cost Sampler", "Hourly Grab", "Grab Sample", "ISCO")
+  
+  results <- sapply(method_names, function(method_name) {
+    filtered_data <- data %>%
+      filter(analyte_abbr == analyte_abbr,
+             event.count == event_count,
+             method.name == method_name,
+             treatment == treatment)
+    
+    mean_result <- mean(filtered_data$result, na.rm = TRUE)
+    
+    return(mean_result)
+  }, simplify = "array")
+  
+  names(results) <- method_names
+  return(results)
+}
+
+
+# Call the function
+mean_results <- calculate_mean_results_for_methods(dat, 
+                                                   analyte_abbr = 'NO3', 
+                                                   event_count = 'Irrigation 1', 
+                                                   treatment = 'CT')
+
+# Print the mean results for each method.name
+print(mean_results)
+```
+
+
+```{r}
+# Step 3: Graph the Densities
+dens(pred_technician1, lwd=4, col=2, xlab="Predicted Values (TSS Error)")
+dens(pred_technician2, lwd=4, col=4, xlab="Predicted Values (TSS Error)", add=TRUE)
+dens(pred_technician3, lwd=4, col=6, xlab="Predicted Values (TSS Error)", add=TRUE)
 ```
 
