@@ -274,7 +274,7 @@ calculate_mean_results_for_methods <- function(data, analyte_abbr, event_count, 
 
 
 # Call the function
-mean_results <- calculate_mean_results_for_methods(dat, 
+mean_results <- calculate_mean_results_for_methods(d, 
                                                    analyte_abbr = 'NO3', 
                                                    event_count = 'Irrigation 1', 
                                                    treatment = 'CT')
