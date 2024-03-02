@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # load libraries
 library(rethinking)
 library(dplyr)
+library(tidyr)
 ```
 
 ## Data Import and Preparation
@@ -33,7 +34,7 @@ d <- d %>%
 d_list <- split(d, d$analyte_abbr)
 
 # commented out to use one at a time or all at once
-dat <- d
+ dat <- d
 # dat <- d_list$NO3
 # dat <- d_list$NO2
 # dat <- d_list$TKN
@@ -60,7 +61,7 @@ dlist <- list(
 )
 ```
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 # fit model 1.0, simple model with no partial pooling
 m1.0 <- ulam(
     alist(
@@ -79,9 +80,35 @@ m1.0 <- ulam(
     ) , data=dlist , chains=4 , cores=4 )
 ```
 
-```{r}
-# fit model 2.0, using partial pooling around irrigation event count (centered)
+```{r, eval=FALSE, echo=FALSE}
+# fit model 2.0, 
+# using partial pooling around irrigation # (centered)
+
 m2.0 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(mu, sigma),
+        sigma ~ dexp(1),
+        
+        mu <- a[I] + bA[A] + bS[S] + bTRT[TRT],
+        # regular priors
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5),
+        bA[A] ~ dnorm(0,0.5),
+        # adaptive priors
+        a[I] ~ dnorm(a_bar, sigma_a),
+        # hyper-priors
+        a_bar ~ dnorm(0,0.5),
+        sigma_a ~ dexp(1)
+        
+    ), data=dlist , chains=4 , cores=4)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+# fit model 2.1, 
+# using partial pooling around irrigation # and Analyte (centered)
+
+m2.1 <- ulam(
     alist(
         # model for C* (observed results)
         C_obs ~ dnorm(mu, sigma),
@@ -104,21 +131,29 @@ m2.0 <- ulam(
 ```
 
 ```{r}
-# fit model 2.1, using partial pooling around irrigation event count (non-centered)
-m2.1 <- ulam(
+# fit model 2.2
+# using partial pooling around irrigation # and Analyte (non-centered)
+m2.2 <- ulam(
     alist(
         # model for C* (observed results)
         C_obs ~ dnorm(mu, sigma),
         sigma ~ dexp(1),
         # model
-        mu <- a_bar + z[I]*sigma_a + bS[S] + bTRT[TRT],
+        mu <- a_bar + 
+              z[I]*sigma_a + # irrigation intercepts
+              x[A]*sigma_g + # analyte intercepts
+              bS[S] + # sampler method effect
+              bTRT[TRT], # treatment effect
         # regular priors
         a_bar ~ dnorm(0,0.5),
         bS[S] ~ dnorm(0,0.5),
         bTRT[TRT] ~ dnorm(0,0.5),
         z[I] ~ dnorm(0,1),
+        x[A] ~ dnorm(0,1),
         sigma_a ~ dexp(1),
-        gq> vector[I]:a <<- a_bar + z[I]*sigma_a
+        sigma_g ~ dexp(1),
+        gq> vector[I]:a <<- a_bar + z*sigma_a,
+        gq> vector[A]:g <<- x*sigma_g
         # adaptive priors
         # none
         # hyper-priors
@@ -127,16 +162,11 @@ m2.1 <- ulam(
     ), data=dlist , chains=4 , cores=4 )
 ```
 
-```{r}
-# fit model 3.0, treating C_true as unobserved data
-
-dlist <- list(
-    C_obs = standardize(dat$result),
-    #C_sd = d$Divorce.SE / sd( d$Divorce ), # we don't have SE from our sample
-    S = as.numeric(as.factor(dat$method.name)),
-    TRT = as.numeric(as.factor(dat$treatment)),
-    N = nrow(dat)
-)
+```{r, eval=FALSE, echo=FALSE}
+# fit model 3.0
+# treating C_true as unobserved data
+# partial pooling around irrigation # and analyte
+# non-centered
 
 m3.0 <- ulam(
     alist(
@@ -146,46 +176,64 @@ m3.0 <- ulam(
         
         # model for D (unobserved)
         vector[N]:C_true ~ dnorm(mu , sigma),
-        mu <- a + bS[S] + bTRT[TRT],
-        a ~ dnorm(0,0.2),
+        mu <- a_bar + 
+              z[I]*sigma_a + # irrigation intercepts
+              x[A]*sigma_g + # analyte intercepts
+              bS[S] + # sampler method effect
+              bTRT[TRT], # treatment effect
+        # regular priors
+        sigma ~ dexp(1),
+        a_bar ~ dnorm(0,0.5),
         bS[S] ~ dnorm(0,0.5),
         bTRT[TRT] ~ dnorm(0,0.5),
-        sigma ~ dexp(1)
+        z[I] ~ dnorm(0,1),
+        x[A] ~ dnorm(0,1),
+        sigma_a ~ dexp(1),
+        sigma_g ~ dexp(1),
+        gq> vector[I]:a <<- a_bar + z*sigma_a,
+        gq> vector[A]:g <<- x*sigma_g
         
     ) , data=dlist , chains=4 , cores=4)
 ```
 
 ## Model Summaries
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 # model 1.0 - no partial pooling by irrigation
 precis(m1.0 , depth=2)
 plot(precis(m1.0 , depth=2))
 ```
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 # model 2.0 - centered
 precis(m2.0 , depth=2)
 plot(precis(m2.0 , depth=2))
 ```
 
-```{r}
-# model 2.1 - non-centered
+```{r, eval=FALSE, echo=FALSE}
+# model 2.1 - centered with analyte pooling
 precis(m2.1 , depth=2)
 plot(precis(m2.1 , depth=2))
 ```
 
 ```{r}
+# model 2.2 - non-centered 2.1
+precis(m2.2 , depth=2)
+plot(precis(m2.2 , depth=2))
+```
+
+```{r, eval=FALSE, echo=FALSE}
 # model 3.0 - true value unobserved
 precis(m3.0 , depth=2)
-plot(precis(m3.0 , depth=2))
+#plot(precis(m3.0 , depth=2))
 ```
 
 ## Graphing Results
 ```{r}
 # extract posterior predictions
 #post <- extract.samples(m1.0)
-post <- extract.samples(m2.0)
+#post <- extract.samples(m2.0)
 #post <- extract.samples(m2.1)
+post <- extract.samples(m2.2)
 #post <- extract.samples(m3.0)
 
 # make dataframes
@@ -202,6 +250,15 @@ dens(bS_df$V2, lwd=4, col=4, xlab="bS (Effect of Sample Method)", add=TRUE) # Bl
 dens(bS_df$V3, lwd=4, col=6, xlab="bS (Effect of Sample Method)", add=TRUE) # Purple: ISCO
 dens(bS_df$V4, lwd=4, col=8, xlab="bS (Effect of Sample Method)", add=TRUE) # Gray: Low-Cost Sampler
 abline(v=0,lty=3)
+
+# Define the range for x_seq based on the values in bS_df
+x_seq <- seq(from = min(bS_df) - 1, to = max(bS_df) + 1, length.out = 300)
+
+# Calculate the prior density
+prior_dens <- dnorm(x_seq, mean = 0, sd = 0.5)
+
+# Add the prior distribution to the plot
+lines(x_seq, prior_dens, lwd = 2, col = "black", lty = 2)
 ```
 
 ### Effect of Tillage
@@ -211,6 +268,15 @@ dens(bTRT_df$V1, lwd=4, col=2, xlab="bS (Effect of Tillage)") # Red: CT
 dens(bTRT_df$V2, lwd=4, col=4, xlab="bS (Effect of Tillage)", add=TRUE) # Blue: MT
 dens(bTRT_df$V3, lwd=4, col=6, xlab="bS (Effect of Tillage)", add=TRUE) # Purple: ST
 abline(v=0,lty=3)
+
+# Define the range for x_seq based on the values in bTRT_df
+x_seq <- seq(from = min(bTRT_df) - 1, to = max(bTRT_df) + 1, length.out = 300)
+
+# Calculate the prior density
+prior_dens <- dnorm(x_seq, mean = 0, sd = 0.5)
+
+# Add the prior distribution to the plot
+lines(x_seq, prior_dens, lwd = 2, col = "black", lty = 2)
 
 ```
 
@@ -240,55 +306,51 @@ for(column_name in columns_to_process) {
 ```{r}
 # plot analytes concentration by sample method
 
+# create analyte list for transforming in function later
+analyte_list <- levels(factor(dat$analyte_abbr))
+
 # create link function to extract specific predictions
 p_link <- function(posterior_samples, I=1, A=1, S=1, TRT=1) {
   mu <- with(posterior_samples,
              a[,I] + g[,A] + bS[,S] + bTRT[,TRT])
-  return(mu)
+             #a[,I] + bA[,A] + bS[,S] + bTRT[,TRT]) # model 2.0
+             #a[,I] + bS[,S] + bTRT[,TRT]) # model 1.0
+  # convert back to real units
+  mu_analyte <- mean(d_list[[analyte_list[[A]]]]$result)
+  sigma_analyte <- sd(d_list[[analyte_list[[A]]]]$result)
+  real_mu <- mu * sigma_analyte + mu_analyte
+  return(real_mu)
 }
 
-p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=1, A=3, S=i, TRT=1))
+p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=1, A=9, S=i, TRT=2))
 p_mu <- apply(p_raw, 2, mean)
 p_ci <- apply(p_raw, 2, PI)
 p_mu
+p_ci
 ```
+
+
 ```{r}
-# Modified function to loop through method.name levels and calculate mean results
-calculate_mean_results_for_methods <- function(data, analyte, event_count, trt) {
-  method_names <- c("Low-Cost Sampler", "Hourly Grab", "Grab Sample", "ISCO")
+calculate_and_print_means_by_treatment <- function(data) {
+  # Get unique levels of treatment
+  treatment_levels <- unique(data$treatment)
   
-  results <- sapply(method_names, function(method_name) {
-    filtered_data <- data %>%
-      filter(analyte_abbr == analyte,
-             event.count == event_count,
-             method.name == method_name,
-             treatment == trt)
-    print(filtered_data)
-    mean_result <- mean(filtered_data$result, na.rm = TRUE)
+  # Iterate over each treatment level
+  for(trt in treatment_levels) {
+    cat("\nMean Results Table for Treatment:", trt, "\n")
     
-    return(mean_result)
-  }, simplify = "array")
-  
-  names(results) <- method_names
-  return(results)
+    mean_results_table <- data %>%
+      filter(treatment == trt) %>%
+      group_by(analyte_abbr, method.name) %>%
+      summarise(mean_result = mean(result, na.rm = TRUE), .groups = 'drop') %>%
+      pivot_wider(names_from = method.name, values_from = mean_result) 
+    
+    # Print the table for the current treatment level
+    print(mean_results_table)
+  }
 }
 
-
-# Call the function
-mean_results <- calculate_mean_results_for_methods(d, 
-                                                   analyte = 'NO3', 
-                                                   event_count = 'Irrigation 1', 
-                                                   trt = 'CT')
-
-# Print the mean results for each method.name
-print(mean_results)
-```
-
-
-```{r}
-# Step 3: Graph the Densities
-dens(pred_technician1, lwd=4, col=2, xlab="Predicted Values (TSS Error)")
-dens(pred_technician2, lwd=4, col=4, xlab="Predicted Values (TSS Error)", add=TRUE)
-dens(pred_technician3, lwd=4, col=6, xlab="Predicted Values (TSS Error)", add=TRUE)
+# Assuming 'd' is your data frame
+calculate_and_print_means_by_treatment(d)
 ```
 
