@@ -1,0 +1,2161 @@
+"event.count","analyte_abbr","treatment","block","method.name","result","duplicate"
+"Irrigation 1","NO2","CT","1","Grab Sample",11.4673721112139,FALSE
+"Irrigation 1","NO2","CT","1","Grab Sample",10.5821650550032,TRUE
+"Irrigation 2","NO2","CT","1","Grab Sample",9.60952150882226,FALSE
+"Irrigation 2","NO2","CT","1","Grab Sample",9.8926422248651,TRUE
+"Irrigation 3","NO2","CT","1","Grab Sample",10.7130456660001,FALSE
+"Irrigation 3","NO2","CT","1","Grab Sample",9.40555785537692,TRUE
+"Irrigation 4","NO2","CT","1","Grab Sample",9.24775484690218,FALSE
+"Irrigation 4","NO2","CT","1","Grab Sample",9.04957754610363,TRUE
+"Irrigation 5","NO2","CT","1","Grab Sample",7.2531786318885,FALSE
+"Irrigation 5","NO2","CT","1","Grab Sample",9.38039744415691,TRUE
+"Irrigation 1","OP","CT","1","Grab Sample",0.12678317278657,FALSE
+"Irrigation 1","OP","CT","1","Grab Sample",0.151080297298067,TRUE
+"Irrigation 2","OP","CT","1","Grab Sample",0.135677784580588,FALSE
+"Irrigation 2","OP","CT","1","Grab Sample",0.128564328458652,TRUE
+"Irrigation 3","OP","CT","1","Grab Sample",0.123614649386817,FALSE
+"Irrigation 3","OP","CT","1","Grab Sample",0.114840782865119,TRUE
+"Irrigation 4","OP","CT","1","Grab Sample",0.10397731692068,FALSE
+"Irrigation 4","OP","CT","1","Grab Sample",0.102368284925346,TRUE
+"Irrigation 5","OP","CT","1","Grab Sample",0.0968793030464734,FALSE
+"Irrigation 5","OP","CT","1","Grab Sample",0.111085541410399,TRUE
+"Irrigation 1","TKN","CT","1","Grab Sample",6.73574933383644,FALSE
+"Irrigation 1","TKN","CT","1","Grab Sample",6.58115446711193,TRUE
+"Irrigation 2","TKN","CT","1","Grab Sample",5.14291845568054,FALSE
+"Irrigation 2","TKN","CT","1","Grab Sample",7.45908636678627,TRUE
+"Irrigation 3","TKN","CT","1","Grab Sample",5.15003518446732,FALSE
+"Irrigation 3","TKN","CT","1","Grab Sample",4.43942213619791,TRUE
+"Irrigation 4","TKN","CT","1","Grab Sample",6.26875544238583,FALSE
+"Irrigation 4","TKN","CT","1","Grab Sample",6.15797213259939,TRUE
+"Irrigation 5","TKN","CT","1","Grab Sample",5.66432613099707,FALSE
+"Irrigation 5","TKN","CT","1","Grab Sample",3.81570202675992,TRUE
+"Irrigation 1","TP","CT","1","Grab Sample",9.95722121376999,FALSE
+"Irrigation 1","TP","CT","1","Grab Sample",9.86199289617622,TRUE
+"Irrigation 2","TP","CT","1","Grab Sample",8.40683612053311,FALSE
+"Irrigation 2","TP","CT","1","Grab Sample",8.38015213698693,TRUE
+"Irrigation 3","TP","CT","1","Grab Sample",8.42794891512665,FALSE
+"Irrigation 3","TP","CT","1","Grab Sample",8.43448016075362,TRUE
+"Irrigation 4","TP","CT","1","Grab Sample",7.68312307573691,FALSE
+"Irrigation 4","TP","CT","1","Grab Sample",7.75100250526329,TRUE
+"Irrigation 5","TP","CT","1","Grab Sample",7.01584244865316,FALSE
+"Irrigation 5","TP","CT","1","Grab Sample",7.00192455689616,TRUE
+"Irrigation 1","EC","CT","1","Grab Sample",1.02562283194245,FALSE
+"Irrigation 1","EC","CT","1","Grab Sample",1.18764340182964,TRUE
+"Irrigation 2","EC","CT","1","Grab Sample",0.966379600724351,FALSE
+"Irrigation 2","EC","CT","1","Grab Sample",0.722734814615932,TRUE
+"Irrigation 3","EC","CT","1","Grab Sample",0.925682016172717,FALSE
+"Irrigation 3","EC","CT","1","Grab Sample",0.858602758865889,TRUE
+"Irrigation 4","EC","CT","1","Grab Sample",0.769615765984251,FALSE
+"Irrigation 4","EC","CT","1","Grab Sample",0.904569875303162,TRUE
+"Irrigation 5","EC","CT","1","Grab Sample",0.72642520459088,FALSE
+"Irrigation 5","EC","CT","1","Grab Sample",0.873847574828232,TRUE
+"Irrigation 1","NO3","CT","1","Grab Sample",0.475568391759468,FALSE
+"Irrigation 1","NO3","CT","1","Grab Sample",0.371060819547808,TRUE
+"Irrigation 2","NO3","CT","1","Grab Sample",0.331016388416092,FALSE
+"Irrigation 2","NO3","CT","1","Grab Sample",0.364529875909516,TRUE
+"Irrigation 3","NO3","CT","1","Grab Sample",0.437029281782295,FALSE
+"Irrigation 3","NO3","CT","1","Grab Sample",0.376869594455623,TRUE
+"Irrigation 4","NO3","CT","1","Grab Sample",0.38795650867398,FALSE
+"Irrigation 4","NO3","CT","1","Grab Sample",0.316255278447957,TRUE
+"Irrigation 5","NO3","CT","1","Grab Sample",0.338279340669289,FALSE
+"Irrigation 5","NO3","CT","1","Grab Sample",0.316220700734845,TRUE
+"Irrigation 1","pH","CT","1","Grab Sample",0.201758225163273,FALSE
+"Irrigation 1","pH","CT","1","Grab Sample",0.222159592562774,TRUE
+"Irrigation 2","pH","CT","1","Grab Sample",0.172944073548046,FALSE
+"Irrigation 2","pH","CT","1","Grab Sample",0.198501611829076,TRUE
+"Irrigation 3","pH","CT","1","Grab Sample",0.194157887124442,FALSE
+"Irrigation 3","pH","CT","1","Grab Sample",0.185336181997128,TRUE
+"Irrigation 4","pH","CT","1","Grab Sample",0.158888475036849,FALSE
+"Irrigation 4","pH","CT","1","Grab Sample",0.161006033309486,TRUE
+"Irrigation 5","pH","CT","1","Grab Sample",0.140849578524821,FALSE
+"Irrigation 5","pH","CT","1","Grab Sample",0.162286281698851,TRUE
+"Irrigation 1","TSS","CT","1","Grab Sample",1351.03310630922,FALSE
+"Irrigation 1","TSS","CT","1","Grab Sample",1410.45118697905,TRUE
+"Irrigation 2","TSS","CT","1","Grab Sample",1269.61321469049,FALSE
+"Irrigation 2","TSS","CT","1","Grab Sample",1131.64505335752,TRUE
+"Irrigation 3","TSS","CT","1","Grab Sample",900.417804573884,FALSE
+"Irrigation 3","TSS","CT","1","Grab Sample",1057.15619963685,TRUE
+"Irrigation 4","TSS","CT","1","Grab Sample",1312.7936439276,FALSE
+"Irrigation 4","TSS","CT","1","Grab Sample",1549.26183543079,TRUE
+"Irrigation 5","TSS","CT","1","Grab Sample",933.069054569507,FALSE
+"Irrigation 5","TSS","CT","1","Grab Sample",1389.0719365837,TRUE
+"Irrigation 1","TDS","CT","1","Grab Sample",718.382779508957,FALSE
+"Irrigation 1","TDS","CT","1","Grab Sample",669.469921906434,TRUE
+"Irrigation 2","TDS","CT","1","Grab Sample",627.699042617685,FALSE
+"Irrigation 2","TDS","CT","1","Grab Sample",570.234494553962,TRUE
+"Irrigation 3","TDS","CT","1","Grab Sample",531.032708611945,FALSE
+"Irrigation 3","TDS","CT","1","Grab Sample",630.836447483797,TRUE
+"Irrigation 4","TDS","CT","1","Grab Sample",563.879237654835,FALSE
+"Irrigation 4","TDS","CT","1","Grab Sample",542.34891909725,TRUE
+"Irrigation 5","TDS","CT","1","Grab Sample",494.827092902026,FALSE
+"Irrigation 5","TDS","CT","1","Grab Sample",584.050686478545,TRUE
+"Irrigation 1","NO2","MT","1","Grab Sample",11.0076570507612,FALSE
+"Irrigation 1","NO2","MT","1","Grab Sample",10.6002425144681,TRUE
+"Irrigation 2","NO2","MT","1","Grab Sample",9.18556135345094,FALSE
+"Irrigation 2","NO2","MT","1","Grab Sample",7.28286822333288,TRUE
+"Irrigation 3","NO2","MT","1","Grab Sample",9.05503456930964,FALSE
+"Irrigation 3","NO2","MT","1","Grab Sample",8.23406154778966,TRUE
+"Irrigation 4","NO2","MT","1","Grab Sample",8.83424370554888,FALSE
+"Irrigation 4","NO2","MT","1","Grab Sample",6.71635477426657,TRUE
+"Irrigation 5","NO2","MT","1","Grab Sample",7.33383111048774,FALSE
+"Irrigation 5","NO2","MT","1","Grab Sample",5.71988467464816,TRUE
+"Irrigation 1","OP","MT","1","Grab Sample",0.124645773209978,FALSE
+"Irrigation 1","OP","MT","1","Grab Sample",0.130040624189331,TRUE
+"Irrigation 2","OP","MT","1","Grab Sample",0.109601493787921,FALSE
+"Irrigation 2","OP","MT","1","Grab Sample",0.0973373556102924,TRUE
+"Irrigation 3","OP","MT","1","Grab Sample",0.106410008101202,FALSE
+"Irrigation 3","OP","MT","1","Grab Sample",0.0849098484423855,TRUE
+"Irrigation 4","OP","MT","1","Grab Sample",0.0908025191848619,FALSE
+"Irrigation 4","OP","MT","1","Grab Sample",0.0994462357188631,TRUE
+"Irrigation 5","OP","MT","1","Grab Sample",0.0884089433649915,FALSE
+"Irrigation 5","OP","MT","1","Grab Sample",0.0916254989634151,TRUE
+"Irrigation 1","TKN","MT","1","Grab Sample",5.5946047512993,FALSE
+"Irrigation 1","TKN","MT","1","Grab Sample",6.9330893587151,TRUE
+"Irrigation 2","TKN","MT","1","Grab Sample",3.92246185182735,FALSE
+"Irrigation 2","TKN","MT","1","Grab Sample",4.30643961320031,TRUE
+"Irrigation 3","TKN","MT","1","Grab Sample",6.26488972513746,FALSE
+"Irrigation 3","TKN","MT","1","Grab Sample",4.26323058627965,TRUE
+"Irrigation 4","TKN","MT","1","Grab Sample",4.14379825400615,FALSE
+"Irrigation 4","TKN","MT","1","Grab Sample",4.86521558710692,TRUE
+"Irrigation 5","TKN","MT","1","Grab Sample",3.68493270801446,FALSE
+"Irrigation 5","TKN","MT","1","Grab Sample",3.61264053103534,TRUE
+"Irrigation 1","TP","MT","1","Grab Sample",8.4580700487476,FALSE
+"Irrigation 1","TP","MT","1","Grab Sample",8.3172996429952,TRUE
+"Irrigation 2","TP","MT","1","Grab Sample",6.82895423737952,FALSE
+"Irrigation 2","TP","MT","1","Grab Sample",6.8980242947284,TRUE
+"Irrigation 3","TP","MT","1","Grab Sample",6.96816737159848,FALSE
+"Irrigation 3","TP","MT","1","Grab Sample",7.04393581200405,TRUE
+"Irrigation 4","TP","MT","1","Grab Sample",6.3236755755311,FALSE
+"Irrigation 4","TP","MT","1","Grab Sample",6.31457024121757,TRUE
+"Irrigation 5","TP","MT","1","Grab Sample",5.69029656998397,FALSE
+"Irrigation 5","TP","MT","1","Grab Sample",5.5769585678048,TRUE
+"Irrigation 1","EC","MT","1","Grab Sample",0.828208132774052,FALSE
+"Irrigation 1","EC","MT","1","Grab Sample",1.04306164900439,TRUE
+"Irrigation 2","EC","MT","1","Grab Sample",0.768590914876185,FALSE
+"Irrigation 2","EC","MT","1","Grab Sample",0.753561210490653,TRUE
+"Irrigation 3","EC","MT","1","Grab Sample",1.00270707118267,FALSE
+"Irrigation 3","EC","MT","1","Grab Sample",0.734811941586704,TRUE
+"Irrigation 4","EC","MT","1","Grab Sample",0.547654035867487,FALSE
+"Irrigation 4","EC","MT","1","Grab Sample",0.671255448302832,TRUE
+"Irrigation 5","EC","MT","1","Grab Sample",0.590838067755645,FALSE
+"Irrigation 5","EC","MT","1","Grab Sample",0.634255647991606,TRUE
+"Irrigation 1","NO3","MT","1","Grab Sample",0.260166239029373,FALSE
+"Irrigation 1","NO3","MT","1","Grab Sample",0.328900879051172,TRUE
+"Irrigation 2","NO3","MT","1","Grab Sample",0.259092791667772,FALSE
+"Irrigation 2","NO3","MT","1","Grab Sample",0.27168703882037,TRUE
+"Irrigation 3","NO3","MT","1","Grab Sample",0.380865444976761,FALSE
+"Irrigation 3","NO3","MT","1","Grab Sample",0.296308112833397,TRUE
+"Irrigation 4","NO3","MT","1","Grab Sample",0.250810285110433,FALSE
+"Irrigation 4","NO3","MT","1","Grab Sample",0.222509577023755,TRUE
+"Irrigation 5","NO3","MT","1","Grab Sample",0.209654865496443,FALSE
+"Irrigation 5","NO3","MT","1","Grab Sample",0.242113929331839,TRUE
+"Irrigation 1","pH","MT","1","Grab Sample",0.177997192265232,FALSE
+"Irrigation 1","pH","MT","1","Grab Sample",0.178301208022114,TRUE
+"Irrigation 2","pH","MT","1","Grab Sample",0.124284222017894,FALSE
+"Irrigation 2","pH","MT","1","Grab Sample",0.153697793847736,TRUE
+"Irrigation 3","pH","MT","1","Grab Sample",0.161551599865293,FALSE
+"Irrigation 3","pH","MT","1","Grab Sample",0.148417615308775,TRUE
+"Irrigation 4","pH","MT","1","Grab Sample",0.131508072509073,FALSE
+"Irrigation 4","pH","MT","1","Grab Sample",0.143328896484604,TRUE
+"Irrigation 5","pH","MT","1","Grab Sample",0.134144839351492,FALSE
+"Irrigation 5","pH","MT","1","Grab Sample",0.114041598820253,TRUE
+"Irrigation 1","TSS","MT","1","Grab Sample",1262.89024005623,FALSE
+"Irrigation 1","TSS","MT","1","Grab Sample",987.743303839163,TRUE
+"Irrigation 2","TSS","MT","1","Grab Sample",1046.31910198159,FALSE
+"Irrigation 2","TSS","MT","1","Grab Sample",721.466836937122,TRUE
+"Irrigation 3","TSS","MT","1","Grab Sample",967.406583155783,FALSE
+"Irrigation 3","TSS","MT","1","Grab Sample",1021.63462792094,TRUE
+"Irrigation 4","TSS","MT","1","Grab Sample",766.658105255406,FALSE
+"Irrigation 4","TSS","MT","1","Grab Sample",649.683340027796,TRUE
+"Irrigation 5","TSS","MT","1","Grab Sample",580.8762402281,FALSE
+"Irrigation 5","TSS","MT","1","Grab Sample",735.875932059942,TRUE
+"Irrigation 1","TDS","MT","1","Grab Sample",541.477158042681,FALSE
+"Irrigation 1","TDS","MT","1","Grab Sample",652.988715281619,TRUE
+"Irrigation 2","TDS","MT","1","Grab Sample",463.382324626962,FALSE
+"Irrigation 2","TDS","MT","1","Grab Sample",474.053007126901,TRUE
+"Irrigation 3","TDS","MT","1","Grab Sample",443.460233190334,FALSE
+"Irrigation 3","TDS","MT","1","Grab Sample",428.960065854327,TRUE
+"Irrigation 4","TDS","MT","1","Grab Sample",425.152746749116,FALSE
+"Irrigation 4","TDS","MT","1","Grab Sample",440.542673891714,TRUE
+"Irrigation 5","TDS","MT","1","Grab Sample",431.850009167531,FALSE
+"Irrigation 5","TDS","MT","1","Grab Sample",473.876722189308,TRUE
+"Irrigation 1","NO2","ST","1","Grab Sample",8.3632411633551,FALSE
+"Irrigation 1","NO2","ST","1","Grab Sample",9.64466792736791,TRUE
+"Irrigation 2","NO2","ST","1","Grab Sample",5.30819151962863,FALSE
+"Irrigation 2","NO2","ST","1","Grab Sample",7.41122212733135,TRUE
+"Irrigation 3","NO2","ST","1","Grab Sample",6.65196246537893,FALSE
+"Irrigation 3","NO2","ST","1","Grab Sample",5.94327332348892,TRUE
+"Irrigation 4","NO2","ST","1","Grab Sample",4.04285760695271,FALSE
+"Irrigation 4","NO2","ST","1","Grab Sample",5.24912232106022,TRUE
+"Irrigation 5","NO2","ST","1","Grab Sample",4.85320454100935,FALSE
+"Irrigation 5","NO2","ST","1","Grab Sample",5.34076662350034,TRUE
+"Irrigation 1","OP","ST","1","Grab Sample",0.107942964441162,FALSE
+"Irrigation 1","OP","ST","1","Grab Sample",0.0955598256333837,TRUE
+"Irrigation 2","OP","ST","1","Grab Sample",0.0874517306156155,FALSE
+"Irrigation 2","OP","ST","1","Grab Sample",0.0865311984443839,TRUE
+"Irrigation 3","OP","ST","1","Grab Sample",0.0880908480389051,FALSE
+"Irrigation 3","OP","ST","1","Grab Sample",0.0695502649772262,TRUE
+"Irrigation 4","OP","ST","1","Grab Sample",0.0805958975725334,FALSE
+"Irrigation 4","OP","ST","1","Grab Sample",0.0760470530358781,TRUE
+"Irrigation 5","OP","ST","1","Grab Sample",0.0557255288357924,FALSE
+"Irrigation 5","OP","ST","1","Grab Sample",0.0681104329388025,TRUE
+"Irrigation 1","TKN","ST","1","Grab Sample",4.76849779606965,FALSE
+"Irrigation 1","TKN","ST","1","Grab Sample",5.92543218060367,TRUE
+"Irrigation 2","TKN","ST","1","Grab Sample",3.91113911693484,FALSE
+"Irrigation 2","TKN","ST","1","Grab Sample",3.12232997534493,TRUE
+"Irrigation 3","TKN","ST","1","Grab Sample",3.9075939963794,FALSE
+"Irrigation 3","TKN","ST","1","Grab Sample",1.0821119792428,TRUE
+"Irrigation 4","TKN","ST","1","Grab Sample",3.7015728991181,FALSE
+"Irrigation 4","TKN","ST","1","Grab Sample",3.80717482815423,TRUE
+"Irrigation 5","TKN","ST","1","Grab Sample",4.49162582885763,FALSE
+"Irrigation 5","TKN","ST","1","Grab Sample",4.34490468977847,TRUE
+"Irrigation 1","TP","ST","1","Grab Sample",7.23792354449495,FALSE
+"Irrigation 1","TP","ST","1","Grab Sample",7.03995022474325,TRUE
+"Irrigation 2","TP","ST","1","Grab Sample",5.54348611941673,FALSE
+"Irrigation 2","TP","ST","1","Grab Sample",5.44361702344205,TRUE
+"Irrigation 3","TP","ST","1","Grab Sample",5.6211397042444,FALSE
+"Irrigation 3","TP","ST","1","Grab Sample",5.47051414426881,TRUE
+"Irrigation 4","TP","ST","1","Grab Sample",4.84945481963419,FALSE
+"Irrigation 4","TP","ST","1","Grab Sample",5.03182394920649,TRUE
+"Irrigation 5","TP","ST","1","Grab Sample",4.13352002186485,FALSE
+"Irrigation 5","TP","ST","1","Grab Sample",4.21994526080795,TRUE
+"Irrigation 1","EC","ST","1","Grab Sample",0.818090877176091,FALSE
+"Irrigation 1","EC","ST","1","Grab Sample",0.893618019737707,TRUE
+"Irrigation 2","EC","ST","1","Grab Sample",0.738803284473056,FALSE
+"Irrigation 2","EC","ST","1","Grab Sample",0.539677164435507,TRUE
+"Irrigation 3","EC","ST","1","Grab Sample",0.567934608451512,FALSE
+"Irrigation 3","EC","ST","1","Grab Sample",0.836836307681831,TRUE
+"Irrigation 4","EC","ST","1","Grab Sample",0.722006829072191,FALSE
+"Irrigation 4","EC","ST","1","Grab Sample",0.675501851351209,TRUE
+"Irrigation 5","EC","ST","1","Grab Sample",0.455205108217523,FALSE
+"Irrigation 5","EC","ST","1","Grab Sample",0.52825112923499,TRUE
+"Irrigation 1","NO3","ST","1","Grab Sample",0.298910743774993,FALSE
+"Irrigation 1","NO3","ST","1","Grab Sample",0.348220804644647,TRUE
+"Irrigation 2","NO3","ST","1","Grab Sample",0.264112507384676,FALSE
+"Irrigation 2","NO3","ST","1","Grab Sample",0.259666537775063,TRUE
+"Irrigation 3","NO3","ST","1","Grab Sample",0.245472655490415,FALSE
+"Irrigation 3","NO3","ST","1","Grab Sample",0.293908661850626,TRUE
+"Irrigation 4","NO3","ST","1","Grab Sample",0.230487989064776,FALSE
+"Irrigation 4","NO3","ST","1","Grab Sample",0.180621106141035,TRUE
+"Irrigation 5","NO3","ST","1","Grab Sample",0.193451457708718,FALSE
+"Irrigation 5","NO3","ST","1","Grab Sample",0.224411308463965,TRUE
+"Irrigation 1","pH","ST","1","Grab Sample",0.137319729613769,FALSE
+"Irrigation 1","pH","ST","1","Grab Sample",0.143450782858499,TRUE
+"Irrigation 2","pH","ST","1","Grab Sample",0.110909875713666,FALSE
+"Irrigation 2","pH","ST","1","Grab Sample",0.112776367177468,TRUE
+"Irrigation 3","pH","ST","1","Grab Sample",0.127784293860532,FALSE
+"Irrigation 3","pH","ST","1","Grab Sample",0.116658361529547,TRUE
+"Irrigation 4","pH","ST","1","Grab Sample",0.0969318276327571,FALSE
+"Irrigation 4","pH","ST","1","Grab Sample",0.100326417610516,TRUE
+"Irrigation 5","pH","ST","1","Grab Sample",0.067624857983877,FALSE
+"Irrigation 5","pH","ST","1","Grab Sample",0.0932231163667171,TRUE
+"Irrigation 1","TSS","ST","1","Grab Sample",1081.23975297256,FALSE
+"Irrigation 1","TSS","ST","1","Grab Sample",1381.82682114605,TRUE
+"Irrigation 2","TSS","ST","1","Grab Sample",1056.64192935958,FALSE
+"Irrigation 2","TSS","ST","1","Grab Sample",795.176069054541,TRUE
+"Irrigation 3","TSS","ST","1","Grab Sample",915.134432340477,FALSE
+"Irrigation 3","TSS","ST","1","Grab Sample",322.321793292997,TRUE
+"Irrigation 4","TSS","ST","1","Grab Sample",876.487279762187,FALSE
+"Irrigation 4","TSS","ST","1","Grab Sample",618.472296455497,TRUE
+"Irrigation 5","TSS","ST","1","Grab Sample",712.696635176144,FALSE
+"Irrigation 5","TSS","ST","1","Grab Sample",1005.066743061,TRUE
+"Irrigation 1","TDS","ST","1","Grab Sample",347.453513086471,FALSE
+"Irrigation 1","TDS","ST","1","Grab Sample",405.427502568009,TRUE
+"Irrigation 2","TDS","ST","1","Grab Sample",452.988520028959,FALSE
+"Irrigation 2","TDS","ST","1","Grab Sample",410.407642253141,TRUE
+"Irrigation 3","TDS","ST","1","Grab Sample",455.661975121492,FALSE
+"Irrigation 3","TDS","ST","1","Grab Sample",369.834270197425,TRUE
+"Irrigation 4","TDS","ST","1","Grab Sample",324.538774473678,FALSE
+"Irrigation 4","TDS","ST","1","Grab Sample",351.691287657517,TRUE
+"Irrigation 5","TDS","ST","1","Grab Sample",334.436011963688,FALSE
+"Irrigation 5","TDS","ST","1","Grab Sample",353.954146819434,TRUE
+"Irrigation 1","NO2","CT","2","Grab Sample",10.6562187609157,FALSE
+"Irrigation 1","NO2","CT","2","Grab Sample",12.9581307192041,TRUE
+"Irrigation 2","NO2","CT","2","Grab Sample",8.98057960338927,FALSE
+"Irrigation 2","NO2","CT","2","Grab Sample",9.90316835320373,TRUE
+"Irrigation 3","NO2","CT","2","Grab Sample",9.03278785672602,FALSE
+"Irrigation 3","NO2","CT","2","Grab Sample",10.2306946737039,TRUE
+"Irrigation 4","NO2","CT","2","Grab Sample",7.42553205748708,FALSE
+"Irrigation 4","NO2","CT","2","Grab Sample",9.43397007758195,TRUE
+"Irrigation 5","NO2","CT","2","Grab Sample",7.53106254798804,FALSE
+"Irrigation 5","NO2","CT","2","Grab Sample",7.81281338048762,TRUE
+"Irrigation 1","OP","CT","2","Grab Sample",0.119946885674355,FALSE
+"Irrigation 1","OP","CT","2","Grab Sample",0.133864512742139,TRUE
+"Irrigation 2","OP","CT","2","Grab Sample",0.116645279043668,FALSE
+"Irrigation 2","OP","CT","2","Grab Sample",0.119966420640614,TRUE
+"Irrigation 3","OP","CT","2","Grab Sample",0.115819103561087,FALSE
+"Irrigation 3","OP","CT","2","Grab Sample",0.115501918701897,TRUE
+"Irrigation 4","OP","CT","2","Grab Sample",0.0826423856342422,FALSE
+"Irrigation 4","OP","CT","2","Grab Sample",0.109007482837807,TRUE
+"Irrigation 5","OP","CT","2","Grab Sample",0.0887933422204291,FALSE
+"Irrigation 5","OP","CT","2","Grab Sample",0.105290442693757,TRUE
+"Irrigation 1","TKN","CT","2","Grab Sample",6.44537353812226,FALSE
+"Irrigation 1","TKN","CT","2","Grab Sample",8.04116869977476,TRUE
+"Irrigation 2","TKN","CT","2","Grab Sample",6.53016997245875,FALSE
+"Irrigation 2","TKN","CT","2","Grab Sample",3.04561895657881,TRUE
+"Irrigation 3","TKN","CT","2","Grab Sample",4.93154815129236,FALSE
+"Irrigation 3","TKN","CT","2","Grab Sample",4.29200821593155,TRUE
+"Irrigation 4","TKN","CT","2","Grab Sample",5.32703961188243,FALSE
+"Irrigation 4","TKN","CT","2","Grab Sample",6.1748259026629,TRUE
+"Irrigation 5","TKN","CT","2","Grab Sample",4.27576101197783,FALSE
+"Irrigation 5","TKN","CT","2","Grab Sample",4.67146028253738,TRUE
+"Irrigation 1","TP","CT","2","Grab Sample",8.92095769299949,FALSE
+"Irrigation 1","TP","CT","2","Grab Sample",9.16554578689652,TRUE
+"Irrigation 2","TP","CT","2","Grab Sample",7.73250656485229,FALSE
+"Irrigation 2","TP","CT","2","Grab Sample",7.71933645082953,TRUE
+"Irrigation 3","TP","CT","2","Grab Sample",7.77083663234927,FALSE
+"Irrigation 3","TP","CT","2","Grab Sample",7.58276939664598,TRUE
+"Irrigation 4","TP","CT","2","Grab Sample",6.97977810256586,FALSE
+"Irrigation 4","TP","CT","2","Grab Sample",7.06806421237791,TRUE
+"Irrigation 5","TP","CT","2","Grab Sample",6.29073265849627,FALSE
+"Irrigation 5","TP","CT","2","Grab Sample",6.24077182437538,TRUE
+"Irrigation 1","EC","CT","2","Grab Sample",0.9584492043533,FALSE
+"Irrigation 1","EC","CT","2","Grab Sample",0.959286656324236,TRUE
+"Irrigation 2","EC","CT","2","Grab Sample",0.989208924280444,FALSE
+"Irrigation 2","EC","CT","2","Grab Sample",0.789843213663593,TRUE
+"Irrigation 3","EC","CT","2","Grab Sample",1.03893682954278,FALSE
+"Irrigation 3","EC","CT","2","Grab Sample",0.937326360826865,TRUE
+"Irrigation 4","EC","CT","2","Grab Sample",0.867098202444282,FALSE
+"Irrigation 4","EC","CT","2","Grab Sample",0.744674997796585,TRUE
+"Irrigation 5","EC","CT","2","Grab Sample",0.631029162753159,FALSE
+"Irrigation 5","EC","CT","2","Grab Sample",0.654900937956858,TRUE
+"Irrigation 1","NO3","CT","2","Grab Sample",0.450946808507829,FALSE
+"Irrigation 1","NO3","CT","2","Grab Sample",0.362686389635468,TRUE
+"Irrigation 2","NO3","CT","2","Grab Sample",0.299585703109268,FALSE
+"Irrigation 2","NO3","CT","2","Grab Sample",0.346846212790134,TRUE
+"Irrigation 3","NO3","CT","2","Grab Sample",0.327451700092225,FALSE
+"Irrigation 3","NO3","CT","2","Grab Sample",0.319491101755623,TRUE
+"Irrigation 4","NO3","CT","2","Grab Sample",0.314309308846267,FALSE
+"Irrigation 4","NO3","CT","2","Grab Sample",0.326240155619871,TRUE
+"Irrigation 5","NO3","CT","2","Grab Sample",0.212897236623886,FALSE
+"Irrigation 5","NO3","CT","2","Grab Sample",0.23569556157612,TRUE
+"Irrigation 1","pH","CT","2","Grab Sample",0.194730618078778,FALSE
+"Irrigation 1","pH","CT","2","Grab Sample",0.200481352189636,TRUE
+"Irrigation 2","pH","CT","2","Grab Sample",0.150325292342363,FALSE
+"Irrigation 2","pH","CT","2","Grab Sample",0.180783214739287,TRUE
+"Irrigation 3","pH","CT","2","Grab Sample",0.158959315763943,FALSE
+"Irrigation 3","pH","CT","2","Grab Sample",0.14802463405073,TRUE
+"Irrigation 4","pH","CT","2","Grab Sample",0.146397960322341,FALSE
+"Irrigation 4","pH","CT","2","Grab Sample",0.170866559907232,TRUE
+"Irrigation 5","pH","CT","2","Grab Sample",0.133499583659597,FALSE
+"Irrigation 5","pH","CT","2","Grab Sample",0.133180153347909,TRUE
+"Irrigation 1","TSS","CT","2","Grab Sample",947.970560025568,FALSE
+"Irrigation 1","TSS","CT","2","Grab Sample",1401.70597786168,TRUE
+"Irrigation 2","TSS","CT","2","Grab Sample",1401.38527213742,FALSE
+"Irrigation 2","TSS","CT","2","Grab Sample",1136.08516736479,TRUE
+"Irrigation 3","TSS","CT","2","Grab Sample",976.213438009421,FALSE
+"Irrigation 3","TSS","CT","2","Grab Sample",1286.33428526717,TRUE
+"Irrigation 4","TSS","CT","2","Grab Sample",875.636884910704,FALSE
+"Irrigation 4","TSS","CT","2","Grab Sample",1108.20906787256,TRUE
+"Irrigation 5","TSS","CT","2","Grab Sample",1036.377308295,FALSE
+"Irrigation 5","TSS","CT","2","Grab Sample",1143.2638651031,TRUE
+"Irrigation 1","TDS","CT","2","Grab Sample",715.11957138988,FALSE
+"Irrigation 1","TDS","CT","2","Grab Sample",613.30526016313,TRUE
+"Irrigation 2","TDS","CT","2","Grab Sample",586.593123335812,FALSE
+"Irrigation 2","TDS","CT","2","Grab Sample",590.21220546619,TRUE
+"Irrigation 3","TDS","CT","2","Grab Sample",497.120313427074,FALSE
+"Irrigation 3","TDS","CT","2","Grab Sample",549.313495493867,TRUE
+"Irrigation 4","TDS","CT","2","Grab Sample",602.659512908558,FALSE
+"Irrigation 4","TDS","CT","2","Grab Sample",532.898806904632,TRUE
+"Irrigation 5","TDS","CT","2","Grab Sample",449.50374357818,FALSE
+"Irrigation 5","TDS","CT","2","Grab Sample",418.970042777072,TRUE
+"Irrigation 1","NO2","MT","2","Grab Sample",9.1510784525342,FALSE
+"Irrigation 1","NO2","MT","2","Grab Sample",7.71813760828914,TRUE
+"Irrigation 2","NO2","MT","2","Grab Sample",5.88413567624163,FALSE
+"Irrigation 2","NO2","MT","2","Grab Sample",6.6772782024439,TRUE
+"Irrigation 3","NO2","MT","2","Grab Sample",4.97113809478092,FALSE
+"Irrigation 3","NO2","MT","2","Grab Sample",6.90343140345926,TRUE
+"Irrigation 4","NO2","MT","2","Grab Sample",7.59404784164735,FALSE
+"Irrigation 4","NO2","MT","2","Grab Sample",5.81554043447258,TRUE
+"Irrigation 5","NO2","MT","2","Grab Sample",7.31318632070409,FALSE
+"Irrigation 5","NO2","MT","2","Grab Sample",7.41045758788567,TRUE
+"Irrigation 1","OP","MT","2","Grab Sample",0.0932733757553341,FALSE
+"Irrigation 1","OP","MT","2","Grab Sample",0.109140121338197,TRUE
+"Irrigation 2","OP","MT","2","Grab Sample",0.0671422499982889,FALSE
+"Irrigation 2","OP","MT","2","Grab Sample",0.101045571997973,TRUE
+"Irrigation 3","OP","MT","2","Grab Sample",0.0820443908721909,FALSE
+"Irrigation 3","OP","MT","2","Grab Sample",0.0855647363339025,TRUE
+"Irrigation 4","OP","MT","2","Grab Sample",0.0704113151417227,FALSE
+"Irrigation 4","OP","MT","2","Grab Sample",0.0858256470486001,TRUE
+"Irrigation 5","OP","MT","2","Grab Sample",0.0785295841482442,FALSE
+"Irrigation 5","OP","MT","2","Grab Sample",0.0726257259633858,TRUE
+"Irrigation 1","TKN","MT","2","Grab Sample",4.68958792130117,FALSE
+"Irrigation 1","TKN","MT","2","Grab Sample",5.2941816370575,TRUE
+"Irrigation 2","TKN","MT","2","Grab Sample",1.52722949762317,FALSE
+"Irrigation 2","TKN","MT","2","Grab Sample",3.66213957887023,TRUE
+"Irrigation 3","TKN","MT","2","Grab Sample",5.15146745107742,FALSE
+"Irrigation 3","TKN","MT","2","Grab Sample",4.91367715419422,TRUE
+"Irrigation 4","TKN","MT","2","Grab Sample",4.43770182573135,FALSE
+"Irrigation 4","TKN","MT","2","Grab Sample",2.42139686314919,TRUE
+"Irrigation 5","TKN","MT","2","Grab Sample",3.58336041024714,FALSE
+"Irrigation 5","TKN","MT","2","Grab Sample",2.51200898465968,TRUE
+"Irrigation 1","TP","MT","2","Grab Sample",7.68436610821918,FALSE
+"Irrigation 1","TP","MT","2","Grab Sample",7.79523649804538,TRUE
+"Irrigation 2","TP","MT","2","Grab Sample",6.33638752588533,FALSE
+"Irrigation 2","TP","MT","2","Grab Sample",6.19140113245383,TRUE
+"Irrigation 3","TP","MT","2","Grab Sample",6.24950163159918,FALSE
+"Irrigation 3","TP","MT","2","Grab Sample",6.49825221711752,TRUE
+"Irrigation 4","TP","MT","2","Grab Sample",5.63239578877299,FALSE
+"Irrigation 4","TP","MT","2","Grab Sample",5.50566092022955,TRUE
+"Irrigation 5","TP","MT","2","Grab Sample",4.81435109304946,FALSE
+"Irrigation 5","TP","MT","2","Grab Sample",4.89609047077057,TRUE
+"Irrigation 1","EC","MT","2","Grab Sample",0.878037999617562,FALSE
+"Irrigation 1","EC","MT","2","Grab Sample",0.888918425370878,TRUE
+"Irrigation 2","EC","MT","2","Grab Sample",0.845667888145251,FALSE
+"Irrigation 2","EC","MT","2","Grab Sample",0.637030943132827,TRUE
+"Irrigation 3","EC","MT","2","Grab Sample",0.775463212914503,FALSE
+"Irrigation 3","EC","MT","2","Grab Sample",0.678433932658257,TRUE
+"Irrigation 4","EC","MT","2","Grab Sample",0.595787932748427,FALSE
+"Irrigation 4","EC","MT","2","Grab Sample",0.449611247212358,TRUE
+"Irrigation 5","EC","MT","2","Grab Sample",0.717358392406444,FALSE
+"Irrigation 5","EC","MT","2","Grab Sample",0.444328586531559,TRUE
+"Irrigation 1","NO3","MT","2","Grab Sample",0.332697674181508,FALSE
+"Irrigation 1","NO3","MT","2","Grab Sample",0.315060954327927,TRUE
+"Irrigation 2","NO3","MT","2","Grab Sample",0.330807118532154,FALSE
+"Irrigation 2","NO3","MT","2","Grab Sample",0.332819906080292,TRUE
+"Irrigation 3","NO3","MT","2","Grab Sample",0.257412812077259,FALSE
+"Irrigation 3","NO3","MT","2","Grab Sample",0.208574194778012,TRUE
+"Irrigation 4","NO3","MT","2","Grab Sample",0.228459172828904,FALSE
+"Irrigation 4","NO3","MT","2","Grab Sample",0.252525957523343,TRUE
+"Irrigation 5","NO3","MT","2","Grab Sample",0.267634409934153,FALSE
+"Irrigation 5","NO3","MT","2","Grab Sample",0.265745189360304,TRUE
+"Irrigation 1","pH","MT","2","Grab Sample",0.1519167337877,FALSE
+"Irrigation 1","pH","MT","2","Grab Sample",0.169594328117325,TRUE
+"Irrigation 2","pH","MT","2","Grab Sample",0.139342290006427,FALSE
+"Irrigation 2","pH","MT","2","Grab Sample",0.145817051379276,TRUE
+"Irrigation 3","pH","MT","2","Grab Sample",0.140724718745632,FALSE
+"Irrigation 3","pH","MT","2","Grab Sample",0.158118002378168,TRUE
+"Irrigation 4","pH","MT","2","Grab Sample",0.118298436492141,FALSE
+"Irrigation 4","pH","MT","2","Grab Sample",0.10296810303114,TRUE
+"Irrigation 5","pH","MT","2","Grab Sample",0.113023106054647,FALSE
+"Irrigation 5","pH","MT","2","Grab Sample",0.104608460336905,TRUE
+"Irrigation 1","TSS","MT","2","Grab Sample",1413.19040724624,FALSE
+"Irrigation 1","TSS","MT","2","Grab Sample",1102.53084306413,TRUE
+"Irrigation 2","TSS","MT","2","Grab Sample",895.30700822886,FALSE
+"Irrigation 2","TSS","MT","2","Grab Sample",625.959431442699,TRUE
+"Irrigation 3","TSS","MT","2","Grab Sample",1181.79897054552,FALSE
+"Irrigation 3","TSS","MT","2","Grab Sample",1167.35551470152,TRUE
+"Irrigation 4","TSS","MT","2","Grab Sample",665.02689293605,FALSE
+"Irrigation 4","TSS","MT","2","Grab Sample",712.049567939121,TRUE
+"Irrigation 5","TSS","MT","2","Grab Sample",1092.70010473968,FALSE
+"Irrigation 5","TSS","MT","2","Grab Sample",244.981437277869,TRUE
+"Irrigation 1","TDS","MT","2","Grab Sample",547.978792715436,FALSE
+"Irrigation 1","TDS","MT","2","Grab Sample",583.738702637581,TRUE
+"Irrigation 2","TDS","MT","2","Grab Sample",498.695032455301,FALSE
+"Irrigation 2","TDS","MT","2","Grab Sample",332.283602657944,TRUE
+"Irrigation 3","TDS","MT","2","Grab Sample",452.859445311818,FALSE
+"Irrigation 3","TDS","MT","2","Grab Sample",482.644024305459,TRUE
+"Irrigation 4","TDS","MT","2","Grab Sample",381.009732013105,FALSE
+"Irrigation 4","TDS","MT","2","Grab Sample",389.615611820758,TRUE
+"Irrigation 5","TDS","MT","2","Grab Sample",352.647134305809,FALSE
+"Irrigation 5","TDS","MT","2","Grab Sample",400.18023307695,TRUE
+"Irrigation 1","NO2","ST","2","Grab Sample",7.12156013716597,FALSE
+"Irrigation 1","NO2","ST","2","Grab Sample",6.47729951329871,TRUE
+"Irrigation 2","NO2","ST","2","Grab Sample",4.38772679250051,FALSE
+"Irrigation 2","NO2","ST","2","Grab Sample",6.05485762278543,TRUE
+"Irrigation 3","NO2","ST","2","Grab Sample",4.309499056983,FALSE
+"Irrigation 3","NO2","ST","2","Grab Sample",6.83833054763856,TRUE
+"Irrigation 4","NO2","ST","2","Grab Sample",6.15701242181736,FALSE
+"Irrigation 4","NO2","ST","2","Grab Sample",5.61459965044872,TRUE
+"Irrigation 5","NO2","ST","2","Grab Sample",4.19502413355867,FALSE
+"Irrigation 5","NO2","ST","2","Grab Sample",4.62517449806781,TRUE
+"Irrigation 1","OP","ST","2","Grab Sample",0.0957844634678433,FALSE
+"Irrigation 1","OP","ST","2","Grab Sample",0.0896562286404801,TRUE
+"Irrigation 2","OP","ST","2","Grab Sample",0.0557559351713097,FALSE
+"Irrigation 2","OP","ST","2","Grab Sample",0.0763917454318234,TRUE
+"Irrigation 3","OP","ST","2","Grab Sample",0.0556657202218038,FALSE
+"Irrigation 3","OP","ST","2","Grab Sample",0.0705282744574448,TRUE
+"Irrigation 4","OP","ST","2","Grab Sample",0.0668741819727015,FALSE
+"Irrigation 4","OP","ST","2","Grab Sample",0.0670050719322382,TRUE
+"Irrigation 5","OP","ST","2","Grab Sample",0.0553070198819395,FALSE
+"Irrigation 5","OP","ST","2","Grab Sample",0.0339429029531701,TRUE
+"Irrigation 1","TKN","ST","2","Grab Sample",3.06273696894827,FALSE
+"Irrigation 1","TKN","ST","2","Grab Sample",4.75601095897904,TRUE
+"Irrigation 2","TKN","ST","2","Grab Sample",3.3915617059981,FALSE
+"Irrigation 2","TKN","ST","2","Grab Sample",3.16214545735733,TRUE
+"Irrigation 3","TKN","ST","2","Grab Sample",6.62473636875183,FALSE
+"Irrigation 3","TKN","ST","2","Grab Sample",4.59459864853188,TRUE
+"Irrigation 4","TKN","ST","2","Grab Sample",2.03638363771835,FALSE
+"Irrigation 4","TKN","ST","2","Grab Sample",2.43234686389894,TRUE
+"Irrigation 5","TKN","ST","2","Grab Sample",3.58290079320386,FALSE
+"Irrigation 5","TKN","ST","2","Grab Sample",1.64476393421874,TRUE
+"Irrigation 1","TP","ST","2","Grab Sample",6.32578144235161,FALSE
+"Irrigation 1","TP","ST","2","Grab Sample",6.27905596775211,TRUE
+"Irrigation 2","TP","ST","2","Grab Sample",4.84617839988026,FALSE
+"Irrigation 2","TP","ST","2","Grab Sample",4.88670709211758,TRUE
+"Irrigation 3","TP","ST","2","Grab Sample",4.90543695206813,FALSE
+"Irrigation 3","TP","ST","2","Grab Sample",4.85976217411067,TRUE
+"Irrigation 4","TP","ST","2","Grab Sample",4.31007016638555,FALSE
+"Irrigation 4","TP","ST","2","Grab Sample",4.10345336468395,TRUE
+"Irrigation 5","TP","ST","2","Grab Sample",3.46390807326231,FALSE
+"Irrigation 5","TP","ST","2","Grab Sample",3.51069725662315,TRUE
+"Irrigation 1","EC","ST","2","Grab Sample",0.751454881586458,FALSE
+"Irrigation 1","EC","ST","2","Grab Sample",0.56992008832958,TRUE
+"Irrigation 2","EC","ST","2","Grab Sample",0.618596926455989,FALSE
+"Irrigation 2","EC","ST","2","Grab Sample",0.34077000663029,TRUE
+"Irrigation 3","EC","ST","2","Grab Sample",0.478548175010103,FALSE
+"Irrigation 3","EC","ST","2","Grab Sample",0.473754144999946,TRUE
+"Irrigation 4","EC","ST","2","Grab Sample",0.366828582882806,FALSE
+"Irrigation 4","EC","ST","2","Grab Sample",0.366838283937076,TRUE
+"Irrigation 5","EC","ST","2","Grab Sample",0.462232376332747,FALSE
+"Irrigation 5","EC","ST","2","Grab Sample",0.454578407201854,TRUE
+"Irrigation 1","NO3","ST","2","Grab Sample",0.34015210120013,FALSE
+"Irrigation 1","NO3","ST","2","Grab Sample",0.317103606991022,TRUE
+"Irrigation 2","NO3","ST","2","Grab Sample",0.223274896277154,FALSE
+"Irrigation 2","NO3","ST","2","Grab Sample",0.262618845623041,TRUE
+"Irrigation 3","NO3","ST","2","Grab Sample",0.251014882224205,FALSE
+"Irrigation 3","NO3","ST","2","Grab Sample",0.200734438050743,TRUE
+"Irrigation 4","NO3","ST","2","Grab Sample",0.188454883500018,FALSE
+"Irrigation 4","NO3","ST","2","Grab Sample",0.177138349579032,TRUE
+"Irrigation 5","NO3","ST","2","Grab Sample",0.143842384826615,FALSE
+"Irrigation 5","NO3","ST","2","Grab Sample",0.195988974966505,TRUE
+"Irrigation 1","pH","ST","2","Grab Sample",0.136273994135897,FALSE
+"Irrigation 1","pH","ST","2","Grab Sample",0.133342653730837,TRUE
+"Irrigation 2","pH","ST","2","Grab Sample",0.0746909230981911,FALSE
+"Irrigation 2","pH","ST","2","Grab Sample",0.0990236575281145,TRUE
+"Irrigation 3","pH","ST","2","Grab Sample",0.109458373083854,FALSE
+"Irrigation 3","pH","ST","2","Grab Sample",0.115631105998998,TRUE
+"Irrigation 4","pH","ST","2","Grab Sample",0.0995722426514397,FALSE
+"Irrigation 4","pH","ST","2","Grab Sample",0.101699207141703,TRUE
+"Irrigation 5","pH","ST","2","Grab Sample",0.0899473587088872,FALSE
+"Irrigation 5","pH","ST","2","Grab Sample",0.060802555780275,TRUE
+"Irrigation 1","TSS","ST","2","Grab Sample",1114.29960546812,FALSE
+"Irrigation 1","TSS","ST","2","Grab Sample",535.675239966325,TRUE
+"Irrigation 2","TSS","ST","2","Grab Sample",304.843528849518,FALSE
+"Irrigation 2","TSS","ST","2","Grab Sample",681.742196167182,TRUE
+"Irrigation 3","TSS","ST","2","Grab Sample",843.518954531085,FALSE
+"Irrigation 3","TSS","ST","2","Grab Sample",768.401742609423,TRUE
+"Irrigation 4","TSS","ST","2","Grab Sample",594.439261061501,FALSE
+"Irrigation 4","TSS","ST","2","Grab Sample",379.770729594896,TRUE
+"Irrigation 5","TSS","ST","2","Grab Sample",195.640131675704,FALSE
+"Irrigation 5","TSS","ST","2","Grab Sample",387.702712843365,TRUE
+"Irrigation 1","TDS","ST","2","Grab Sample",472.835909115551,FALSE
+"Irrigation 1","TDS","ST","2","Grab Sample",447.101498657235,TRUE
+"Irrigation 2","TDS","ST","2","Grab Sample",330.365927681049,FALSE
+"Irrigation 2","TDS","ST","2","Grab Sample",426.444929669325,TRUE
+"Irrigation 3","TDS","ST","2","Grab Sample",354.088111921883,FALSE
+"Irrigation 3","TDS","ST","2","Grab Sample",360.187476308025,TRUE
+"Irrigation 4","TDS","ST","2","Grab Sample",364.478108991444,FALSE
+"Irrigation 4","TDS","ST","2","Grab Sample",309.684409062015,TRUE
+"Irrigation 5","TDS","ST","2","Grab Sample",262.210807383466,FALSE
+"Irrigation 5","TDS","ST","2","Grab Sample",185.113356280083,TRUE
+"Irrigation 1","NO2","CT","1","Hourly Grab",11.9481788764084,FALSE
+"Irrigation 1","NO2","CT","1","Hourly Grab",10.5656274164272,TRUE
+"Irrigation 2","NO2","CT","1","Hourly Grab",10.0046466203066,FALSE
+"Irrigation 2","NO2","CT","1","Hourly Grab",11.9177324219292,TRUE
+"Irrigation 3","NO2","CT","1","Hourly Grab",9.86656822441138,FALSE
+"Irrigation 3","NO2","CT","1","Hourly Grab",11.0371485831613,TRUE
+"Irrigation 4","NO2","CT","1","Hourly Grab",10.4947862618937,FALSE
+"Irrigation 4","NO2","CT","1","Hourly Grab",9.64712544546188,TRUE
+"Irrigation 5","NO2","CT","1","Hourly Grab",9.37144950685627,FALSE
+"Irrigation 5","NO2","CT","1","Hourly Grab",8.14201844346558,TRUE
+"Irrigation 1","OP","CT","1","Hourly Grab",0.154333909100334,FALSE
+"Irrigation 1","OP","CT","1","Hourly Grab",0.14840694676295,TRUE
+"Irrigation 2","OP","CT","1","Hourly Grab",0.153588200590747,FALSE
+"Irrigation 2","OP","CT","1","Hourly Grab",0.136124315334926,TRUE
+"Irrigation 3","OP","CT","1","Hourly Grab",0.138141835741203,FALSE
+"Irrigation 3","OP","CT","1","Hourly Grab",0.1252685048712,TRUE
+"Irrigation 4","OP","CT","1","Hourly Grab",0.118009718067084,FALSE
+"Irrigation 4","OP","CT","1","Hourly Grab",0.112084536022393,TRUE
+"Irrigation 5","OP","CT","1","Hourly Grab",0.111255780554005,FALSE
+"Irrigation 5","OP","CT","1","Hourly Grab",0.12370749328863,TRUE
+"Irrigation 1","TKN","CT","1","Hourly Grab",7.73235365666872,FALSE
+"Irrigation 1","TKN","CT","1","Hourly Grab",6.22757264919409,TRUE
+"Irrigation 2","TKN","CT","1","Hourly Grab",7.38020338939675,FALSE
+"Irrigation 2","TKN","CT","1","Hourly Grab",7.88416525214265,TRUE
+"Irrigation 3","TKN","CT","1","Hourly Grab",6.39417482282647,FALSE
+"Irrigation 3","TKN","CT","1","Hourly Grab",8.38706693462493,TRUE
+"Irrigation 4","TKN","CT","1","Hourly Grab",5.75449946682929,FALSE
+"Irrigation 4","TKN","CT","1","Hourly Grab",8.68416634445635,TRUE
+"Irrigation 5","TKN","CT","1","Hourly Grab",4.22791494282231,FALSE
+"Irrigation 5","TKN","CT","1","Hourly Grab",6.02917702052178,TRUE
+"Irrigation 1","TP","CT","1","Hourly Grab",10.3912911426875,FALSE
+"Irrigation 1","TP","CT","1","Hourly Grab",10.5718770218938,TRUE
+"Irrigation 2","TP","CT","1","Hourly Grab",8.89924299054554,FALSE
+"Irrigation 2","TP","CT","1","Hourly Grab",9.1479604756532,TRUE
+"Irrigation 3","TP","CT","1","Hourly Grab",9.17392232421381,FALSE
+"Irrigation 3","TP","CT","1","Hourly Grab",8.90979266957505,TRUE
+"Irrigation 4","TP","CT","1","Hourly Grab",8.32885515633472,FALSE
+"Irrigation 4","TP","CT","1","Hourly Grab",8.55566580238273,TRUE
+"Irrigation 5","TP","CT","1","Hourly Grab",7.68159785474609,FALSE
+"Irrigation 5","TP","CT","1","Hourly Grab",7.87415139079107,TRUE
+"Irrigation 1","EC","CT","1","Hourly Grab",1.21213812168346,FALSE
+"Irrigation 1","EC","CT","1","Hourly Grab",1.13715765623582,TRUE
+"Irrigation 2","EC","CT","1","Hourly Grab",1.01046341682064,FALSE
+"Irrigation 2","EC","CT","1","Hourly Grab",1.08778243315869,TRUE
+"Irrigation 3","EC","CT","1","Hourly Grab",0.981178271714404,FALSE
+"Irrigation 3","EC","CT","1","Hourly Grab",1.14085148840442,TRUE
+"Irrigation 4","EC","CT","1","Hourly Grab",0.944742129294277,FALSE
+"Irrigation 4","EC","CT","1","Hourly Grab",0.927912565601713,TRUE
+"Irrigation 5","EC","CT","1","Hourly Grab",0.910464900694165,FALSE
+"Irrigation 5","EC","CT","1","Hourly Grab",0.874115352639342,TRUE
+"Irrigation 1","NO3","CT","1","Hourly Grab",0.461252323481457,FALSE
+"Irrigation 1","NO3","CT","1","Hourly Grab",0.496212388969416,TRUE
+"Irrigation 2","NO3","CT","1","Hourly Grab",0.377533660087416,FALSE
+"Irrigation 2","NO3","CT","1","Hourly Grab",0.439903347205625,TRUE
+"Irrigation 3","NO3","CT","1","Hourly Grab",0.429687945172704,FALSE
+"Irrigation 3","NO3","CT","1","Hourly Grab",0.312940367582516,TRUE
+"Irrigation 4","NO3","CT","1","Hourly Grab",0.25612881761909,FALSE
+"Irrigation 4","NO3","CT","1","Hourly Grab",0.380253623283283,TRUE
+"Irrigation 5","NO3","CT","1","Hourly Grab",0.32324703682381,FALSE
+"Irrigation 5","NO3","CT","1","Hourly Grab",0.38991632029396,TRUE
+"Irrigation 1","pH","CT","1","Hourly Grab",0.217685593175847,FALSE
+"Irrigation 1","pH","CT","1","Hourly Grab",0.238696338844262,TRUE
+"Irrigation 2","pH","CT","1","Hourly Grab",0.189948772423603,FALSE
+"Irrigation 2","pH","CT","1","Hourly Grab",0.195571392559079,TRUE
+"Irrigation 3","pH","CT","1","Hourly Grab",0.205330162583786,FALSE
+"Irrigation 3","pH","CT","1","Hourly Grab",0.188508321486401,TRUE
+"Irrigation 4","pH","CT","1","Hourly Grab",0.180825158517931,FALSE
+"Irrigation 4","pH","CT","1","Hourly Grab",0.185127154757759,TRUE
+"Irrigation 5","pH","CT","1","Hourly Grab",0.135810239872747,FALSE
+"Irrigation 5","pH","CT","1","Hourly Grab",0.167962461617234,TRUE
+"Irrigation 1","TSS","CT","1","Hourly Grab",1664.9230460757,FALSE
+"Irrigation 1","TSS","CT","1","Hourly Grab",1720.29544832342,TRUE
+"Irrigation 2","TSS","CT","1","Hourly Grab",1313.89149349129,FALSE
+"Irrigation 2","TSS","CT","1","Hourly Grab",1257.82607820566,TRUE
+"Irrigation 3","TSS","CT","1","Hourly Grab",1254.00684082416,FALSE
+"Irrigation 3","TSS","CT","1","Hourly Grab",1198.78583618515,TRUE
+"Irrigation 4","TSS","CT","1","Hourly Grab",812.411217550539,FALSE
+"Irrigation 4","TSS","CT","1","Hourly Grab",1134.41147549418,TRUE
+"Irrigation 5","TSS","CT","1","Hourly Grab",1252.49069179625,FALSE
+"Irrigation 5","TSS","CT","1","Hourly Grab",939.900111497723,TRUE
+"Irrigation 1","TDS","CT","1","Hourly Grab",715.716538770808,FALSE
+"Irrigation 1","TDS","CT","1","Hourly Grab",768.207840130074,TRUE
+"Irrigation 2","TDS","CT","1","Hourly Grab",599.872042219159,FALSE
+"Irrigation 2","TDS","CT","1","Hourly Grab",717.657368555831,TRUE
+"Irrigation 3","TDS","CT","1","Hourly Grab",579.011870801874,FALSE
+"Irrigation 3","TDS","CT","1","Hourly Grab",633.612606824775,TRUE
+"Irrigation 4","TDS","CT","1","Hourly Grab",583.179938770271,FALSE
+"Irrigation 4","TDS","CT","1","Hourly Grab",629.216076798641,TRUE
+"Irrigation 5","TDS","CT","1","Hourly Grab",576.296756355305,FALSE
+"Irrigation 5","TDS","CT","1","Hourly Grab",535.220563334215,TRUE
+"Irrigation 1","NO2","MT","1","Hourly Grab",10.784348333326,FALSE
+"Irrigation 1","NO2","MT","1","Hourly Grab",10.0199702252941,TRUE
+"Irrigation 2","NO2","MT","1","Hourly Grab",9.10537254210855,FALSE
+"Irrigation 2","NO2","MT","1","Hourly Grab",9.90109376357957,TRUE
+"Irrigation 3","NO2","MT","1","Hourly Grab",7.98374189395981,FALSE
+"Irrigation 3","NO2","MT","1","Hourly Grab",9.58070759429996,TRUE
+"Irrigation 4","NO2","MT","1","Hourly Grab",8.99303166764865,FALSE
+"Irrigation 4","NO2","MT","1","Hourly Grab",8.26548754238765,TRUE
+"Irrigation 5","NO2","MT","1","Hourly Grab",6.75502208794519,FALSE
+"Irrigation 5","NO2","MT","1","Hourly Grab",7.33765912810772,TRUE
+"Irrigation 1","OP","MT","1","Hourly Grab",0.124016680826138,FALSE
+"Irrigation 1","OP","MT","1","Hourly Grab",0.136458524795139,TRUE
+"Irrigation 2","OP","MT","1","Hourly Grab",0.105886959380971,FALSE
+"Irrigation 2","OP","MT","1","Hourly Grab",0.101068180193381,TRUE
+"Irrigation 3","OP","MT","1","Hourly Grab",0.109884033611693,FALSE
+"Irrigation 3","OP","MT","1","Hourly Grab",0.103909334170692,TRUE
+"Irrigation 4","OP","MT","1","Hourly Grab",0.0939156976543813,FALSE
+"Irrigation 4","OP","MT","1","Hourly Grab",0.0905115560394945,TRUE
+"Irrigation 5","OP","MT","1","Hourly Grab",0.0902348299711754,FALSE
+"Irrigation 5","OP","MT","1","Hourly Grab",0.105510331836779,TRUE
+"Irrigation 1","TKN","MT","1","Hourly Grab",5.27639189614549,FALSE
+"Irrigation 1","TKN","MT","1","Hourly Grab",5.68416215573337,TRUE
+"Irrigation 2","TKN","MT","1","Hourly Grab",6.19306898890443,FALSE
+"Irrigation 2","TKN","MT","1","Hourly Grab",5.23368404560432,TRUE
+"Irrigation 3","TKN","MT","1","Hourly Grab",4.43260241180601,FALSE
+"Irrigation 3","TKN","MT","1","Hourly Grab",5.92923516005747,TRUE
+"Irrigation 4","TKN","MT","1","Hourly Grab",4.56090135119864,FALSE
+"Irrigation 4","TKN","MT","1","Hourly Grab",4.11782463816204,TRUE
+"Irrigation 5","TKN","MT","1","Hourly Grab",4.13103697575107,FALSE
+"Irrigation 5","TKN","MT","1","Hourly Grab",4.06164300625247,TRUE
+"Irrigation 1","TP","MT","1","Hourly Grab",9.11369066964142,FALSE
+"Irrigation 1","TP","MT","1","Hourly Grab",9.00842569356526,TRUE
+"Irrigation 2","TP","MT","1","Hourly Grab",7.69331552115387,FALSE
+"Irrigation 2","TP","MT","1","Hourly Grab",7.66607281657529,TRUE
+"Irrigation 3","TP","MT","1","Hourly Grab",7.64229537664649,FALSE
+"Irrigation 3","TP","MT","1","Hourly Grab",7.62691361022497,TRUE
+"Irrigation 4","TP","MT","1","Hourly Grab",6.94687188387463,FALSE
+"Irrigation 4","TP","MT","1","Hourly Grab",6.89358894493521,TRUE
+"Irrigation 5","TP","MT","1","Hourly Grab",6.31355004936075,FALSE
+"Irrigation 5","TP","MT","1","Hourly Grab",6.21439290388854,TRUE
+"Irrigation 1","EC","MT","1","Hourly Grab",1.15800685649703,FALSE
+"Irrigation 1","EC","MT","1","Hourly Grab",1.11875178463334,TRUE
+"Irrigation 2","EC","MT","1","Hourly Grab",0.81828361813366,FALSE
+"Irrigation 2","EC","MT","1","Hourly Grab",0.8703408420375,TRUE
+"Irrigation 3","EC","MT","1","Hourly Grab",0.667803009377862,FALSE
+"Irrigation 3","EC","MT","1","Hourly Grab",0.788708995854649,TRUE
+"Irrigation 4","EC","MT","1","Hourly Grab",0.802794121234,FALSE
+"Irrigation 4","EC","MT","1","Hourly Grab",0.826066722255151,TRUE
+"Irrigation 5","EC","MT","1","Hourly Grab",0.823023048653759,FALSE
+"Irrigation 5","EC","MT","1","Hourly Grab",0.739032421594932,TRUE
+"Irrigation 1","NO3","MT","1","Hourly Grab",0.484548905500109,FALSE
+"Irrigation 1","NO3","MT","1","Hourly Grab",0.473408863927864,TRUE
+"Irrigation 2","NO3","MT","1","Hourly Grab",0.411589060701587,FALSE
+"Irrigation 2","NO3","MT","1","Hourly Grab",0.305341002102235,TRUE
+"Irrigation 3","NO3","MT","1","Hourly Grab",0.225762087521382,FALSE
+"Irrigation 3","NO3","MT","1","Hourly Grab",0.24134797217517,TRUE
+"Irrigation 4","NO3","MT","1","Hourly Grab",0.316001581131279,FALSE
+"Irrigation 4","NO3","MT","1","Hourly Grab",0.316286389736633,TRUE
+"Irrigation 5","NO3","MT","1","Hourly Grab",0.297419172451242,FALSE
+"Irrigation 5","NO3","MT","1","Hourly Grab",0.314740888216444,TRUE
+"Irrigation 1","pH","MT","1","Hourly Grab",0.176950665476446,FALSE
+"Irrigation 1","pH","MT","1","Hourly Grab",0.192994909268589,TRUE
+"Irrigation 2","pH","MT","1","Hourly Grab",0.163632107386579,FALSE
+"Irrigation 2","pH","MT","1","Hourly Grab",0.167450586449243,TRUE
+"Irrigation 3","pH","MT","1","Hourly Grab",0.172561939278933,FALSE
+"Irrigation 3","pH","MT","1","Hourly Grab",0.186690977217129,TRUE
+"Irrigation 4","pH","MT","1","Hourly Grab",0.14943289086192,FALSE
+"Irrigation 4","pH","MT","1","Hourly Grab",0.156003015718255,TRUE
+"Irrigation 5","pH","MT","1","Hourly Grab",0.134718875462795,FALSE
+"Irrigation 5","pH","MT","1","Hourly Grab",0.122990362744872,TRUE
+"Irrigation 1","TSS","MT","1","Hourly Grab",1139.84719194788,FALSE
+"Irrigation 1","TSS","MT","1","Hourly Grab",968.201844157629,TRUE
+"Irrigation 2","TSS","MT","1","Hourly Grab",1076.60304996432,FALSE
+"Irrigation 2","TSS","MT","1","Hourly Grab",1277.85992695819,TRUE
+"Irrigation 3","TSS","MT","1","Hourly Grab",1070.05679430079,FALSE
+"Irrigation 3","TSS","MT","1","Hourly Grab",1213.60335487343,TRUE
+"Irrigation 4","TSS","MT","1","Hourly Grab",889.386840167809,FALSE
+"Irrigation 4","TSS","MT","1","Hourly Grab",911.422099408136,TRUE
+"Irrigation 5","TSS","MT","1","Hourly Grab",781.295404796335,FALSE
+"Irrigation 5","TSS","MT","1","Hourly Grab",811.083635560134,TRUE
+"Irrigation 1","TDS","MT","1","Hourly Grab",697.546214742811,FALSE
+"Irrigation 1","TDS","MT","1","Hourly Grab",713.722971713443,TRUE
+"Irrigation 2","TDS","MT","1","Hourly Grab",510.035515419568,FALSE
+"Irrigation 2","TDS","MT","1","Hourly Grab",682.554906711254,TRUE
+"Irrigation 3","TDS","MT","1","Hourly Grab",532.999457084922,FALSE
+"Irrigation 3","TDS","MT","1","Hourly Grab",588.973204142772,TRUE
+"Irrigation 4","TDS","MT","1","Hourly Grab",489.579815133137,FALSE
+"Irrigation 4","TDS","MT","1","Hourly Grab",579.206566208366,TRUE
+"Irrigation 5","TDS","MT","1","Hourly Grab",444.464157641906,FALSE
+"Irrigation 5","TDS","MT","1","Hourly Grab",430.374374412344,TRUE
+"Irrigation 1","NO2","ST","1","Hourly Grab",7.86012547437245,FALSE
+"Irrigation 1","NO2","ST","1","Hourly Grab",8.86991070749465,TRUE
+"Irrigation 2","NO2","ST","1","Hourly Grab",7.94386147926065,FALSE
+"Irrigation 2","NO2","ST","1","Hourly Grab",7.10472562518166,TRUE
+"Irrigation 3","NO2","ST","1","Hourly Grab",7.88965400253231,FALSE
+"Irrigation 3","NO2","ST","1","Hourly Grab",6.95516983024384,TRUE
+"Irrigation 4","NO2","ST","1","Hourly Grab",5.64807163557616,FALSE
+"Irrigation 4","NO2","ST","1","Hourly Grab",7.32558748874303,TRUE
+"Irrigation 5","NO2","ST","1","Hourly Grab",4.76582574540105,FALSE
+"Irrigation 5","NO2","ST","1","Hourly Grab",5.01299402902993,TRUE
+"Irrigation 1","OP","ST","1","Hourly Grab",0.1128949912251,FALSE
+"Irrigation 1","OP","ST","1","Hourly Grab",0.109760694363123,TRUE
+"Irrigation 2","OP","ST","1","Hourly Grab",0.0985421579311091,FALSE
+"Irrigation 2","OP","ST","1","Hourly Grab",0.0937687330878648,TRUE
+"Irrigation 3","OP","ST","1","Hourly Grab",0.0876701635554166,FALSE
+"Irrigation 3","OP","ST","1","Hourly Grab",0.106118612493259,TRUE
+"Irrigation 4","OP","ST","1","Hourly Grab",0.0657652982428562,FALSE
+"Irrigation 4","OP","ST","1","Hourly Grab",0.0754098239047494,TRUE
+"Irrigation 5","OP","ST","1","Hourly Grab",0.0605430433788352,FALSE
+"Irrigation 5","OP","ST","1","Hourly Grab",0.068466086817654,TRUE
+"Irrigation 1","TKN","ST","1","Hourly Grab",5.90785338000144,FALSE
+"Irrigation 1","TKN","ST","1","Hourly Grab",3.70916032109622,TRUE
+"Irrigation 2","TKN","ST","1","Hourly Grab",4.46839015874169,FALSE
+"Irrigation 2","TKN","ST","1","Hourly Grab",6.21517748163022,TRUE
+"Irrigation 3","TKN","ST","1","Hourly Grab",4.62176847863815,FALSE
+"Irrigation 3","TKN","ST","1","Hourly Grab",3.65941929192272,TRUE
+"Irrigation 4","TKN","ST","1","Hourly Grab",4.1437463111444,FALSE
+"Irrigation 4","TKN","ST","1","Hourly Grab",4.2033863919561,TRUE
+"Irrigation 5","TKN","ST","1","Hourly Grab",2.5160683669749,FALSE
+"Irrigation 5","TKN","ST","1","Hourly Grab",4.16305268602296,TRUE
+"Irrigation 1","TP","ST","1","Hourly Grab",7.72265647242955,FALSE
+"Irrigation 1","TP","ST","1","Hourly Grab",7.69989652162882,TRUE
+"Irrigation 2","TP","ST","1","Hourly Grab",6.16336539207423,FALSE
+"Irrigation 2","TP","ST","1","Hourly Grab",6.13823226305342,TRUE
+"Irrigation 3","TP","ST","1","Hourly Grab",6.35818347259822,FALSE
+"Irrigation 3","TP","ST","1","Hourly Grab",6.37498916666204,TRUE
+"Irrigation 4","TP","ST","1","Hourly Grab",5.47680615792755,FALSE
+"Irrigation 4","TP","ST","1","Hourly Grab",5.68973933012903,TRUE
+"Irrigation 5","TP","ST","1","Hourly Grab",4.75995134205233,FALSE
+"Irrigation 5","TP","ST","1","Hourly Grab",5.00540547988422,TRUE
+"Irrigation 1","EC","ST","1","Hourly Grab",0.909499985788108,FALSE
+"Irrigation 1","EC","ST","1","Hourly Grab",0.862892256980431,TRUE
+"Irrigation 2","EC","ST","1","Hourly Grab",0.807639932131846,FALSE
+"Irrigation 2","EC","ST","1","Hourly Grab",0.71553229523291,TRUE
+"Irrigation 3","EC","ST","1","Hourly Grab",0.662516302126824,FALSE
+"Irrigation 3","EC","ST","1","Hourly Grab",0.629711492937317,TRUE
+"Irrigation 4","EC","ST","1","Hourly Grab",0.86362182793832,FALSE
+"Irrigation 4","EC","ST","1","Hourly Grab",0.503661638019423,TRUE
+"Irrigation 5","EC","ST","1","Hourly Grab",0.36370970145318,FALSE
+"Irrigation 5","EC","ST","1","Hourly Grab",0.660380649915849,TRUE
+"Irrigation 1","NO3","ST","1","Hourly Grab",0.36702434541324,FALSE
+"Irrigation 1","NO3","ST","1","Hourly Grab",0.345796419206448,TRUE
+"Irrigation 2","NO3","ST","1","Hourly Grab",0.162262565821491,FALSE
+"Irrigation 2","NO3","ST","1","Hourly Grab",0.286186938540236,TRUE
+"Irrigation 3","NO3","ST","1","Hourly Grab",0.208786045454703,FALSE
+"Irrigation 3","NO3","ST","1","Hourly Grab",0.333179434873793,TRUE
+"Irrigation 4","NO3","ST","1","Hourly Grab",0.186584617189617,FALSE
+"Irrigation 4","NO3","ST","1","Hourly Grab",0.250442826432495,TRUE
+"Irrigation 5","NO3","ST","1","Hourly Grab",0.21288073782491,FALSE
+"Irrigation 5","NO3","ST","1","Hourly Grab",0.156511413119444,TRUE
+"Irrigation 1","pH","ST","1","Hourly Grab",0.167821860687577,FALSE
+"Irrigation 1","pH","ST","1","Hourly Grab",0.161705940636231,TRUE
+"Irrigation 2","pH","ST","1","Hourly Grab",0.124847853326789,FALSE
+"Irrigation 2","pH","ST","1","Hourly Grab",0.144599052301255,TRUE
+"Irrigation 3","pH","ST","1","Hourly Grab",0.141602113621451,FALSE
+"Irrigation 3","pH","ST","1","Hourly Grab",0.137014935609732,TRUE
+"Irrigation 4","pH","ST","1","Hourly Grab",0.129499546139962,FALSE
+"Irrigation 4","pH","ST","1","Hourly Grab",0.12066017394789,TRUE
+"Irrigation 5","pH","ST","1","Hourly Grab",0.0950216505681519,FALSE
+"Irrigation 5","pH","ST","1","Hourly Grab",0.0911474187293127,TRUE
+"Irrigation 1","TSS","ST","1","Hourly Grab",907.100995411838,FALSE
+"Irrigation 1","TSS","ST","1","Hourly Grab",1347.77878714658,TRUE
+"Irrigation 2","TSS","ST","1","Hourly Grab",1200.87030329646,FALSE
+"Irrigation 2","TSS","ST","1","Hourly Grab",832.02566763646,TRUE
+"Irrigation 3","TSS","ST","1","Hourly Grab",1083.83024514779,FALSE
+"Irrigation 3","TSS","ST","1","Hourly Grab",1021.9554427746,TRUE
+"Irrigation 4","TSS","ST","1","Hourly Grab",659.643200335777,FALSE
+"Irrigation 4","TSS","ST","1","Hourly Grab",658.456063910294,TRUE
+"Irrigation 5","TSS","ST","1","Hourly Grab",680.879516426484,FALSE
+"Irrigation 5","TSS","ST","1","Hourly Grab",750.831449845206,TRUE
+"Irrigation 1","TDS","ST","1","Hourly Grab",549.015162668099,FALSE
+"Irrigation 1","TDS","ST","1","Hourly Grab",592.159234781219,TRUE
+"Irrigation 2","TDS","ST","1","Hourly Grab",328.451027775176,FALSE
+"Irrigation 2","TDS","ST","1","Hourly Grab",439.438622100307,TRUE
+"Irrigation 3","TDS","ST","1","Hourly Grab",424.996828644826,FALSE
+"Irrigation 3","TDS","ST","1","Hourly Grab",437.078501475409,TRUE
+"Irrigation 4","TDS","ST","1","Hourly Grab",346.920383982035,FALSE
+"Irrigation 4","TDS","ST","1","Hourly Grab",413.102131367352,TRUE
+"Irrigation 5","TDS","ST","1","Hourly Grab",373.940043808945,FALSE
+"Irrigation 5","TDS","ST","1","Hourly Grab",385.513668818971,TRUE
+"Irrigation 1","NO2","CT","2","Hourly Grab",12.7828021450409,FALSE
+"Irrigation 1","NO2","CT","2","Hourly Grab",11.1283336596245,TRUE
+"Irrigation 2","NO2","CT","2","Hourly Grab",9.90840113159675,FALSE
+"Irrigation 2","NO2","CT","2","Hourly Grab",8.33896358436608,TRUE
+"Irrigation 3","NO2","CT","2","Hourly Grab",8.93600613718085,FALSE
+"Irrigation 3","NO2","CT","2","Hourly Grab",9.58915552005529,TRUE
+"Irrigation 4","NO2","CT","2","Hourly Grab",7.51934895137875,FALSE
+"Irrigation 4","NO2","CT","2","Hourly Grab",8.66500025718471,TRUE
+"Irrigation 5","NO2","CT","2","Hourly Grab",8.76951180812101,FALSE
+"Irrigation 5","NO2","CT","2","Hourly Grab",7.46876646006669,TRUE
+"Irrigation 1","OP","CT","2","Hourly Grab",0.156181407514549,FALSE
+"Irrigation 1","OP","CT","2","Hourly Grab",0.14339996605373,TRUE
+"Irrigation 2","OP","CT","2","Hourly Grab",0.114554767448605,FALSE
+"Irrigation 2","OP","CT","2","Hourly Grab",0.111013437034567,TRUE
+"Irrigation 3","OP","CT","2","Hourly Grab",0.12106971598657,FALSE
+"Irrigation 3","OP","CT","2","Hourly Grab",0.105161649519514,TRUE
+"Irrigation 4","OP","CT","2","Hourly Grab",0.106642670510133,FALSE
+"Irrigation 4","OP","CT","2","Hourly Grab",0.141063454304525,TRUE
+"Irrigation 5","OP","CT","2","Hourly Grab",0.0796474663679868,FALSE
+"Irrigation 5","OP","CT","2","Hourly Grab",0.109935238501459,TRUE
+"Irrigation 1","TKN","CT","2","Hourly Grab",6.67655839631525,FALSE
+"Irrigation 1","TKN","CT","2","Hourly Grab",7.47043233854045,TRUE
+"Irrigation 2","TKN","CT","2","Hourly Grab",3.8626516197368,FALSE
+"Irrigation 2","TKN","CT","2","Hourly Grab",3.88516854651416,TRUE
+"Irrigation 3","TKN","CT","2","Hourly Grab",7.16158249820234,FALSE
+"Irrigation 3","TKN","CT","2","Hourly Grab",5.22328959086658,TRUE
+"Irrigation 4","TKN","CT","2","Hourly Grab",4.73759246921172,FALSE
+"Irrigation 4","TKN","CT","2","Hourly Grab",6.93778977009431,TRUE
+"Irrigation 5","TKN","CT","2","Hourly Grab",5.81994020902734,FALSE
+"Irrigation 5","TKN","CT","2","Hourly Grab",4.73477102780032,TRUE
+"Irrigation 1","TP","CT","2","Hourly Grab",9.6799557133621,FALSE
+"Irrigation 1","TP","CT","2","Hourly Grab",9.83515585998125,TRUE
+"Irrigation 2","TP","CT","2","Hourly Grab",8.6041009963204,FALSE
+"Irrigation 2","TP","CT","2","Hourly Grab",8.47888741816236,TRUE
+"Irrigation 3","TP","CT","2","Hourly Grab",8.44736533020627,FALSE
+"Irrigation 3","TP","CT","2","Hourly Grab",8.51157972593009,TRUE
+"Irrigation 4","TP","CT","2","Hourly Grab",7.86075762063692,FALSE
+"Irrigation 4","TP","CT","2","Hourly Grab",7.97613191094583,TRUE
+"Irrigation 5","TP","CT","2","Hourly Grab",6.97260154431041,FALSE
+"Irrigation 5","TP","CT","2","Hourly Grab",6.88539953752015,TRUE
+"Irrigation 1","EC","CT","2","Hourly Grab",1.04352788199126,FALSE
+"Irrigation 1","EC","CT","2","Hourly Grab",1.0672627249394,TRUE
+"Irrigation 2","EC","CT","2","Hourly Grab",0.915843392583241,FALSE
+"Irrigation 2","EC","CT","2","Hourly Grab",0.928571662802865,TRUE
+"Irrigation 3","EC","CT","2","Hourly Grab",0.802908590830356,FALSE
+"Irrigation 3","EC","CT","2","Hourly Grab",0.998245048119722,TRUE
+"Irrigation 4","EC","CT","2","Hourly Grab",0.979185257453401,FALSE
+"Irrigation 4","EC","CT","2","Hourly Grab",0.897003237485254,TRUE
+"Irrigation 5","EC","CT","2","Hourly Grab",0.667138737772412,FALSE
+"Irrigation 5","EC","CT","2","Hourly Grab",0.686303962755857,TRUE
+"Irrigation 1","NO3","CT","2","Hourly Grab",0.391092774038646,FALSE
+"Irrigation 1","NO3","CT","2","Hourly Grab",0.45610053950438,TRUE
+"Irrigation 2","NO3","CT","2","Hourly Grab",0.27988168618854,FALSE
+"Irrigation 2","NO3","CT","2","Hourly Grab",0.356942067417578,TRUE
+"Irrigation 3","NO3","CT","2","Hourly Grab",0.329795510602216,FALSE
+"Irrigation 3","NO3","CT","2","Hourly Grab",0.390510739845199,TRUE
+"Irrigation 4","NO3","CT","2","Hourly Grab",0.368511778283939,FALSE
+"Irrigation 4","NO3","CT","2","Hourly Grab",0.287234617534093,TRUE
+"Irrigation 5","NO3","CT","2","Hourly Grab",0.337104585906365,FALSE
+"Irrigation 5","NO3","CT","2","Hourly Grab",0.348262267384322,TRUE
+"Irrigation 1","pH","CT","2","Hourly Grab",0.190492265790671,FALSE
+"Irrigation 1","pH","CT","2","Hourly Grab",0.202750284646831,TRUE
+"Irrigation 2","pH","CT","2","Hourly Grab",0.181478705235754,FALSE
+"Irrigation 2","pH","CT","2","Hourly Grab",0.175984677545559,TRUE
+"Irrigation 3","pH","CT","2","Hourly Grab",0.183520539295089,FALSE
+"Irrigation 3","pH","CT","2","Hourly Grab",0.177193891058098,TRUE
+"Irrigation 4","pH","CT","2","Hourly Grab",0.167625784913414,FALSE
+"Irrigation 4","pH","CT","2","Hourly Grab",0.159052997360434,TRUE
+"Irrigation 5","pH","CT","2","Hourly Grab",0.15265446981326,FALSE
+"Irrigation 5","pH","CT","2","Hourly Grab",0.147661296085207,TRUE
+"Irrigation 1","TSS","CT","2","Hourly Grab",1382.01330488563,FALSE
+"Irrigation 1","TSS","CT","2","Hourly Grab",1509.53470910357,TRUE
+"Irrigation 2","TSS","CT","2","Hourly Grab",1157.7580482213,FALSE
+"Irrigation 2","TSS","CT","2","Hourly Grab",806.148294690578,TRUE
+"Irrigation 3","TSS","CT","2","Hourly Grab",1173.44069049474,FALSE
+"Irrigation 3","TSS","CT","2","Hourly Grab",1340.68015590618,TRUE
+"Irrigation 4","TSS","CT","2","Hourly Grab",1078.63852109803,FALSE
+"Irrigation 4","TSS","CT","2","Hourly Grab",871.564926266383,TRUE
+"Irrigation 5","TSS","CT","2","Hourly Grab",891.055118422032,FALSE
+"Irrigation 5","TSS","CT","2","Hourly Grab",889.473363442438,TRUE
+"Irrigation 1","TDS","CT","2","Hourly Grab",780.443888845598,FALSE
+"Irrigation 1","TDS","CT","2","Hourly Grab",760.46189460347,TRUE
+"Irrigation 2","TDS","CT","2","Hourly Grab",532.405665626649,FALSE
+"Irrigation 2","TDS","CT","2","Hourly Grab",593.69489074837,TRUE
+"Irrigation 3","TDS","CT","2","Hourly Grab",598.923330631548,FALSE
+"Irrigation 3","TDS","CT","2","Hourly Grab",612.30548820528,TRUE
+"Irrigation 4","TDS","CT","2","Hourly Grab",524.835388930472,FALSE
+"Irrigation 4","TDS","CT","2","Hourly Grab",589.614253393582,TRUE
+"Irrigation 5","TDS","CT","2","Hourly Grab",526.106603896223,FALSE
+"Irrigation 5","TDS","CT","2","Hourly Grab",536.395406218031,TRUE
+"Irrigation 1","NO2","MT","2","Hourly Grab",11.0050265001196,FALSE
+"Irrigation 1","NO2","MT","2","Hourly Grab",9.42483788052315,TRUE
+"Irrigation 2","NO2","MT","2","Hourly Grab",8.53132016152895,FALSE
+"Irrigation 2","NO2","MT","2","Hourly Grab",8.48704240105873,TRUE
+"Irrigation 3","NO2","MT","2","Hourly Grab",8.48205095532882,FALSE
+"Irrigation 3","NO2","MT","2","Hourly Grab",8.48240637982725,TRUE
+"Irrigation 4","NO2","MT","2","Hourly Grab",6.85219866924155,FALSE
+"Irrigation 4","NO2","MT","2","Hourly Grab",8.25671442466036,TRUE
+"Irrigation 5","NO2","MT","2","Hourly Grab",5.11343437699398,FALSE
+"Irrigation 5","NO2","MT","2","Hourly Grab",5.372836779625,TRUE
+"Irrigation 1","OP","MT","2","Hourly Grab",0.1157001157723,FALSE
+"Irrigation 1","OP","MT","2","Hourly Grab",0.131827036559947,TRUE
+"Irrigation 2","OP","MT","2","Hourly Grab",0.101586552121975,FALSE
+"Irrigation 2","OP","MT","2","Hourly Grab",0.0846255161640974,TRUE
+"Irrigation 3","OP","MT","2","Hourly Grab",0.117261687371661,FALSE
+"Irrigation 3","OP","MT","2","Hourly Grab",0.106700583544625,TRUE
+"Irrigation 4","OP","MT","2","Hourly Grab",0.0806413260004735,FALSE
+"Irrigation 4","OP","MT","2","Hourly Grab",0.0764095773355651,TRUE
+"Irrigation 5","OP","MT","2","Hourly Grab",0.0914435285388983,FALSE
+"Irrigation 5","OP","MT","2","Hourly Grab",0.0893229781323901,TRUE
+"Irrigation 1","TKN","MT","2","Hourly Grab",6.64052601386948,FALSE
+"Irrigation 1","TKN","MT","2","Hourly Grab",5.93980038833373,TRUE
+"Irrigation 2","TKN","MT","2","Hourly Grab",3.1001542276552,FALSE
+"Irrigation 2","TKN","MT","2","Hourly Grab",4.41370498134781,TRUE
+"Irrigation 3","TKN","MT","2","Hourly Grab",6.55748871921814,FALSE
+"Irrigation 3","TKN","MT","2","Hourly Grab",3.83276763497013,TRUE
+"Irrigation 4","TKN","MT","2","Hourly Grab",5.2660880362237,FALSE
+"Irrigation 4","TKN","MT","2","Hourly Grab",5.69925382289353,TRUE
+"Irrigation 5","TKN","MT","2","Hourly Grab",2.66067272373831,FALSE
+"Irrigation 5","TKN","MT","2","Hourly Grab",4.58285157614672,TRUE
+"Irrigation 1","TP","MT","2","Hourly Grab",8.38651555679957,FALSE
+"Irrigation 1","TP","MT","2","Hourly Grab",8.39694353925945,TRUE
+"Irrigation 2","TP","MT","2","Hourly Grab",6.94379519443146,FALSE
+"Irrigation 2","TP","MT","2","Hourly Grab",6.96669787574301,TRUE
+"Irrigation 3","TP","MT","2","Hourly Grab",7.13376792404162,FALSE
+"Irrigation 3","TP","MT","2","Hourly Grab",7.00926926504731,TRUE
+"Irrigation 4","TP","MT","2","Hourly Grab",6.29624114351623,FALSE
+"Irrigation 4","TP","MT","2","Hourly Grab",6.33726956879259,TRUE
+"Irrigation 5","TP","MT","2","Hourly Grab",5.69110947804965,FALSE
+"Irrigation 5","TP","MT","2","Hourly Grab",5.64792260282537,TRUE
+"Irrigation 1","EC","MT","2","Hourly Grab",0.936639539759172,FALSE
+"Irrigation 1","EC","MT","2","Hourly Grab",1.13927388433263,TRUE
+"Irrigation 2","EC","MT","2","Hourly Grab",0.931322350932271,FALSE
+"Irrigation 2","EC","MT","2","Hourly Grab",0.809832388781599,TRUE
+"Irrigation 3","EC","MT","2","Hourly Grab",0.730774243894082,FALSE
+"Irrigation 3","EC","MT","2","Hourly Grab",0.968518897342884,TRUE
+"Irrigation 4","EC","MT","2","Hourly Grab",0.458586344264848,FALSE
+"Irrigation 4","EC","MT","2","Hourly Grab",0.673396369375671,TRUE
+"Irrigation 5","EC","MT","2","Hourly Grab",0.646481086824373,FALSE
+"Irrigation 5","EC","MT","2","Hourly Grab",0.759992622902864,TRUE
+"Irrigation 1","NO3","MT","2","Hourly Grab",0.343376974657458,FALSE
+"Irrigation 1","NO3","MT","2","Hourly Grab",0.394277481641187,TRUE
+"Irrigation 2","NO3","MT","2","Hourly Grab",0.326619551695497,FALSE
+"Irrigation 2","NO3","MT","2","Hourly Grab",0.367767073785579,TRUE
+"Irrigation 3","NO3","MT","2","Hourly Grab",0.326329972179631,FALSE
+"Irrigation 3","NO3","MT","2","Hourly Grab",0.338994331815657,TRUE
+"Irrigation 4","NO3","MT","2","Hourly Grab",0.3066357172159,FALSE
+"Irrigation 4","NO3","MT","2","Hourly Grab",0.267629671596139,TRUE
+"Irrigation 5","NO3","MT","2","Hourly Grab",0.164066861403865,FALSE
+"Irrigation 5","NO3","MT","2","Hourly Grab",0.305046095596016,TRUE
+"Irrigation 1","pH","MT","2","Hourly Grab",0.170774569257778,FALSE
+"Irrigation 1","pH","MT","2","Hourly Grab",0.175112397704813,TRUE
+"Irrigation 2","pH","MT","2","Hourly Grab",0.147584664246835,FALSE
+"Irrigation 2","pH","MT","2","Hourly Grab",0.154083235847583,TRUE
+"Irrigation 3","pH","MT","2","Hourly Grab",0.127938521861726,FALSE
+"Irrigation 3","pH","MT","2","Hourly Grab",0.15995358828911,TRUE
+"Irrigation 4","pH","MT","2","Hourly Grab",0.144868185829233,FALSE
+"Irrigation 4","pH","MT","2","Hourly Grab",0.137377685698031,TRUE
+"Irrigation 5","pH","MT","2","Hourly Grab",0.115771554100391,FALSE
+"Irrigation 5","pH","MT","2","Hourly Grab",0.110820010675323,TRUE
+"Irrigation 1","TSS","MT","2","Hourly Grab",1259.79320551796,FALSE
+"Irrigation 1","TSS","MT","2","Hourly Grab",1522.73279540678,TRUE
+"Irrigation 2","TSS","MT","2","Hourly Grab",473.092460553434,FALSE
+"Irrigation 2","TSS","MT","2","Hourly Grab",913.176450286285,TRUE
+"Irrigation 3","TSS","MT","2","Hourly Grab",1174.32225650486,FALSE
+"Irrigation 3","TSS","MT","2","Hourly Grab",1125.6906419598,TRUE
+"Irrigation 4","TSS","MT","2","Hourly Grab",661.522551251971,FALSE
+"Irrigation 4","TSS","MT","2","Hourly Grab",999.764171469563,TRUE
+"Irrigation 5","TSS","MT","2","Hourly Grab",739.943483986282,FALSE
+"Irrigation 5","TSS","MT","2","Hourly Grab",703.094440296967,TRUE
+"Irrigation 1","TDS","MT","2","Hourly Grab",598.011045072327,FALSE
+"Irrigation 1","TDS","MT","2","Hourly Grab",715.853793608374,TRUE
+"Irrigation 2","TDS","MT","2","Hourly Grab",465.851493686725,FALSE
+"Irrigation 2","TDS","MT","2","Hourly Grab",392.431623858745,TRUE
+"Irrigation 3","TDS","MT","2","Hourly Grab",491.923260605837,FALSE
+"Irrigation 3","TDS","MT","2","Hourly Grab",483.850727262126,TRUE
+"Irrigation 4","TDS","MT","2","Hourly Grab",466.877399738955,FALSE
+"Irrigation 4","TDS","MT","2","Hourly Grab",396.707930530104,TRUE
+"Irrigation 5","TDS","MT","2","Hourly Grab",432.974461559652,FALSE
+"Irrigation 5","TDS","MT","2","Hourly Grab",440.073486304242,TRUE
+"Irrigation 1","NO2","ST","2","Hourly Grab",7.02389705526659,FALSE
+"Irrigation 1","NO2","ST","2","Hourly Grab",8.14428478598652,TRUE
+"Irrigation 2","NO2","ST","2","Hourly Grab",5.51887330974612,FALSE
+"Irrigation 2","NO2","ST","2","Hourly Grab",5.56718450806268,TRUE
+"Irrigation 3","NO2","ST","2","Hourly Grab",5.32123112148649,FALSE
+"Irrigation 3","NO2","ST","2","Hourly Grab",6.5339234113061,TRUE
+"Irrigation 4","NO2","ST","2","Hourly Grab",3.79170120761893,FALSE
+"Irrigation 4","NO2","ST","2","Hourly Grab",7.64229320681296,TRUE
+"Irrigation 5","NO2","ST","2","Hourly Grab",4.82851038239825,FALSE
+"Irrigation 5","NO2","ST","2","Hourly Grab",4.14741584282977,TRUE
+"Irrigation 1","OP","ST","2","Hourly Grab",0.0981131870563603,FALSE
+"Irrigation 1","OP","ST","2","Hourly Grab",0.0844582951399445,TRUE
+"Irrigation 2","OP","ST","2","Hourly Grab",0.0650771734064155,FALSE
+"Irrigation 2","OP","ST","2","Hourly Grab",0.0639952715666594,TRUE
+"Irrigation 3","OP","ST","2","Hourly Grab",0.0927412892767517,FALSE
+"Irrigation 3","OP","ST","2","Hourly Grab",0.0711910072449713,TRUE
+"Irrigation 4","OP","ST","2","Hourly Grab",0.088427236900006,FALSE
+"Irrigation 4","OP","ST","2","Hourly Grab",0.0698073334731976,TRUE
+"Irrigation 5","OP","ST","2","Hourly Grab",0.0669711862995529,FALSE
+"Irrigation 5","OP","ST","2","Hourly Grab",0.0673728905276925,TRUE
+"Irrigation 1","TKN","ST","2","Hourly Grab",5.54614058886662,FALSE
+"Irrigation 1","TKN","ST","2","Hourly Grab",5.79622250546953,TRUE
+"Irrigation 2","TKN","ST","2","Hourly Grab",5.36498371957759,FALSE
+"Irrigation 2","TKN","ST","2","Hourly Grab",4.71217142546915,TRUE
+"Irrigation 3","TKN","ST","2","Hourly Grab",4.04243677691421,FALSE
+"Irrigation 3","TKN","ST","2","Hourly Grab",3.85438279402086,TRUE
+"Irrigation 4","TKN","ST","2","Hourly Grab",3.21500578811286,FALSE
+"Irrigation 4","TKN","ST","2","Hourly Grab",3.84631000715133,TRUE
+"Irrigation 5","TKN","ST","2","Hourly Grab",2.81333714250566,FALSE
+"Irrigation 5","TKN","ST","2","Hourly Grab",2.98862077083882,TRUE
+"Irrigation 1","TP","ST","2","Hourly Grab",7.00071414499945,FALSE
+"Irrigation 1","TP","ST","2","Hourly Grab",7.24445768898842,TRUE
+"Irrigation 2","TP","ST","2","Hourly Grab",5.51246871685285,FALSE
+"Irrigation 2","TP","ST","2","Hourly Grab",5.70752579031244,TRUE
+"Irrigation 3","TP","ST","2","Hourly Grab",5.69393994229252,FALSE
+"Irrigation 3","TP","ST","2","Hourly Grab",5.71685588603536,TRUE
+"Irrigation 4","TP","ST","2","Hourly Grab",4.92632837626187,FALSE
+"Irrigation 4","TP","ST","2","Hourly Grab",4.8705253658821,TRUE
+"Irrigation 5","TP","ST","2","Hourly Grab",4.32058795498084,FALSE
+"Irrigation 5","TP","ST","2","Hourly Grab",4.21274201451359,TRUE
+"Irrigation 1","EC","ST","2","Hourly Grab",1.04600698184884,FALSE
+"Irrigation 1","EC","ST","2","Hourly Grab",0.774483727877065,TRUE
+"Irrigation 2","EC","ST","2","Hourly Grab",0.563998455094451,FALSE
+"Irrigation 2","EC","ST","2","Hourly Grab",0.844188401049433,TRUE
+"Irrigation 3","EC","ST","2","Hourly Grab",0.461533372497249,FALSE
+"Irrigation 3","EC","ST","2","Hourly Grab",0.708523658496478,TRUE
+"Irrigation 4","EC","ST","2","Hourly Grab",0.570082540292586,FALSE
+"Irrigation 4","EC","ST","2","Hourly Grab",0.379521665617645,TRUE
+"Irrigation 5","EC","ST","2","Hourly Grab",0.397045864864527,FALSE
+"Irrigation 5","EC","ST","2","Hourly Grab",0.47455946509867,TRUE
+"Irrigation 1","NO3","ST","2","Hourly Grab",0.325123476364915,FALSE
+"Irrigation 1","NO3","ST","2","Hourly Grab",0.280537208495249,TRUE
+"Irrigation 2","NO3","ST","2","Hourly Grab",0.249909565238787,FALSE
+"Irrigation 2","NO3","ST","2","Hourly Grab",0.22792448788426,TRUE
+"Irrigation 3","NO3","ST","2","Hourly Grab",0.271174747088955,FALSE
+"Irrigation 3","NO3","ST","2","Hourly Grab",0.241540492753154,TRUE
+"Irrigation 4","NO3","ST","2","Hourly Grab",0.179440691843002,FALSE
+"Irrigation 4","NO3","ST","2","Hourly Grab",0.163317109116674,TRUE
+"Irrigation 5","NO3","ST","2","Hourly Grab",0.190109547648497,FALSE
+"Irrigation 5","NO3","ST","2","Hourly Grab",0.202647165525881,TRUE
+"Irrigation 1","pH","ST","2","Hourly Grab",0.157314167675837,FALSE
+"Irrigation 1","pH","ST","2","Hourly Grab",0.140819215534346,TRUE
+"Irrigation 2","pH","ST","2","Hourly Grab",0.11597121401939,FALSE
+"Irrigation 2","pH","ST","2","Hourly Grab",0.12645739878029,TRUE
+"Irrigation 3","pH","ST","2","Hourly Grab",0.123836000499998,FALSE
+"Irrigation 3","pH","ST","2","Hourly Grab",0.121935125091665,TRUE
+"Irrigation 4","pH","ST","2","Hourly Grab",0.110249026901868,FALSE
+"Irrigation 4","pH","ST","2","Hourly Grab",0.121242756406803,TRUE
+"Irrigation 5","pH","ST","2","Hourly Grab",0.102216326124504,FALSE
+"Irrigation 5","pH","ST","2","Hourly Grab",0.083297411901451,TRUE
+"Irrigation 1","TSS","ST","2","Hourly Grab",883.361398522276,FALSE
+"Irrigation 1","TSS","ST","2","Hourly Grab",991.146404111445,TRUE
+"Irrigation 2","TSS","ST","2","Hourly Grab",879.85990535281,FALSE
+"Irrigation 2","TSS","ST","2","Hourly Grab",788.316417119544,TRUE
+"Irrigation 3","TSS","ST","2","Hourly Grab",608.274928454841,FALSE
+"Irrigation 3","TSS","ST","2","Hourly Grab",847.235216057467,TRUE
+"Irrigation 4","TSS","ST","2","Hourly Grab",897.484251148173,FALSE
+"Irrigation 4","TSS","ST","2","Hourly Grab",1113.13293402398,TRUE
+"Irrigation 5","TSS","ST","2","Hourly Grab",824.085560986889,FALSE
+"Irrigation 5","TSS","ST","2","Hourly Grab",555.295327558821,TRUE
+"Irrigation 1","TDS","ST","2","Hourly Grab",488.619180412299,FALSE
+"Irrigation 1","TDS","ST","2","Hourly Grab",471.399517197007,TRUE
+"Irrigation 2","TDS","ST","2","Hourly Grab",414.0412229345,FALSE
+"Irrigation 2","TDS","ST","2","Hourly Grab",294.995495930939,TRUE
+"Irrigation 3","TDS","ST","2","Hourly Grab",407.36050677016,FALSE
+"Irrigation 3","TDS","ST","2","Hourly Grab",392.42829191205,TRUE
+"Irrigation 4","TDS","ST","2","Hourly Grab",275.84400096925,FALSE
+"Irrigation 4","TDS","ST","2","Hourly Grab",317.56694837076,TRUE
+"Irrigation 5","TDS","ST","2","Hourly Grab",370.99120599961,FALSE
+"Irrigation 5","TDS","ST","2","Hourly Grab",259.339777968784,TRUE
+"Irrigation 1","NO2","CT","1","ISCO",9.33572174987433,FALSE
+"Irrigation 1","NO2","CT","1","ISCO",11.2653714355145,TRUE
+"Irrigation 2","NO2","CT","1","ISCO",8.42855614009299,FALSE
+"Irrigation 2","NO2","CT","1","ISCO",7.28747325375614,TRUE
+"Irrigation 3","NO2","CT","1","ISCO",9.61891147600333,FALSE
+"Irrigation 3","NO2","CT","1","ISCO",8.76438501807664,TRUE
+"Irrigation 4","NO2","CT","1","ISCO",6.50492174376937,FALSE
+"Irrigation 4","NO2","CT","1","ISCO",6.67381245151807,TRUE
+"Irrigation 5","NO2","CT","1","ISCO",7.46994670515863,FALSE
+"Irrigation 5","NO2","CT","1","ISCO",5.3944439333182,TRUE
+"Irrigation 1","OP","CT","1","ISCO",0.129376016582964,FALSE
+"Irrigation 1","OP","CT","1","ISCO",0.12347049264059,TRUE
+"Irrigation 2","OP","CT","1","ISCO",0.0987435438823071,FALSE
+"Irrigation 2","OP","CT","1","ISCO",0.124376545102313,TRUE
+"Irrigation 3","OP","CT","1","ISCO",0.0930067453504006,FALSE
+"Irrigation 3","OP","CT","1","ISCO",0.109693405753208,TRUE
+"Irrigation 4","OP","CT","1","ISCO",0.10268940024776,FALSE
+"Irrigation 4","OP","CT","1","ISCO",0.0924045243831617,TRUE
+"Irrigation 5","OP","CT","1","ISCO",0.0613741148156692,FALSE
+"Irrigation 5","OP","CT","1","ISCO",0.0959056176319764,TRUE
+"Irrigation 1","TKN","CT","1","ISCO",7.69192736311983,FALSE
+"Irrigation 1","TKN","CT","1","ISCO",5.47968831583749,TRUE
+"Irrigation 2","TKN","CT","1","ISCO",6.33879141255899,FALSE
+"Irrigation 2","TKN","CT","1","ISCO",3.95164520415721,TRUE
+"Irrigation 3","TKN","CT","1","ISCO",5.23706512515493,FALSE
+"Irrigation 3","TKN","CT","1","ISCO",5.09092905194188,TRUE
+"Irrigation 4","TKN","CT","1","ISCO",6.01062504265347,FALSE
+"Irrigation 4","TKN","CT","1","ISCO",6.14628672251753,TRUE
+"Irrigation 5","TKN","CT","1","ISCO",5.74868250219563,FALSE
+"Irrigation 5","TKN","CT","1","ISCO",4.71969383234211,TRUE
+"Irrigation 1","TP","CT","1","ISCO",9.17849559735235,FALSE
+"Irrigation 1","TP","CT","1","ISCO",9.18172987161051,TRUE
+"Irrigation 2","TP","CT","1","ISCO",7.49998215641724,FALSE
+"Irrigation 2","TP","CT","1","ISCO",7.77308807108713,TRUE
+"Irrigation 3","TP","CT","1","ISCO",7.64692939050758,FALSE
+"Irrigation 3","TP","CT","1","ISCO",7.7671334175963,TRUE
+"Irrigation 4","TP","CT","1","ISCO",7.03704009485071,FALSE
+"Irrigation 4","TP","CT","1","ISCO",6.92985869920236,TRUE
+"Irrigation 5","TP","CT","1","ISCO",6.14745100235481,FALSE
+"Irrigation 5","TP","CT","1","ISCO",6.33143388408824,TRUE
+"Irrigation 1","EC","CT","1","ISCO",1.08023202052508,FALSE
+"Irrigation 1","EC","CT","1","ISCO",0.99885777039284,TRUE
+"Irrigation 2","EC","CT","1","ISCO",0.698702950052802,FALSE
+"Irrigation 2","EC","CT","1","ISCO",0.855842412100539,TRUE
+"Irrigation 3","EC","CT","1","ISCO",0.965079128980947,FALSE
+"Irrigation 3","EC","CT","1","ISCO",0.848047243407375,TRUE
+"Irrigation 4","EC","CT","1","ISCO",0.787121804314529,FALSE
+"Irrigation 4","EC","CT","1","ISCO",0.798344916150515,TRUE
+"Irrigation 5","EC","CT","1","ISCO",0.704470560294803,FALSE
+"Irrigation 5","EC","CT","1","ISCO",0.664307697201293,TRUE
+"Irrigation 1","NO3","CT","1","ISCO",0.407543150757251,FALSE
+"Irrigation 1","NO3","CT","1","ISCO",0.408990469433198,TRUE
+"Irrigation 2","NO3","CT","1","ISCO",0.325641585877402,FALSE
+"Irrigation 2","NO3","CT","1","ISCO",0.30242307439849,TRUE
+"Irrigation 3","NO3","CT","1","ISCO",0.369625206063831,FALSE
+"Irrigation 3","NO3","CT","1","ISCO",0.353782608636805,TRUE
+"Irrigation 4","NO3","CT","1","ISCO",0.296052480590228,FALSE
+"Irrigation 4","NO3","CT","1","ISCO",0.35880003436286,TRUE
+"Irrigation 5","NO3","CT","1","ISCO",0.30209886865382,FALSE
+"Irrigation 5","NO3","CT","1","ISCO",0.332577239571635,TRUE
+"Irrigation 1","pH","CT","1","ISCO",0.214129475821868,FALSE
+"Irrigation 1","pH","CT","1","ISCO",0.191798054094922,TRUE
+"Irrigation 2","pH","CT","1","ISCO",0.166565274811829,FALSE
+"Irrigation 2","pH","CT","1","ISCO",0.155195586168822,TRUE
+"Irrigation 3","pH","CT","1","ISCO",0.184107078716527,FALSE
+"Irrigation 3","pH","CT","1","ISCO",0.150363211701168,TRUE
+"Irrigation 4","pH","CT","1","ISCO",0.170155697448661,FALSE
+"Irrigation 4","pH","CT","1","ISCO",0.156630133513844,TRUE
+"Irrigation 5","pH","CT","1","ISCO",0.146204395447455,FALSE
+"Irrigation 5","pH","CT","1","ISCO",0.125291547754763,TRUE
+"Irrigation 1","TSS","CT","1","ISCO",1151.67504784482,FALSE
+"Irrigation 1","TSS","CT","1","ISCO",1224.11673529882,TRUE
+"Irrigation 2","TSS","CT","1","ISCO",874.201210884086,FALSE
+"Irrigation 2","TSS","CT","1","ISCO",962.846101777731,TRUE
+"Irrigation 3","TSS","CT","1","ISCO",925.052866308546,FALSE
+"Irrigation 3","TSS","CT","1","ISCO",1786.28340755155,TRUE
+"Irrigation 4","TSS","CT","1","ISCO",1020.9340603506,FALSE
+"Irrigation 4","TSS","CT","1","ISCO",807.12262147004,TRUE
+"Irrigation 5","TSS","CT","1","ISCO",1002.36064222168,FALSE
+"Irrigation 5","TSS","CT","1","ISCO",819.195924386924,TRUE
+"Irrigation 1","TDS","CT","1","ISCO",723.667701277549,FALSE
+"Irrigation 1","TDS","CT","1","ISCO",670.823508910561,TRUE
+"Irrigation 2","TDS","CT","1","ISCO",570.878954957269,FALSE
+"Irrigation 2","TDS","CT","1","ISCO",613.693587520921,TRUE
+"Irrigation 3","TDS","CT","1","ISCO",577.99830176051,FALSE
+"Irrigation 3","TDS","CT","1","ISCO",603.390785551411,TRUE
+"Irrigation 4","TDS","CT","1","ISCO",586.982694880457,FALSE
+"Irrigation 4","TDS","CT","1","ISCO",455.623894327483,TRUE
+"Irrigation 5","TDS","CT","1","ISCO",451.633715767493,FALSE
+"Irrigation 5","TDS","CT","1","ISCO",447.104734468859,TRUE
+"Irrigation 1","NO2","MT","1","ISCO",8.14954339270329,FALSE
+"Irrigation 1","NO2","MT","1","ISCO",8.46248165014452,TRUE
+"Irrigation 2","NO2","MT","1","ISCO",9.14567025373826,FALSE
+"Irrigation 2","NO2","MT","1","ISCO",6.11278702179381,TRUE
+"Irrigation 3","NO2","MT","1","ISCO",5.62482544097259,FALSE
+"Irrigation 3","NO2","MT","1","ISCO",6.94938077285,TRUE
+"Irrigation 4","NO2","MT","1","ISCO",5.52658477800537,FALSE
+"Irrigation 4","NO2","MT","1","ISCO",8.13187340706351,TRUE
+"Irrigation 5","NO2","MT","1","ISCO",4.74518156907734,FALSE
+"Irrigation 5","NO2","MT","1","ISCO",4.34963477950697,TRUE
+"Irrigation 1","OP","MT","1","ISCO",0.114931433996567,FALSE
+"Irrigation 1","OP","MT","1","ISCO",0.115453491398007,TRUE
+"Irrigation 2","OP","MT","1","ISCO",0.0882245993239469,FALSE
+"Irrigation 2","OP","MT","1","ISCO",0.0845919603999882,TRUE
+"Irrigation 3","OP","MT","1","ISCO",0.0884866108904125,FALSE
+"Irrigation 3","OP","MT","1","ISCO",0.0940763523704514,TRUE
+"Irrigation 4","OP","MT","1","ISCO",0.0957409386048525,FALSE
+"Irrigation 4","OP","MT","1","ISCO",0.0934599789742471,TRUE
+"Irrigation 5","OP","MT","1","ISCO",0.0766758994911724,FALSE
+"Irrigation 5","OP","MT","1","ISCO",0.0704926708903424,TRUE
+"Irrigation 1","TKN","MT","1","ISCO",5.76905434562877,FALSE
+"Irrigation 1","TKN","MT","1","ISCO",5.93138518227452,TRUE
+"Irrigation 2","TKN","MT","1","ISCO",4.82037859880278,FALSE
+"Irrigation 2","TKN","MT","1","ISCO",4.76410093542508,TRUE
+"Irrigation 3","TKN","MT","1","ISCO",4.49303050495259,FALSE
+"Irrigation 3","TKN","MT","1","ISCO",2.9542932139997,TRUE
+"Irrigation 4","TKN","MT","1","ISCO",2.82547140127136,FALSE
+"Irrigation 4","TKN","MT","1","ISCO",3.65759327921789,TRUE
+"Irrigation 5","TKN","MT","1","ISCO",3.17426300437952,FALSE
+"Irrigation 5","TKN","MT","1","ISCO",4.85616854982976,TRUE
+"Irrigation 1","TP","MT","1","ISCO",7.72308836837404,FALSE
+"Irrigation 1","TP","MT","1","ISCO",7.84761499140579,TRUE
+"Irrigation 2","TP","MT","1","ISCO",6.41958880019373,FALSE
+"Irrigation 2","TP","MT","1","ISCO",6.18277631334087,TRUE
+"Irrigation 3","TP","MT","1","ISCO",6.26174444008701,FALSE
+"Irrigation 3","TP","MT","1","ISCO",6.16360747991606,TRUE
+"Irrigation 4","TP","MT","1","ISCO",5.55758690180661,FALSE
+"Irrigation 4","TP","MT","1","ISCO",5.67715676656293,TRUE
+"Irrigation 5","TP","MT","1","ISCO",4.78094987163039,FALSE
+"Irrigation 5","TP","MT","1","ISCO",4.9860137218572,TRUE
+"Irrigation 1","EC","MT","1","ISCO",0.958079997404198,FALSE
+"Irrigation 1","EC","MT","1","ISCO",0.74437987804921,TRUE
+"Irrigation 2","EC","MT","1","ISCO",0.859958149061866,FALSE
+"Irrigation 2","EC","MT","1","ISCO",0.594445613962056,TRUE
+"Irrigation 3","EC","MT","1","ISCO",0.807616856960212,FALSE
+"Irrigation 3","EC","MT","1","ISCO",0.745734588701965,TRUE
+"Irrigation 4","EC","MT","1","ISCO",0.644315948071538,FALSE
+"Irrigation 4","EC","MT","1","ISCO",0.945461459144623,TRUE
+"Irrigation 5","EC","MT","1","ISCO",0.486952435136074,FALSE
+"Irrigation 5","EC","MT","1","ISCO",0.705108659955128,TRUE
+"Irrigation 1","NO3","MT","1","ISCO",0.384838974917943,FALSE
+"Irrigation 1","NO3","MT","1","ISCO",0.270955933491097,TRUE
+"Irrigation 2","NO3","MT","1","ISCO",0.366797148997179,FALSE
+"Irrigation 2","NO3","MT","1","ISCO",0.298554353587562,TRUE
+"Irrigation 3","NO3","MT","1","ISCO",0.225977659911722,FALSE
+"Irrigation 3","NO3","MT","1","ISCO",0.352145489557009,TRUE
+"Irrigation 4","NO3","MT","1","ISCO",0.183922761785512,FALSE
+"Irrigation 4","NO3","MT","1","ISCO",0.242839864835175,TRUE
+"Irrigation 5","NO3","MT","1","ISCO",0.212859745282785,FALSE
+"Irrigation 5","NO3","MT","1","ISCO",0.186244758795336,TRUE
+"Irrigation 1","pH","MT","1","ISCO",0.172331955407548,FALSE
+"Irrigation 1","pH","MT","1","ISCO",0.159173130296167,TRUE
+"Irrigation 2","pH","MT","1","ISCO",0.131894579686405,FALSE
+"Irrigation 2","pH","MT","1","ISCO",0.138346783692764,TRUE
+"Irrigation 3","pH","MT","1","ISCO",0.13264620594542,FALSE
+"Irrigation 3","pH","MT","1","ISCO",0.138756351326722,TRUE
+"Irrigation 4","pH","MT","1","ISCO",0.0920934969778926,FALSE
+"Irrigation 4","pH","MT","1","ISCO",0.11750772675116,TRUE
+"Irrigation 5","pH","MT","1","ISCO",0.102124064565877,FALSE
+"Irrigation 5","pH","MT","1","ISCO",0.108188021206103,TRUE
+"Irrigation 1","TSS","MT","1","ISCO",1150.94697635488,FALSE
+"Irrigation 1","TSS","MT","1","ISCO",1147.95974104973,TRUE
+"Irrigation 2","TSS","MT","1","ISCO",389.67956660472,FALSE
+"Irrigation 2","TSS","MT","1","ISCO",1015.91295789763,TRUE
+"Irrigation 3","TSS","MT","1","ISCO",1127.73184219833,FALSE
+"Irrigation 3","TSS","MT","1","ISCO",942.928941661981,TRUE
+"Irrigation 4","TSS","MT","1","ISCO",688.89340941961,FALSE
+"Irrigation 4","TSS","MT","1","ISCO",968.653054258575,TRUE
+"Irrigation 5","TSS","MT","1","ISCO",825.040480559168,FALSE
+"Irrigation 5","TSS","MT","1","ISCO",864.546758906246,TRUE
+"Irrigation 1","TDS","MT","1","ISCO",553.361798012089,FALSE
+"Irrigation 1","TDS","MT","1","ISCO",524.389341314365,TRUE
+"Irrigation 2","TDS","MT","1","ISCO",517.204817866216,FALSE
+"Irrigation 2","TDS","MT","1","ISCO",361.686176386155,TRUE
+"Irrigation 3","TDS","MT","1","ISCO",368.865731349389,FALSE
+"Irrigation 3","TDS","MT","1","ISCO",393.483844596602,TRUE
+"Irrigation 4","TDS","MT","1","ISCO",322.835874046814,FALSE
+"Irrigation 4","TDS","MT","1","ISCO",384.231128332252,TRUE
+"Irrigation 5","TDS","MT","1","ISCO",350.40424462357,FALSE
+"Irrigation 5","TDS","MT","1","ISCO",384.423893444682,TRUE
+"Irrigation 1","NO2","ST","1","ISCO",7.13248395741827,FALSE
+"Irrigation 1","NO2","ST","1","ISCO",8.62471712544792,TRUE
+"Irrigation 2","NO2","ST","1","ISCO",6.47882162922033,FALSE
+"Irrigation 2","NO2","ST","1","ISCO",4.84547792865141,TRUE
+"Irrigation 3","NO2","ST","1","ISCO",6.52939826491459,FALSE
+"Irrigation 3","NO2","ST","1","ISCO",4.40117328152376,TRUE
+"Irrigation 4","NO2","ST","1","ISCO",6.0808075147066,FALSE
+"Irrigation 4","NO2","ST","1","ISCO",5.52816345789518,TRUE
+"Irrigation 5","NO2","ST","1","ISCO",4.19599672863829,FALSE
+"Irrigation 5","NO2","ST","1","ISCO",3.34926107319204,TRUE
+"Irrigation 1","OP","ST","1","ISCO",0.0940565578406181,FALSE
+"Irrigation 1","OP","ST","1","ISCO",0.109535363554834,TRUE
+"Irrigation 2","OP","ST","1","ISCO",0.0692436808047238,FALSE
+"Irrigation 2","OP","ST","1","ISCO",0.0669089223610195,TRUE
+"Irrigation 3","OP","ST","1","ISCO",0.0665946666741263,FALSE
+"Irrigation 3","OP","ST","1","ISCO",0.0616264827084833,TRUE
+"Irrigation 4","OP","ST","1","ISCO",0.0648249763926583,FALSE
+"Irrigation 4","OP","ST","1","ISCO",0.0413660582626865,TRUE
+"Irrigation 5","OP","ST","1","ISCO",0.0638362759790417,FALSE
+"Irrigation 5","OP","ST","1","ISCO",0.0454123297081184,TRUE
+"Irrigation 1","TKN","ST","1","ISCO",4.92878622128254,FALSE
+"Irrigation 1","TKN","ST","1","ISCO",4.34620480775584,TRUE
+"Irrigation 2","TKN","ST","1","ISCO",3.59790716609597,FALSE
+"Irrigation 2","TKN","ST","1","ISCO",4.3731256055342,TRUE
+"Irrigation 3","TKN","ST","1","ISCO",3.44393563897817,FALSE
+"Irrigation 3","TKN","ST","1","ISCO",3.89985331030001,TRUE
+"Irrigation 4","TKN","ST","1","ISCO",1.5951065903181,FALSE
+"Irrigation 4","TKN","ST","1","ISCO",4.07246855583483,TRUE
+"Irrigation 5","TKN","ST","1","ISCO",1.34523278286478,FALSE
+"Irrigation 5","TKN","ST","1","ISCO",1.30439026452739,TRUE
+"Irrigation 1","TP","ST","1","ISCO",6.34217163238235,FALSE
+"Irrigation 1","TP","ST","1","ISCO",6.31138062010826,TRUE
+"Irrigation 2","TP","ST","1","ISCO",5.03092502127152,FALSE
+"Irrigation 2","TP","ST","1","ISCO",4.77643651960198,TRUE
+"Irrigation 3","TP","ST","1","ISCO",4.86347114883068,FALSE
+"Irrigation 3","TP","ST","1","ISCO",4.67921419374051,TRUE
+"Irrigation 4","TP","ST","1","ISCO",4.10988905407903,FALSE
+"Irrigation 4","TP","ST","1","ISCO",4.18262400411346,TRUE
+"Irrigation 5","TP","ST","1","ISCO",3.25339943482995,FALSE
+"Irrigation 5","TP","ST","1","ISCO",3.67206697395378,TRUE
+"Irrigation 1","EC","ST","1","ISCO",0.639109610514378,FALSE
+"Irrigation 1","EC","ST","1","ISCO",0.693674814717711,TRUE
+"Irrigation 2","EC","ST","1","ISCO",0.577542775295907,FALSE
+"Irrigation 2","EC","ST","1","ISCO",0.623361968098911,TRUE
+"Irrigation 3","EC","ST","1","ISCO",0.657989180154999,FALSE
+"Irrigation 3","EC","ST","1","ISCO",0.779599397655322,TRUE
+"Irrigation 4","EC","ST","1","ISCO",0.644880648243109,FALSE
+"Irrigation 4","EC","ST","1","ISCO",0.744742559144775,TRUE
+"Irrigation 5","EC","ST","1","ISCO",0.665615096506377,FALSE
+"Irrigation 5","EC","ST","1","ISCO",0.31473194158833,TRUE
+"Irrigation 1","NO3","ST","1","ISCO",0.20421601093263,FALSE
+"Irrigation 1","NO3","ST","1","ISCO",0.251851340979705,TRUE
+"Irrigation 2","NO3","ST","1","ISCO",0.27406542585676,FALSE
+"Irrigation 2","NO3","ST","1","ISCO",0.177051652850347,TRUE
+"Irrigation 3","NO3","ST","1","ISCO",0.165781770607045,FALSE
+"Irrigation 3","NO3","ST","1","ISCO",0.169979011321005,TRUE
+"Irrigation 4","NO3","ST","1","ISCO",0.147664342889893,FALSE
+"Irrigation 4","NO3","ST","1","ISCO",0.188021827317384,TRUE
+"Irrigation 5","NO3","ST","1","ISCO",0.0753908501696059,FALSE
+"Irrigation 5","NO3","ST","1","ISCO",0.18697068858088,TRUE
+"Irrigation 1","pH","ST","1","ISCO",0.122859960630826,FALSE
+"Irrigation 1","pH","ST","1","ISCO",0.137773724330363,TRUE
+"Irrigation 2","pH","ST","1","ISCO",0.0838626402646653,FALSE
+"Irrigation 2","pH","ST","1","ISCO",0.0990513998672243,TRUE
+"Irrigation 3","pH","ST","1","ISCO",0.0840096607377702,FALSE
+"Irrigation 3","pH","ST","1","ISCO",0.0947915327626195,TRUE
+"Irrigation 4","pH","ST","1","ISCO",0.0945393886625855,FALSE
+"Irrigation 4","pH","ST","1","ISCO",0.0856399633685686,TRUE
+"Irrigation 5","pH","ST","1","ISCO",0.0904244095966544,FALSE
+"Irrigation 5","pH","ST","1","ISCO",0.0899157145814276,TRUE
+"Irrigation 1","TSS","ST","1","ISCO",758.412668046176,FALSE
+"Irrigation 1","TSS","ST","1","ISCO",549.160178454712,TRUE
+"Irrigation 2","TSS","ST","1","ISCO",432.708505134585,FALSE
+"Irrigation 2","TSS","ST","1","ISCO",364.022853586069,TRUE
+"Irrigation 3","TSS","ST","1","ISCO",1101.03597791413,FALSE
+"Irrigation 3","TSS","ST","1","ISCO",629.572446035021,TRUE
+"Irrigation 4","TSS","ST","1","ISCO",637.826825177613,FALSE
+"Irrigation 4","TSS","ST","1","ISCO",1057.95140029313,TRUE
+"Irrigation 5","TSS","ST","1","ISCO",175.705324984034,FALSE
+"Irrigation 5","TSS","ST","1","ISCO",523.746088624767,TRUE
+"Irrigation 1","TDS","ST","1","ISCO",455.517517867761,FALSE
+"Irrigation 1","TDS","ST","1","ISCO",490.364033639364,TRUE
+"Irrigation 2","TDS","ST","1","ISCO",311.566419455813,FALSE
+"Irrigation 2","TDS","ST","1","ISCO",413.923426925878,TRUE
+"Irrigation 3","TDS","ST","1","ISCO",390.79892726785,FALSE
+"Irrigation 3","TDS","ST","1","ISCO",398.802187877987,TRUE
+"Irrigation 4","TDS","ST","1","ISCO",307.333024506121,FALSE
+"Irrigation 4","TDS","ST","1","ISCO",262.016524694307,TRUE
+"Irrigation 5","TDS","ST","1","ISCO",256.215247884148,FALSE
+"Irrigation 5","TDS","ST","1","ISCO",223.292500276125,TRUE
+"Irrigation 1","NO2","CT","2","ISCO",10.2624875430443,FALSE
+"Irrigation 1","NO2","CT","2","ISCO",8.63673139891902,TRUE
+"Irrigation 2","NO2","CT","2","ISCO",6.00316762489007,FALSE
+"Irrigation 2","NO2","CT","2","ISCO",6.15636744130271,TRUE
+"Irrigation 3","NO2","CT","2","ISCO",8.52815644619005,FALSE
+"Irrigation 3","NO2","CT","2","ISCO",8.04718823963262,TRUE
+"Irrigation 4","NO2","CT","2","ISCO",5.63303765118209,FALSE
+"Irrigation 4","NO2","CT","2","ISCO",7.50785716680919,TRUE
+"Irrigation 5","NO2","CT","2","ISCO",5.57563411193347,FALSE
+"Irrigation 5","NO2","CT","2","ISCO",7.80786204017945,TRUE
+"Irrigation 1","OP","CT","2","ISCO",0.129017402263435,FALSE
+"Irrigation 1","OP","CT","2","ISCO",0.118080219988317,TRUE
+"Irrigation 2","OP","CT","2","ISCO",0.100062561225075,FALSE
+"Irrigation 2","OP","CT","2","ISCO",0.111533320448066,TRUE
+"Irrigation 3","OP","CT","2","ISCO",0.101819241355754,FALSE
+"Irrigation 3","OP","CT","2","ISCO",0.0661717357512998,TRUE
+"Irrigation 4","OP","CT","2","ISCO",0.0844599754800831,FALSE
+"Irrigation 4","OP","CT","2","ISCO",0.103979078445163,TRUE
+"Irrigation 5","OP","CT","2","ISCO",0.0905465931589311,FALSE
+"Irrigation 5","OP","CT","2","ISCO",0.0953662134590682,TRUE
+"Irrigation 1","TKN","CT","2","ISCO",6.22874881097517,FALSE
+"Irrigation 1","TKN","CT","2","ISCO",5.43722931210701,TRUE
+"Irrigation 2","TKN","CT","2","ISCO",4.51074708762896,FALSE
+"Irrigation 2","TKN","CT","2","ISCO",4.90804591249155,TRUE
+"Irrigation 3","TKN","CT","2","ISCO",4.18142026115665,FALSE
+"Irrigation 3","TKN","CT","2","ISCO",3.80122878882802,TRUE
+"Irrigation 4","TKN","CT","2","ISCO",4.55030458499327,FALSE
+"Irrigation 4","TKN","CT","2","ISCO",7.10336265636121,TRUE
+"Irrigation 5","TKN","CT","2","ISCO",1.83019159437908,FALSE
+"Irrigation 5","TKN","CT","2","ISCO",4.35499827552447,TRUE
+"Irrigation 1","TP","CT","2","ISCO",8.50158939767119,FALSE
+"Irrigation 1","TP","CT","2","ISCO",8.50611357842207,TRUE
+"Irrigation 2","TP","CT","2","ISCO",6.99806130590422,FALSE
+"Irrigation 2","TP","CT","2","ISCO",6.99845337221653,TRUE
+"Irrigation 3","TP","CT","2","ISCO",6.98131102414897,FALSE
+"Irrigation 3","TP","CT","2","ISCO",6.90952373730573,TRUE
+"Irrigation 4","TP","CT","2","ISCO",6.31236549188829,FALSE
+"Irrigation 4","TP","CT","2","ISCO",6.45330300052033,TRUE
+"Irrigation 5","TP","CT","2","ISCO",5.63085211982537,FALSE
+"Irrigation 5","TP","CT","2","ISCO",5.58182882862511,TRUE
+"Irrigation 1","EC","CT","2","ISCO",0.927469416513944,FALSE
+"Irrigation 1","EC","CT","2","ISCO",0.940701497246974,TRUE
+"Irrigation 2","EC","CT","2","ISCO",0.658045094182595,FALSE
+"Irrigation 2","EC","CT","2","ISCO",0.778243650632379,TRUE
+"Irrigation 3","EC","CT","2","ISCO",0.889663895914587,FALSE
+"Irrigation 3","EC","CT","2","ISCO",0.843986222822465,TRUE
+"Irrigation 4","EC","CT","2","ISCO",0.745259895161087,FALSE
+"Irrigation 4","EC","CT","2","ISCO",0.82246892529901,TRUE
+"Irrigation 5","EC","CT","2","ISCO",0.514857358962043,FALSE
+"Irrigation 5","EC","CT","2","ISCO",0.648202102864914,TRUE
+"Irrigation 1","NO3","CT","2","ISCO",0.300183866704086,FALSE
+"Irrigation 1","NO3","CT","2","ISCO",0.426782414756582,TRUE
+"Irrigation 2","NO3","CT","2","ISCO",0.336186979224795,FALSE
+"Irrigation 2","NO3","CT","2","ISCO",0.36846981328122,TRUE
+"Irrigation 3","NO3","CT","2","ISCO",0.284884941911874,FALSE
+"Irrigation 3","NO3","CT","2","ISCO",0.278721679834175,TRUE
+"Irrigation 4","NO3","CT","2","ISCO",0.362303625772395,FALSE
+"Irrigation 4","NO3","CT","2","ISCO",0.295128427442274,TRUE
+"Irrigation 5","NO3","CT","2","ISCO",0.240518316529984,FALSE
+"Irrigation 5","NO3","CT","2","ISCO",0.260214554940186,TRUE
+"Irrigation 1","pH","CT","2","ISCO",0.187185555425639,FALSE
+"Irrigation 1","pH","CT","2","ISCO",0.187124575431358,TRUE
+"Irrigation 2","pH","CT","2","ISCO",0.153688474179232,FALSE
+"Irrigation 2","pH","CT","2","ISCO",0.13729765054501,TRUE
+"Irrigation 3","pH","CT","2","ISCO",0.144660715144171,FALSE
+"Irrigation 3","pH","CT","2","ISCO",0.140887128008416,TRUE
+"Irrigation 4","pH","CT","2","ISCO",0.141977971577935,FALSE
+"Irrigation 4","pH","CT","2","ISCO",0.136305703025029,TRUE
+"Irrigation 5","pH","CT","2","ISCO",0.122401683603235,FALSE
+"Irrigation 5","pH","CT","2","ISCO",0.106429020564846,TRUE
+"Irrigation 1","TSS","CT","2","ISCO",1349.09151390198,FALSE
+"Irrigation 1","TSS","CT","2","ISCO",1209.38515677038,TRUE
+"Irrigation 2","TSS","CT","2","ISCO",1245.4115446446,FALSE
+"Irrigation 2","TSS","CT","2","ISCO",580.317662154105,TRUE
+"Irrigation 3","TSS","CT","2","ISCO",1215.2994397724,FALSE
+"Irrigation 3","TSS","CT","2","ISCO",992.91344921254,TRUE
+"Irrigation 4","TSS","CT","2","ISCO",906.102394403201,FALSE
+"Irrigation 4","TSS","CT","2","ISCO",1014.57483057792,TRUE
+"Irrigation 5","TSS","CT","2","ISCO",969.58383355121,FALSE
+"Irrigation 5","TSS","CT","2","ISCO",918.977221554034,TRUE
+"Irrigation 1","TDS","CT","2","ISCO",542.977728012943,FALSE
+"Irrigation 1","TDS","CT","2","ISCO",548.050558672075,TRUE
+"Irrigation 2","TDS","CT","2","ISCO",388.660573640459,FALSE
+"Irrigation 2","TDS","CT","2","ISCO",554.622134450443,TRUE
+"Irrigation 3","TDS","CT","2","ISCO",580.694911396168,FALSE
+"Irrigation 3","TDS","CT","2","ISCO",568.678593901513,TRUE
+"Irrigation 4","TDS","CT","2","ISCO",478.886509258773,FALSE
+"Irrigation 4","TDS","CT","2","ISCO",369.619844863178,TRUE
+"Irrigation 5","TDS","CT","2","ISCO",440.700167850368,FALSE
+"Irrigation 5","TDS","CT","2","ISCO",365.442318123041,TRUE
+"Irrigation 1","NO2","MT","2","ISCO",9.41683318821555,FALSE
+"Irrigation 1","NO2","MT","2","ISCO",8.34205982223731,TRUE
+"Irrigation 2","NO2","MT","2","ISCO",4.9409746703939,FALSE
+"Irrigation 2","NO2","MT","2","ISCO",7.77894971969437,TRUE
+"Irrigation 3","NO2","MT","2","ISCO",6.22837022721439,FALSE
+"Irrigation 3","NO2","MT","2","ISCO",5.54989056397277,TRUE
+"Irrigation 4","NO2","MT","2","ISCO",5.70093899368202,FALSE
+"Irrigation 4","NO2","MT","2","ISCO",5.53140065415653,TRUE
+"Irrigation 5","NO2","MT","2","ISCO",4.59962807210542,FALSE
+"Irrigation 5","NO2","MT","2","ISCO",6.09353715503854,TRUE
+"Irrigation 1","OP","MT","2","ISCO",0.0950198541481701,FALSE
+"Irrigation 1","OP","MT","2","ISCO",0.116734925626532,TRUE
+"Irrigation 2","OP","MT","2","ISCO",0.0654843116712566,FALSE
+"Irrigation 2","OP","MT","2","ISCO",0.0785185571895242,TRUE
+"Irrigation 3","OP","MT","2","ISCO",0.108408288738282,FALSE
+"Irrigation 3","OP","MT","2","ISCO",0.0708615544232785,TRUE
+"Irrigation 4","OP","MT","2","ISCO",0.0701691094774773,FALSE
+"Irrigation 4","OP","MT","2","ISCO",0.0681711716712477,TRUE
+"Irrigation 5","OP","MT","2","ISCO",0.066260315688938,FALSE
+"Irrigation 5","OP","MT","2","ISCO",0.0628704420067061,TRUE
+"Irrigation 1","TKN","MT","2","ISCO",5.75659903567071,FALSE
+"Irrigation 1","TKN","MT","2","ISCO",5.40162805293626,TRUE
+"Irrigation 2","TKN","MT","2","ISCO",2.72356520040738,FALSE
+"Irrigation 2","TKN","MT","2","ISCO",4.16746722065992,TRUE
+"Irrigation 3","TKN","MT","2","ISCO",6.05746402837635,FALSE
+"Irrigation 3","TKN","MT","2","ISCO",2.38684641402894,TRUE
+"Irrigation 4","TKN","MT","2","ISCO",1.4198090669607,FALSE
+"Irrigation 4","TKN","MT","2","ISCO",4.97132085635725,TRUE
+"Irrigation 5","TKN","MT","2","ISCO",2.24201608695603,FALSE
+"Irrigation 5","TKN","MT","2","ISCO",2.78616663214236,TRUE
+"Irrigation 1","TP","MT","2","ISCO",6.94817042624987,FALSE
+"Irrigation 1","TP","MT","2","ISCO",7.1209374609243,TRUE
+"Irrigation 2","TP","MT","2","ISCO",5.72162200766838,FALSE
+"Irrigation 2","TP","MT","2","ISCO",5.43120308641025,TRUE
+"Irrigation 3","TP","MT","2","ISCO",5.57337306055433,FALSE
+"Irrigation 3","TP","MT","2","ISCO",5.66821596330608,TRUE
+"Irrigation 4","TP","MT","2","ISCO",4.91678458610719,FALSE
+"Irrigation 4","TP","MT","2","ISCO",4.88057877363314,TRUE
+"Irrigation 5","TP","MT","2","ISCO",4.1452129055216,FALSE
+"Irrigation 5","TP","MT","2","ISCO",4.07640616342577,TRUE
+"Irrigation 1","EC","MT","2","ISCO",0.80923169523196,FALSE
+"Irrigation 1","EC","MT","2","ISCO",0.60344323331297,TRUE
+"Irrigation 2","EC","MT","2","ISCO",0.661018866479351,FALSE
+"Irrigation 2","EC","MT","2","ISCO",0.670918231326937,TRUE
+"Irrigation 3","EC","MT","2","ISCO",0.561012686553541,FALSE
+"Irrigation 3","EC","MT","2","ISCO",0.659683146345893,TRUE
+"Irrigation 4","EC","MT","2","ISCO",0.614270900597969,FALSE
+"Irrigation 4","EC","MT","2","ISCO",0.445548253019225,TRUE
+"Irrigation 5","EC","MT","2","ISCO",0.723354767200134,FALSE
+"Irrigation 5","EC","MT","2","ISCO",0.563483013994544,TRUE
+"Irrigation 1","NO3","MT","2","ISCO",0.334741385230291,FALSE
+"Irrigation 1","NO3","MT","2","ISCO",0.339510710831261,TRUE
+"Irrigation 2","NO3","MT","2","ISCO",0.256936682508178,FALSE
+"Irrigation 2","NO3","MT","2","ISCO",0.222090494176016,TRUE
+"Irrigation 3","NO3","MT","2","ISCO",0.239453056362284,FALSE
+"Irrigation 3","NO3","MT","2","ISCO",0.225358580795521,TRUE
+"Irrigation 4","NO3","MT","2","ISCO",0.19848002235109,FALSE
+"Irrigation 4","NO3","MT","2","ISCO",0.287097367887324,TRUE
+"Irrigation 5","NO3","MT","2","ISCO",0.251056914085414,FALSE
+"Irrigation 5","NO3","MT","2","ISCO",0.215893395467767,TRUE
+"Irrigation 1","pH","MT","2","ISCO",0.166731203369382,FALSE
+"Irrigation 1","pH","MT","2","ISCO",0.155482950689082,TRUE
+"Irrigation 2","pH","MT","2","ISCO",0.1113373900948,FALSE
+"Irrigation 2","pH","MT","2","ISCO",0.121534562741485,TRUE
+"Irrigation 3","pH","MT","2","ISCO",0.131238112752661,FALSE
+"Irrigation 3","pH","MT","2","ISCO",0.11600653041956,TRUE
+"Irrigation 4","pH","MT","2","ISCO",0.10632955886478,FALSE
+"Irrigation 4","pH","MT","2","ISCO",0.105823358431844,TRUE
+"Irrigation 5","pH","MT","2","ISCO",0.0768212811978001,FALSE
+"Irrigation 5","pH","MT","2","ISCO",0.075225177021483,TRUE
+"Irrigation 1","TSS","MT","2","ISCO",1018.86008896198,FALSE
+"Irrigation 1","TSS","MT","2","ISCO",831.688824997568,TRUE
+"Irrigation 2","TSS","MT","2","ISCO",598.724993899655,FALSE
+"Irrigation 2","TSS","MT","2","ISCO",960.20296056814,TRUE
+"Irrigation 3","TSS","MT","2","ISCO",718.486169561687,FALSE
+"Irrigation 3","TSS","MT","2","ISCO",711.161680136738,TRUE
+"Irrigation 4","TSS","MT","2","ISCO",625.292601549172,FALSE
+"Irrigation 4","TSS","MT","2","ISCO",670.946102955691,TRUE
+"Irrigation 5","TSS","MT","2","ISCO",558.979212818176,FALSE
+"Irrigation 5","TSS","MT","2","ISCO",689.347569223525,TRUE
+"Irrigation 1","TDS","MT","2","ISCO",441.26055258988,FALSE
+"Irrigation 1","TDS","MT","2","ISCO",426.566408993596,TRUE
+"Irrigation 2","TDS","MT","2","ISCO",423.154106808587,FALSE
+"Irrigation 2","TDS","MT","2","ISCO",460.267416914557,TRUE
+"Irrigation 3","TDS","MT","2","ISCO",317.02084935668,FALSE
+"Irrigation 3","TDS","MT","2","ISCO",359.618150242793,TRUE
+"Irrigation 4","TDS","MT","2","ISCO",372.713411298402,FALSE
+"Irrigation 4","TDS","MT","2","ISCO",333.421484747056,TRUE
+"Irrigation 5","TDS","MT","2","ISCO",343.654970798498,FALSE
+"Irrigation 5","TDS","MT","2","ISCO",316.962177593443,TRUE
+"Irrigation 1","NO2","ST","2","ISCO",7.39742529805744,FALSE
+"Irrigation 1","NO2","ST","2","ISCO",5.71310474686173,TRUE
+"Irrigation 2","NO2","ST","2","ISCO",3.86059808941762,FALSE
+"Irrigation 2","NO2","ST","2","ISCO",6.0591387925444,TRUE
+"Irrigation 3","NO2","ST","2","ISCO",5.22894276540035,FALSE
+"Irrigation 3","NO2","ST","2","ISCO",5.31265240258304,TRUE
+"Irrigation 4","NO2","ST","2","ISCO",1.97632065119442,FALSE
+"Irrigation 4","NO2","ST","2","ISCO",5.09995968374415,TRUE
+"Irrigation 5","NO2","ST","2","ISCO",1.99669443982668,FALSE
+"Irrigation 5","NO2","ST","2","ISCO",3.83105331012278,TRUE
+"Irrigation 1","OP","ST","2","ISCO",0.0949086783662799,FALSE
+"Irrigation 1","OP","ST","2","ISCO",0.0885566325921809,TRUE
+"Irrigation 2","OP","ST","2","ISCO",0.0728082791366751,FALSE
+"Irrigation 2","OP","ST","2","ISCO",0.0574871646911385,TRUE
+"Irrigation 3","OP","ST","2","ISCO",0.0711207469248256,FALSE
+"Irrigation 3","OP","ST","2","ISCO",0.0649979858811695,TRUE
+"Irrigation 4","OP","ST","2","ISCO",0.0521005537926412,FALSE
+"Irrigation 4","OP","ST","2","ISCO",0.0574935143623659,TRUE
+"Irrigation 5","OP","ST","2","ISCO",0.0237433134338879,FALSE
+"Irrigation 5","OP","ST","2","ISCO",0.028074884027161,TRUE
+"Irrigation 1","TKN","ST","2","ISCO",3.42864365756705,FALSE
+"Irrigation 1","TKN","ST","2","ISCO",3.86211394660632,TRUE
+"Irrigation 2","TKN","ST","2","ISCO",3.75565531278182,FALSE
+"Irrigation 2","TKN","ST","2","ISCO",3.285557014838,TRUE
+"Irrigation 3","TKN","ST","2","ISCO",3.15196163292228,FALSE
+"Irrigation 3","TKN","ST","2","ISCO",2.33215331946625,TRUE
+"Irrigation 4","TKN","ST","2","ISCO",1.47235477266306,FALSE
+"Irrigation 4","TKN","ST","2","ISCO",2.56138232022717,TRUE
+"Irrigation 5","TKN","ST","2","ISCO",0.256253664796309,FALSE
+"Irrigation 5","TKN","ST","2","ISCO",4.87705578293881,TRUE
+"Irrigation 1","TP","ST","2","ISCO",5.55767697743567,FALSE
+"Irrigation 1","TP","ST","2","ISCO",5.57353953349068,TRUE
+"Irrigation 2","TP","ST","2","ISCO",4.29063010097295,FALSE
+"Irrigation 2","TP","ST","2","ISCO",4.25523026003734,TRUE
+"Irrigation 3","TP","ST","2","ISCO",4.3454717262663,FALSE
+"Irrigation 3","TP","ST","2","ISCO",4.29152809483376,TRUE
+"Irrigation 4","TP","ST","2","ISCO",3.43124122209636,FALSE
+"Irrigation 4","TP","ST","2","ISCO",3.26239525470553,TRUE
+"Irrigation 5","TP","ST","2","ISCO",2.900069166025,FALSE
+"Irrigation 5","TP","ST","2","ISCO",2.88779957240632,TRUE
+"Irrigation 1","EC","ST","2","ISCO",0.632071323546965,FALSE
+"Irrigation 1","EC","ST","2","ISCO",0.691401123054076,TRUE
+"Irrigation 2","EC","ST","2","ISCO",0.66399297881171,FALSE
+"Irrigation 2","EC","ST","2","ISCO",0.501320948462611,TRUE
+"Irrigation 3","EC","ST","2","ISCO",0.390610790784194,FALSE
+"Irrigation 3","EC","ST","2","ISCO",0.417886128120799,TRUE
+"Irrigation 4","EC","ST","2","ISCO",0.247547966278334,FALSE
+"Irrigation 4","EC","ST","2","ISCO",0.362904051019807,TRUE
+"Irrigation 5","EC","ST","2","ISCO",0.21948791100721,FALSE
+"Irrigation 5","EC","ST","2","ISCO",0.337447426347797,TRUE
+"Irrigation 1","NO3","ST","2","ISCO",0.222669145692825,FALSE
+"Irrigation 1","NO3","ST","2","ISCO",0.22593065482288,TRUE
+"Irrigation 2","NO3","ST","2","ISCO",0.175972289685471,FALSE
+"Irrigation 2","NO3","ST","2","ISCO",0.17440881871322,TRUE
+"Irrigation 3","NO3","ST","2","ISCO",0.153258755639818,FALSE
+"Irrigation 3","NO3","ST","2","ISCO",0.131168147371973,TRUE
+"Irrigation 4","NO3","ST","2","ISCO",0.220856461519441,FALSE
+"Irrigation 4","NO3","ST","2","ISCO",0.109749623635499,TRUE
+"Irrigation 5","NO3","ST","2","ISCO",0.0402156575492476,FALSE
+"Irrigation 5","NO3","ST","2","ISCO",0.135211675421537,TRUE
+"Irrigation 1","pH","ST","2","ISCO",0.13142837191097,FALSE
+"Irrigation 1","pH","ST","2","ISCO",0.133668220004304,TRUE
+"Irrigation 2","pH","ST","2","ISCO",0.0635648173991327,FALSE
+"Irrigation 2","pH","ST","2","ISCO",0.100370679250021,TRUE
+"Irrigation 3","pH","ST","2","ISCO",0.0789102072364222,FALSE
+"Irrigation 3","pH","ST","2","ISCO",0.0825818486812948,TRUE
+"Irrigation 4","pH","ST","2","ISCO",0.0783382345095334,FALSE
+"Irrigation 4","pH","ST","2","ISCO",0.0808160980221555,TRUE
+"Irrigation 5","pH","ST","2","ISCO",0.0612252512679253,FALSE
+"Irrigation 5","pH","ST","2","ISCO",0.0642711050847143,TRUE
+"Irrigation 1","TSS","ST","2","ISCO",722.985991932931,FALSE
+"Irrigation 1","TSS","ST","2","ISCO",1055.25777112063,TRUE
+"Irrigation 2","TSS","ST","2","ISCO",860.544788639519,FALSE
+"Irrigation 2","TSS","ST","2","ISCO",839.79018595705,TRUE
+"Irrigation 3","TSS","ST","2","ISCO",406.096671867379,FALSE
+"Irrigation 3","TSS","ST","2","ISCO",531.57690230893,TRUE
+"Irrigation 4","TSS","ST","2","ISCO",655.853316501993,FALSE
+"Irrigation 4","TSS","ST","2","ISCO",194.367316077325,TRUE
+"Irrigation 5","TSS","ST","2","ISCO",180.363923373197,FALSE
+"Irrigation 5","TSS","ST","2","ISCO",262.898256175475,TRUE
+"Irrigation 1","TDS","ST","2","ISCO",393.804477978048,FALSE
+"Irrigation 1","TDS","ST","2","ISCO",403.962731249036,TRUE
+"Irrigation 2","TDS","ST","2","ISCO",303.549982910238,FALSE
+"Irrigation 2","TDS","ST","2","ISCO",313.589926653186,TRUE
+"Irrigation 3","TDS","ST","2","ISCO",195.806827647219,FALSE
+"Irrigation 3","TDS","ST","2","ISCO",306.17294632594,TRUE
+"Irrigation 4","TDS","ST","2","ISCO",281.141940354406,FALSE
+"Irrigation 4","TDS","ST","2","ISCO",197.045048297014,TRUE
+"Irrigation 5","TDS","ST","2","ISCO",235.575629442182,FALSE
+"Irrigation 5","TDS","ST","2","ISCO",152.435478057779,TRUE
+"Irrigation 1","NO2","CT","1","Low-Cost Sampler",10.1476833393701,FALSE
+"Irrigation 1","NO2","CT","1","Low-Cost Sampler",12.5374723818239,TRUE
+"Irrigation 2","NO2","CT","1","Low-Cost Sampler",7.19119036962231,FALSE
+"Irrigation 2","NO2","CT","1","Low-Cost Sampler",7.71861714127755,TRUE
+"Irrigation 3","NO2","CT","1","Low-Cost Sampler",8.48095328563618,FALSE
+"Irrigation 3","NO2","CT","1","Low-Cost Sampler",9.64355088876449,TRUE
+"Irrigation 4","NO2","CT","1","Low-Cost Sampler",7.28577861777121,FALSE
+"Irrigation 4","NO2","CT","1","Low-Cost Sampler",7.22751678502264,TRUE
+"Irrigation 5","NO2","CT","1","Low-Cost Sampler",5.370793231168,FALSE
+"Irrigation 5","NO2","CT","1","Low-Cost Sampler",7.18417176890509,TRUE
+"Irrigation 1","OP","CT","1","Low-Cost Sampler",0.12972016587591,FALSE
+"Irrigation 1","OP","CT","1","Low-Cost Sampler",0.128860496223714,TRUE
+"Irrigation 2","OP","CT","1","Low-Cost Sampler",0.0920316631167492,FALSE
+"Irrigation 2","OP","CT","1","Low-Cost Sampler",0.111839731530239,TRUE
+"Irrigation 3","OP","CT","1","Low-Cost Sampler",0.0854539348421677,FALSE
+"Irrigation 3","OP","CT","1","Low-Cost Sampler",0.0979036041387663,TRUE
+"Irrigation 4","OP","CT","1","Low-Cost Sampler",0.0986047909605646,FALSE
+"Irrigation 4","OP","CT","1","Low-Cost Sampler",0.0829302942058296,TRUE
+"Irrigation 5","OP","CT","1","Low-Cost Sampler",0.0763598819189119,FALSE
+"Irrigation 5","OP","CT","1","Low-Cost Sampler",0.0780637989934934,TRUE
+"Irrigation 1","TKN","CT","1","Low-Cost Sampler",6.23910940678217,FALSE
+"Irrigation 1","TKN","CT","1","Low-Cost Sampler",7.01646662525591,TRUE
+"Irrigation 2","TKN","CT","1","Low-Cost Sampler",4.63682696545734,FALSE
+"Irrigation 2","TKN","CT","1","Low-Cost Sampler",6.44512939843448,TRUE
+"Irrigation 3","TKN","CT","1","Low-Cost Sampler",4.79334753409661,FALSE
+"Irrigation 3","TKN","CT","1","Low-Cost Sampler",5.93605688745514,TRUE
+"Irrigation 4","TKN","CT","1","Low-Cost Sampler",5.11401872188338,FALSE
+"Irrigation 4","TKN","CT","1","Low-Cost Sampler",4.34883103671919,TRUE
+"Irrigation 5","TKN","CT","1","Low-Cost Sampler",4.23340913448912,FALSE
+"Irrigation 5","TKN","CT","1","Low-Cost Sampler",3.54204922088892,TRUE
+"Irrigation 1","TP","CT","1","Low-Cost Sampler",8.87327836245674,FALSE
+"Irrigation 1","TP","CT","1","Low-Cost Sampler",8.94249038851914,TRUE
+"Irrigation 2","TP","CT","1","Low-Cost Sampler",7.35329826067195,FALSE
+"Irrigation 2","TP","CT","1","Low-Cost Sampler",7.36725949539145,TRUE
+"Irrigation 3","TP","CT","1","Low-Cost Sampler",7.37901119957396,FALSE
+"Irrigation 3","TP","CT","1","Low-Cost Sampler",7.31147567507254,TRUE
+"Irrigation 4","TP","CT","1","Low-Cost Sampler",6.81741420543377,FALSE
+"Irrigation 4","TP","CT","1","Low-Cost Sampler",6.68568554004973,TRUE
+"Irrigation 5","TP","CT","1","Low-Cost Sampler",6.0832776908832,FALSE
+"Irrigation 5","TP","CT","1","Low-Cost Sampler",5.98937591655726,TRUE
+"Irrigation 1","EC","CT","1","Low-Cost Sampler",0.9752757927121,FALSE
+"Irrigation 1","EC","CT","1","Low-Cost Sampler",0.992633723308291,TRUE
+"Irrigation 2","EC","CT","1","Low-Cost Sampler",0.807432457324559,FALSE
+"Irrigation 2","EC","CT","1","Low-Cost Sampler",1.04857375976617,TRUE
+"Irrigation 3","EC","CT","1","Low-Cost Sampler",0.789947557432334,FALSE
+"Irrigation 3","EC","CT","1","Low-Cost Sampler",0.824618454162926,TRUE
+"Irrigation 4","EC","CT","1","Low-Cost Sampler",0.666782119236367,FALSE
+"Irrigation 4","EC","CT","1","Low-Cost Sampler",0.910824040005277,TRUE
+"Irrigation 5","EC","CT","1","Low-Cost Sampler",0.689928499633896,FALSE
+"Irrigation 5","EC","CT","1","Low-Cost Sampler",0.605293954256814,TRUE
+"Irrigation 1","NO3","CT","1","Low-Cost Sampler",0.379157791363315,FALSE
+"Irrigation 1","NO3","CT","1","Low-Cost Sampler",0.318056962513992,TRUE
+"Irrigation 2","NO3","CT","1","Low-Cost Sampler",0.26694150541973,FALSE
+"Irrigation 2","NO3","CT","1","Low-Cost Sampler",0.290679409204655,TRUE
+"Irrigation 3","NO3","CT","1","Low-Cost Sampler",0.297543814704782,FALSE
+"Irrigation 3","NO3","CT","1","Low-Cost Sampler",0.261301513270394,TRUE
+"Irrigation 4","NO3","CT","1","Low-Cost Sampler",0.297386482763394,FALSE
+"Irrigation 4","NO3","CT","1","Low-Cost Sampler",0.239972199297591,TRUE
+"Irrigation 5","NO3","CT","1","Low-Cost Sampler",0.282293336180341,FALSE
+"Irrigation 5","NO3","CT","1","Low-Cost Sampler",0.222313440470765,TRUE
+"Irrigation 1","pH","CT","1","Low-Cost Sampler",0.206217467503043,FALSE
+"Irrigation 1","pH","CT","1","Low-Cost Sampler",0.202796578631763,TRUE
+"Irrigation 2","pH","CT","1","Low-Cost Sampler",0.160524161359395,FALSE
+"Irrigation 2","pH","CT","1","Low-Cost Sampler",0.154771333347649,TRUE
+"Irrigation 3","pH","CT","1","Low-Cost Sampler",0.148986624091454,FALSE
+"Irrigation 3","pH","CT","1","Low-Cost Sampler",0.172776962769282,TRUE
+"Irrigation 4","pH","CT","1","Low-Cost Sampler",0.161064486168942,FALSE
+"Irrigation 4","pH","CT","1","Low-Cost Sampler",0.128934868330545,TRUE
+"Irrigation 5","pH","CT","1","Low-Cost Sampler",0.118230886090523,FALSE
+"Irrigation 5","pH","CT","1","Low-Cost Sampler",0.114822717792605,TRUE
+"Irrigation 1","TSS","CT","1","Low-Cost Sampler",1029.96971414628,FALSE
+"Irrigation 1","TSS","CT","1","Low-Cost Sampler",1132.3359227645,TRUE
+"Irrigation 2","TSS","CT","1","Low-Cost Sampler",1661.46605424963,FALSE
+"Irrigation 2","TSS","CT","1","Low-Cost Sampler",1101.25801435084,TRUE
+"Irrigation 3","TSS","CT","1","Low-Cost Sampler",1144.51958911751,FALSE
+"Irrigation 3","TSS","CT","1","Low-Cost Sampler",934.544400045347,TRUE
+"Irrigation 4","TSS","CT","1","Low-Cost Sampler",914.983176103625,FALSE
+"Irrigation 4","TSS","CT","1","Low-Cost Sampler",983.046076298609,TRUE
+"Irrigation 5","TSS","CT","1","Low-Cost Sampler",609.756484941894,FALSE
+"Irrigation 5","TSS","CT","1","Low-Cost Sampler",1060.51423818888,TRUE
+"Irrigation 1","TDS","CT","1","Low-Cost Sampler",640.136404052756,FALSE
+"Irrigation 1","TDS","CT","1","Low-Cost Sampler",655.91499552686,TRUE
+"Irrigation 2","TDS","CT","1","Low-Cost Sampler",608.176198687994,FALSE
+"Irrigation 2","TDS","CT","1","Low-Cost Sampler",487.272818145093,TRUE
+"Irrigation 3","TDS","CT","1","Low-Cost Sampler",563.39005045045,FALSE
+"Irrigation 3","TDS","CT","1","Low-Cost Sampler",527.582730828778,TRUE
+"Irrigation 4","TDS","CT","1","Low-Cost Sampler",461.448175188528,FALSE
+"Irrigation 4","TDS","CT","1","Low-Cost Sampler",508.286179535152,TRUE
+"Irrigation 5","TDS","CT","1","Low-Cost Sampler",463.119506010956,FALSE
+"Irrigation 5","TDS","CT","1","Low-Cost Sampler",352.469906012277,TRUE
+"Irrigation 1","NO2","MT","1","Low-Cost Sampler",7.90535286634581,FALSE
+"Irrigation 1","NO2","MT","1","Low-Cost Sampler",7.71204562194436,TRUE
+"Irrigation 2","NO2","MT","1","Low-Cost Sampler",6.71047697825281,FALSE
+"Irrigation 2","NO2","MT","1","Low-Cost Sampler",7.25799885465393,TRUE
+"Irrigation 3","NO2","MT","1","Low-Cost Sampler",4.8734783666007,FALSE
+"Irrigation 3","NO2","MT","1","Low-Cost Sampler",5.36717775673322,TRUE
+"Irrigation 4","NO2","MT","1","Low-Cost Sampler",7.15536973496761,FALSE
+"Irrigation 4","NO2","MT","1","Low-Cost Sampler",6.7502189541228,TRUE
+"Irrigation 5","NO2","MT","1","Low-Cost Sampler",5.33618664943311,FALSE
+"Irrigation 5","NO2","MT","1","Low-Cost Sampler",4.84176682502765,TRUE
+"Irrigation 1","OP","MT","1","Low-Cost Sampler",0.0959011468399614,FALSE
+"Irrigation 1","OP","MT","1","Low-Cost Sampler",0.10303023729327,TRUE
+"Irrigation 2","OP","MT","1","Low-Cost Sampler",0.0875510443441374,FALSE
+"Irrigation 2","OP","MT","1","Low-Cost Sampler",0.0694484824402766,TRUE
+"Irrigation 3","OP","MT","1","Low-Cost Sampler",0.0843950874490613,FALSE
+"Irrigation 3","OP","MT","1","Low-Cost Sampler",0.0810949659867365,TRUE
+"Irrigation 4","OP","MT","1","Low-Cost Sampler",0.0608067253717584,FALSE
+"Irrigation 4","OP","MT","1","Low-Cost Sampler",0.0591390971115943,TRUE
+"Irrigation 5","OP","MT","1","Low-Cost Sampler",0.0670663481368424,FALSE
+"Irrigation 5","OP","MT","1","Low-Cost Sampler",0.0523911096011123,TRUE
+"Irrigation 1","TKN","MT","1","Low-Cost Sampler",4.5365343093276,FALSE
+"Irrigation 1","TKN","MT","1","Low-Cost Sampler",5.67675898106078,TRUE
+"Irrigation 2","TKN","MT","1","Low-Cost Sampler",5.2390145481043,FALSE
+"Irrigation 2","TKN","MT","1","Low-Cost Sampler",6.15956530401701,TRUE
+"Irrigation 3","TKN","MT","1","Low-Cost Sampler",4.7870329407466,FALSE
+"Irrigation 3","TKN","MT","1","Low-Cost Sampler",3.78940412606328,TRUE
+"Irrigation 4","TKN","MT","1","Low-Cost Sampler",5.67375565125464,FALSE
+"Irrigation 4","TKN","MT","1","Low-Cost Sampler",4.34169928870666,TRUE
+"Irrigation 5","TKN","MT","1","Low-Cost Sampler",4.17222387364063,FALSE
+"Irrigation 5","TKN","MT","1","Low-Cost Sampler",3.24065073559223,TRUE
+"Irrigation 1","TP","MT","1","Low-Cost Sampler",7.40403905717134,FALSE
+"Irrigation 1","TP","MT","1","Low-Cost Sampler",7.37871285232181,TRUE
+"Irrigation 2","TP","MT","1","Low-Cost Sampler",5.81885633146958,FALSE
+"Irrigation 2","TP","MT","1","Low-Cost Sampler",5.99466192898957,TRUE
+"Irrigation 3","TP","MT","1","Low-Cost Sampler",5.85009525805555,FALSE
+"Irrigation 3","TP","MT","1","Low-Cost Sampler",5.93835562793465,TRUE
+"Irrigation 4","TP","MT","1","Low-Cost Sampler",5.12925269294642,FALSE
+"Irrigation 4","TP","MT","1","Low-Cost Sampler",5.25841613225865,TRUE
+"Irrigation 5","TP","MT","1","Low-Cost Sampler",4.5022348767838,FALSE
+"Irrigation 5","TP","MT","1","Low-Cost Sampler",4.63322075748905,TRUE
+"Irrigation 1","EC","MT","1","Low-Cost Sampler",0.785719790023143,FALSE
+"Irrigation 1","EC","MT","1","Low-Cost Sampler",0.763011221988559,TRUE
+"Irrigation 2","EC","MT","1","Low-Cost Sampler",0.610214909974282,FALSE
+"Irrigation 2","EC","MT","1","Low-Cost Sampler",0.80883740956966,TRUE
+"Irrigation 3","EC","MT","1","Low-Cost Sampler",0.635210480733673,FALSE
+"Irrigation 3","EC","MT","1","Low-Cost Sampler",0.620362391961323,TRUE
+"Irrigation 4","EC","MT","1","Low-Cost Sampler",0.770046343842004,FALSE
+"Irrigation 4","EC","MT","1","Low-Cost Sampler",0.341065363264286,TRUE
+"Irrigation 5","EC","MT","1","Low-Cost Sampler",0.485961737541342,FALSE
+"Irrigation 5","EC","MT","1","Low-Cost Sampler",0.579977583081315,TRUE
+"Irrigation 1","NO3","MT","1","Low-Cost Sampler",0.307797888117353,FALSE
+"Irrigation 1","NO3","MT","1","Low-Cost Sampler",0.320921822055288,TRUE
+"Irrigation 2","NO3","MT","1","Low-Cost Sampler",0.21078325568175,FALSE
+"Irrigation 2","NO3","MT","1","Low-Cost Sampler",0.178877713064625,TRUE
+"Irrigation 3","NO3","MT","1","Low-Cost Sampler",0.282928476983442,FALSE
+"Irrigation 3","NO3","MT","1","Low-Cost Sampler",0.206112311901602,TRUE
+"Irrigation 4","NO3","MT","1","Low-Cost Sampler",0.243625129785447,FALSE
+"Irrigation 4","NO3","MT","1","Low-Cost Sampler",0.152383934480327,TRUE
+"Irrigation 5","NO3","MT","1","Low-Cost Sampler",0.151869470338499,FALSE
+"Irrigation 5","NO3","MT","1","Low-Cost Sampler",0.319423661534802,TRUE
+"Irrigation 1","pH","MT","1","Low-Cost Sampler",0.146747800516909,FALSE
+"Irrigation 1","pH","MT","1","Low-Cost Sampler",0.152553624763784,TRUE
+"Irrigation 2","pH","MT","1","Low-Cost Sampler",0.114489235272463,FALSE
+"Irrigation 2","pH","MT","1","Low-Cost Sampler",0.118509073636383,TRUE
+"Irrigation 3","pH","MT","1","Low-Cost Sampler",0.143438095573419,FALSE
+"Irrigation 3","pH","MT","1","Low-Cost Sampler",0.12843634613727,TRUE
+"Irrigation 4","pH","MT","1","Low-Cost Sampler",0.129871928370455,FALSE
+"Irrigation 4","pH","MT","1","Low-Cost Sampler",0.121763937949331,TRUE
+"Irrigation 5","pH","MT","1","Low-Cost Sampler",0.103699186984212,FALSE
+"Irrigation 5","pH","MT","1","Low-Cost Sampler",0.0985531670403245,TRUE
+"Irrigation 1","TSS","MT","1","Low-Cost Sampler",917.876547737608,FALSE
+"Irrigation 1","TSS","MT","1","Low-Cost Sampler",1144.46304398134,TRUE
+"Irrigation 2","TSS","MT","1","Low-Cost Sampler",554.179942558183,FALSE
+"Irrigation 2","TSS","MT","1","Low-Cost Sampler",527.538247082151,TRUE
+"Irrigation 3","TSS","MT","1","Low-Cost Sampler",597.361716224966,FALSE
+"Irrigation 3","TSS","MT","1","Low-Cost Sampler",930.210663323065,TRUE
+"Irrigation 4","TSS","MT","1","Low-Cost Sampler",530.830037823012,FALSE
+"Irrigation 4","TSS","MT","1","Low-Cost Sampler",762.979724313604,TRUE
+"Irrigation 5","TSS","MT","1","Low-Cost Sampler",663.31947938347,FALSE
+"Irrigation 5","TSS","MT","1","Low-Cost Sampler",616.822158543656,TRUE
+"Irrigation 1","TDS","MT","1","Low-Cost Sampler",507.466608010347,FALSE
+"Irrigation 1","TDS","MT","1","Low-Cost Sampler",640.71299483676,TRUE
+"Irrigation 2","TDS","MT","1","Low-Cost Sampler",347.985931097093,FALSE
+"Irrigation 2","TDS","MT","1","Low-Cost Sampler",406.061103000091,TRUE
+"Irrigation 3","TDS","MT","1","Low-Cost Sampler",406.283413602572,FALSE
+"Irrigation 3","TDS","MT","1","Low-Cost Sampler",391.811085433049,TRUE
+"Irrigation 4","TDS","MT","1","Low-Cost Sampler",332.208854802317,FALSE
+"Irrigation 4","TDS","MT","1","Low-Cost Sampler",415.376441479832,TRUE
+"Irrigation 5","TDS","MT","1","Low-Cost Sampler",340.308990478999,FALSE
+"Irrigation 5","TDS","MT","1","Low-Cost Sampler",281.099534777893,TRUE
+"Irrigation 1","NO2","ST","1","Low-Cost Sampler",6.52239583434481,FALSE
+"Irrigation 1","NO2","ST","1","Low-Cost Sampler",5.9767483912774,TRUE
+"Irrigation 2","NO2","ST","1","Low-Cost Sampler",4.76581628216403,FALSE
+"Irrigation 2","NO2","ST","1","Low-Cost Sampler",5.40169645815421,TRUE
+"Irrigation 3","NO2","ST","1","Low-Cost Sampler",5.23160602153591,FALSE
+"Irrigation 3","NO2","ST","1","Low-Cost Sampler",6.73530661029788,TRUE
+"Irrigation 4","NO2","ST","1","Low-Cost Sampler",4.74570802009852,FALSE
+"Irrigation 4","NO2","ST","1","Low-Cost Sampler",3.34498384789169,TRUE
+"Irrigation 5","NO2","ST","1","Low-Cost Sampler",3.73288305195674,FALSE
+"Irrigation 5","NO2","ST","1","Low-Cost Sampler",4.18382154478131,TRUE
+"Irrigation 1","OP","ST","1","Low-Cost Sampler",0.0838348134930871,FALSE
+"Irrigation 1","OP","ST","1","Low-Cost Sampler",0.0798518526506409,TRUE
+"Irrigation 2","OP","ST","1","Low-Cost Sampler",0.0697718898380163,FALSE
+"Irrigation 2","OP","ST","1","Low-Cost Sampler",0.0574648013253439,TRUE
+"Irrigation 3","OP","ST","1","Low-Cost Sampler",0.0569067853683135,FALSE
+"Irrigation 3","OP","ST","1","Low-Cost Sampler",0.0545076429465576,TRUE
+"Irrigation 4","OP","ST","1","Low-Cost Sampler",0.0611946014414772,FALSE
+"Irrigation 4","OP","ST","1","Low-Cost Sampler",0.0406082332555984,TRUE
+"Irrigation 5","OP","ST","1","Low-Cost Sampler",0.0508371941787695,FALSE
+"Irrigation 5","OP","ST","1","Low-Cost Sampler",0.0550667868773822,TRUE
+"Irrigation 1","TKN","ST","1","Low-Cost Sampler",5.10340227169584,FALSE
+"Irrigation 1","TKN","ST","1","Low-Cost Sampler",4.50783726060076,TRUE
+"Irrigation 2","TKN","ST","1","Low-Cost Sampler",3.3908822886084,FALSE
+"Irrigation 2","TKN","ST","1","Low-Cost Sampler",1.80818271166296,TRUE
+"Irrigation 3","TKN","ST","1","Low-Cost Sampler",1.06980078857078,FALSE
+"Irrigation 3","TKN","ST","1","Low-Cost Sampler",4.22579955576207,TRUE
+"Irrigation 4","TKN","ST","1","Low-Cost Sampler",1.32907344901781,FALSE
+"Irrigation 4","TKN","ST","1","Low-Cost Sampler",2.38572812579865,TRUE
+"Irrigation 5","TKN","ST","1","Low-Cost Sampler",1.39379696502598,FALSE
+"Irrigation 5","TKN","ST","1","Low-Cost Sampler",1.65442983245602,TRUE
+"Irrigation 1","TP","ST","1","Low-Cost Sampler",5.99927504199314,FALSE
+"Irrigation 1","TP","ST","1","Low-Cost Sampler",5.83726821476545,TRUE
+"Irrigation 2","TP","ST","1","Low-Cost Sampler",4.5265261637598,FALSE
+"Irrigation 2","TP","ST","1","Low-Cost Sampler",4.70812146342963,TRUE
+"Irrigation 3","TP","ST","1","Low-Cost Sampler",4.43429978918593,FALSE
+"Irrigation 3","TP","ST","1","Low-Cost Sampler",4.54261342044477,TRUE
+"Irrigation 4","TP","ST","1","Low-Cost Sampler",3.59219640651098,FALSE
+"Irrigation 4","TP","ST","1","Low-Cost Sampler",3.75530994367469,TRUE
+"Irrigation 5","TP","ST","1","Low-Cost Sampler",3.37587117663608,FALSE
+"Irrigation 5","TP","ST","1","Low-Cost Sampler",3.24978192377915,TRUE
+"Irrigation 1","EC","ST","1","Low-Cost Sampler",0.51033412724332,FALSE
+"Irrigation 1","EC","ST","1","Low-Cost Sampler",0.640998795748658,TRUE
+"Irrigation 2","EC","ST","1","Low-Cost Sampler",0.285967121236435,FALSE
+"Irrigation 2","EC","ST","1","Low-Cost Sampler",0.474166866683284,TRUE
+"Irrigation 3","EC","ST","1","Low-Cost Sampler",0.476274389953235,FALSE
+"Irrigation 3","EC","ST","1","Low-Cost Sampler",0.377002155735551,TRUE
+"Irrigation 4","EC","ST","1","Low-Cost Sampler",0.599940471861899,FALSE
+"Irrigation 4","EC","ST","1","Low-Cost Sampler",0.628363370778972,TRUE
+"Irrigation 5","EC","ST","1","Low-Cost Sampler",0.313028477769187,FALSE
+"Irrigation 5","EC","ST","1","Low-Cost Sampler",0.273677256685159,TRUE
+"Irrigation 1","NO3","ST","1","Low-Cost Sampler",0.215530949287408,FALSE
+"Irrigation 1","NO3","ST","1","Low-Cost Sampler",0.239365014770412,TRUE
+"Irrigation 2","NO3","ST","1","Low-Cost Sampler",0.103437349418673,FALSE
+"Irrigation 2","NO3","ST","1","Low-Cost Sampler",0.236244618233191,TRUE
+"Irrigation 3","NO3","ST","1","Low-Cost Sampler",0.186246655199042,FALSE
+"Irrigation 3","NO3","ST","1","Low-Cost Sampler",0.280412581072538,TRUE
+"Irrigation 4","NO3","ST","1","Low-Cost Sampler",0.258927648330493,FALSE
+"Irrigation 4","NO3","ST","1","Low-Cost Sampler",0.0838821821571644,TRUE
+"Irrigation 5","NO3","ST","1","Low-Cost Sampler",0.167191371526505,FALSE
+"Irrigation 5","NO3","ST","1","Low-Cost Sampler",0.124674259748194,TRUE
+"Irrigation 1","pH","ST","1","Low-Cost Sampler",0.132521045056769,FALSE
+"Irrigation 1","pH","ST","1","Low-Cost Sampler",0.102582267159776,TRUE
+"Irrigation 2","pH","ST","1","Low-Cost Sampler",0.090007544029642,FALSE
+"Irrigation 2","pH","ST","1","Low-Cost Sampler",0.0894222965459679,TRUE
+"Irrigation 3","pH","ST","1","Low-Cost Sampler",0.0905056821687769,FALSE
+"Irrigation 3","pH","ST","1","Low-Cost Sampler",0.100649784650338,TRUE
+"Irrigation 4","pH","ST","1","Low-Cost Sampler",0.0852261514566641,FALSE
+"Irrigation 4","pH","ST","1","Low-Cost Sampler",0.0884002020396555,TRUE
+"Irrigation 5","pH","ST","1","Low-Cost Sampler",0.0641881171082578,FALSE
+"Irrigation 5","pH","ST","1","Low-Cost Sampler",0.0818592537209112,TRUE
+"Irrigation 1","TSS","ST","1","Low-Cost Sampler",612.100132868929,FALSE
+"Irrigation 1","TSS","ST","1","Low-Cost Sampler",846.440129081031,TRUE
+"Irrigation 2","TSS","ST","1","Low-Cost Sampler",696.978823684279,FALSE
+"Irrigation 2","TSS","ST","1","Low-Cost Sampler",712.753673085674,TRUE
+"Irrigation 3","TSS","ST","1","Low-Cost Sampler",537.78345045959,FALSE
+"Irrigation 3","TSS","ST","1","Low-Cost Sampler",448.775652858992,TRUE
+"Irrigation 4","TSS","ST","1","Low-Cost Sampler",640.48720217007,FALSE
+"Irrigation 4","TSS","ST","1","Low-Cost Sampler",396.23818824047,TRUE
+"Irrigation 5","TSS","ST","1","Low-Cost Sampler",614.324168680303,FALSE
+"Irrigation 5","TSS","ST","1","Low-Cost Sampler",304.608543744785,TRUE
+"Irrigation 1","TDS","ST","1","Low-Cost Sampler",450.043362279262,FALSE
+"Irrigation 1","TDS","ST","1","Low-Cost Sampler",503.369736265198,TRUE
+"Irrigation 2","TDS","ST","1","Low-Cost Sampler",334.44422113507,FALSE
+"Irrigation 2","TDS","ST","1","Low-Cost Sampler",337.290175253852,TRUE
+"Irrigation 3","TDS","ST","1","Low-Cost Sampler",252.862887528013,FALSE
+"Irrigation 3","TDS","ST","1","Low-Cost Sampler",267.949558592426,TRUE
+"Irrigation 4","TDS","ST","1","Low-Cost Sampler",242.664919820357,FALSE
+"Irrigation 4","TDS","ST","1","Low-Cost Sampler",192.07640900257,TRUE
+"Irrigation 5","TDS","ST","1","Low-Cost Sampler",254.735282478119,FALSE
+"Irrigation 5","TDS","ST","1","Low-Cost Sampler",317.314847153694,TRUE
+"Irrigation 1","NO2","CT","2","Low-Cost Sampler",8.14374656190534,FALSE
+"Irrigation 1","NO2","CT","2","Low-Cost Sampler",8.44909288945448,TRUE
+"Irrigation 2","NO2","CT","2","Low-Cost Sampler",7.57331464735475,FALSE
+"Irrigation 2","NO2","CT","2","Low-Cost Sampler",8.2623410284061,TRUE
+"Irrigation 3","NO2","CT","2","Low-Cost Sampler",6.44141842117867,FALSE
+"Irrigation 3","NO2","CT","2","Low-Cost Sampler",6.81517330730265,TRUE
+"Irrigation 4","NO2","CT","2","Low-Cost Sampler",8.1026623318815,FALSE
+"Irrigation 4","NO2","CT","2","Low-Cost Sampler",7.16194434947005,TRUE
+"Irrigation 5","NO2","CT","2","Low-Cost Sampler",6.09666067735213,FALSE
+"Irrigation 5","NO2","CT","2","Low-Cost Sampler",6.18309339011458,TRUE
+"Irrigation 1","OP","CT","2","Low-Cost Sampler",0.125106882996817,FALSE
+"Irrigation 1","OP","CT","2","Low-Cost Sampler",0.113126305186379,TRUE
+"Irrigation 2","OP","CT","2","Low-Cost Sampler",0.0943031985824572,FALSE
+"Irrigation 2","OP","CT","2","Low-Cost Sampler",0.0915128011714127,TRUE
+"Irrigation 3","OP","CT","2","Low-Cost Sampler",0.0834769656282705,FALSE
+"Irrigation 3","OP","CT","2","Low-Cost Sampler",0.100789623173748,TRUE
+"Irrigation 4","OP","CT","2","Low-Cost Sampler",0.101314328840597,FALSE
+"Irrigation 4","OP","CT","2","Low-Cost Sampler",0.0753739230342352,TRUE
+"Irrigation 5","OP","CT","2","Low-Cost Sampler",0.0676443256128591,FALSE
+"Irrigation 5","OP","CT","2","Low-Cost Sampler",0.0796325144659718,TRUE
+"Irrigation 1","TKN","CT","2","Low-Cost Sampler",6.22930403784162,FALSE
+"Irrigation 1","TKN","CT","2","Low-Cost Sampler",4.84790720594184,TRUE
+"Irrigation 2","TKN","CT","2","Low-Cost Sampler",4.68540303997342,FALSE
+"Irrigation 2","TKN","CT","2","Low-Cost Sampler",4.85674110555458,TRUE
+"Irrigation 3","TKN","CT","2","Low-Cost Sampler",4.66849003236139,FALSE
+"Irrigation 3","TKN","CT","2","Low-Cost Sampler",3.96374233363387,TRUE
+"Irrigation 4","TKN","CT","2","Low-Cost Sampler",5.91776757690769,FALSE
+"Irrigation 4","TKN","CT","2","Low-Cost Sampler",4.10867262096185,TRUE
+"Irrigation 5","TKN","CT","2","Low-Cost Sampler",4.59345138790277,FALSE
+"Irrigation 5","TKN","CT","2","Low-Cost Sampler",3.66750851746952,TRUE
+"Irrigation 1","TP","CT","2","Low-Cost Sampler",7.98790613150334,FALSE
+"Irrigation 1","TP","CT","2","Low-Cost Sampler",8.05096515027049,TRUE
+"Irrigation 2","TP","CT","2","Low-Cost Sampler",6.62527438732293,FALSE
+"Irrigation 2","TP","CT","2","Low-Cost Sampler",6.71834101930823,TRUE
+"Irrigation 3","TP","CT","2","Low-Cost Sampler",6.57821547194716,FALSE
+"Irrigation 3","TP","CT","2","Low-Cost Sampler",6.71216632639347,TRUE
+"Irrigation 4","TP","CT","2","Low-Cost Sampler",6.02894641741611,FALSE
+"Irrigation 4","TP","CT","2","Low-Cost Sampler",5.94973376259721,TRUE
+"Irrigation 5","TP","CT","2","Low-Cost Sampler",5.28404756744488,FALSE
+"Irrigation 5","TP","CT","2","Low-Cost Sampler",5.24027687288648,TRUE
+"Irrigation 1","EC","CT","2","Low-Cost Sampler",0.98077687081305,FALSE
+"Irrigation 1","EC","CT","2","Low-Cost Sampler",1.04894426397333,TRUE
+"Irrigation 2","EC","CT","2","Low-Cost Sampler",0.623375741299161,FALSE
+"Irrigation 2","EC","CT","2","Low-Cost Sampler",0.899429694360413,TRUE
+"Irrigation 3","EC","CT","2","Low-Cost Sampler",0.708967888984964,FALSE
+"Irrigation 3","EC","CT","2","Low-Cost Sampler",0.895190922498863,TRUE
+"Irrigation 4","EC","CT","2","Low-Cost Sampler",0.809015454814139,FALSE
+"Irrigation 4","EC","CT","2","Low-Cost Sampler",0.613256249220478,TRUE
+"Irrigation 5","EC","CT","2","Low-Cost Sampler",0.504868903311543,FALSE
+"Irrigation 5","EC","CT","2","Low-Cost Sampler",0.487508272954844,TRUE
+"Irrigation 1","NO3","CT","2","Low-Cost Sampler",0.28092958121114,FALSE
+"Irrigation 1","NO3","CT","2","Low-Cost Sampler",0.281993262716083,TRUE
+"Irrigation 2","NO3","CT","2","Low-Cost Sampler",0.26661828530169,FALSE
+"Irrigation 2","NO3","CT","2","Low-Cost Sampler",0.335221162314642,TRUE
+"Irrigation 3","NO3","CT","2","Low-Cost Sampler",0.344236315262191,FALSE
+"Irrigation 3","NO3","CT","2","Low-Cost Sampler",0.250471461665531,TRUE
+"Irrigation 4","NO3","CT","2","Low-Cost Sampler",0.250649111987406,FALSE
+"Irrigation 4","NO3","CT","2","Low-Cost Sampler",0.330505734436264,TRUE
+"Irrigation 5","NO3","CT","2","Low-Cost Sampler",0.229776968594674,FALSE
+"Irrigation 5","NO3","CT","2","Low-Cost Sampler",0.147612449088176,TRUE
+"Irrigation 1","pH","CT","2","Low-Cost Sampler",0.155428875026926,FALSE
+"Irrigation 1","pH","CT","2","Low-Cost Sampler",0.183341859575568,TRUE
+"Irrigation 2","pH","CT","2","Low-Cost Sampler",0.119780227709299,FALSE
+"Irrigation 2","pH","CT","2","Low-Cost Sampler",0.149573502599276,TRUE
+"Irrigation 3","pH","CT","2","Low-Cost Sampler",0.145205848329165,FALSE
+"Irrigation 3","pH","CT","2","Low-Cost Sampler",0.146644658500637,TRUE
+"Irrigation 4","pH","CT","2","Low-Cost Sampler",0.112000649310004,FALSE
+"Irrigation 4","pH","CT","2","Low-Cost Sampler",0.131803803298171,TRUE
+"Irrigation 5","pH","CT","2","Low-Cost Sampler",0.123912856952555,FALSE
+"Irrigation 5","pH","CT","2","Low-Cost Sampler",0.117777211015356,TRUE
+"Irrigation 1","TSS","CT","2","Low-Cost Sampler",919.692804578618,FALSE
+"Irrigation 1","TSS","CT","2","Low-Cost Sampler",1417.14755138707,TRUE
+"Irrigation 2","TSS","CT","2","Low-Cost Sampler",666.208503368372,FALSE
+"Irrigation 2","TSS","CT","2","Low-Cost Sampler",605.617538876102,TRUE
+"Irrigation 3","TSS","CT","2","Low-Cost Sampler",764.698691890477,FALSE
+"Irrigation 3","TSS","CT","2","Low-Cost Sampler",938.556819914626,TRUE
+"Irrigation 4","TSS","CT","2","Low-Cost Sampler",1029.26607751858,FALSE
+"Irrigation 4","TSS","CT","2","Low-Cost Sampler",525.735622516186,TRUE
+"Irrigation 5","TSS","CT","2","Low-Cost Sampler",612.052119328421,FALSE
+"Irrigation 5","TSS","CT","2","Low-Cost Sampler",908.441255445593,TRUE
+"Irrigation 1","TDS","CT","2","Low-Cost Sampler",610.051724267762,FALSE
+"Irrigation 1","TDS","CT","2","Low-Cost Sampler",535.65146801634,TRUE
+"Irrigation 2","TDS","CT","2","Low-Cost Sampler",423.060556068221,FALSE
+"Irrigation 2","TDS","CT","2","Low-Cost Sampler",577.820734545956,TRUE
+"Irrigation 3","TDS","CT","2","Low-Cost Sampler",506.855088522359,FALSE
+"Irrigation 3","TDS","CT","2","Low-Cost Sampler",617.829188978281,TRUE
+"Irrigation 4","TDS","CT","2","Low-Cost Sampler",406.244092277852,FALSE
+"Irrigation 4","TDS","CT","2","Low-Cost Sampler",372.434134780703,TRUE
+"Irrigation 5","TDS","CT","2","Low-Cost Sampler",282.481417670887,FALSE
+"Irrigation 5","TDS","CT","2","Low-Cost Sampler",340.645498940676,TRUE
+"Irrigation 1","NO2","MT","2","Low-Cost Sampler",7.59567053239973,FALSE
+"Irrigation 1","NO2","MT","2","Low-Cost Sampler",7.15248806330186,TRUE
+"Irrigation 2","NO2","MT","2","Low-Cost Sampler",4.40981103965611,FALSE
+"Irrigation 2","NO2","MT","2","Low-Cost Sampler",6.21683726064053,TRUE
+"Irrigation 3","NO2","MT","2","Low-Cost Sampler",5.61624177099168,FALSE
+"Irrigation 3","NO2","MT","2","Low-Cost Sampler",5.56263917100537,TRUE
+"Irrigation 4","NO2","MT","2","Low-Cost Sampler",4.69994460279014,FALSE
+"Irrigation 4","NO2","MT","2","Low-Cost Sampler",3.73364597548633,TRUE
+"Irrigation 5","NO2","MT","2","Low-Cost Sampler",4.70519422309374,FALSE
+"Irrigation 5","NO2","MT","2","Low-Cost Sampler",4.42681124495022,TRUE
+"Irrigation 1","OP","MT","2","Low-Cost Sampler",0.0914759479766675,FALSE
+"Irrigation 1","OP","MT","2","Low-Cost Sampler",0.0916256450084459,TRUE
+"Irrigation 2","OP","MT","2","Low-Cost Sampler",0.0735161189190462,FALSE
+"Irrigation 2","OP","MT","2","Low-Cost Sampler",0.0889429368410741,TRUE
+"Irrigation 3","OP","MT","2","Low-Cost Sampler",0.080300111631797,FALSE
+"Irrigation 3","OP","MT","2","Low-Cost Sampler",0.0662828883648039,TRUE
+"Irrigation 4","OP","MT","2","Low-Cost Sampler",0.0542639814386701,FALSE
+"Irrigation 4","OP","MT","2","Low-Cost Sampler",0.0702296676005105,TRUE
+"Irrigation 5","OP","MT","2","Low-Cost Sampler",0.0501875315630661,FALSE
+"Irrigation 5","OP","MT","2","Low-Cost Sampler",0.0654485930554482,TRUE
+"Irrigation 1","TKN","MT","2","Low-Cost Sampler",5.5428989439683,FALSE
+"Irrigation 1","TKN","MT","2","Low-Cost Sampler",2.55903130846958,TRUE
+"Irrigation 2","TKN","MT","2","Low-Cost Sampler",3.50686077692766,FALSE
+"Irrigation 2","TKN","MT","2","Low-Cost Sampler",3.06018979413126,TRUE
+"Irrigation 3","TKN","MT","2","Low-Cost Sampler",4.8606026999754,FALSE
+"Irrigation 3","TKN","MT","2","Low-Cost Sampler",5.26221876943672,TRUE
+"Irrigation 4","TKN","MT","2","Low-Cost Sampler",4.1228300105584,FALSE
+"Irrigation 4","TKN","MT","2","Low-Cost Sampler",2.81241015604043,TRUE
+"Irrigation 5","TKN","MT","2","Low-Cost Sampler",2.35268519940399,FALSE
+"Irrigation 5","TKN","MT","2","Low-Cost Sampler",3.30192075362709,TRUE
+"Irrigation 1","TP","MT","2","Low-Cost Sampler",6.48374445015594,FALSE
+"Irrigation 1","TP","MT","2","Low-Cost Sampler",6.70359431597652,TRUE
+"Irrigation 2","TP","MT","2","Low-Cost Sampler",5.22386517906246,FALSE
+"Irrigation 2","TP","MT","2","Low-Cost Sampler",5.3026143706607,TRUE
+"Irrigation 3","TP","MT","2","Low-Cost Sampler",5.28656807793996,FALSE
+"Irrigation 3","TP","MT","2","Low-Cost Sampler",5.35809553458875,TRUE
+"Irrigation 4","TP","MT","2","Low-Cost Sampler",4.46471745591919,FALSE
+"Irrigation 4","TP","MT","2","Low-Cost Sampler",4.61786962368097,TRUE
+"Irrigation 5","TP","MT","2","Low-Cost Sampler",3.86030330933768,FALSE
+"Irrigation 5","TP","MT","2","Low-Cost Sampler",3.76117017603032,TRUE
+"Irrigation 1","EC","MT","2","Low-Cost Sampler",0.661145381877603,FALSE
+"Irrigation 1","EC","MT","2","Low-Cost Sampler",0.889729327767801,TRUE
+"Irrigation 2","EC","MT","2","Low-Cost Sampler",0.722205807149607,FALSE
+"Irrigation 2","EC","MT","2","Low-Cost Sampler",0.619457742083569,TRUE
+"Irrigation 3","EC","MT","2","Low-Cost Sampler",0.638105754351466,FALSE
+"Irrigation 3","EC","MT","2","Low-Cost Sampler",0.574737730271893,TRUE
+"Irrigation 4","EC","MT","2","Low-Cost Sampler",0.589426611323198,FALSE
+"Irrigation 4","EC","MT","2","Low-Cost Sampler",0.521899139524114,TRUE
+"Irrigation 5","EC","MT","2","Low-Cost Sampler",0.320061514063052,FALSE
+"Irrigation 5","EC","MT","2","Low-Cost Sampler",0.246699741533194,TRUE
+"Irrigation 1","NO3","MT","2","Low-Cost Sampler",0.302253399277215,FALSE
+"Irrigation 1","NO3","MT","2","Low-Cost Sampler",0.323228389746463,TRUE
+"Irrigation 2","NO3","MT","2","Low-Cost Sampler",0.242472470504323,FALSE
+"Irrigation 2","NO3","MT","2","Low-Cost Sampler",0.313049761926378,TRUE
+"Irrigation 3","NO3","MT","2","Low-Cost Sampler",0.130821386177785,FALSE
+"Irrigation 3","NO3","MT","2","Low-Cost Sampler",0.144909900325666,TRUE
+"Irrigation 4","NO3","MT","2","Low-Cost Sampler",0.211686048953957,FALSE
+"Irrigation 4","NO3","MT","2","Low-Cost Sampler",0.233283885109088,TRUE
+"Irrigation 5","NO3","MT","2","Low-Cost Sampler",0.125601053979545,FALSE
+"Irrigation 5","NO3","MT","2","Low-Cost Sampler",0.151133302394842,TRUE
+"Irrigation 1","pH","MT","2","Low-Cost Sampler",0.147316139747657,FALSE
+"Irrigation 1","pH","MT","2","Low-Cost Sampler",0.142868860164817,TRUE
+"Irrigation 2","pH","MT","2","Low-Cost Sampler",0.104485825867367,FALSE
+"Irrigation 2","pH","MT","2","Low-Cost Sampler",0.120804521481437,TRUE
+"Irrigation 3","pH","MT","2","Low-Cost Sampler",0.12009790222222,FALSE
+"Irrigation 3","pH","MT","2","Low-Cost Sampler",0.109638759084346,TRUE
+"Irrigation 4","pH","MT","2","Low-Cost Sampler",0.101119463606359,FALSE
+"Irrigation 4","pH","MT","2","Low-Cost Sampler",0.0953326852811928,TRUE
+"Irrigation 5","pH","MT","2","Low-Cost Sampler",0.0885220947361176,FALSE
+"Irrigation 5","pH","MT","2","Low-Cost Sampler",0.0893381194469338,TRUE
+"Irrigation 1","TSS","MT","2","Low-Cost Sampler",1183.54679758314,FALSE
+"Irrigation 1","TSS","MT","2","Low-Cost Sampler",1035.86560558847,TRUE
+"Irrigation 2","TSS","MT","2","Low-Cost Sampler",634.460338771287,FALSE
+"Irrigation 2","TSS","MT","2","Low-Cost Sampler",787.062643683613,TRUE
+"Irrigation 3","TSS","MT","2","Low-Cost Sampler",298.565248549632,FALSE
+"Irrigation 3","TSS","MT","2","Low-Cost Sampler",500.309276949557,TRUE
+"Irrigation 4","TSS","MT","2","Low-Cost Sampler",1097.27279382607,FALSE
+"Irrigation 4","TSS","MT","2","Low-Cost Sampler",497.254728550955,TRUE
+"Irrigation 5","TSS","MT","2","Low-Cost Sampler",511.04896820579,FALSE
+"Irrigation 5","TSS","MT","2","Low-Cost Sampler",736.544869967658,TRUE
+"Irrigation 1","TDS","MT","2","Low-Cost Sampler",539.197168401056,FALSE
+"Irrigation 1","TDS","MT","2","Low-Cost Sampler",491.696861274332,TRUE
+"Irrigation 2","TDS","MT","2","Low-Cost Sampler",370.681003341584,FALSE
+"Irrigation 2","TDS","MT","2","Low-Cost Sampler",326.742446898249,TRUE
+"Irrigation 3","TDS","MT","2","Low-Cost Sampler",406.761289588461,FALSE
+"Irrigation 3","TDS","MT","2","Low-Cost Sampler",285.70667838769,TRUE
+"Irrigation 4","TDS","MT","2","Low-Cost Sampler",315.950552811678,FALSE
+"Irrigation 4","TDS","MT","2","Low-Cost Sampler",425.899332524762,TRUE
+"Irrigation 5","TDS","MT","2","Low-Cost Sampler",372.482821211896,FALSE
+"Irrigation 5","TDS","MT","2","Low-Cost Sampler",425.260257828103,TRUE
+"Irrigation 1","NO2","ST","2","Low-Cost Sampler",4.61367085658521,FALSE
+"Irrigation 1","NO2","ST","2","Low-Cost Sampler",5.67958884745521,TRUE
+"Irrigation 2","NO2","ST","2","Low-Cost Sampler",3.94372218057243,FALSE
+"Irrigation 2","NO2","ST","2","Low-Cost Sampler",4.63879989150337,TRUE
+"Irrigation 3","NO2","ST","2","Low-Cost Sampler",4.81062248463002,FALSE
+"Irrigation 3","NO2","ST","2","Low-Cost Sampler",5.74552686809301,TRUE
+"Irrigation 4","NO2","ST","2","Low-Cost Sampler",2.86337596605564,FALSE
+"Irrigation 4","NO2","ST","2","Low-Cost Sampler",4.06612515080059,TRUE
+"Irrigation 5","NO2","ST","2","Low-Cost Sampler",4.47192782694078,FALSE
+"Irrigation 5","NO2","ST","2","Low-Cost Sampler",3.19627456409757,TRUE
+"Irrigation 1","OP","ST","2","Low-Cost Sampler",0.0689415516306202,FALSE
+"Irrigation 1","OP","ST","2","Low-Cost Sampler",0.0667740286521896,TRUE
+"Irrigation 2","OP","ST","2","Low-Cost Sampler",0.044273287834954,FALSE
+"Irrigation 2","OP","ST","2","Low-Cost Sampler",0.0488838570444271,TRUE
+"Irrigation 3","OP","ST","2","Low-Cost Sampler",0.0534425083808504,FALSE
+"Irrigation 3","OP","ST","2","Low-Cost Sampler",0.0746763583162702,TRUE
+"Irrigation 4","OP","ST","2","Low-Cost Sampler",0.0604857030484336,FALSE
+"Irrigation 4","OP","ST","2","Low-Cost Sampler",0.0477508571465889,TRUE
+"Irrigation 5","OP","ST","2","Low-Cost Sampler",0.0302536336099802,FALSE
+"Irrigation 5","OP","ST","2","Low-Cost Sampler",0.0390476328507995,TRUE
+"Irrigation 1","TKN","ST","2","Low-Cost Sampler",2.70190584182649,FALSE
+"Irrigation 1","TKN","ST","2","Low-Cost Sampler",2.56135652682426,TRUE
+"Irrigation 2","TKN","ST","2","Low-Cost Sampler",3.29659817682923,FALSE
+"Irrigation 2","TKN","ST","2","Low-Cost Sampler",1.58537908691565,TRUE
+"Irrigation 3","TKN","ST","2","Low-Cost Sampler",2.0358939548395,FALSE
+"Irrigation 3","TKN","ST","2","Low-Cost Sampler",1.19860723725683,TRUE
+"Irrigation 4","TKN","ST","2","Low-Cost Sampler",3.0996943475529,FALSE
+"Irrigation 4","TKN","ST","2","Low-Cost Sampler",0.523214246310185,TRUE
+"Irrigation 5","TKN","ST","2","Low-Cost Sampler",3.52806678970424,FALSE
+"Irrigation 5","TKN","ST","2","Low-Cost Sampler",3.20862384213117,TRUE
+"Irrigation 1","TP","ST","2","Low-Cost Sampler",5.13648202764703,FALSE
+"Irrigation 1","TP","ST","2","Low-Cost Sampler",5.32542446332595,TRUE
+"Irrigation 2","TP","ST","2","Low-Cost Sampler",3.81814097127376,FALSE
+"Irrigation 2","TP","ST","2","Low-Cost Sampler",3.84440022923806,TRUE
+"Irrigation 3","TP","ST","2","Low-Cost Sampler",3.83186893304327,FALSE
+"Irrigation 3","TP","ST","2","Low-Cost Sampler",3.86570912014309,TRUE
+"Irrigation 4","TP","ST","2","Low-Cost Sampler",3.00257176535902,FALSE
+"Irrigation 4","TP","ST","2","Low-Cost Sampler",3.27980973233366,TRUE
+"Irrigation 5","TP","ST","2","Low-Cost Sampler",2.37175540977219,FALSE
+"Irrigation 5","TP","ST","2","Low-Cost Sampler",2.47576200323645,TRUE
+"Irrigation 1","EC","ST","2","Low-Cost Sampler",0.674529609290476,FALSE
+"Irrigation 1","EC","ST","2","Low-Cost Sampler",0.588113876390362,TRUE
+"Irrigation 2","EC","ST","2","Low-Cost Sampler",0.365642421509901,FALSE
+"Irrigation 2","EC","ST","2","Low-Cost Sampler",0.452457369838528,TRUE
+"Irrigation 3","EC","ST","2","Low-Cost Sampler",0.38959335534043,FALSE
+"Irrigation 3","EC","ST","2","Low-Cost Sampler",0.405218690044134,TRUE
+"Irrigation 4","EC","ST","2","Low-Cost Sampler",0.248422979895626,FALSE
+"Irrigation 4","EC","ST","2","Low-Cost Sampler",0.476785343416707,TRUE
+"Irrigation 5","EC","ST","2","Low-Cost Sampler",0.172012750761912,FALSE
+"Irrigation 5","EC","ST","2","Low-Cost Sampler",0.396291405051552,TRUE
+"Irrigation 1","NO3","ST","2","Low-Cost Sampler",0.225985539639509,FALSE
+"Irrigation 1","NO3","ST","2","Low-Cost Sampler",0.194213015539648,TRUE
+"Irrigation 2","NO3","ST","2","Low-Cost Sampler",0.250311324422641,FALSE
+"Irrigation 2","NO3","ST","2","Low-Cost Sampler",0.217147366164834,TRUE
+"Irrigation 3","NO3","ST","2","Low-Cost Sampler",0.221359597745163,FALSE
+"Irrigation 3","NO3","ST","2","Low-Cost Sampler",0.263145995547125,TRUE
+"Irrigation 4","NO3","ST","2","Low-Cost Sampler",0.143284007294318,FALSE
+"Irrigation 4","NO3","ST","2","Low-Cost Sampler",0.129335137689818,TRUE
+"Irrigation 5","NO3","ST","2","Low-Cost Sampler",0.043889102944912,FALSE
+"Irrigation 5","NO3","ST","2","Low-Cost Sampler",0.144843209144903,TRUE
+"Irrigation 1","pH","ST","2","Low-Cost Sampler",0.113273225637663,FALSE
+"Irrigation 1","pH","ST","2","Low-Cost Sampler",0.127216224805123,TRUE
+"Irrigation 2","pH","ST","2","Low-Cost Sampler",0.0864263763995329,FALSE
+"Irrigation 2","pH","ST","2","Low-Cost Sampler",0.0807805246409366,TRUE
+"Irrigation 3","pH","ST","2","Low-Cost Sampler",0.0689208454060941,FALSE
+"Irrigation 3","pH","ST","2","Low-Cost Sampler",0.0710919600440449,TRUE
+"Irrigation 4","pH","ST","2","Low-Cost Sampler",0.0430629725324275,FALSE
+"Irrigation 4","pH","ST","2","Low-Cost Sampler",0.0684974795685096,TRUE
+"Irrigation 5","pH","ST","2","Low-Cost Sampler",0.0597499391124614,FALSE
+"Irrigation 5","pH","ST","2","Low-Cost Sampler",0.0675070772224338,TRUE
+"Irrigation 1","TSS","ST","2","Low-Cost Sampler",1107.37969740778,FALSE
+"Irrigation 1","TSS","ST","2","Low-Cost Sampler",363.929014934831,TRUE
+"Irrigation 2","TSS","ST","2","Low-Cost Sampler",548.619355962538,FALSE
+"Irrigation 2","TSS","ST","2","Low-Cost Sampler",642.179513050796,TRUE
+"Irrigation 3","TSS","ST","2","Low-Cost Sampler",358.89374304273,FALSE
+"Irrigation 3","TSS","ST","2","Low-Cost Sampler",432.191024530031,TRUE
+"Irrigation 4","TSS","ST","2","Low-Cost Sampler",264.742461497703,FALSE
+"Irrigation 4","TSS","ST","2","Low-Cost Sampler",470.029307705879,TRUE
+"Irrigation 5","TSS","ST","2","Low-Cost Sampler",353.755707527858,FALSE
+"Irrigation 5","TSS","ST","2","Low-Cost Sampler",455.818081543939,TRUE
+"Irrigation 1","TDS","ST","2","Low-Cost Sampler",333.703111251487,FALSE
+"Irrigation 1","TDS","ST","2","Low-Cost Sampler",372.206632343972,TRUE
+"Irrigation 2","TDS","ST","2","Low-Cost Sampler",320.369282940348,FALSE
+"Irrigation 2","TDS","ST","2","Low-Cost Sampler",353.99166946843,TRUE
+"Irrigation 3","TDS","ST","2","Low-Cost Sampler",280.425484774484,FALSE
+"Irrigation 3","TDS","ST","2","Low-Cost Sampler",254.921643224006,TRUE
+"Irrigation 4","TDS","ST","2","Low-Cost Sampler",284.14138042248,FALSE
+"Irrigation 4","TDS","ST","2","Low-Cost Sampler",236.2017680307,TRUE
+"Irrigation 5","TDS","ST","2","Low-Cost Sampler",122.395739764566,FALSE
+"Irrigation 5","TDS","ST","2","Low-Cost Sampler",171.47259416472,TRUE

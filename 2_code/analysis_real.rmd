@@ -1,5 +1,5 @@
 ---
-title: "Sampler Comparison Analysis Using Bayesian Inference - Simulated Data"
+title: "Sampler Comparison Analysis Using Bayesian Inference - Real Data"
 author: "A.J. Brown"
 date: "`r Sys.Date()`"
 output: html_document
@@ -18,13 +18,14 @@ source("data_sim.r")
 
 ## Data Import and Preparation
 ```{r}
-# load simulated data for testing
+# load real data
 # note that this script places the working directory in the 2_code folder, not the root of the project
-#d <- read.csv("../1_data/sim_data.csv")
-d <- simulate_data(real_data_path = "../1_data/real_data.csv",
-                   export_csv = TRUE, 
-                   csv_path = "../1_data/simulated_data.csv")
+d <- read.csv("../1_data/real_data.csv")
 
+# drop inflow rows
+d <- d[d$event.type != 'Inflow',]
+#d <- d[!d$event.count %in% c('Storm 1', 'Storm 2'),]
+  
 # standardize analytes
 d <- d %>%
   group_by(analyte_abbr) %>%
@@ -441,10 +442,10 @@ p_link <- function(posterior_samples, I=1, A=1, S=1, B=1, TRT=1) {
   return(real_mu)
 }
 
-p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=2, A=8, S=i, B=1, TRT=2))
+p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=1, A=9, S=i, B=2, TRT=2))
 p_mu <- apply(p_raw, 2, mean)
 p_ci <- apply(p_raw, 2, PI, prob=0.95)
-print ("1) Low-Cost Sampler, 2) Grab Sample, 3) Hourly Grab, 4) ISCO")
+print ("1) Grab Sample, 2) Hourly Grab, 3) ISCO, 4) Low-Cost Sampler")
 p_mu
 p_ci
 ```
@@ -477,7 +478,8 @@ calculate_and_print_means_by_treatment(d)
 ```{r}
 # To use with real data, just pass your real data frame to the function
 # Ensure your real data frame has the same structure, particularly the columns: method.name, analyte_abbr, and result
-p_sim <- plot_results_by_method_and_analyte(d, title = "Average of Analyte by Sample Method - Simulated Data")
-p_sim
-ggsave("../figs/summary_sim.png", p_sim, width = 10, height = 6, units = "in")
+p_real <- plot_results_by_method_and_analyte(d, title = "Average of Analyte by Sample Method - Real Data")
+p_real
+ggsave("../figs/summary_real.png", p_real, width = 10, height = 6, units = "in")
 ```
+
