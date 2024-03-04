@@ -21,9 +21,7 @@ library(tidyr)
 # load simulated data for testing
 # note that this script places the working directory in the 2_code folder, not the root of the project
 d <- read.csv("../1_data/sim_data.csv")
-```
 
-```{r}
 # standardize analytes
 d <- d %>%
   group_by(analyte_abbr) %>%
@@ -32,9 +30,6 @@ d <- d %>%
 
 # parse data into sub dataframes for each analyte_abbr
 d_list <- split(d, d$analyte_abbr)
-
-# commented out to use one at a time or all at once
- dat <- d
 # dat <- d_list$NO3
 # dat <- d_list$NO2
 # dat <- d_list$TKN
@@ -44,6 +39,10 @@ d_list <- split(d, d$analyte_abbr)
 # dat <- d_list$EC
 # dat <- d_list$pH
 # dat <- d_list$TDS
+
+# our model uses all data at once, no need to split
+dat <- d
+
 ```
 
 ## Model Generation
@@ -57,6 +56,7 @@ dlist <- list(
     TRT = as.numeric(as.factor(dat$treatment)),
     I = as.numeric(as.factor(dat$event.count)),
     A = as.numeric(as.factor(dat$analyte_abbr)),
+    B = as.numeric(as.factor(dat$block)),
     N = nrow(dat)
 )
 ```
@@ -162,6 +162,42 @@ m2.2 <- ulam(
     ), data=dlist , chains=4 , cores=4 )
 ```
 
+```{r}
+# fit model 2.3
+# using partial pooling around irrigation # and Analyte, and block (non-centered)
+m2.3 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(mu, sigma),
+        sigma ~ dexp(1),
+        # model
+        mu <- a_bar + 
+              z[I]*sigma_a + # irrigation intercepts
+              x[A]*sigma_g + # analyte intercepts
+              b[B]*sigma_j + # block intercepts
+              bS[S] + # sampler method effect
+              bTRT[TRT], # treatment effect
+        # regular priors
+        a_bar ~ dnorm(0,0.5),
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5),
+        z[I] ~ dnorm(0,1),
+        x[A] ~ dnorm(0,1),
+        b[B] ~ dnorm(0,1),
+        sigma_a ~ dexp(1),
+        sigma_g ~ dexp(1),
+        sigma_j ~ dexp(1),
+        gq> vector[I]:a <<- a_bar + z*sigma_a,
+        gq> vector[A]:g <<- x*sigma_g,
+        gq> vector[TRT]:j <<- b*sigma_j
+        # adaptive priors
+          # none
+        # hyper-priors
+          # none
+        
+    ), data=dlist, chains=4, cores=4 )
+```
+
 ```{r, eval=FALSE, echo=FALSE}
 # fit model 3.0
 # treating C_true as unobserved data
@@ -217,8 +253,14 @@ plot(precis(m2.1 , depth=2))
 
 ```{r}
 # model 2.2 - non-centered 2.1
-precis(m2.2 , depth=2)
-plot(precis(m2.2 , depth=2))
+precis(m2.2, depth=2)
+plot(precis(m2.2, depth=2))
+```
+
+```{r}
+# model 2.3
+precis(m2.3, depth=2)
+plot(precis(m2.3, depth=2))
 ```
 
 ```{r, eval=FALSE, echo=FALSE}
@@ -233,7 +275,8 @@ precis(m3.0 , depth=2)
 #post <- extract.samples(m1.0)
 #post <- extract.samples(m2.0)
 #post <- extract.samples(m2.1)
-post <- extract.samples(m2.2)
+#post <- extract.samples(m2.2)
+post <- extract.samples(m2.3)
 #post <- extract.samples(m3.0)
 
 # make dataframes
@@ -312,7 +355,7 @@ analyte_list <- levels(factor(dat$analyte_abbr))
 # create link function to extract specific predictions
 p_link <- function(posterior_samples, I=1, A=1, S=1, TRT=1) {
   mu <- with(posterior_samples,
-             a[,I] + g[,A] + bS[,S] + bTRT[,TRT])
+             a[,I] + g[,A] + bS[,S] + bTRT[,TRT]) # model 2.2
              #a[,I] + bA[,A] + bS[,S] + bTRT[,TRT]) # model 2.0
              #a[,I] + bS[,S] + bTRT[,TRT]) # model 1.0
   # convert back to real units
@@ -322,9 +365,10 @@ p_link <- function(posterior_samples, I=1, A=1, S=1, TRT=1) {
   return(real_mu)
 }
 
-p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=1, A=9, S=i, TRT=2))
+p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=2, A=9, S=i, TRT=1))
 p_mu <- apply(p_raw, 2, mean)
 p_ci <- apply(p_raw, 2, PI)
+print ("1) Grab Sample, 2) Hourly Grab, 3) ISCO, 4) Low-Cost Sampler")
 p_mu
 p_ci
 ```
