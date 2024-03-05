@@ -13,16 +13,21 @@ The Colorado State University Agricultural Water Quality Program (AWQP) has deve
 
 A baysian approach is used in this analysis to compare water quality measurements from the four methods due to robust quantification of uncertainty and measurement error from this approach. The results of this study will be used to inform future research and provide a methodology for evaluating other sample collection methods and technologies henceforth.
 
-## Objectives
+## Objective
 
-- Compare and contrast water quality and quantity measurements collected from 4 methods:
-    1. **Commercial-grade equipment:** collecting first flush and subsequent hourly samples, composited for each runoff event
-    2. **LCS:** collecting first flush and subsequent hourly samples, composited for each runoff event
-    3. **Manual collection 1:** water samples collected in a plastic bottle by hand at first flush, then at each susbsequent hour, composited for each runoff event.
-    4. **Manual collection 2:** water samples collected in a plastic bottle by hand at first flush, then at the first hour after first flush, then at the last hour of the runoff event, composited.
+To compare and contrast water quality and quantity measurements collected from 4 methods:
+
+  1. **Commercial-grade equipment:** collecting first flush and subsequent hourly samples, composited for each runoff event
+  2. **LCS:** collecting first flush and subsequent hourly samples, composited for each runoff event
+  3. **Manual collection 1:** water samples collected in a plastic bottle by hand at first flush, then at each susbsequent hour, composited for each runoff event.
+  4. **Manual collection 2:** water samples collected in a plastic bottle by hand at first flush, then at the first hour after first flush, then at the last hour of the runoff event, composited.
 
 ## Table of Contents
-
+- [Repository Structure](#repository-structure)
+- [Experimental Design and Data Collection](#experimental-design-and-data-collection)
+- [Data Analysis, Results, and Discussion](#data-analysis-results-and-discussion)
+- [Conclusion](#conclusion)
+- [References](#references)
 
 ## Repository Structure
 * `0_docs/` - contains project documentation, including code output reports
@@ -54,12 +59,12 @@ A more detailed depiction of the equipment and it's orientation at each EoF site
 
 
 ### Water Quality Analysis
-Water samples collected from all sampling methods will be analyzed for the following as per NRCS Conservation Evaluation and Monitoring Activity (CEMA) 201 (NRCS, 2012): Ammonium Nitrogen (EPA 350.1), Nitrate-Nitrite (EPA353.2), Total Phosphorus (EPA365.2), Total Kjeldahl Nitrogen (A4500-NH3), Orthophosphate as P (EPA300), and Total Suspended Solids (EPA160.2). Additionally, the AWQP will add the following tests to encompass salinity, pH, and biological measurements: Total Dissolved Solids (EPA 160.1), specific conductance (EPA 120.1), pH (EPA 150.1), and total coliforms (EPA 1604).
+Water samples collected from all sampling methods will be analyzed for the following as per NRCS Conservation Evaluation and Monitoring Activity (CEMA) 201 (NRCS, 2012): Ammonium Nitrogen (EPA 350.1), Nitrate-Nitrite (EPA353.2), Total Phosphorus (EPA365.2), Total Kjeldahl Nitrogen (A4500-NH3), Orthophosphate as P (EPA300), and Total Suspended Solids (EPA160.2). Additionally, the AWQP added the following tests to encompass salinity, pH, and biological measurements: Total Dissolved Solids (EPA 160.1), specific conductance (EPA 120.1), and pH (EPA 150.1).
 
-Total suspended solids, specific conductance, and pH will be measured at the CSU AWQP laboratory, whereas the remaining analyte analyses will be outsourced to ALS Environmental within proper hold times.
+Total suspended solids, specific conductance, and pH were measured at the CSU AWQP laboratory, whereas the remaining analyte analyses were outsourced to ALS Environmental within proper hold times.
 
 
-## Data Analysis
+## Data Analysis, Results, and Discussion
 
 This analysis will be performed using R via Rstudio in conjunction with the `rethinking`, `cmdstanr`, and `dplyr` packages.
 
@@ -104,27 +109,40 @@ dag {
 
 ### Create the statistical model
 The statistical model is created using the DAG and the following assumptions:
-$$ C_i \sim \text{Normal}(\mu_i, \sigma) $$
-$$ \mu_i = \alpha_{I} + \gamma_{A} + \theta_{B} + \beta_{S}S_i + \beta_{T}T_i $$
+
+```math
+C_i \sim \text{Normal}(\mu_i, \sigma)
+\mu_i = \alpha_{I} + \gamma_{A} + \theta_{B} + \beta_{S}S_i + \beta_{T}T_i
+```
 
 Regular priors:
-$$ \beta_{S} \sim  \text{Normal}(0, 0.5) $$
-$$ \beta_{T} \sim  \text{Normal}(0, 0.5) $$
+
+```math
+\beta_{S} \sim  \text{Normal}(0, 0.5)
+\beta_{T} \sim  \text{Normal}(0, 0.5)
+```
 
 Adaptive priors:
-$$ \alpha_{I} \sim \text{Normal}(\overline{\alpha}, \sigma_{\alpha}) $$
-$$ \gamma_{A} \sim \text{Normal}(\overline{\gamma}, \sigma_{\gamma}) $$
-$$ \theta_{B} \sim \text{Normal}(\overline{\theta}, \sigma_{\theta}) $$
+
+```math
+\alpha_{I} \sim \text{Normal}(\overline{\alpha}, \sigma_{\alpha})
+\gamma_{A} \sim \text{Normal}(\overline{\gamma}, \sigma_{\gamma})
+\theta_{B} \sim \text{Normal}(\overline{\theta}, \sigma_{\theta})
+```
 
 Hyper-priors:
-$$ \overline{\alpha} \sim \text{Normal}(0, 0.5) $$
-$$ \overline{\gamma} \sim \text{Normal}(0, 0.5) $$
-$$ \overline{\theta} \sim \text{Normal}(0, 0.5) $$
-$$ \sigma_{\alpha} \sim \text{Exponential}(1) $$
-$$ \sigma_{\gamma} \sim \text{Exponential}(1) $$
-$$ \sigma_{\theta} \sim \text{Exponential}(1) $$
+
+```math
+\overline{\alpha} \sim \text{Normal}(0, 0.5)
+\overline{\gamma} \sim \text{Normal}(0, 0.5)
+\overline{\theta} \sim \text{Normal}(0, 0.5)
+\sigma_{\alpha} \sim \text{Exponential}(1)
+\sigma_{\gamma} \sim \text{Exponential}(1)
+\sigma_{\theta} \sim \text{Exponential}(1)
+```
 
 Where:
+
 - $C_i$ is the observed analyte concentration
 - $\alpha_{I}$ is the intercept for irrigation event
 - $\gamma_{A}$ is the intercept for analyte type
