@@ -86,7 +86,7 @@ The script to generate the simulated can be found in `2_code/data_sim.R`, and th
 Produced by [dagitty.net](https://www.dagitty.net/dags.html#), the causal model is a directed acyclic graph (DAG) that represents the relationships between the variables in the study.  This model will be used to create the statistical model in R.
 
 ![Figure 3: Causal Model](figs/dag.png)
-*Figure 3.*
+*Figure 3.* DAG representing the causal model for the study.
 
 
 Where sampler method (S) and tillage treatment (T) influence the unobserved true concentration (C), which in turn influences the observed concentration (C*). The observed concentration is also influenced by measurement error (*e*).
@@ -251,7 +251,7 @@ Looking at sampler effect distributions, **the results show that the sampler met
 
 Looking at tillage effect distributions, **the results show that the tillage treatment over all analytes did not have a significant effect on the observed concentration** (i.e., Figure 9 shows distributions centered around 0, meaning no effect).  This is unexpected, as the tillage treatment was expected to have significant impacts on the observed water quality concentration.
 
-## Conlusion
+## Conclusion
 Water quality is an important aspect of agriculture, and it is important to understand the impacts of different sampling methods and tillage treatments on agricultural water quality measurements for scalable decision making and water resource management in general.  This study used a bayesian approach, using a generative model, to estimate the impacts of sampler method and tillage treatment on observed water quality concentration.  The results showed that neither the sampler method nor the tillage treatment had significant impacts on the observed water quality concentration. Regarding sampling method, this is good news, because it means that multiple sampling methods can be used in the field without significantly impacting the observed water quality concentration. Regarding tillage, however, the results are unexpected, as the tillage treatment was expected to have significant impacts on the observed water quality concentration.  Further research is needed to understand the impacts of tillage treatment on observed water quality concentration. Future work will include a more detailed analysis of the tillage treatment impacts over multiple years, and not just 2023 data as used in this study.
 
 
