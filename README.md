@@ -112,6 +112,7 @@ The statistical model is created using the DAG and the following assumptions:
 
 ```math
 C_i \sim \text{Normal}(\mu_i, \sigma)
+
 \mu_i = \alpha_{I} + \gamma_{A} + \theta_{B} + \beta_{S}S_i + \beta_{T}T_i
 ```
 
@@ -119,6 +120,7 @@ Regular priors:
 
 ```math
 \beta_{S} \sim  \text{Normal}(0, 0.5)
+
 \beta_{T} \sim  \text{Normal}(0, 0.5)
 ```
 
@@ -126,7 +128,9 @@ Adaptive priors:
 
 ```math
 \alpha_{I} \sim \text{Normal}(\overline{\alpha}, \sigma_{\alpha})
+
 \gamma_{A} \sim \text{Normal}(\overline{\gamma}, \sigma_{\gamma})
+
 \theta_{B} \sim \text{Normal}(\overline{\theta}, \sigma_{\theta})
 ```
 
@@ -134,10 +138,15 @@ Hyper-priors:
 
 ```math
 \overline{\alpha} \sim \text{Normal}(0, 0.5)
+
 \overline{\gamma} \sim \text{Normal}(0, 0.5)
+
 \overline{\theta} \sim \text{Normal}(0, 0.5)
+
 \sigma_{\alpha} \sim \text{Exponential}(1)
+
 \sigma_{\gamma} \sim \text{Exponential}(1)
+
 \sigma_{\theta} \sim \text{Exponential}(1)
 ```
 
