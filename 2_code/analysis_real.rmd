@@ -44,6 +44,10 @@ d_list <- split(d, d$analyte_abbr)
 # dat <- d_list$pH
 # dat <- d_list$TDS
 
+# parse data into sub dataframes for each irrigation
+d_list_irr <- split(d, d$event.count)
+
+
 # our model uses all data at once, no need to split
 dat <- d
 
@@ -481,5 +485,53 @@ calculate_and_print_means_by_treatment(d)
 p_real <- plot_results_by_method_and_analyte(d, title = "Average of Analyte by Sample Method - Real Data")
 p_real
 ggsave("../figs/summary_real.png", p_real, width = 10, height = 6, units = "in")
+```
+```{r}
+# Plot by irrigation count
+# irr 1
+p_real_1 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 1`, title = "Average of Analyte by Sample Method - Irrigation 1")
+p_real_1
+ggsave("../figs/summary_real_irr1.png", p_real_1, width = 10, height = 6, units = "in")
+
+# irr 2
+p_real_2 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 2`, title = "Average of Analyte by Sample Method - Irrigation 2")
+p_real_2
+ggsave("../figs/summary_real_irr2.png", p_real_2, width = 10, height = 6, units = "in")
+
+# irr 3
+p_real_3 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 3`, title = "Average of Analyte by Sample Method - Irrigation 3")
+p_real_3
+ggsave("../figs/summary_real_irr3.png", p_real_3, width = 10, height = 6, units = "in")
+
+# irr 4
+p_real_4 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 4`, title = "Average of Analyte by Sample Method - Irrigation 4")
+p_real_4
+ggsave("../figs/summary_real_irr4.png", p_real_4, width = 10, height = 6, units = "in")
+
+# irr 5
+p_real_5 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 5`, title = "Average of Analyte by Sample Method - Irrigation 5")
+p_real_5
+ggsave("../figs/summary_real_irr5.png", p_real_5, width = 10, height = 6, units = "in")
+
+# storm 1
+p_real_storm1 <- plot_results_by_method_and_analyte(d_list_irr$`Storm 1`, title = "Average of Analyte by Sample Method - Storm 1")
+p_real_storm1
+ggsave("../figs/summary_real_storm1.png", p_real_storm1, width = 10, height = 6, units = "in")
+
+# storm 2
+p_real_storm2 <- plot_results_by_method_and_analyte(d_list_irr$`Storm 2`, title = "Average of Analyte by Sample Method - Storm 2")
+p_real_storm2
+ggsave("../figs/summary_real_storm2.png", p_real_storm2, width = 10, height = 6, units = "in")
+```
+```{r}
+# simple multiple regression for reference between analyte, method, and treatment
+library(car)
+lm_mod <- lm(result ~ analyte_abbr + method.name + treatment, data = d)
+summary(lm_mod)
+Anova(lm_mod, type="III")
+plot(lm_mod)
+
+#kruskal-wallis test for reference
+kruskal.test(result ~ method.name, data = d)
 ```
 
