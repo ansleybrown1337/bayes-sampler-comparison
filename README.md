@@ -49,8 +49,8 @@ During the year of this study (2023), the research field was planted in silage c
 
 The edge-of-field (EoF) runoff monitoring setup consists of a commercial-grade automated water sampler, an LCS, a a furrow flume. The placement of each EoF site is located at the bottom of the field, and can be seen in Figure 1:
 
-![Figure 2: Plot Map](figs/plots.png)
-*Figure 2.* Plot map of the conservation tillage study site where water samples will be collected, located at CSU ARDEC, Fort Collins, CO.
+![Figure 1: Plot Map](figs/plots.png)
+*Figure 1.* Plot map of the conservation tillage study site where water samples will be collected, located at CSU ARDEC, Fort Collins, CO.
 
 A more detailed depiction of the equipment and it's orientation at each EoF site can be found in Figure 2:
 
@@ -85,7 +85,7 @@ The script to generate the simulated can be found in `2_code/data_sim.R`, and th
 ### Create a causal model
 Produced by [dagitty.net](https://www.dagitty.net/dags.html#), the causal model is a directed acyclic graph (DAG) that represents the relationships between the variables in the study.  This model will be used to create the statistical model in R.
 
-![Figure 3: Causal Model](figs/dag.png)
+![Figure 3: Causal Model](figs/dag.PNG)
 *Figure 3.* DAG representing the causal model for the study.
 
 
