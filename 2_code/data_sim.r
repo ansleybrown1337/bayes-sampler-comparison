@@ -112,4 +112,31 @@ plot_results_by_method_and_analyte <- function(df, title = "Data") {
 # p_real <- plot_results_by_method_and_analyte(real.df, title = "Real Data")
 # print(p_real)
 
+# plot average of each analyte_abbr by treatment as bar graph
+plot_results_by_treatment_and_analyte <- function(df, title = "Data") {
+  # Ensure treatment and analyte_abbr are factors for proper plotting
+  df$treatment <- as.factor(df$treatment)
+  df$analyte_abbr <- as.factor(df$analyte_abbr)
+  
+  # Calculate mean and standard deviation for each treatment and analyte
+  mean_df <- aggregate(result ~ treatment + analyte_abbr, data=df, FUN=mean)
+  sd_df <- aggregate(result ~ treatment + analyte_abbr, data=df, FUN=sd, na.rm = TRUE)
+  
+  # Merge mean and standard deviation dataframes
+  plot_df <- merge(mean_df, sd_df, by=c('treatment', 'analyte_abbr'))
+  names(plot_df)[3:4] <- c("mean", "sd")
+  
+  # Create the plot
+  p <- ggplot(plot_df, aes(x=treatment, y=mean, fill=analyte_abbr)) +
+    geom_bar(stat="identity", position=position_dodge()) +
+    geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2,
+                  position=position_dodge(.9)) +
+    labs(title=title, x="Treatment", y="Mean Result") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    facet_wrap(~analyte_abbr, scales="free_y") +
+    theme(legend.position="none")
+  
+  return(p)
+}
+
 

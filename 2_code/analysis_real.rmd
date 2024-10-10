@@ -353,7 +353,6 @@ s_plot
 
 ```
 
-
 ### Effect of Tillage
 ```{r}
 # Find the range of all densities
@@ -389,6 +388,7 @@ lines(x_seq, prior_dens, lwd = 2, col = "black", lty = 2)
 # Add a vertical line at 0
 abline(v=0, lty=3)
 ```
+
 ```{r}
 trt_plot <- ggplot(bTRT_lng, aes(x = value, fill = name)) +
               geom_density(alpha = 0.7) +  # Adjust alpha for transparency if needed
@@ -424,7 +424,6 @@ for(column_name in columns_to_process) {
 
 ```
 
-
 ```{r}
 # plot analytes concentration by sample method
 
@@ -454,7 +453,7 @@ p_mu
 p_ci
 ```
 
-
+### Summary data and bar graphing
 ```{r}
 calculate_and_print_means_by_treatment <- function(data) {
   # Get unique levels of treatment
@@ -486,6 +485,7 @@ p_real <- plot_results_by_method_and_analyte(d, title = "Average of Analyte by S
 p_real
 ggsave("../figs/summary_real.png", p_real, width = 10, height = 6, units = "in")
 ```
+
 ```{r}
 # Plot by irrigation count
 # irr 1
@@ -523,6 +523,14 @@ p_real_storm2 <- plot_results_by_method_and_analyte(d_list_irr$`Storm 2`, title 
 p_real_storm2
 ggsave("../figs/summary_real_storm2.png", p_real_storm2, width = 10, height = 6, units = "in")
 ```
+
+```{r}
+# Plot by treatment
+p_trt <- plot_results_by_treatment_and_analyte(d, title = "Average of Analyte by Tillage Treatment")
+p_trt
+ggsave("../figs/trt_summary_real.png", p_trt, width = 10, height = 6, units = "in")
+```
+
 ```{r}
 # simple multiple regression for reference between analyte, method, and treatment
 library(car)
