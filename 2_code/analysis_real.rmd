@@ -206,6 +206,41 @@ m2.3 <- ulam(
     ), data=dlist, chains=4, cores=4 )
 ```
 
+```{r}
+# fit model 2.4
+# stratifying by treatment, sampler, and analyte
+# using partial pooling around irrigation #, and block (non-centered)
+m2.4 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(mu, sigma),
+        sigma ~ dexp(1),
+        # model
+        mu <- a_bar + 
+              z[I]*sigma_a + # irrigation intercepts
+              b[B]*sigma_j + # block intercepts
+              bA[A] + # analyte effect
+              bS[S] + # sampler method effect
+              bTRT[TRT], # treatment effect
+        # regular priors
+        a_bar ~ dnorm(0,0.5),
+        bA[A] ~ dnorm(0,0.5),
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5),
+        z[I] ~ dnorm(0,1),
+        b[B] ~ dnorm(0,1),
+        sigma_a ~ dexp(1),
+        sigma_j ~ dexp(1),
+        gq> vector[I]:a <<- a_bar + z*sigma_a,
+        gq> vector[B]:j <<- b*sigma_j
+        # adaptive priors
+          # none
+        # hyper-priors
+          # none
+        
+    ), data=dlist, chains=4, cores=4 )
+```
+
 ```{r, eval=FALSE, echo=FALSE}
 # fit model 3.0
 # treating C_true as unobserved data
@@ -272,6 +307,13 @@ plot(precis(m2.3, depth=2))
 traceplot(m2.3)
 ```
 
+```{r}
+# model 2.3
+precis(m2.4, depth=2)
+plot(precis(m2.4, depth=2))
+traceplot(m2.4)
+```
+
 ```{r, eval=FALSE, echo=FALSE}
 # model 3.0 - true value unobserved
 precis(m3.0 , depth=2)
@@ -286,9 +328,12 @@ precis(m3.0 , depth=2)
 #post <- extract.samples(m2.1)
 #post <- extract.samples(m2.2)
 post <- extract.samples(m2.3)
+#post <- extract.samples(m2.4)
 #post <- extract.samples(m3.0)
 
 # make dataframes
+#bA_df <- as.data.frame(post$bA)
+#bA_lng <- pivot_longer(bA_df, cols = c(V1, V2, V3, V4, V5, V6, V7, V8, V9))
 bS_df <- as.data.frame(post$bS)
 bS_lng <- pivot_longer(bS_df, cols = c(V1, V2, V3, V4))
 bTRT_df <- as.data.frame(post$bTRT)
