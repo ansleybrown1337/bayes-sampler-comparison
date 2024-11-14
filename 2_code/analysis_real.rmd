@@ -16,6 +16,17 @@ library(tidyr)
 source("data_sim.r")
 ```
 
+```{r, echo=FALSE, include=FALSE}}
+# changing Stan parameters for speed
+cpp_options <- list(
+  "CXXFLAGS" = "-Wno-nonnull -D_UCRT -Wno-deprecated-declarations -O1",
+  "TBB_CXXFLAGS" = "-D_UCRT",
+  "STAN_THREADS" = TRUE
+)
+cmdstan_make_local(cpp_options = cpp_options, append = FALSE)
+rebuild_cmdstan()
+```
+
 ## Data Import and Preparation
 ```{r}
 # load real data
@@ -308,10 +319,11 @@ traceplot(m2.3)
 ```
 
 ```{r}
-# model 2.3
+# model 2.4
 precis(m2.4, depth=2)
 plot(precis(m2.4, depth=2))
-traceplot(m2.4)
+#traceplot(m2.4)
+trankplot(m2.4)
 ```
 
 ```{r, eval=FALSE, echo=FALSE}
@@ -327,13 +339,13 @@ precis(m3.0 , depth=2)
 #post <- extract.samples(m2.0)
 #post <- extract.samples(m2.1)
 #post <- extract.samples(m2.2)
-post <- extract.samples(m2.3)
-#post <- extract.samples(m2.4)
+#post <- extract.samples(m2.3)
+post <- extract.samples(m2.4)
 #post <- extract.samples(m3.0)
 
 # make dataframes
-#bA_df <- as.data.frame(post$bA)
-#bA_lng <- pivot_longer(bA_df, cols = c(V1, V2, V3, V4, V5, V6, V7, V8, V9))
+bA_df <- as.data.frame(post$bA)
+bA_lng <- pivot_longer(bA_df, cols = c(V1, V2, V3, V4, V5, V6, V7, V8, V9))
 bS_df <- as.data.frame(post$bS)
 bS_lng <- pivot_longer(bS_df, cols = c(V1, V2, V3, V4))
 bTRT_df <- as.data.frame(post$bTRT)
