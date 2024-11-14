@@ -181,7 +181,7 @@ m2.2 <- ulam(
     ), data=dlist , chains=4 , cores=4 )
 ```
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 # fit model 2.3
 # using partial pooling around irrigation # and Analyte, and block (non-centered)
 m2.3 <- ulam(
@@ -311,7 +311,7 @@ precis(m2.2, depth=2)
 plot(precis(m2.2, depth=2))
 ```
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 # model 2.3
 precis(m2.3, depth=2)
 plot(precis(m2.3, depth=2))
@@ -391,6 +391,7 @@ abline(v=0, lty=3)
 ```
 
 ```{r}
+# same plot but using ggplot
 s_plot <- ggplot(bS_lng, aes(x = value, fill = name)) +
               geom_density(alpha = 0.7) +  # Adjust alpha for transparency if needed
               scale_fill_brewer(palette = "Dark2", 
@@ -447,6 +448,7 @@ abline(v=0, lty=3)
 ```
 
 ```{r}
+# same plot but using ggplot
 trt_plot <- ggplot(bTRT_lng, aes(x = value, fill = name)) +
               geom_density(alpha = 0.7) +  # Adjust alpha for transparency if needed
               scale_fill_brewer(palette = "Dark2", labels = c("CT", "MT", "ST")) +  # Colorblind-friendly palette
@@ -482,7 +484,7 @@ for(column_name in columns_to_process) {
 ```
 
 ```{r}
-# plot analytes concentration by sample method
+# print analytes concentration 89% CI by sample method
 
 # create analyte list for transforming in function later
 analyte_list <- levels(factor(dat$analyte_abbr))
@@ -490,8 +492,8 @@ analyte_list <- levels(factor(dat$analyte_abbr))
 # create link function to extract specific predictions
 p_link <- function(posterior_samples, I=1, A=1, S=1, B=1, TRT=1) {
   mu <- with(posterior_samples,
-             # model 2.3 
-             a[,I] + g[,A] + j[,B] + bS[,S] + bTRT[,TRT]) # model 2.3
+             a[,I] + j[,B] + bA[,A] + bS[,S] + bTRT[,TRT]) # model 2.4
+             #a[,I] + g[,A] + j[,B] + bS[,S] + bTRT[,TRT]) # model 2.3
              #a[,I] + g[,A] + bS[,S] + bTRT[,TRT]) # model 2.2
              #a[,I] + bA[,A] + bS[,S] + bTRT[,TRT]) # model 2.0
              #a[,I] + bS[,S] + bTRT[,TRT]) # model 1.0
@@ -505,16 +507,20 @@ p_link <- function(posterior_samples, I=1, A=1, S=1, B=1, TRT=1) {
 p_raw <- sapply(1:4, function(i) p_link(posterior_samples=post, I=1, A=9, S=i, B=2, TRT=2))
 p_mu <- apply(p_raw, 2, mean)
 p_ci <- apply(p_raw, 2, PI, prob=0.95)
+print("Analyte: TSS, Treatment: MT, Irrigation: 1, Block: 2")
 print ("1) Grab Sample, 2) Hourly Grab, 3) ISCO, 4) Low-Cost Sampler")
 p_mu
 p_ci
 ```
 
-### Summary data and bar graphing
+### Calculate and Print Means by Treatment
 ```{r}
 calculate_and_print_means_by_treatment <- function(data) {
   # Get unique levels of treatment
   treatment_levels <- unique(data$treatment)
+  
+  # Initialize an empty list to store mean results tables
+  mean_results_list <- list()
   
   # Iterate over each treatment level
   for(trt in treatment_levels) {
@@ -522,20 +528,193 @@ calculate_and_print_means_by_treatment <- function(data) {
     
     mean_results_table <- data %>%
       filter(treatment == trt) %>%
-      group_by(analyte_abbr, method.name) %>%
+      group_by(analyte_abbr, method.name, block, event.count) %>%
       summarise(mean_result = mean(result, na.rm = TRUE), .groups = 'drop') %>%
       pivot_wider(names_from = method.name, values_from = mean_result) 
     
     # Print the table for the current treatment level
     print(mean_results_table)
+    
+    # Store the table in the list with the treatment level as the name
+    mean_results_list[[trt]] <- mean_results_table
   }
+  
+  # Return the list of mean results tables
+  return(mean_results_list)
 }
 
-# Assuming 'd' is your data frame
-calculate_and_print_means_by_treatment(d)
+mean_results <- calculate_and_print_means_by_treatment(d)
 ```
 
 ```{r}
+# Function to plot observed mean on model-generated probability density
+plot_posterior_with_observed <- function(analyte_name, treatment_name, block_num, irrigation_event, data, posterior_samples) {
+  
+  # Map analyte names to indices
+  analyte_levels <- levels(as.factor(data$analyte_abbr))
+  A <- match(analyte_name, analyte_levels)
+  if (is.na(A)) stop("Analyte not found in data.")
+  
+  # Map treatment names to indices
+  treatment_levels <- levels(as.factor(data$treatment))
+  TRT <- match(treatment_name, treatment_levels)
+  if (is.na(TRT)) stop("Treatment not found in data.")
+  
+  # Map irrigation events to indices
+  irrigation_levels <- levels(as.factor(data$event.count))
+  I <- match(irrigation_event, irrigation_levels)
+  if (is.na(I)) stop("Irrigation event not found in data.")
+  
+  # Block number (assuming blocks are numbered consecutively starting from 1)
+  B <- block_num
+  
+  # Sample methods mapping
+  method_levels <- levels(as.factor(data$method.name))
+  num_methods <- length(method_levels)
+  
+  # Extract posterior predictions for each sample method
+  all_predicted_mu <- list()
+  for (S in 1:num_methods) {
+    mu_samples <- p_link(posterior_samples, I=I, A=A, S=S, B=B, TRT=TRT)
+    mu_samples <- mu_samples[is.finite(mu_samples)]
+    if (length(mu_samples) == 0) {
+      warning(paste("No finite posterior samples for method:", method_levels[S]))
+      next
+    }
+    all_predicted_mu[[S]] <- mu_samples
+  }
+  
+  # Remove any methods with no predicted samples
+  valid_methods <- which(sapply(all_predicted_mu, length) > 0)
+  if (length(valid_methods) == 0) {
+    stop("No valid posterior predictions to plot.")
+  }
+  
+  method_levels <- method_levels[valid_methods]
+  
+  # Use the rethinking palette for colors
+  rethink_palette <- c("#8080FF", 
+                       "#F98400", 
+                       "#00A08A", 
+                       "#E2AD00", 
+                       "#800080", 
+                       "#008000", 
+                       "#5BBCD6",
+                       "#F2AD00", 
+                       "#FF0000"
+                       )
+
+  
+  # Ensure the palette length matches the number of valid methods
+  colors <- rethink_palette[1:length(valid_methods)]
+  
+  # Determine the x and y limits for plotting
+  x_min <- min(sapply(all_predicted_mu[valid_methods], min), na.rm=TRUE)
+  x_max <- max(sapply(all_predicted_mu[valid_methods], max), na.rm=TRUE)
+  
+  y_max <- 0
+  density_list <- list()
+  for (idx in seq_along(valid_methods)) {
+    S <- valid_methods[idx]
+    mu_samples <- all_predicted_mu[[S]]
+    dens_data <- density(mu_samples)
+    density_list[[idx]] <- dens_data
+    y_max <- max(y_max, max(dens_data$y, na.rm=TRUE))
+  }
+  
+  # Initialize the plot with a general title
+  plot(NULL, xlim=c(x_min, x_max), ylim=c(0, y_max * 1.1), 
+       xlab="Concentration", ylab="Probability Density", 
+       main="Posterior Probability Distributions with Observed Data")
+  
+  # Add the caption-like text block under the title
+  caption_text <- paste("Analyte:", analyte_name, ", Treatment:", treatment_name, 
+                        ", Irrigation:", irrigation_event, ", Block:", B)
+  mtext(caption_text, side=3, line=0.5, cex=0.9)
+  
+  # Plot posterior densities and overlay observed means
+  for (idx in seq_along(valid_methods)) {
+    S <- valid_methods[idx]
+    # Plot the posterior density
+    dens_data <- density(all_predicted_mu[[S]])
+    lines(dens_data$x, dens_data$y, col=colors[idx], lwd=4)
+    
+    # Extract the observed mean for the current method
+    method_name <- method_levels[idx]
+    observed_data <- data %>%
+      filter(analyte_abbr == analyte_name,
+             treatment == treatment_name,
+             block == B,
+             event.count == irrigation_event,
+             method.name == method_name)
+    
+    if (nrow(observed_data) == 0) {
+      warning(paste("No observed data for method:", method_name))
+      next
+    }
+    
+    observed_mean <- mean(observed_data$result, na.rm=TRUE)
+    
+    # Overlay the observed mean as a vertical dashed line
+    abline(v=observed_mean, col=colors[idx], lwd=2, lty=2)
+  }
+  
+  # Add a legend to the plot
+  legend("topright", legend=method_levels, col=colors, lwd=2, lty=1)
+}
+
+```
+
+
+```{r}
+# Plot the posterior distributions with observed (and potentially SWAT+) data
+plot_posterior_with_observed(
+  analyte_name = "TSS",             # Specify the analyte name
+  treatment_name = "CT",            # Specify the treatment name
+  block_num = 2,                    # Specify the block number
+  irrigation_event = "Irrigation 3",# Specify the irrigation event
+  data = d,                         # Your data frame
+  posterior_samples = post          # Your posterior samples
+)
+
+# Mechanistic prediction and confidence interval bounds
+SWAT_prediction <- 1000
+x_left <- SWAT_prediction * 0.8   # Lower bound (80% of prediction)
+x_right <- SWAT_prediction * 1.15 # Upper bound (115% of prediction)
+
+# Get the current y-axis limits
+y_bottom <- par("usr")[3]
+y_top <- par("usr")[4]
+
+# Add gray shading between the two vertical lines
+rect(x_left, y_bottom, x_right, y_top, 
+     col = rgb(0.5, 0.5, 0.5, alpha = 0.3), border = NA)
+
+# Redraw the vertical lines on top of the shading
+abline(v = x_left, col = "black", lwd = 2, lty = 3)
+abline(v = x_right, col = "black", lwd = 2, lty = 3)
+
+# Add a label near the prediction value
+text(x = mechanistic_prediction, 
+     y = y_top * 0.1,  # Positioning text at 90% of y-axis range
+     labels = "SWAT+ CI%", 
+     col = "black", 
+     pos = 4, 
+     offset = 1.9)
+
+# Save the plot to a PNG file without affecting the displayed plot
+dev.copy(png, filename = "../figs/posterior_with_observed.png", 
+         width = 8, height = 6, units = "in", res = 300)
+dev.off()
+
+```
+
+
+
+
+## Bar plot graphics with real data
+```{r}
+# Function to plot results by method and analyte annual average
 # To use with real data, just pass your real data frame to the function
 # Ensure your real data frame has the same structure, particularly the columns: method.name, analyte_abbr, and result
 p_real <- plot_results_by_method_and_analyte(d, title = "Average of Analyte by Sample Method - Real Data")
