@@ -70,7 +70,6 @@ dat <- d
 # create data list for ulam models
 dlist <- list(
     C_obs = dat$result_ctr, #use standardized results
-    #C_sd = d$Divorce.SE / sd( d$Divorce ), # we don't have SE from our sample
     S = as.numeric(as.factor(dat$method.name)),
     TRT = as.numeric(as.factor(dat$treatment)),
     I = as.numeric(as.factor(dat$event.count)),
@@ -350,6 +349,23 @@ bS_df <- as.data.frame(post$bS)
 bS_lng <- pivot_longer(bS_df, cols = c(V1, V2, V3, V4))
 bTRT_df <- as.data.frame(post$bTRT)
 bTRT_lng <- pivot_longer(bTRT_df, cols = c(V1, V2, V3))
+
+# Function to compute summary statistics with 95% CI
+compute_summary_with_ci <- function(contrast_df) {
+  summary_stats <- apply(contrast_df, 2, function(x) {
+    c(
+      Min = min(x),
+      #`1st Qu.` = quantile(x, 0.25),
+      Median = median(x),
+      Mean = mean(x),
+      #`3rd Qu.` = quantile(x, 0.75),
+      Max = max(x),
+      `95% CI Lower` = quantile(x, 0.025),
+      `95% CI Upper` = quantile(x, 0.975)
+    )
+  })
+  return(as.data.frame(t(summary_stats)))
+}
 ```
 
 ### Effect of Sample Method
@@ -411,6 +427,60 @@ s_plot
 
 ```
 
+```{r}
+# Compute contrasts in the bS_df between V1, V2, V3, and V4
+bS_contrasts_df <- data.frame(
+  LCS_vs_GB = bS_df$V1 - bS_df$V2,
+  LCS_vs_GBH = bS_df$V1 - bS_df$V3,
+  LCS_vs_ISCO = bS_df$V1 - bS_df$V4,
+  GB_vs_GBH = bS_df$V2 - bS_df$V3,
+  GB_vs_ISCO = bS_df$V2 - bS_df$V4,
+  GBH_vs_ISCO = bS_df$V3 - bS_df$V4
+)
+
+# Extract contrasts into a matrix or dataframe for easier iteration
+contrast_matrix <- as.matrix(bS_contrasts_df)
+
+# Set up an empty plot with appropriate limits and labels
+plot(
+  NULL, 
+  xlim = c(-0.3, 0.3), # Adjust as needed based on your contrast range
+  ylim = c(0, 25), 
+  xlab = "Contrast of β_S (impact of sampler type on water quality)", 
+  ylab = "Density"
+)
+
+# Initialize an empty vector to store labels for the legend
+legend_labels <- colnames(contrast_matrix)
+
+# Loop over each column (contrast) and plot its density
+for (i in 1:ncol(contrast_matrix)) {
+  dens(
+    contrast_matrix[, i], # Extract the current contrast column
+    lwd = 4,              # Line width
+    col = i + 1,          # Unique color for each contrast
+    add = TRUE            # Overlay the densities
+  )
+}
+
+# Optional: Add annotations for regions
+abline(v = 0, lty = 2) # Vertical dashed line at 0
+text(-0.1, 22, "Negative Bias", col = "black", pos = 1) # Adjust text placement
+text(0.1, 22, "Positive Bias", col = "black", pos = 1)
+
+# Add a legend
+legend(
+  "topright",                   # Position of the legend
+  legend = legend_labels,       # Labels from column names of the contrast matrix
+  col = 2:(ncol(contrast_matrix) + 1), # Corresponding colors
+  lwd = 4,                      # Line width matching density lines
+  cex = 0.8                     # Adjust text size
+)
+
+print(compute_summary_with_ci(bS_contrasts_df))
+```
+
+
 ### Effect of Tillage
 ```{r}
 # Find the range of all densities
@@ -461,6 +531,54 @@ trt_plot
 
 ```
 
+```{r}
+# Compute contrasts for tillage treatments (CT, MT, ST)
+bTRT_contrasts_df <- data.frame(
+  CT_vs_MT = bTRT_df$V1 - bTRT_df$V2,
+  CT_vs_ST = bTRT_df$V1 - bTRT_df$V3,
+  MT_vs_ST = bTRT_df$V2 - bTRT_df$V3
+)
+
+# Convert to a matrix for iteration
+contrast_matrix <- as.matrix(bTRT_contrasts_df)
+
+# Set up an empty plot with appropriate limits
+plot(
+  NULL, 
+  xlim = range(contrast_matrix),  # Automatically calculate x-axis range
+  ylim = c(0, 25),                # Adjust based on density values
+  xlab = "Contrast of β_TRT (Effect of Tillage)", 
+  ylab = "Density"
+)
+
+# Loop over contrasts to plot densities
+for (i in 1:ncol(contrast_matrix)) {
+  dens(
+    contrast_matrix[, i],  # Current contrast
+    lwd = 4,               # Line width
+    col = i + 1,           # Color for each contrast
+    add = TRUE             # Overlay densities
+  )
+}
+
+# Optional: Add annotations for regions
+abline(v = 0, lty = 2) # Vertical dashed line at 0
+text(-0.1, 22, "Negative Bias", col = "black", pos = 1) # Adjust text placement
+text(0.1, 22, "Positive Bias", col = "black", pos = 1)
+
+# Add a legend
+legend(
+  "topright", 
+  legend = colnames(contrast_matrix),  # Legend labels from column names
+  col = 2:(ncol(contrast_matrix) + 1), 
+  lwd = 4, 
+  cex = 0.8
+)
+
+print(compute_summary_with_ci(bTRT_contrasts_df))
+```
+
+
 ### Analyte Prediction
 ```{r}
 # make legends for clusters and factors
@@ -480,7 +598,6 @@ columns_to_process <- c("analyte_abbr", "event.count", "method.name", "treatment
 for(column_name in columns_to_process) {
   generate_legend(dat, column_name)
 }
-
 ```
 
 ```{r}
@@ -695,9 +812,9 @@ abline(v = x_left, col = "black", lwd = 2, lty = 3)
 abline(v = x_right, col = "black", lwd = 2, lty = 3)
 
 # Add a label near the prediction value
-text(x = mechanistic_prediction, 
+text(x = SWAT_prediction, 
      y = y_top * 0.1,  # Positioning text at 90% of y-axis range
-     labels = "SWAT+ CI%", 
+     labels = "SWAT+ 95% CI", 
      col = "black", 
      pos = 4, 
      offset = 1.9)
