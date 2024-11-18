@@ -18,14 +18,21 @@ source("data_sim.r")
 
 ```{r, echo=FALSE, include=FALSE}}
 # changing Stan parameters for speed
+# check_cmdstan_toolchain()
 cpp_options <- list(
   "CXXFLAGS" = "-Wno-nonnull -D_UCRT -Wno-deprecated-declarations -O1",
   "TBB_CXXFLAGS" = "-D_UCRT",
-  "STAN_THREADS" = TRUE
+  "STAN_THREADS" = TRUE,
+  PRECOMPILED_HEADERS = TRUE
 )
 cmdstan_make_local(cpp_options = cpp_options, append = FALSE)
-rebuild_cmdstan()
 ```
+
+```{r}
+# rebuild once we have made local changes with all the cores (parallel::detectCores())
+rebuild_cmdstan(cores = 8)
+```
+
 
 ## Data Import and Preparation
 ```{r}
