@@ -37,6 +37,7 @@ rebuild_cmdstan(cores = 8)
 ## Data Import and Preparation
 ```{r}
 # load real data
+# TODO: add 2024 data to this 2023 dataset.
 # note that this script places the working directory in the 2_code folder, not the root of the project
 d <- read.csv("../1_data/real_data.csv")
 
@@ -255,7 +256,21 @@ m2.4 <- ulam(
         # hyper-priors
           # none
         
-    ), data=dlist, chains=4, cores=4 )
+    ), data=dlist, chains=4, cores=4 ) #test running this with threads=2 to speed it up
+```
+
+```{r}
+# model 2.5
+# some notes for this model (in development)
+# stratifying by treatment, sampler, and analyte
+  # should analyte have it's own slope and intercept? (i.e., bA[A] and g[A])
+# using partial pooling around block only
+# irrigation is not a cluster (i.e., b/c order matters unlike block)
+  # furthermore, irrigations are temporally autocorrelated, so we may need a kernel density simulation
+# I think inflow water conc should be a covariate as well, as it influences the concentration of the analyte at the outflow; this will require some df manipulation to make inflow conc associated with each outflow conc
+# Storm/Irr should be a covariate as well, as it influences the concentration of the analyte at the outflow
+# might need a new DAG here to reflect the above...
+# non-centered model
 ```
 
 ```{r, eval=FALSE, echo=FALSE}
@@ -331,6 +346,7 @@ plot(precis(m2.4, depth=2))
 #traceplot(m2.4)
 trankplot(m2.4)
 ```
+
 
 ```{r, eval=FALSE, echo=FALSE}
 # model 3.0 - true value unobserved
@@ -614,6 +630,7 @@ for(column_name in columns_to_process) {
 analyte_list <- levels(factor(dat$analyte_abbr))
 
 # create link function to extract specific predictions
+# TODO: can we make this more versitile by using sim() in rethinking package instead of manually specifying model terms?
 p_link <- function(posterior_samples, I=1, A=1, S=1, B=1, TRT=1) {
   mu <- with(posterior_samples,
              a[,I] + j[,B] + bA[,A] + bS[,S] + bTRT[,TRT]) # model 2.4
