@@ -233,6 +233,7 @@ m2.4 <- ulam(
         # model for C* (observed results)
         C_obs ~ dnorm(mu, sigma),
         sigma ~ dexp(1),
+        
         # model
         mu <- a_bar + 
               z[I]*sigma_a + # irrigation intercepts
@@ -256,21 +257,55 @@ m2.4 <- ulam(
         # hyper-priors
           # none
         
-    ), data=dlist, chains=4, cores=4 ) #test running this with threads=2 to speed it up
+    ), data=dlist, chains=4, cores=4, threads=2) #test running this with threads=2 to speed it up
 ```
 
 ```{r}
-# model 2.5
+# model 2.5 - see https://speakerdeck.com/rmcelreath/statistical-rethinking-2022-lecture-17?slide=36
 # some notes for this model (in development)
-# stratifying by treatment, sampler, and analyte
-  # should analyte have it's own slope and intercept? (i.e., bA[A] and g[A])
+# stratifying by treatment, sampler, and analyte;
+  # should analyte have it's own slope and intercept? (i.e., bA[A] and g[A]) # Yes - to capture the different baseline and and linear relationships for each analyte
 # using partial pooling around block only
+# treating C_true as unobserved data
+# non-centered model
+# TODO: UNTESTED 10 Dec 2024
+
+m2.5 <- ulam(
+    alist(
+        # model for C* (observed results)
+        C_obs ~ dnorm(C_true, C_sd),
+        C_sd ~ dexp(1), # need a prior for C_sd
+        
+        # model for D (unobserved)
+        vector[N]:C_true ~ dnorm(mu , sigma),
+        mu <- a_bar[A] + # analyte intercepts
+              b[B]*sigma_j + # block intercepts
+              bA[A] + # analyte effect
+              bS[S] + # sampler method effect
+              bTRT[TRT], # treatment effect
+        # regular priors
+        sigma ~ dexp(1),
+        a_bar[A] ~ dnorm(0,0.5),
+        bA[A] ~ dnorm(0,0.5),
+        bS[S] ~ dnorm(0,0.5),
+        bTRT[TRT] ~ dnorm(0,0.5),
+        b[B] ~ dnorm(0,1),
+        sigma_a ~ dexp(1),
+        sigma_j ~ dexp(1),
+        gq> vector[B]:a <<- a_bar + b*sigma_j
+        
+    ) , data=dlist , chains=4 , cores=4, threads=2)
+
+
+# Notes for full causal model in Ch2:
+
 # irrigation is not a cluster (i.e., b/c order matters unlike block)
+# Analytes may end up being post stratified; we may need to use a different model for each analyte?
   # furthermore, irrigations are temporally autocorrelated, so we may need a kernel density simulation
 # I think inflow water conc should be a covariate as well, as it influences the concentration of the analyte at the outflow; this will require some df manipulation to make inflow conc associated with each outflow conc
 # Storm/Irr should be a covariate as well, as it influences the concentration of the analyte at the outflow
 # might need a new DAG here to reflect the above...
-# non-centered model
+
 ```
 
 ```{r, eval=FALSE, echo=FALSE}
