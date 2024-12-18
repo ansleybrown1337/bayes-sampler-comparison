@@ -13,12 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 library(rethinking)
 library(dplyr)
 library(tidyr)
-source("data_sim.r")
+source("data_sim.r") # to import graphing function
 ```
 
 ```{r, echo=FALSE, include=FALSE}}
 # changing Stan parameters for speed
 # check_cmdstan_toolchain()
+# set_cmdstan_path("C:/Users/ansleybr/Documents/.cmdstan/cmdstan-2.34.1")
 cpp_options <- list(
   "CXXFLAGS" = "-Wno-nonnull -D_UCRT -Wno-deprecated-declarations -O1",
   "TBB_CXXFLAGS" = "-D_UCRT",
@@ -37,7 +38,6 @@ rebuild_cmdstan(cores = 8)
 ## Data Import and Preparation
 ```{r}
 # load real data
-# TODO: add 2024 data to this 2023 dataset.
 # note that this script places the working directory in the 2_code folder, not the root of the project
 d <- read.csv("../1_data/real_data.csv")
 
