@@ -34,6 +34,10 @@ simulate_data <- function(real_data_path, export_csv = FALSE, csv_path = "./1_da
   block_offsets <- list("1" = 1, "2" = 0.9)
   
   # Define adjust_mean function
+  # TODO: I need to modify this to exactly replicate the linear model I use;
+  # this will ensure that coefficients set here should be estimated by the final model.
+  # Right now, we get the trends correct, but the distributions don't center over the
+  # correct offset coefficients set above.
   adjust_mean <- function(base_mean, method, treatment, event, blk) {
     adjusted_mean <- base_mean +
       (method_offsets[[as.character(method)]] - 1) * base_mean +
