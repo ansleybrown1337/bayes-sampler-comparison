@@ -19,7 +19,19 @@ source("data_sim.r") # to import graphing function
 ```{r, echo=FALSE, include=FALSE}}
 # changing Stan parameters for speed
 # check_cmdstan_toolchain()
+# Sys.setenv(PATH = paste(
+#   "C:\\rtools42\\ucrt64\\bin",
+#   "C:\\rtools42\\usr\\bin",
+#   "C:\\WINDOWS\\system32",
+#   "C:\\WINDOWS",
+#   "C:\\WINDOWS\\System32\\Wbem",
+#   "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\",
+#   "C:\\WINDOWS\\System32\\OpenSSH\\",
+#   sep = ";"
+# ))
+# Sys.which("g++")
 # set_cmdstan_path("C:/Users/ansleybr/Documents/.cmdstan/cmdstan-2.34.1")
+
 cpp_options <- list(
   "CXXFLAGS" = "-Wno-nonnull -D_UCRT -Wno-deprecated-declarations -O1",
   "TBB_CXXFLAGS" = "-D_UCRT",
