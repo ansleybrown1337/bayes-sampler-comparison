@@ -38,7 +38,7 @@ print_precis_with_correct_legend <- function(model, sim_data) {
 
 ### Model 1.0 - Intercept Only
 Data simulation
-```{r}
+```{r, eval=FALSE}
 simulate_model_1.0 <- function(n_per_type = 50, noise_sd = 0.2, seed = 42) {
   # Define sampler types and their true intercepts
   sampler_types <- c("LCS", "ISCO", "GB", "GBH")
@@ -64,7 +64,7 @@ sim_data_1.0 <- simulate_model_1.0()
 ```
 
 Model fit
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 # fit model 1.0, simple model with no partial pooling
 # sim data for this model making the intercept coef have the following values:
 # LCS should be 0.7, ISCO should be 0.3, GB should be 1.2 and GBH should be 1.0
@@ -94,7 +94,7 @@ m1.0 <- ulam(
 ```
 
 Summary of results
-```{r}
+```{r, eval=FALSE}
 # Use the function to display results
 print_precis_with_correct_legend(m1.0, sim_data_1.0)
 ```
@@ -103,7 +103,7 @@ Result: The model is able to recover the true intercepts for each sampler type.
 
 ### Model 1.1 - Intercept Only with single analyte avg
 Data Simulation
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 simulate_model_1.1 <- function(n_per_type = 50, noise_sd = 0.2, seed = 42, avg_conc = 8) {
   # Define sampler types and their true intercepts
   sampler_types <- c("LCS", "ISCO", "GB", "GBH")
@@ -142,7 +142,7 @@ sim_data_1.1 <- simulate_model_1.1(avg_conc = 8)
 ```
 
 Model Fit
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 # fit model 1.1
 # Prepare the data
 data1.1 <- list(
@@ -168,7 +168,7 @@ m1.1 <- ulam(
 ```
 
 Summary of results with precis()
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 # Use the function to display results
 print_precis_with_correct_legend(m1.1, sim_data_1.1)
 ```
@@ -177,7 +177,7 @@ Results: Model 1.1 outputted expected z-scores for the true intercepts of the sa
 
 ### Model 1.2 - Multilevel model with sampler and analyte effects
 Data simulation 
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 simulate_model_1.2 <- function(n_per_type = 100, noise_sd = 0.2, seed = 45) {
   # Define sampler types and their true intercepts
   sampler_types <- c("LCS", "ISCO", "GB", "GBH")
@@ -259,7 +259,7 @@ sim_data_1.2 %>%
 ```
 
 Model fit
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 # Define data for Model 1.2
 data1.2 <- list(
   C_obs = sim_data_1.2$C_obs_standardized,      # Standardized observed concentrations
@@ -298,13 +298,13 @@ m1.2 <- ulam(
 ```
 
 Summary of results 
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 # Use the function to display results
 print_precis_with_correct_legend(m1.2, sim_data_1.2)
 ```
 
 Posterior predictions
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 # Extract the posterior samples
 post <- extract.samples(m1.2)
 
@@ -375,7 +375,7 @@ refined_summary_table
 ```
 
 Frequentist Model Equivalent for Sanity Check
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 # frequentist model to verify model form
 # Fit the linear model
 lm_fit <- lm(C_obs ~ as.factor(analyte_abbr) + as.factor(analyte_abbr):S, data = sim_data_1.2)
@@ -400,7 +400,7 @@ Results: Model 1.2 was successful in estimating analyte and sampler effects in a
 
 ### Model 1.3 - Multilevel model with sampler, analyte, and block effects
 Data simulation
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 simulate_model_1.3 <- function(n_per_type = 100, noise_sd = 0.2, seed = 45) {
   # Define sampler types and their true intercepts
   sampler_types <- c("LCS", "ISCO", "GB", "GBH")
@@ -518,18 +518,18 @@ m1.3_updated <- ulam(
 ```
 
 Summary of results
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 precis(m1.3_updated, depth=2)
 ```
 
 Posterior predictions
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Extract posterior samples
 post1.3 <- extract.samples(m1.3_updated)
 
 # Updated link function for posterior predictions
-link_function <- function(post, data) {
-  n_samples <- nrow(post$beta[, , 1])  # Number of posterior samples
+link_function <- function(post1.3, data) {
+  n_samples <- nrow(post1.3$beta[, , 1])  # Number of posterior samples
   n_analytes <- data$K_A               # Number of analytes
   n_samplers <- data$K_S               # Number of sampler types
   n_blocks <- data$K_B                 # Number of blocks
@@ -542,11 +542,11 @@ link_function <- function(post, data) {
     for (s in 1:n_samplers) {
       for (b in 1:n_blocks) {
         # Compute predictions in z-score form
-        predictions[, a, s, b] <- post$a_bar +
-                                  post$z_alpha[, a] * post$sigma_a +
-                                  post$beta[, a, s] +
-                                  post$g_bar +
-                                  post$z_gamma[, a, b] * post$sigma_g
+        predictions[, a, s, b] <- post1.3$a_bar +
+                                  post1.3$z_alpha[, a] * post1.3$sigma_a +
+                                  post1.3$beta[, a, s] +
+                                  post1.3$g_bar +
+                                  post1.3$z_gamma[, a, b] * post1.3$sigma_g
       }
     }
   }
@@ -555,7 +555,7 @@ link_function <- function(post, data) {
 }
 
 # Generate predictions
-posterior_predictions <- link_function(post, data1.3)
+posterior_predictions <- link_function(post1.3, data1.3)
 
 # Initialize array for back-transformed predictions
 back_transformed_predictions1.3 <- array(NA, dim = dim(posterior_predictions))
@@ -580,7 +580,7 @@ for (a in 1:data1.3$K_A) {
   for (s in 1:data1.3$K_S) {
     for (b in 1:data1.3$K_B) {
       # Extract samples for the current analyte, sampler, and block
-      samples <- back_transformed_predictions[, a, s, b]
+      samples <- back_transformed_predictions1.3[, a, s, b]
       
       # Add summary statistics to the dataframe
       summary_row <- data.frame(
@@ -613,11 +613,11 @@ Results: Model 1.3 now works as expected, with block effects varying by analyte.
 **In Development**
 
 Data simulation
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 ```
 
 Model fit
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 m1.4_centered <- ulam(
   alist(
     # Observation model
@@ -680,14 +680,14 @@ m1.4_noncentered <- ulam(
 ```
 
 Summary of results
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 #precis(fit_m1.4_centered, depth = 2)
 precis(fit_m1.4_noncentered, depth = 2)
 
 ```
 
 Posterior predictions
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 post <- extract.samples(fit_m1.4_noncentered)
 summary(post$Rho_alpha)
 
@@ -766,7 +766,7 @@ plot_sampler_effects(
 )
 ```
 
-*Plot Sampler Effect Constrasts*
+*Plot Sampler Effect Contrasts*
 ```{r}
 # Plot contrasts of sampler effects with improved axis scaling
 plot_sampler_contrasts <- function(posterior_samples, sampler_types) {
@@ -820,7 +820,7 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_types) {
   }
   
   # Add legend
-  #legend("topright", legend = names(contrast_list), col = colors[1:length(contrast_list)], lwd = 3)
+  legend("topright", legend = names(contrast_list), col = colors[1:length(contrast_list)], lwd = 3)
 }
 
 # Example usage
@@ -929,7 +929,7 @@ plot_predictions_with_observed(
   back_transformed_predictions = final_post_back_transformed,
   data = final_data,
   sampler_types = sampler_types,
-  analyte_index = 8,       # Specify the analyte index
+  analyte_index = 1,       # Specify the analyte index
   block_index = "Block1"   # Specify the block name
 )
 
