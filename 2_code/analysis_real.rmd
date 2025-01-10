@@ -43,7 +43,7 @@ cmdstan_make_local(cpp_options = cpp_options, append = FALSE)
 
 ```{r}
 # rebuild once we have made local changes with all the cores (parallel::detectCores())
-rebuild_cmdstan(cores = 8)
+rebuild_cmdstan(cores = parallel::detectCores())
 ```
 
 

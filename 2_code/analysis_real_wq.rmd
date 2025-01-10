@@ -1,0 +1,719 @@
+---
+title: "Sampler Comparison Analysis Using Bayesian Inference - Real Data"
+author: "A.J. Brown"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, include=FALSE}
+# load libraries
+library(rethinking)
+library(dplyr)
+library(tidyr)
+source("data_sim.r") # to import graphing function
+```
+
+```{r, echo=FALSE, include=FALSE}}
+# changing Stan parameters for speed
+# check_cmdstan_toolchain()
+# Sys.setenv(PATH = paste(
+#   "C:\\rtools42\\ucrt64\\bin",
+#   "C:\\rtools42\\usr\\bin",
+#   "C:\\WINDOWS\\system32",
+#   "C:\\WINDOWS",
+#   "C:\\WINDOWS\\System32\\Wbem",
+#   "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\",
+#   "C:\\WINDOWS\\System32\\OpenSSH\\",
+#   sep = ";"
+# ))
+# Sys.which("g++")
+# set_cmdstan_path("C:/Users/ansleybr/Documents/.cmdstan/cmdstan-2.34.1")
+
+cpp_options <- list(
+  "CXXFLAGS" = "-Wno-nonnull -D_UCRT -Wno-deprecated-declarations -O1",
+  "TBB_CXXFLAGS" = "-D_UCRT",
+  "STAN_THREADS" = TRUE,
+  PRECOMPILED_HEADERS = TRUE
+)
+cmdstan_make_local(cpp_options = cpp_options, append = FALSE)
+```
+
+```{r}
+# rebuild once we have made local changes with all the cores (parallel::detectCores())
+rebuild_cmdstan(cores = parallel::detectCores())
+```
+
+
+## Data Import and Preparation
+```{r}
+# load real data
+# note that this script places the working directory in the 2_code folder, not the root of the project
+d <- read.csv("../1_data/real_data.csv")
+
+# drop inflow rows
+d <- d[d$event.type != 'Inflow',]
+#d <- d[!d$event.count %in% c('Storm 1', 'Storm 2'),]
+  
+# standardize analytes
+d <- d %>%
+  group_by(analyte_abbr) %>%
+  mutate(result_ctr = standardize(result)) %>%
+  ungroup()
+
+# parse data into sub dataframes for each analyte_abbr
+d_list <- split(d, d$analyte_abbr)
+# dat <- d_list$NO3
+# dat <- d_list$NO2
+# dat <- d_list$TKN
+# dat <- d_list$TP
+# dat <- d_list$OP
+# dat <- d_list$TSS
+# dat <- d_list$EC
+# dat <- d_list$pH
+# dat <- d_list$TDS
+
+# parse data into sub dataframes for each irrigation
+d_list_irr <- split(d, d$event.count)
+
+
+# our model uses all data at once, no need to split
+dat <- d
+
+# Prepare data for the updated model
+data1.3 <- list(
+  C_obs = sim_data_1.3$C_obs_standardized,  # Standardized observed concentrations
+  S = as.numeric(as.factor(sim_data_1.3$S)), # Sampler type index (1-4)
+  A = sim_data_1.3$analyte_abbr,             # Analyte index (1-9)
+  B = as.numeric(as.factor(sim_data_1.3$block)), # Block index (1-2)
+  N = nrow(sim_data_1.3),                    # Number of observations
+  K_S = length(unique(sim_data_1.3$S)),      # Number of sampler types
+  K_A = length(unique(sim_data_1.3$analyte_abbr)), # Number of analytes
+  K_B = length(unique(sim_data_1.3$block))   # Number of blocks
+)
+
+```
+
+### Model 1.3 - Multilevel model with sampler, analyte, and block effects
+
+Model fit
+```{r}
+
+# Updated model allowing block effects to vary by analyte
+m1.3_updated <- ulam(
+  alist(
+    # Observation model
+    C_obs ~ dnorm(mu, sigma),
+    
+    # Mean structure with analyte-specific block effects
+    mu <- alpha[A] + beta[A, S] + gamma[A, B],
+    
+    # Non-centered parameterization for analyte-specific intercepts
+    transpars> vector[K_A]:alpha <<- a_bar + z_alpha * sigma_a,
+    vector[K_A]:z_alpha ~ normal(0, 1),
+    
+    # Non-centered parameterization for analyte-specific block effects
+    transpars> matrix[K_A, K_B]:gamma <<- g_bar + z_gamma * sigma_g,
+    matrix[K_A, K_B]:z_gamma ~ normal(0, 1),
+    
+    # Priors for sampler-specific effects
+    matrix[K_A, K_S]:beta ~ normal(0, 1),
+    
+    # Hyper-priors
+    a_bar ~ normal(0, 1),
+    sigma_a ~ exponential(1),
+    g_bar ~ normal(0, 0.5),
+    sigma_g ~ exponential(1),
+    
+    # Prior for measurement error
+    sigma ~ exponential(1)
+  ),
+  data = data1.3,
+  chains = 4,
+  cores = 4
+)
+
+```
+
+Summary of results
+```{r}
+precis(m1.3_updated, depth=2)
+```
+
+Posterior predictions
+```{r}
+# Extract posterior samples
+post1.3 <- extract.samples(m1.3_updated)
+
+# Updated link function for posterior predictions
+link_function <- function(post1.3, data) {
+  n_samples <- nrow(post1.3$beta[, , 1])  # Number of posterior samples
+  n_analytes <- data$K_A               # Number of analytes
+  n_samplers <- data$K_S               # Number of sampler types
+  n_blocks <- data$K_B                 # Number of blocks
+  
+  # Initialize predictions array
+  predictions <- array(NA, dim = c(n_samples, n_analytes, n_samplers, n_blocks))
+  
+  # Generate predictions
+  for (a in 1:n_analytes) {
+    for (s in 1:n_samplers) {
+      for (b in 1:n_blocks) {
+        # Compute predictions in z-score form
+        predictions[, a, s, b] <- post1.3$a_bar +
+                                  post1.3$z_alpha[, a] * post1.3$sigma_a +
+                                  post1.3$beta[, a, s] +
+                                  post1.3$g_bar +
+                                  post1.3$z_gamma[, a, b] * post1.3$sigma_g
+      }
+    }
+  }
+  
+  return(predictions)
+}
+
+# Generate predictions
+posterior_predictions <- link_function(post1.3, data1.3)
+
+# Initialize array for back-transformed predictions
+back_transformed_predictions1.3 <- array(NA, dim = dim(posterior_predictions))
+
+# Back-transform predictions for each analyte
+for (a in 1:data1.3$K_A) {
+  # Extract mean and SD for the analyte
+  analyte_mean <- mean(sim_data_1.3$C_obs[sim_data_1.3$analyte_abbr == a])
+  analyte_sd <- sd(sim_data_1.3$C_obs[sim_data_1.3$analyte_abbr == a])
+  
+  # Back-transform predictions for the analyte
+  back_transformed_predictions1.3[, a, , ] <- posterior_predictions[, a, , ] * analyte_sd + analyte_mean
+}
+
+
+# Summarize posterior predictions
+# Initialize a summary dataframe
+prediction_summary <- data.frame()
+
+# Summarize predictions for each analyte, sampler, and block
+for (a in 1:data1.3$K_A) {
+  for (s in 1:data1.3$K_S) {
+    for (b in 1:data1.3$K_B) {
+      # Extract samples for the current analyte, sampler, and block
+      samples <- back_transformed_predictions1.3[, a, s, b]
+      
+      # Add summary statistics to the dataframe
+      summary_row <- data.frame(
+        analyte_abbr = a,
+        sampler_type = as.character(levels(sim_data_1.3$S)[s]),
+        block = as.character(levels(sim_data_1.3$block)[b]),
+        mean_prediction = mean(samples),
+        prediction_5.5 = quantile(samples, 0.055),
+        prediction_94.5 = quantile(samples, 0.945)
+      )
+      
+      prediction_summary <- rbind(prediction_summary, summary_row)
+    }
+  }
+}
+
+# Refine the summary table: Rows as analytes, columns as sampler types
+refined_summary_table <- prediction_summary %>%
+  select(analyte_abbr, sampler_type, mean_prediction, block) %>%
+  pivot_wider(names_from = sampler_type, values_from = mean_prediction)
+
+# View the refined summary table
+refined_summary_table
+```
+
+Results:
+
+## Final model selection, graphing, and interpretation
+*In Development*
+
+Select final model and 'observed data' for comparison
+```{r}
+final_model <- m1.3_updated
+final_post <- post1.3 #put posterior predictions here
+final_post_back_transformed <- back_transformed_predictions1.3 #put back-transformed posterior predictions here
+final_data <- sim_data_1.3
+```
+
+Plot Model Summary and Convergence Diagnostics
+*Model Summary*
+```{r}
+precis(final_model, depth = 2)
+plot(precis(final_model, depth = 2))
+```
+
+*Convergence Diagnostics*
+```{r}
+traceplot(final_model)
+#trankplot(final_model)
+```
+
+*Plot Sampler Effects from Posterior*
+```{r}
+# Plot sampler effects with dynamic axis limits
+plot_sampler_effects <- function(posterior_samples, sampler_types) {
+  # Extract sampler effects from posterior samples
+  n_samplers <- ncol(posterior_samples$beta[1, , ])  # Number of sampler types
+  sampler_effects <- matrix(NA, nrow = nrow(posterior_samples$beta[, , 1]), ncol = n_samplers)
+  
+  for (s in 1:n_samplers) {
+    # Compute the mean sampler effect (averaged over analytes)
+    sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s], na.rm = TRUE)
+  }
+  
+  # Define dynamic axis limits
+  percent_buffer <- 0.1 # Percentage buffer for axis limits
+  x_min <- min(sampler_effects, na.rm = TRUE)
+  x_max <- max(sampler_effects, na.rm = TRUE)
+  xlim <- c(x_min - percent_buffer * abs(x_min), x_max + percent_buffer * abs(x_max))
+  
+  y_max <- 0
+  for (s in 1:n_samplers) {
+    dens_data <- density(sampler_effects[, s])
+    y_max <- max(y_max, max(dens_data$y, na.rm = TRUE))
+  }
+  ylim <- c(0, y_max * (1+percent_buffer))
+  
+  # Plot posterior densities for sampler effects
+  colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00")  # Rethinking palette
+  plot(NULL, xlim = xlim, ylim = ylim, 
+       xlab = "Sampler Effect", ylab = "Density", main = "Posterior Sampler Effects")
+  
+  for (s in 1:n_samplers) {
+    dens(sampler_effects[, s], col = colors[s], lwd = 3, add = TRUE)
+  }
+  
+  # Add legend
+  legend("topright", legend = sampler_types, col = colors[1:n_samplers], lwd = 3)
+}
+
+# Example usage
+sampler_types <- levels(as.factor(final_data$S))
+plot_sampler_effects(
+  posterior_samples = final_post, 
+  sampler_types = sampler_types
+)
+```
+
+*Plot Sampler Effect Contrasts*
+```{r}
+# Plot contrasts of sampler effects with improved axis scaling
+plot_sampler_contrasts <- function(posterior_samples, sampler_types) {
+  # Extract sampler effects from posterior samples
+  n_samplers <- ncol(posterior_samples$beta[1, , ])  # Number of sampler types
+  sampler_effects <- matrix(NA, nrow = nrow(posterior_samples$beta[, , 1]), ncol = n_samplers)
+  
+  for (s in 1:n_samplers) {
+    # Compute the mean sampler effect (averaged over analytes)
+    sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s], na.rm = TRUE)
+  }
+  
+  # Compute pairwise contrasts
+  contrast_list <- list()
+  for (i in 1:(n_samplers - 1)) {
+    for (j in (i + 1):n_samplers) {
+      contrast_name <- paste(sampler_types[i], "-", sampler_types[j])
+      contrast_list[[contrast_name]] <- sampler_effects[, i] - sampler_effects[, j]
+    }
+  }
+  
+  # Define dynamic x limits for contrasts with a minimum buffer size
+  all_contrasts <- unlist(contrast_list)
+  percent_buffer <- 0.1
+  min_buffer <- 0.1  # Minimum absolute buffer for padding
+  x_min <- min(all_contrasts, na.rm = TRUE)
+  x_max <- max(all_contrasts, na.rm = TRUE)
+  x_range <- x_max - x_min
+  xlim <- c(
+    x_min - max(percent_buffer * x_range, min_buffer),
+    x_max + max(percent_buffer * x_range, min_buffer)
+  )
+  
+  # Define y limits dynamically
+  y_max <- 0
+  for (contrast in contrast_list) {
+    dens_data <- density(contrast)
+    y_max <- max(y_max, max(dens_data$y, na.rm = TRUE))
+  }
+  ylim <- c(0, y_max * 1.1)
+  
+  # Plot posterior densities for contrasts
+  colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#FF8080", "#80FF80")  # Extended palette
+  plot(NULL, xlim = xlim, ylim = ylim, 
+       xlab = "Contrast Effect", ylab = "Density", main = "Posterior Sampler Contrasts")
+  
+  contrast_index <- 1
+  for (contrast_name in names(contrast_list)) {
+    dens(contrast_list[[contrast_name]], col = colors[contrast_index], lwd = 3, add = TRUE)
+    contrast_index <- contrast_index + 1
+  }
+  
+  # Add legend
+  legend("topright", legend = names(contrast_list), col = colors[1:length(contrast_list)], lwd = 3)
+}
+
+# Example usage
+plot_sampler_contrasts(
+  posterior_samples = final_post, 
+  sampler_types = sampler_types
+)
+```
+
+*Plot Concentration Predictions*
+```{r}
+# Function to plot prediction distributions with real data overlay, including analyte dictionary
+plot_predictions_with_observed <- function(back_transformed_predictions, data, sampler_types, analyte_index, block_index = NULL) {
+  # Create a dictionary for analyte names
+  analyte_dict <- c("NO3", "NO2", "TKN", "pH", "TP", "OP", "EC", "TSS", "TDS")
+  
+  # Get the analyte name from the dictionary
+  analyte_name <- ifelse(analyte_index > 0 & analyte_index <= length(analyte_dict),
+                         analyte_dict[analyte_index],
+                         "Unknown")
+  
+  # Map block levels to numeric indices
+  block_levels <- levels(data$block)
+  block_name <- if (!is.null(block_index) && is.character(block_index)) {
+    block_index <- match(block_index, block_levels)
+    if (is.na(block_index)) stop("Invalid block_index provided.")
+    block_levels[block_index]
+  } else if (!is.null(block_index)) {
+    block_levels[block_index]
+  } else {
+    "All Blocks"
+  }
+  
+  # Extract predictions for the given analyte and block
+  n_samplers <- dim(back_transformed_predictions)[3]  # Number of sampler types
+  predictions <- list()
+  for (s in 1:n_samplers) {
+    if (is.null(block_index)) {
+      # No block-specific effect
+      predictions[[sampler_types[s]]] <- back_transformed_predictions[, analyte_index, s, 1]
+    } else {
+      # Include block-specific effect
+      predictions[[sampler_types[s]]] <- back_transformed_predictions[, analyte_index, s, block_index]
+    }
+  }
+  
+  # Define dynamic axis limits
+  all_predictions <- unlist(predictions)
+  percent_buffer <- 0.1
+  x_min <- min(all_predictions, na.rm = TRUE)
+  x_max <- max(all_predictions, na.rm = TRUE)
+  x_range <- x_max - x_min
+  xlim <- c(
+    x_min - max(percent_buffer * x_range, 0.1),
+    x_max + max(percent_buffer * x_range, 0.1)
+  )
+  
+  y_max <- 0
+  for (sampler in sampler_types) {
+    dens_data <- density(predictions[[sampler]])
+    y_max <- max(y_max, max(dens_data$y, na.rm = TRUE))
+  }
+  ylim <- c(0, y_max * 1.1)
+  
+  # Plot posterior prediction densities (rethink pallette)
+  colors <- c("#8080FF", 
+              "#F98400", 
+              "#00A08A", 
+              "#E2AD00", 
+              "#800080", 
+              "#008000", 
+              "#5BBCD6",
+              "#CC79A7", 
+              "#AAAAAA"
+             )
+  plot(NULL, xlim = xlim, ylim = ylim, 
+       xlab = "Predicted Concentration", ylab = "Density", 
+       main = sprintf("Posterior Predictions with Observed Data\nAnalyte: %s, Block: %s", analyte_name, block_name))
+  
+  for (s in 1:n_samplers) {
+    dens(predictions[[sampler_types[s]]], col = colors[s], lwd = 3, add = TRUE)
+  }
+  
+  # Add observed data points, considering block effects
+  for (s in 1:n_samplers) {
+    observed_data <- data %>%
+      filter(analyte_abbr == analyte_index, S == sampler_types[s])
+    
+    if (!is.null(block_index)) {
+      observed_data <- observed_data %>% filter(block == block_levels[block_index])
+    }
+    
+    observed_values <- observed_data$C_obs
+    if (length(observed_values) > 0) {
+      observed_mean <- mean(observed_values, na.rm = TRUE)
+      observed_sd <- sd(observed_values, na.rm = TRUE)
+      
+      # Overlay observed mean and SD as dashed line and shaded region
+      abline(v = observed_mean, col = colors[s], lwd = 2, lty = 2)
+      # rect(
+      #   observed_mean - observed_sd, 0, 
+      #   observed_mean + observed_sd, y_max * 0.1, 
+      #   col = adjustcolor(colors[s], alpha.f = 0.3), border = NA
+      # )
+    }
+  }
+  
+  # Add legend
+  legend("topright", legend = sampler_types, col = colors[1:n_samplers], lwd = 3)
+}
+```
+
+```{r}
+plot_predictions_with_observed(
+  back_transformed_predictions = final_post_back_transformed,
+  data = final_data,
+  sampler_types = sampler_types,
+  analyte_index = 1,       # Specify the analyte index
+  block_index = "Block1"   # Specify the block name
+)
+
+```
+
+TODO:
+- Finish m1.4
+- Save plots as images
+- Update README with final model and results
+
+
+# Old Graph Code for reference (to delete when done using it)
+```{r}
+# Function to plot observed mean on model-generated probability density
+plot_posterior_with_observed <- function(analyte_name, treatment_name, block_num, irrigation_event, data, posterior_samples) {
+  
+  # Map analyte names to indices
+  analyte_levels <- levels(as.factor(data$analyte_abbr))
+  A <- match(analyte_name, analyte_levels)
+  if (is.na(A)) stop("Analyte not found in data.")
+  
+  # Map treatment names to indices
+  treatment_levels <- levels(as.factor(data$treatment))
+  TRT <- match(treatment_name, treatment_levels)
+  if (is.na(TRT)) stop("Treatment not found in data.")
+  
+  # Map irrigation events to indices
+  irrigation_levels <- levels(as.factor(data$event.count))
+  I <- match(irrigation_event, irrigation_levels)
+  if (is.na(I)) stop("Irrigation event not found in data.")
+  
+  # Block number (assuming blocks are numbered consecutively starting from 1)
+  B <- block_num
+  
+  # Sample methods mapping
+  method_levels <- levels(as.factor(data$method.name))
+  num_methods <- length(method_levels)
+  
+  # Extract posterior predictions for each sample method
+  all_predicted_mu <- list()
+  for (S in 1:num_methods) {
+    mu_samples <- p_link(posterior_samples, I=I, A=A, S=S, B=B, TRT=TRT)
+    mu_samples <- mu_samples[is.finite(mu_samples)]
+    if (length(mu_samples) == 0) {
+      warning(paste("No finite posterior samples for method:", method_levels[S]))
+      next
+    }
+    all_predicted_mu[[S]] <- mu_samples
+  }
+  
+  # Remove any methods with no predicted samples
+  valid_methods <- which(sapply(all_predicted_mu, length) > 0)
+  if (length(valid_methods) == 0) {
+    stop("No valid posterior predictions to plot.")
+  }
+  
+  method_levels <- method_levels[valid_methods]
+  
+  # Use the rethinking palette for colors
+  rethink_palette <- c("#8080FF", 
+                       "#F98400", 
+                       "#00A08A", 
+                       "#E2AD00", 
+                       "#800080", 
+                       "#008000", 
+                       "#5BBCD6",
+                       "#F2AD00", 
+                       "#FF0000"
+                       )
+
+  
+  # Ensure the palette length matches the number of valid methods
+  colors <- rethink_palette[1:length(valid_methods)]
+  
+  # Determine the x and y limits for plotting
+  x_min <- min(sapply(all_predicted_mu[valid_methods], min), na.rm=TRUE)
+  x_max <- max(sapply(all_predicted_mu[valid_methods], max), na.rm=TRUE)
+  
+  y_max <- 0
+  density_list <- list()
+  for (idx in seq_along(valid_methods)) {
+    S <- valid_methods[idx]
+    mu_samples <- all_predicted_mu[[S]]
+    dens_data <- density(mu_samples)
+    density_list[[idx]] <- dens_data
+    y_max <- max(y_max, max(dens_data$y, na.rm=TRUE))
+  }
+  
+  # Initialize the plot with a general title
+  plot(NULL, xlim=c(x_min, x_max), ylim=c(0, y_max * 1.1), 
+       xlab="Concentration", ylab="Probability Density", 
+       main="Posterior Probability Distributions with Observed Data")
+  
+  # Add the caption-like text block under the title
+  caption_text <- paste("Analyte:", analyte_name, ", Treatment:", treatment_name, 
+                        ", Irrigation:", irrigation_event, ", Block:", B)
+  mtext(caption_text, side=3, line=0.5, cex=0.9)
+  
+  # Plot posterior densities and overlay observed means
+  for (idx in seq_along(valid_methods)) {
+    S <- valid_methods[idx]
+    # Plot the posterior density
+    dens_data <- density(all_predicted_mu[[S]])
+    lines(dens_data$x, dens_data$y, col=colors[idx], lwd=4)
+    
+    # Extract the observed mean for the current method
+    method_name <- method_levels[idx]
+    observed_data <- data %>%
+      filter(analyte_abbr == analyte_name,
+             treatment == treatment_name,
+             block == B,
+             event.count == irrigation_event,
+             method.name == method_name)
+    
+    if (nrow(observed_data) == 0) {
+      warning(paste("No observed data for method:", method_name))
+      next
+    }
+    
+    observed_mean <- mean(observed_data$result, na.rm=TRUE)
+    
+    # Overlay the observed mean as a vertical dashed line
+    abline(v=observed_mean, col=colors[idx], lwd=2, lty=2)
+  }
+  
+  # Add a legend to the plot
+  legend("topright", legend=method_levels, col=colors, lwd=2, lty=1)
+}
+
+```
+
+
+```{r}
+# Plot the posterior distributions with observed (and potentially SWAT+) data
+plot_posterior_with_observed(
+  analyte_name = "TSS",             # Specify the analyte name
+  treatment_name = "CT",            # Specify the treatment name
+  block_num = 2,                    # Specify the block number
+  irrigation_event = "Irrigation 3",# Specify the irrigation event
+  data = d,                         # Your data frame
+  posterior_samples = post          # Your posterior samples
+)
+
+# Mechanistic prediction and confidence interval bounds
+SWAT_prediction <- 1000
+x_left <- SWAT_prediction * 0.8   # Lower bound (80% of prediction)
+x_right <- SWAT_prediction * 1.15 # Upper bound (115% of prediction)
+
+# Get the current y-axis limits
+y_bottom <- par("usr")[3]
+y_top <- par("usr")[4]
+
+# Add gray shading between the two vertical lines
+rect(x_left, y_bottom, x_right, y_top, 
+     col = rgb(0.5, 0.5, 0.5, alpha = 0.3), border = NA)
+
+# Redraw the vertical lines on top of the shading
+abline(v = x_left, col = "black", lwd = 2, lty = 3)
+abline(v = x_right, col = "black", lwd = 2, lty = 3)
+
+# Add a label near the prediction value
+text(x = SWAT_prediction, 
+     y = y_top * 0.1,  # Positioning text at 90% of y-axis range
+     labels = "SWAT+ 95% CI", 
+     col = "black", 
+     pos = 4, 
+     offset = 1.9)
+
+# Save the plot to a PNG file without affecting the displayed plot
+dev.copy(png, filename = "../figs/posterior_with_observed.png", 
+         width = 8, height = 6, units = "in", res = 300)
+dev.off()
+
+```
+
+
+
+
+## Bar plot graphics with real data
+```{r}
+# Function to plot results by method and analyte annual average
+# To use with real data, just pass your real data frame to the function
+# Ensure your real data frame has the same structure, particularly the columns: method.name, analyte_abbr, and result
+p_real <- plot_results_by_method_and_analyte(d, title = "Average of Analyte by Sample Method - Real Data")
+p_real
+ggsave("../figs/summary_real.png", p_real, width = 10, height = 6, units = "in")
+```
+
+```{r}
+# Plot by irrigation count
+# irr 1
+p_real_1 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 1`, title = "Average of Analyte by Sample Method - Irrigation 1")
+p_real_1
+ggsave("../figs/summary_real_irr1.png", p_real_1, width = 10, height = 6, units = "in")
+
+# irr 2
+p_real_2 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 2`, title = "Average of Analyte by Sample Method - Irrigation 2")
+p_real_2
+ggsave("../figs/summary_real_irr2.png", p_real_2, width = 10, height = 6, units = "in")
+
+# irr 3
+p_real_3 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 3`, title = "Average of Analyte by Sample Method - Irrigation 3")
+p_real_3
+ggsave("../figs/summary_real_irr3.png", p_real_3, width = 10, height = 6, units = "in")
+
+# irr 4
+p_real_4 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 4`, title = "Average of Analyte by Sample Method - Irrigation 4")
+p_real_4
+ggsave("../figs/summary_real_irr4.png", p_real_4, width = 10, height = 6, units = "in")
+
+# irr 5
+p_real_5 <- plot_results_by_method_and_analyte(d_list_irr$`Irrigation 5`, title = "Average of Analyte by Sample Method - Irrigation 5")
+p_real_5
+ggsave("../figs/summary_real_irr5.png", p_real_5, width = 10, height = 6, units = "in")
+
+# storm 1
+p_real_storm1 <- plot_results_by_method_and_analyte(d_list_irr$`Storm 1`, title = "Average of Analyte by Sample Method - Storm 1")
+p_real_storm1
+ggsave("../figs/summary_real_storm1.png", p_real_storm1, width = 10, height = 6, units = "in")
+
+# storm 2
+p_real_storm2 <- plot_results_by_method_and_analyte(d_list_irr$`Storm 2`, title = "Average of Analyte by Sample Method - Storm 2")
+p_real_storm2
+ggsave("../figs/summary_real_storm2.png", p_real_storm2, width = 10, height = 6, units = "in")
+```
+
+```{r}
+# Plot by treatment
+p_trt <- plot_results_by_treatment_and_analyte(d, title = "Average of Analyte by Tillage Treatment")
+p_trt
+ggsave("../figs/trt_summary_real.png", p_trt, width = 10, height = 6, units = "in")
+```
+
+```{r}
+# simple multiple regression for reference between analyte, method, and treatment
+library(car)
+lm_mod <- lm(result ~ analyte_abbr + method.name + treatment, data = d)
+summary(lm_mod)
+Anova(lm_mod, type="III")
+plot(lm_mod)
+
+#kruskal-wallis test for reference
+kruskal.test(result ~ method.name, data = d)
+```
+
