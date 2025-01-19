@@ -23,37 +23,6 @@ TODO:
 - Update README with final model and results
 
 ### Tools
-Stan tools to run more optimally (optional, off by default)
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
-# changing Stan parameters for speed
-# check_cmdstan_toolchain()
-# Sys.setenv(PATH = paste(
-#   "C:\\rtools42\\ucrt64\\bin",
-#   "C:\\rtools42\\usr\\bin",
-#   "C:\\WINDOWS\\system32",
-#   "C:\\WINDOWS",
-#   "C:\\WINDOWS\\System32\\Wbem",
-#   "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\",
-#   "C:\\WINDOWS\\System32\\OpenSSH\\",
-#   sep = ";"
-# ))
-# Sys.which("g++")
-# set_cmdstan_path("C:/Users/ansleybr/Documents/.cmdstan/cmdstan-2.34.1")
-
-cpp_options <- list(
-  "CXXFLAGS" = "-Wno-nonnull -D_UCRT -Wno-deprecated-declarations -O1",
-  "TBB_CXXFLAGS" = "-D_UCRT",
-  "STAN_THREADS" = TRUE,
-  PRECOMPILED_HEADERS = TRUE
-)
-cmdstan_make_local(cpp_options = cpp_options, append = FALSE)
-```
-
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
-# rebuild once we have made local changes with all the cores (parallel::detectCores())
-rebuild_cmdstan(cores = parallel::detectCores())
-```
-
 Tool for printing precis() results with key:
 ```{r}
 # Print precis results with sampler type legend
@@ -644,6 +613,10 @@ Summary of results
 precis(m1.3_updated, depth=2)
 ```
 
+```{r}
+traceplot(m1.3_updated)
+```
+
 Posterior predictions
 ```{r}
 # Extract posterior samples
@@ -720,12 +693,12 @@ for (a in 1:data1.3$K_A) {
 }
 
 # Refine the summary table: Rows as analytes, columns as sampler types
-refined_summary_table <- prediction_summary %>%
+refined_summary_table_1.3 <- prediction_summary %>%
   select(analyte_abbr, sampler_type, mean_prediction, block) %>%
   pivot_wider(names_from = sampler_type, values_from = mean_prediction)
 
 # View the refined summary table
-refined_summary_table
+refined_summary_table_1.3
 ```
 
 Results: Model 1.3 now works as expected, with block effects varying by analyte. The refined summary table shows the mean predictions for each analyte, sampler type, and block. The model can be further refined by incorporating multilevel structures for characterizing correlations between the block effects, sampler effects, and analyte-specific intercepts. 
@@ -736,82 +709,155 @@ Results: Model 1.3 now works as expected, with block effects varying by analyte.
 
 Data simulation
 ```{r, eval=FALSE}
+#TBD if we want to try simulating correlations between parameters
+sim_data_1.4 <- sim_data_1.3
 ```
 
 Model fit
 ```{r, eval=FALSE}
-m1.4_centered <- ulam(
-  alist(
-    # Observation model
-    C_obs_standardized ~ dnorm(mu, sigma),
-
-    # Mean structure
-    mu <- alpha[A] + beta[A, S] + gamma[B],
-
-    # Multivariate normal prior for analyte-specific intercepts
-    vector[K_A]:alpha ~ multi_normal(mu_alpha, Sigma_alpha),
-    vector[K_A]:mu_alpha ~ normal(0, 1),  # Mean vector for analytes
-    matrix[K_A, K_A]:Sigma_alpha <- diag_pre_multiply(sigma_alpha, Rho_alpha),
-    cholesky_factor_corr[K_A]:Rho_alpha ~ lkj_corr_cholesky(2),
-    vector[K_A]:sigma_alpha ~ exponential(1),
-
-    # Priors for sampler effects
-    matrix[K_A, K_S]:beta ~ normal(0, 1),
-
-    # Priors for block effects
-    vector[K_B]:gamma ~ normal(0, 0.5),
-
-    # Prior for measurement error
-    sigma ~ exponential(1)
-  ),
-  data = data1.3,
-  chains = 4,
-  cores = 4
+# Prepare data for the centered model - use data1.3 for now since it should be the same results
+data1.4 <- list(
+  C_obs = sim_data_1.3$C_obs_standardized,  # Standardized observed concentrations
+  S = as.numeric(as.factor(sim_data_1.3$S)), # Sampler type index (1-4)
+  A = sim_data_1.3$analyte_abbr,             # Analyte index (1-9)
+  B = as.numeric(as.factor(sim_data_1.3$block)), # Block index (1-2)
+  N = nrow(sim_data_1.3),                    # Number of observations
+  K_S = length(unique(sim_data_1.3$S)),      # Number of sampler types
+  K_A = length(unique(sim_data_1.3$analyte_abbr)), # Number of analytes
+  K_B = length(unique(sim_data_1.3$block))   # Number of blocks
 )
 
+# Non-centered version of m1.4 (corrected)
 m1.4_noncentered <- ulam(
   alist(
     # Observation model
-    C_obs_standardized ~ dnorm(mu, sigma),
-
-    # Mean structure
-    mu <- alpha[A] + beta[A, S] + gamma[B],
-
-    # Non-centered MVN for analyte-specific intercepts
-    transpars> vector[K_A]:alpha <<- mu_alpha + L_Rho_alpha * z_alpha,
-    vector[K_A]:z_alpha ~ normal(0, 1),  # Standard normal vector
-    vector[K_A]:mu_alpha ~ normal(0, 1),  # Mean vector for analytes
-    cholesky_factor_corr[K_A]:L_Rho_alpha ~ lkj_corr_cholesky(2),  # Cholesky factor
-    vector[K_A]:sigma_alpha ~ exponential(1),  # Standard deviations
-    gq> matrix[K_A, K_A]:Rho_alpha <<- Chol_to_Corr(L_Rho_alpha),  # Correlation matrix
-
-    # Priors for sampler effects
-    matrix[K_A, K_S]:beta ~ normal(0, 1),
-
-    # Priors for block effects
-    vector[K_B]:gamma ~ normal(0, 0.5),
-
+    C_obs ~ dnorm(mu, sigma),
+    
+    # Mean structure with correlations between analytes, samplers, and blocks
+    mu <- alpha[A] + beta[A, S] + gamma[A, B],
+    
+    # Analyte-specific intercepts (non-centered parameterization)
+    transpars> vector[K_A]:alpha <<- mu_alpha + z_alpha * sigma_alpha,
+    vector[K_A]:z_alpha ~ normal(0, 1),  # Non-centered scaling
+    mu_alpha ~ normal(0, 1),  # Prior for mean intercepts
+    sigma_alpha ~ exponential(1),  # Prior for intercept variation
+    
+    # Analyte-specific sampler effects (non-centered parameterization)
+    transpars> matrix[K_A, K_S]:beta <<- mu_beta + z_beta * diag_pre_multiply(sigma_beta, L_beta),
+    transpars> matrix[K_A, K_S]:mu_beta <- rep_matrix(0, K_A, K_S),  # Center at zero
+    matrix[K_A, K_S]:z_beta ~ normal(0, 1),  # Standardized effects
+    transpars> cholesky_factor_corr[K_S]:L_beta ~ lkj_corr_cholesky(2),  # LKJ prior
+    vector[K_S]:sigma_beta ~ exponential(1),  # Prior for scaling sampler effects
+    
+    # Analyte-specific block effects (non-centered parameterization)
+    transpars> matrix[K_A, K_B]:gamma <<- mu_gamma + z_gamma * diag_pre_multiply(sigma_gamma, L_gamma),
+    transpars> matrix[K_A, K_B]:mu_gamma <- rep_matrix(0, K_A, K_B),  # Center at zero
+    matrix[K_A, K_B]:z_gamma ~ normal(0, 1),  # Standardized effects
+    transpars> cholesky_factor_corr[K_B]:L_gamma ~ lkj_corr_cholesky(2),  # LKJ prior
+    vector[K_B]:sigma_gamma ~ exponential(1),  # Prior for scaling block effects
+    
     # Prior for measurement error
     sigma ~ exponential(1)
   ),
-  data = data1.3,
+  data = data1.4,
   chains = 4,
-  cores = 4
+  cores = 8,
+  iter = 4000,              # Total iterations (increase this)
+  warmup = 2000             # Number of warmup iterations (optional, default is iter/2)
 )
 
 ```
 
 Summary of results
 ```{r, eval=FALSE}
-#precis(fit_m1.4_centered, depth = 2)
-precis(fit_m1.4_noncentered, depth = 2)
+precis(m1.4_noncentered, depth = 2)
 
+```
+
+```{r}
+traceplot(m1.4_noncentered)
 ```
 
 Posterior predictions
 ```{r, eval=FALSE}
-post <- extract.samples(fit_m1.4_noncentered)
-summary(post$Rho_alpha)
+# Extract posterior samples
+post1.4 <- extract.samples(m1.4_noncentered)
+
+# Updated link function for posterior predictions
+link_function_1.4 <- function(post1.4, data) {
+  n_samples <- nrow(post1.4$alpha)       # Number of posterior samples
+  n_analytes <- data$K_A                # Number of analytes
+  n_samplers <- data$K_S                # Number of sampler types
+  n_blocks <- data$K_B                  # Number of blocks
+  
+  # Initialize predictions array
+  predictions <- array(NA, dim = c(n_samples, n_analytes, n_samplers, n_blocks))
+  
+  # Generate predictions
+  for (a in 1:n_analytes) {
+    for (s in 1:n_samplers) {
+      for (b in 1:n_blocks) {
+        # Compute predictions using the new model structure
+        predictions[, a, s, b] <- post1.4$mu_alpha +
+                                  post1.4$z_alpha[, a] * post1.4$sigma_alpha +
+                                  post1.4$beta[, a, s] +
+                                  post1.4$gamma[, a, b]
+      }
+    }
+  }
+  
+  return(predictions)
+}
+
+# Generate predictions
+posterior_predictions_1.4 <- link_function_1.4(post1.4, data1.4)
+
+# Initialize array for back-transformed predictions
+back_transformed_predictions_1.4 <- array(NA, dim = dim(posterior_predictions_1.4))
+
+# Back-transform predictions for each analyte
+for (a in 1:data1.4$K_A) {
+  # Extract mean and SD for the analyte from `sim_data_1.4`
+  analyte_mean <- mean(sim_data_1.4$C_obs[sim_data_1.4$analyte_abbr == a])
+  analyte_sd <- sd(sim_data_1.4$C_obs[sim_data_1.4$analyte_abbr == a])
+  
+  # Back-transform predictions for the analyte
+  back_transformed_predictions_1.4[, a, , ] <- posterior_predictions_1.4[, a, , ] * analyte_sd + analyte_mean
+}
+
+# Summarize posterior predictions
+# Initialize a summary dataframe
+prediction_summary_1.4 <- data.frame()
+
+# Summarize predictions for each analyte, sampler, and block
+for (a in 1:data1.4$K_A) {
+  for (s in 1:data1.4$K_S) {
+    for (b in 1:data1.4$K_B) {
+      # Extract samples for the current analyte, sampler, and block
+      samples <- back_transformed_predictions_1.4[, a, s, b]
+      
+      # Add summary statistics to the dataframe
+      summary_row <- data.frame(
+        analyte_abbr = a,
+        sampler_type = s,
+        block = b,
+        mean_prediction = mean(samples),
+        prediction_5.5 = quantile(samples, 0.055),
+        prediction_94.5 = quantile(samples, 0.945)
+      )
+      
+      prediction_summary_1.4 <- rbind(prediction_summary_1.4, summary_row)
+    }
+  }
+}
+
+# Refine the summary table: Rows as analytes, columns as sampler types
+refined_summary_table_1.4 <- prediction_summary_1.4 %>%
+  select(analyte_abbr, sampler_type, mean_prediction, block) %>%
+  pivot_wider(names_from = sampler_type, values_from = mean_prediction)
+
+# View the refined summary table
+refined_summary_table_1.4
 
 ```
 
@@ -819,17 +865,16 @@ Results:
 
 ## Final model selection, graphing, and interpretation - TEST DATA
 *In Development*
-
 Select final model and 'observed data' for comparison
 ```{r}
-final_model <- m1.3_updated
-final_post <- post1.3 #put posterior predictions here
-final_post_back_transformed <- back_transformed_predictions1.3 #put back-transformed posterior predictions here
-final_data <- sim_data_1.3
+final_model <- m1.4_noncentered
+final_post <- post1.4 #put posterior predictions here
+final_post_back_transformed <- back_transformed_predictions_1.4 #put back-transformed posterior predictions here
+final_data <- sim_data_1.4
 ```
 
-Plot Model Summary and Convergence Diagnostics
 *Model Summary*
+Plot Model Summary and Convergence Diagnostics
 ```{r}
 precis(final_model, depth = 2)
 plot(precis(final_model, depth = 2))
@@ -1066,6 +1111,7 @@ plot_predictions_with_observed(
 
 ```
 
+
 ## Final model selection, graphing, and interpretation - REAL DATA
 *In Development*
 
@@ -1190,6 +1236,58 @@ refined_summary_table <- prediction_summary %>%
 # View the refined summary table
 refined_summary_table
 ```
+
+```{r}
+# Number of posterior samples
+n_samples <- length(post1.3_real$a_bar)  # Should be 2,000
+
+# Number of parameters for alpha, beta, and gamma
+K_A <- length(post1.3_real$alpha) / n_samples  # Analytes
+K_S <- length(post1.3_real$beta) / (n_samples * K_A)  # Samplers
+K_B <- length(post1.3_real$gamma) / (n_samples * K_A)  # Blocks
+
+# Reshape alpha, beta, and gamma into matrices
+alpha_matrix <- matrix(post1.3_real$alpha, nrow = n_samples, ncol = K_A)
+beta_matrix <- matrix(post1.3_real$beta, nrow = n_samples, ncol = K_A * K_S)
+gamma_matrix <- matrix(post1.3_real$gamma, nrow = n_samples, ncol = K_A * K_B)
+```
+
+```{r}
+# Correlation plot for sampler-specific effects
+correlationPlot(
+  mat = beta_matrix,
+  density = "smooth",
+  method = "pearson",
+  thin = 500,
+  scaleCorText = TRUE,
+  main = "Correlation Between Sampler Effects"
+)
+```
+
+```{r}
+# Correlation plot for analyte-specific intercepts
+correlationPlot(
+  mat = alpha_matrix,
+  density = "smooth",
+  method = "pearson",
+  thin = 500,
+  scaleCorText = TRUE,
+  main = "Correlation Between Analyte Intercepts"
+)
+```
+
+```{r}
+# Correlation plot for block-specific effects
+correlationPlot(
+  mat = gamma_matrix,
+  density = "smooth",
+  method = "pearson",
+  thin = 500,
+  scaleCorText = TRUE,
+  main = "Correlation Between Block Effects"
+)
+```
+
 
 Select final model and 'observed data' for comparison
 ```{r}
@@ -1489,9 +1587,6 @@ plot_predictions_with_observed(
 ```
 
 ## Conclusion
-The aim of this study is to investigate the total effect of sampler method on water quality measurements for mulitple analytes tested in our study. 
-
-In this project, we have demonstrated how to fit multilevel models to data with varying standard deviations. We have shown how to simulate data, fit models, and generate posterior predictions. We have also demonstrated how to back-transform predictions to the original scale. The models we have fitted have successfully estimated the effects of analytes, sampler types, and blocks on the outcome variable. We have also shown how to compare the results of Bayesian models with frequentist models for sanity checks. 
 
 
 
