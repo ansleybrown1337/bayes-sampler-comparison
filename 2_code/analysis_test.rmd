@@ -703,7 +703,7 @@ refined_summary_table_1.3
 
 Results: Model 1.3 now works as expected, with block effects varying by analyte. The refined summary table shows the mean predictions for each analyte, sampler type, and block. The model can be further refined by incorporating multilevel structures for characterizing correlations between the block effects, sampler effects, and analyte-specific intercepts. 
 
-### Model 1.4 - Multilevel model with sampler, analyte, and no block effects with MVN distribution between analytes
+### Model 1.4 - Multilevel model with sampler, analyte, and block effects with MVN distribution between analytes, samplers, and blocks
 
 **In Development**
 
@@ -716,16 +716,7 @@ sim_data_1.4 <- sim_data_1.3
 Model fit
 ```{r, eval=FALSE}
 # Prepare data for the centered model - use data1.3 for now since it should be the same results
-data1.4 <- list(
-  C_obs = sim_data_1.3$C_obs_standardized,  # Standardized observed concentrations
-  S = as.numeric(as.factor(sim_data_1.3$S)), # Sampler type index (1-4)
-  A = sim_data_1.3$analyte_abbr,             # Analyte index (1-9)
-  B = as.numeric(as.factor(sim_data_1.3$block)), # Block index (1-2)
-  N = nrow(sim_data_1.3),                    # Number of observations
-  K_S = length(unique(sim_data_1.3$S)),      # Number of sampler types
-  K_A = length(unique(sim_data_1.3$analyte_abbr)), # Number of analytes
-  K_B = length(unique(sim_data_1.3$block))   # Number of blocks
-)
+data1.4 <- data1.3
 
 # Non-centered version of m1.4 (corrected)
 m1.4_noncentered <- ulam(
@@ -736,20 +727,20 @@ m1.4_noncentered <- ulam(
     # Mean structure with correlations between analytes, samplers, and blocks
     mu <- alpha[A] + beta[A, S] + gamma[A, B],
     
-    # Analyte-specific intercepts (non-centered parameterization)
+    # Analyte-specific (9 levels) intercepts (non-centered parameterization)
     transpars> vector[K_A]:alpha <<- mu_alpha + z_alpha * sigma_alpha,
     vector[K_A]:z_alpha ~ normal(0, 1),  # Non-centered scaling
     mu_alpha ~ normal(0, 1),  # Prior for mean intercepts
     sigma_alpha ~ exponential(1),  # Prior for intercept variation
     
-    # Analyte-specific sampler effects (non-centered parameterization)
+    # Analyte-specific (9 levels) sampler (4 levels) effects (non-centered parameterization)
     transpars> matrix[K_A, K_S]:beta <<- mu_beta + z_beta * diag_pre_multiply(sigma_beta, L_beta),
     transpars> matrix[K_A, K_S]:mu_beta <- rep_matrix(0, K_A, K_S),  # Center at zero
     matrix[K_A, K_S]:z_beta ~ normal(0, 1),  # Standardized effects
     transpars> cholesky_factor_corr[K_S]:L_beta ~ lkj_corr_cholesky(2),  # LKJ prior
     vector[K_S]:sigma_beta ~ exponential(1),  # Prior for scaling sampler effects
     
-    # Analyte-specific block effects (non-centered parameterization)
+    # Analyte-specific (9 levels) block (2 levels) effects (non-centered parameterization)
     transpars> matrix[K_A, K_B]:gamma <<- mu_gamma + z_gamma * diag_pre_multiply(sigma_gamma, L_gamma),
     transpars> matrix[K_A, K_B]:mu_gamma <- rep_matrix(0, K_A, K_B),  # Center at zero
     matrix[K_A, K_B]:z_gamma ~ normal(0, 1),  # Standardized effects
@@ -761,7 +752,7 @@ m1.4_noncentered <- ulam(
   ),
   data = data1.4,
   chains = 4,
-  cores = 8,
+  cores = 12,
   iter = 4000,              # Total iterations (increase this)
   warmup = 2000             # Number of warmup iterations (optional, default is iter/2)
 )
