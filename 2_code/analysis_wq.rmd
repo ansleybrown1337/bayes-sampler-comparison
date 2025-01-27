@@ -1069,11 +1069,12 @@ plot_sampler_effects <- function(posterior_samples, sampler_types) {
 
 # Example usage
 sampler_types <- levels(as.factor(final_data$S))
+png('../figs/sampler_effects_sim.png', width = 800, height = 600, res = 300)
 plot_sampler_effects(
   posterior_samples = final_post, 
   sampler_types = sampler_types
 )
-
+dev.off()
 ```
 
 *Plot Sampler Effect Contrasts*
@@ -1134,10 +1135,12 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_types) {
 }
 
 # Example usage
+png('../figs/sampler_contrasts_sim.png', width = 800, height = 600, res = 300)
 plot_sampler_contrasts(
   posterior_samples = final_post, 
   sampler_types = sampler_types
 )
+dev.off()
 ```
 
 *Plot Concentration Predictions*
@@ -1244,6 +1247,7 @@ plot_predictions_with_observed <- function(back_transformed_predictions, data, s
 ```
 
 ```{r}
+png('../figs/predictions_with_observed_sim.png', width = 800, height = 600, res = 300)
 plot_predictions_with_observed(
   back_transformed_predictions = final_post_back_transformed,
   data = final_data,
@@ -1251,7 +1255,7 @@ plot_predictions_with_observed(
   analyte_index = 1,       # Specify the analyte index
   block_index = "Block1"   # Specify the block name
 )
-
+dev.off()
 ```
 
 
@@ -1443,10 +1447,13 @@ plot_sampler_effects <- function(posterior_samples, sampler_mapping) {
 
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
+
+png('../figs/sampler_effects.png', width = 800, height = 600, res = 300)
 plot_sampler_effects(
   posterior_samples = final_post, 
   sampler_mapping = sampler_mapping
 )
+dev.off()
 ```
 
 *Plot Sampler Effect Contrasts*
@@ -1520,10 +1527,13 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
 
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
+
+png('../figs/sampler_contrasts.png', width = 800, height = 600, res = 300)
 plot_sampler_contrasts(
   posterior_samples = final_post, 
   sampler_mapping = sampler_mapping
 )
+dev.off()
 ```
 
 *Plot Concentration Predictions*
@@ -1656,6 +1666,7 @@ plot_predictions_with_observed <- function(back_transformed_predictions, data, s
 
 ```{r}
 # Example usage
+png('../figs/predictions_with_observed.png', width = 800, height = 600, res = 300)
 plot_predictions_with_observed(
   back_transformed_predictions = final_post_back_transformed, 
   data = d, 
@@ -1663,6 +1674,7 @@ plot_predictions_with_observed(
   analyte_index = 8, 
   block_index = 1
 )
+dev.off()
 ```
 
 ## Conclusion
