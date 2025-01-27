@@ -562,7 +562,7 @@ sim_data_1.3 %>%
 ```
 
 Model fit - TEST DATA
-```{r}
+```{r, eval=FALSE}
 # Prepare data for the updated model
 data1.3 <- list(
   C_obs = sim_data_1.3$C_obs_standardized,  # Standardized observed concentrations
@@ -612,16 +612,16 @@ m1.3 <- ulam(
 ```
 
 Summary of results
-```{r}
+```{r, eval=FALSE}
 precis(m1.3, depth=2)
 ```
 
-```{r}
+```{r, eval=FALSE}
 traceplot(m1.3)
 ```
 
 Posterior predictions
-```{r}
+```{r, eval=FALSE}
 # Extract posterior samples
 post1.3 <- extract.samples(m1.3)
 
@@ -716,7 +716,7 @@ Data simulation
 sim_data_1.4 <- sim_data_1.3
 ```
 
-Centered Model
+#### Centered Model
 - Model fit
 ```{r, eval=FALSE}
 # Prepare data for the model
@@ -845,9 +845,9 @@ refined_summary_table_1.4_c
 ```
 
 
-Non-centered model
+#### Non-centered model
 - Model fit
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 # Prepare data for the model
 data1.4 <- list(
   C_obs = sim_data_1.4$C_obs_standardized,  # Standardized observed concentrations
@@ -902,12 +902,12 @@ m1.4_nc <- ulam(
 ```
 
 - Summary of results
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 precis(m1.4_nc, depth = 2)
 ```
 
 - Posterior predictions
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 # Extract posterior samples
 post1.4_nc <- extract.samples(m1.4_nc)
 
@@ -989,7 +989,7 @@ refined_summary_table_1.4_nc
 
 ```
 
-Results: 
+Results: The non-centered model performs better, and can accurately estimate simulated data.
 
 ## Final model selection, graphing, and interpretation - TEST DATA
 *In Development*
@@ -1260,50 +1260,26 @@ plot_predictions_with_observed(
 
 Run selected model using real data - which imputes missing data from Storm 1,2
 ```{r}
-# data is 'dat' as created from the real data
-# Updated model allowing block effects to vary by analyte
-m1.3_real <- ulam(
-  alist(
-    # Observation model
-    C_obs ~ dnorm(mu, sigma),
-    
-    # Mean structure with analyte-specific block effects
-    mu <- alpha[A] + beta[A, S] + gamma[A, B],
-    
-    # Non-centered parameterization for analyte-specific intercepts
-    transpars> vector[K_A]:alpha <<- a_bar + z_alpha * sigma_a,
-    vector[K_A]:z_alpha ~ normal(0, 1),
-    
-    # Non-centered parameterization for analyte-specific block effects
-    transpars> matrix[K_A, K_B]:gamma <<- g_bar + z_gamma * sigma_g,
-    matrix[K_A, K_B]:z_gamma ~ normal(0, 1),
-    
-    # Priors for sampler-specific effects
-    matrix[K_A, K_S]:beta ~ normal(0, 1),
-    
-    # Hyper-priors
-    a_bar ~ normal(0, 1),
-    sigma_a ~ exponential(1),
-    g_bar ~ normal(0, 0.5),
-    sigma_g ~ exponential(1),
-    
-    # Prior for measurement error
-    sigma ~ exponential(1)
-  ),
-  data = dat,
-  chains = 4,
-  cores = 4
-)
+# data is 'dat' as created from the real data in the Tools section
+
+# Recalibrate the m1.4_nc model using the real data
+m1.4_nc_real <- update(m1.4_nc, data = dat)
+```
+
+Summary
+```{r}
+# Check summary of recalibrated model
+precis(m1.4_nc_real, depth = 2)
 ```
 
 Generate posterior predictions and back-transformed predictions
 ```{r}
 # Extract posterior samples
-post1.3_real <- extract.samples(m1.3_real)
+post1.4_nc_real <- extract.samples(m1.4_nc_real)
 
 # Updated link function for posterior predictions
-link_function <- function(post1.3_real, data) {
-  n_samples <- nrow(post1.3_real$beta[, , 1])  # Number of posterior samples
+link_function_1.4_nc <- function(post, data) {
+  n_samples <- nrow(post$beta[, , 1])  # Number of posterior samples
   n_analytes <- data$K_A               # Number of analytes
   n_samplers <- data$K_S               # Number of sampler types
   n_blocks <- data$K_B                 # Number of blocks
@@ -1315,12 +1291,11 @@ link_function <- function(post1.3_real, data) {
   for (a in 1:n_analytes) {
     for (s in 1:n_samplers) {
       for (b in 1:n_blocks) {
-        # Compute predictions in z-score form
-        predictions[, a, s, b] <- post1.3_real$a_bar +
-                                  post1.3_real$z_alpha[, a] * post1.3_real$sigma_a +
-                                  post1.3_real$beta[, a, s] +
-                                  post1.3_real$g_bar +
-                                  post1.3_real$z_gamma[, a, b] * post1.3_real$sigma_g
+        # Compute predictions using the existing posterior parameters
+        predictions[, a, s, b] <- post$mu_alpha + 
+                                  post$z_alpha[, a] * post$sigma_alpha + 
+                                  post$beta[, a, s] + 
+                                  post$gamma[, a, b]
       }
     }
   }
@@ -1328,115 +1303,70 @@ link_function <- function(post1.3_real, data) {
   return(predictions)
 }
 
+
 # Generate predictions
-posterior_predictions <- link_function(post1.3_real, data1.3)
+posterior_predictions_real <- link_function_1.4_nc(post1.4_nc_real, dat)
 
 # Initialize array for back-transformed predictions
-back_transformed_predictions1.3_real <- array(NA, dim = dim(posterior_predictions))
+back_transformed_predictions_1.4_nc_real <- array(NA, dim = dim(posterior_predictions_real))
 
 # Back-transform predictions for each analyte
-for (a in 1:data1.3$K_A) {
-  # Extract mean and SD for the analyte
-  analyte_mean <- mean(sim_data_1.3$C_obs[sim_data_1.3$analyte_abbr == a])
-  analyte_sd <- sd(sim_data_1.3$C_obs[sim_data_1.3$analyte_abbr == a])
+for (a in 1:dat$K_A) {
+  analyte_mean <- mean(d$result[d$A == a], na.rm = T)  # Replace with actual analyte means
+  analyte_sd <- sd(d$result[d$A == a], na.rm = T)      # Replace with actual analyte SDs
   
   # Back-transform predictions for the analyte
-  back_transformed_predictions1.3_real[, a, , ] <- posterior_predictions[, a, , ] * analyte_sd + analyte_mean
+  back_transformed_predictions_1.4_nc_real[, a, , ] <- posterior_predictions_real[, a, , ] * analyte_sd + analyte_mean
 }
 
-
 # Summarize posterior predictions
-# Initialize a summary dataframe
 prediction_summary <- data.frame()
 
-# Summarize predictions for each analyte, sampler, and block
-for (a in 1:data1.3$K_A) {
-  for (s in 1:data1.3$K_S) {
-    for (b in 1:data1.3$K_B) {
-      # Extract samples for the current analyte, sampler, and block
-      samples <- back_transformed_predictions1.3_real[, a, s, b]
+for (a in 1:dat$K_A) {
+  for (s in 1:dat$K_S) {
+    for (b in 1:dat$K_B) {
+      samples <- back_transformed_predictions_1.4_nc_real[, a, s, b]
       
-      # Add summary statistics to the dataframe
+      # Skip if all samples are NA or NaN
+      if (all(is.na(samples))) {
+        cat("Found NA values in predictions for:\n")
+        cat("  Analyte:", a, "\n")
+        cat("  Sampler:", s, "\n")
+        cat("  Block:", b, "\n")
+        print(head(samples))  # Print a preview of the problematic samples
+        next
+      }
+      
+      # Add summary statistics, ignoring NA values
       summary_row <- data.frame(
         analyte_abbr = a,
-        sampler_type = as.character(levels(sim_data_1.3$S)[s]),
-        block = as.character(levels(sim_data_1.3$block)[b]),
-        mean_prediction = mean(samples),
-        prediction_5.5 = quantile(samples, 0.055),
-        prediction_94.5 = quantile(samples, 0.945)
+        sampler_type = as.character(levels(d$method.name)[s]),
+        block = as.character(levels(d$block)[b]),
+        mean_prediction = mean(samples, na.rm = TRUE),
+        prediction_5.5 = quantile(samples, 0.055, na.rm = TRUE),
+        prediction_94.5 = quantile(samples, 0.945, na.rm = TRUE)
       )
-      
       prediction_summary <- rbind(prediction_summary, summary_row)
     }
   }
 }
 
-# Refine the summary table: Rows as analytes, columns as sampler types
+
+# Refine the summary table
 refined_summary_table <- prediction_summary %>%
   select(analyte_abbr, sampler_type, mean_prediction, block) %>%
   pivot_wider(names_from = sampler_type, values_from = mean_prediction)
 
 # View the refined summary table
 refined_summary_table
+
 ```
-
-```{r}
-# Number of posterior samples
-n_samples <- length(post1.3_real$a_bar)  # Should be 2,000
-
-# Number of parameters for alpha, beta, and gamma
-K_A <- length(post1.3_real$alpha) / n_samples  # Analytes
-K_S <- length(post1.3_real$beta) / (n_samples * K_A)  # Samplers
-K_B <- length(post1.3_real$gamma) / (n_samples * K_A)  # Blocks
-
-# Reshape alpha, beta, and gamma into matrices
-alpha_matrix <- matrix(post1.3_real$alpha, nrow = n_samples, ncol = K_A)
-beta_matrix <- matrix(post1.3_real$beta, nrow = n_samples, ncol = K_A * K_S)
-gamma_matrix <- matrix(post1.3_real$gamma, nrow = n_samples, ncol = K_A * K_B)
-```
-
-```{r}
-# Correlation plot for sampler-specific effects
-correlationPlot(
-  mat = beta_matrix,
-  density = "smooth",
-  method = "pearson",
-  thin = 500,
-  scaleCorText = TRUE,
-  main = "Correlation Between Sampler Effects"
-)
-```
-
-```{r}
-# Correlation plot for analyte-specific intercepts
-correlationPlot(
-  mat = alpha_matrix,
-  density = "smooth",
-  method = "pearson",
-  thin = 500,
-  scaleCorText = TRUE,
-  main = "Correlation Between Analyte Intercepts"
-)
-```
-
-```{r}
-# Correlation plot for block-specific effects
-correlationPlot(
-  mat = gamma_matrix,
-  density = "smooth",
-  method = "pearson",
-  thin = 500,
-  scaleCorText = TRUE,
-  main = "Correlation Between Block Effects"
-)
-```
-
 
 Select final model and 'observed data' for comparison
 ```{r}
-final_model <- m1.3_real
-final_post <- post1.3_real #put posterior predictions here
-final_post_back_transformed <- back_transformed_predictions1.3_real #put back-transformed posterior predictions here
+final_model <- m1.4_nc_real
+final_post <- post1.4_nc_real #put posterior predictions here
+final_post_back_transformed <- back_transformed_predictions_1.4_nc_real #put back-transformed posterior predictions here
 final_data <- d
 ```
 
@@ -1726,12 +1656,11 @@ plot_predictions_with_observed <- function(back_transformed_predictions, data, s
 
 ```{r}
 # Example usage
-sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 plot_predictions_with_observed(
   back_transformed_predictions = final_post_back_transformed, 
   data = d, 
   sampler_mapping = sampler_mapping, 
-  analyte_index = 1, 
+  analyte_index = 8, 
   block_index = 1
 )
 ```
