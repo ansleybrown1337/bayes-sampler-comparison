@@ -43,7 +43,7 @@ The study site is located at the CSU Agricultural Research, Development and Educ
 
 In 2011, the site was established to compare two conservation tillage treatments, minimum till (MT) and strip till (ST), with a conventional tillage control treatment (CT) that is representative of typical practices in furrow irrigated fields of northern Colorado. The MT and ST treatments were selected in collaboration with a group of advising farmers interested in the feasibility of conservation tillage for furrow-irrigated systems. The field contains relatively large field plots (320 m long × 27 m wide) to realistically represent water movement in furrows and associated challenges with commercial production fields in the region. 
 
-During the year of this study (2023), the research field was planted in silage corn in late April and harvested in mid-September. Winter wheat was planted immediately afterward and will be harvested in July 2024.
+During the yearS of this study (2023 and 2024), the research field was planted in silage corn in late April and harvested in mid-September. Winter wheat was planted immediately afterward and will was harvested in July 2024.
 
 ### Edge-of-Field Runoff Monitoring Setup
 
@@ -80,9 +80,10 @@ The procedure will be as follows:
 ### Simulate data
 Simulated data come from an r script specifically built to represent a similar scenario with similar data, but with known influences of each variable on the result (e.g., make each sampler type have it's own bias on analyte concentration).  This will allow us to test the model and ensure it is functioning properly before using real data.
 
-The script to generate the simulated can be found in `2_code/data_sim.R`, and the results can be found in `0_data/sim_data.csv`.
-
 ### Create a causal model
+
+UPDATE THIS SECITON, AJ
+
 Produced by [dagitty.net](https://www.dagitty.net/dags.html#), the causal model is a directed acyclic graph (DAG) that represents the relationships between the variables in the study.  This model will be used to create the statistical model in R.
 
 ![Figure 3: Causal Model](figs/dag.PNG)
@@ -108,110 +109,136 @@ dag {
 ```
 
 ### Create the statistical model
-The statistical model is created using the DAG and the following assumptions:
+### Generalized Linear Mixed Model
 
-$`C_i \sim \text{Normal}(\mu_i, \sigma)`$
+The statistical model is created using a DAG and the following assumptions:
 
-$`\mu_i = \alpha_{I} + \gamma_{A} + \theta_{B} + \beta_{S}S_i + \beta_{T}T_i`$
+#### Observation Model:
+$$
+C_i \sim \text{Normal}(\mu_i, \sigma)
+$$
 
-Regular priors:
-
-$`\beta_{S} \sim  \text{Normal}(0, 0.5)`$
-
-$`\beta_{T} \sim  \text{Normal}(0, 0.5)`$
-
-Adaptive priors:
-
-$`\alpha_{I} \sim \text{Normal}(\overline{\alpha}, \sigma_{\alpha})`$
-
-$`\gamma_{A} \sim \text{Normal}(\overline{\gamma}, \sigma_{\gamma})`$
-
-$`\theta_{B} \sim \text{Normal}(\overline{\theta}, \sigma_{\theta})`$
-
-Hyper-priors:
-
-
-$`\overline{\alpha} \sim \text{Normal}(0, 0.5)`$
-
-$`\overline{\gamma} \sim \text{Normal}(0, 0.5)`$
-
-$`\overline{\theta} \sim \text{Normal}(0, 0.5)`$
-
-$`\sigma_{\alpha} \sim \text{Exponential}(1)`$
-
-$`\sigma_{\gamma} \sim \text{Exponential}(1)`$
-
-$`\sigma_{\theta} \sim \text{Exponential}(1)`$
-
+#### Mean Structure:
+$$
+\mu_i = \alpha_A + \beta_{A, S} + \gamma_{A, B}
+$$
 
 Where:
+- $C_i$ is the observed analyte concentration (standardized)
+- $ \alpha_A $ is the analyte-specific intercept
+- $ \beta_{A, S} $ is the analyte-specific effect of sampler method $ S $ (centered multivariate normal)
+- $ \gamma_{A, B} $ is the analyte-specific effect of block $ B $ (centered multivariate normal)
+- $ \sigma $ is the measurement error standard deviation
 
-- $C_i$ is the observed analyte concentration
-- $\alpha_{I}$ is the intercept for irrigation event
-- $\gamma_{A}$ is the intercept for analyte type
-- $\theta_{B}$ is the intercept for replication block
-- $\beta_{S}$ is the effect of sampler method
-- $\beta_{T}$ is the effect of tillage treatment
+### Priors
 
-**A comment on clusters v. features:**
+#### Regular Priors:
+- Measurement error:
+$$
+\sigma \sim \text{Exponential}(1)
+$$
 
-*Clusters* are kinds of groups within the data (e.g., irrigation event count or analyte type). These require adaptive priors to account for the variation within each cluster using hyper-paremeters.  In this case, the clusters are irrigation event, analyte type, and replication block.
+#### Analyte-Specific Priors:
+- Intercepts for analyte $ \alpha_A $:
+$$
+\alpha_A \sim \text{Normal}(0, 1)
+$$
 
-*Features* are aspects of the model (parameters) that vary by cluster (e.g., the effect of sampler method or tillage treatment on the observed concentration). These require regular priors to find the expsoure effect on the dependent variable.
+- Sampler effects $ \beta_{A, S} $ (centered multivariate normal):
+$$
+\beta_{A, S} \sim \text{MultiNormal}(0, \text{Rho}_{\text{sampler}}, \sigma_{\text{sampler}})
+$$
+
+- Block effects $ \gamma_{A, B} $ (centered multivariate normal):
+$$
+\gamma_{A, B} \sim \text{MultiNormal}(0, \text{Rho}_{\text{block}}, \sigma_{\text{block}})
+$$
+
+#### Adaptive Priors:
+- Covariance parameters for sampler effects:
+$$
+\text{Rho}_{\text{sampler}} \sim \text{LKJ}(4)
+$$
+$$
+\sigma_{\text{sampler}} \sim \text{Exponential}(1)
+$$
+
+- Covariance parameters for block effects:
+$$
+\text{Rho}_{\text{block}} \sim \text{LKJ}(4)
+$$
+$$
+\sigma_{\text{block}} \sim \text{Exponential}(1)
+$$
+
+
+In Summary:
+- **Analyte-Specific Effects ($ \alpha_A $)**: Unique intercepts for each analyte type.
+- **Sampler Effects ($ \beta_{A, S} $)**: Variance and correlation in sampler performance across analytes.
+- **Block Effects ($ \gamma_{A, B} $)**: Variance and correlation in replication blocks across analytes.
+- **Measurement Error ($ \sigma $)**: The standard deviation of residual error in observed concentrations.
+
+The model enables the estimation of analyte-specific effects, accounting for variance and correlation in sampler methods and replication blocks. By leveraging adaptive priors and a multilevel framework, the model is designed to capture underlying patterns in water quality data while addressing the hierarchical structure of the experimental setup. Furthermore, the use of this Bayesian approach allowed for imputation of missing values from sample methods from two storm events where runoff occured, but none was collected except by the LCS.
 
 ### Create the statistical model in R
-The source code for the statistical model can be found in `2_code/analysis.Rmd` and `2_code/analysis_test.Rmd`.
+The source code for the statistical model can be found in `2_code/analysis_wq.Rmd`. The model chosen for this study is a non-centered version of the mathematical model presented above, and is seen in the R code as `m1.4_nc` which is shown below:
 
 ```{r, eval=FALSE, echo=FALSE}
-# create data list for ulam models
-dlist <- list(
-    C_obs = dat$result_ctr, #use standardized results
-    #C_sd = d$Divorce.SE / sd( d$Divorce ), # we don't have SE from our sample
-    S = as.numeric(as.factor(dat$method.name)),
-    TRT = as.numeric(as.factor(dat$treatment)),
-    I = as.numeric(as.factor(dat$event.count)),
-    A = as.numeric(as.factor(dat$analyte_abbr)),
-    B = as.numeric(as.factor(dat$block)),
-    N = nrow(dat)
+# Prepare data for the model
+data1.4 <- list(
+  C_obs = sim_data_1.4$C_obs_standardized,  # Standardized observed concentrations
+  S = as.numeric(as.factor(sim_data_1.4$S)), # Sampler type index (1-4)
+  A = sim_data_1.4$analyte_abbr,             # Analyte index (1-9)
+  B = as.numeric(as.factor(sim_data_1.4$block)), # Block index (1-2)
+  N = nrow(sim_data_1.4),                    # Number of observations
+  K_S = length(unique(sim_data_1.4$S)),      # Number of sampler types
+  K_A = length(unique(sim_data_1.4$analyte_abbr)), # Number of analytes
+  K_B = length(unique(sim_data_1.4$block))   # Number of blocks
 )
 
-# fit model 2.3
-# using partial pooling around irrigation # and Analyte, and block (non-centered)
-m2.3 <- ulam(
-    alist(
-        # model for C* (observed results)
-        C_obs ~ dnorm(mu, sigma),
-        sigma ~ dexp(1),
-        # model
-        mu <- a_bar + 
-              z[I]*sigma_a + # irrigation intercepts
-              x[A]*sigma_g + # analyte intercepts
-              b[B]*sigma_j + # block intercepts
-              bS[S] + # sampler method effect
-              bTRT[TRT], # treatment effect
-        # regular priors
-        a_bar ~ dnorm(0,0.5),
-        bS[S] ~ dnorm(0,0.5),
-        bTRT[TRT] ~ dnorm(0,0.5),
-        z[I] ~ dnorm(0,1),
-        x[A] ~ dnorm(0,1),
-        b[B] ~ dnorm(0,1),
-        sigma_a ~ dexp(1),
-        sigma_g ~ dexp(1),
-        sigma_j ~ dexp(1),
-        gq> vector[I]:a <<- a_bar + z*sigma_a,
-        gq> vector[A]:g <<- x*sigma_g,
-        gq> vector[B]:j <<- b*sigma_j
-        # adaptive priors
-          # none
-        # hyper-priors
-          # none
-        
-    ), data=dlist, chains=4, cores=4 )
+# Non-centered version of m1.4 (corrected)
+m1.4_nc <- ulam(
+  alist(
+    # Observation model
+    C_obs ~ dnorm(mu, sigma),
+    
+    # Mean structure with correlations between analytes, samplers, and blocks
+    mu <- alpha[A] + beta[A, S] + gamma[A, B],
+    
+    # Analyte-specific (9 levels) intercepts (non-centered parameterization)
+    transpars> vector[K_A]:alpha <<- mu_alpha + z_alpha * sigma_alpha,
+    vector[K_A]:z_alpha ~ normal(0, 1),  # Non-centered scaling
+    mu_alpha ~ normal(0, 1),  # Prior for mean intercepts
+    sigma_alpha ~ exponential(1),  # Prior for intercept variation
+    
+    # Analyte-specific (9 levels) sampler (4 levels) effects (non-centered parameterization)
+    transpars> matrix[K_A, K_S]:beta <<- mu_beta + z_beta * diag_pre_multiply(sigma_beta, L_beta),
+    transpars> matrix[K_A, K_S]:mu_beta <- rep_matrix(0, K_A, K_S),  # Center at zero
+    matrix[K_A, K_S]:z_beta ~ normal(0, 1),  # Standardized effects
+    transpars> cholesky_factor_corr[K_S]:L_beta ~ lkj_corr_cholesky(2),  # LKJ prior
+    vector[K_S]:sigma_beta ~ exponential(1),  # Prior for scaling sampler effects
+    
+    # Analyte-specific (9 levels) block (2 levels) effects (non-centered parameterization)
+    transpars> matrix[K_A, K_B]:gamma <<- mu_gamma + z_gamma * diag_pre_multiply(sigma_gamma, L_gamma),
+    transpars> matrix[K_A, K_B]:mu_gamma <- rep_matrix(0, K_A, K_B),  # Center at zero
+    matrix[K_A, K_B]:z_gamma ~ normal(0, 1),  # Standardized effects
+    transpars> cholesky_factor_corr[K_B]:L_gamma ~ lkj_corr_cholesky(2),  # LKJ prior
+    vector[K_B]:sigma_gamma ~ exponential(1),  # Prior for scaling block effects
+    
+    # Prior for measurement error
+    sigma ~ exponential(1)
+  ),
+  data = data1.4,
+  chains = 4,
+  cores = 12,
+  iter = 2000,              # Total iterations (increase this)
+  warmup = 1000             # Number of warmup iterations (optional, default is iter/2)
+)
 ```
 
 ### Test the model using the simulated data
-Using the simulated data, the model was tested to ensure that the model functions as intented.  The results can be found in `0_docs/analysis_test.html`.
+
+AJ UPDATE THIS
 
 Artificial values were added to the simulated data to represent the effect of sampler method, tillage treatment, irrigation event, and replication block on the observed concentration.  The model was then used to create a modified average that was then pushed through a normal distribution to represent a simulated observed concentration.  This was done twice for each combination of sampler method, tillage treatment, irrigation event, and replication block in congruence with real sampling protocol.
 
