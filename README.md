@@ -81,37 +81,36 @@ The procedure will be as follows:
 Simulated data come from an r script specifically built to represent a similar scenario with similar data, but with known influences of each variable on the result (e.g., make each sampler type have it's own bias on analyte concentration).  This will allow us to test the model and ensure it is functioning properly before using real data.
 
 ### Create a causal model
-
-UPDATE THIS SECITON, AJ
-
 Produced by [dagitty.net](https://www.dagitty.net/dags.html#), the causal model is a directed acyclic graph (DAG) that represents the relationships between the variables in the study.  This model will be used to create the statistical model in R.
 
 ![Figure 3: Causal Model](figs/dag.PNG)
 *Figure 3.* DAG representing the causal model for the study.
 
 
-Where sampler method (S) and tillage treatment (T) influence the unobserved true concentration (C), which in turn influences the observed concentration (C*). The observed concentration is also influenced by measurement error (*e*).
+Where sampler method (S), Analyte type (A), and experimental block (B) influence the observed analyte concentration (C). The observed concentration is also influenced by other uncertainty that is unobserved (*e*). Green nodes represent exposures, blue nodes represent outcomes, and grey nodes represent unobserved variables.
 
 Here was the code used to generate the DAG:
 
 ```{r}
 dag {
-"Measurement Error" [pos="0.158,-1.083"]
-"Obs. Conc." [outcome,pos="-0.414,-0.561"]
-"Sampler Method" [exposure,pos="-1.296,-0.978"]
-"Tillage Treatment" [exposure,pos="-1.270,-0.285"]
-"True Conc." [latent,pos="-0.918,-0.566"]
-"Measurement Error" -> "Obs. Conc."
-"Sampler Method" -> "True Conc."
-"Tillage Treatment" -> "True Conc."
-"True Conc." -> "Obs. Conc."
+bb="-3.052,-3.426,2.385,2.376"
+"Observed Concentration" [outcome,pos="-0.456,-0.248"]
+"Other Uncertainty" [latent,pos="1.329,-2.365"]
+"Sampler Method" [exposure,pos="-1.336,-1.831"]
+Analyte [exposure,pos="-2.142,-0.196"]
+Block [exposure,pos="-1.343,1.451"]
+"Other Uncertainty" -> "Observed Concentration"
+"Sampler Method" -> "Observed Concentration"
+Analyte -> "Observed Concentration"
+Analyte -> "Sampler Method"
+Analyte -> Block
+Block -> "Observed Concentration"
 }
 ```
 
 ### Create the statistical model
 ### Generalized Linear Mixed Model
-
-The statistical model is created using a DAG and the following assumptions:
+Using the above DAG as a guide, we can create a statistical model to analyze the data. In this case, we will use a generalized linear mixed model (GLMM) to model the concentration results for each analyte, sampler and block.  
 
 #### Observation Model:
 $$
@@ -125,7 +124,7 @@ $$
 
 Where:
 - $C_i$ is the observed analyte concentration (standardized)
-- $ \alpha_A $ is the analyte-specific intercept
+- $ \alpha_A $ is the analyte mean concentration (i.e., the mean concentration of analyte $ A $ when block and sampler effects are zero)
 - $ \beta_{A, S} $ is the analyte-specific effect of sampler method $ S $ (centered multivariate normal)
 - $ \gamma_{A, B} $ is the analyte-specific effect of block $ B $ (centered multivariate normal)
 - $ \sigma $ is the measurement error standard deviation
@@ -144,31 +143,26 @@ $$
 \alpha_A \sim \text{Normal}(0, 1)
 $$
 
-- Sampler effects $ \beta_{A, S} $ (centered multivariate normal):
+- Sampler effects $ \beta_{A, S} $:
 $$
-\beta_{A, S} \sim \text{MultiNormal}(0, \text{Rho}_{\text{sampler}}, \sigma_{\text{sampler}})
+\beta_{A, S} \sim \text{MVN}([0,0,0,0], \text{R}_{\text{S}}, \text{S}_{\text{S}})
 $$
 
-- Block effects $ \gamma_{A, B} $ (centered multivariate normal):
+- Block effects $ \gamma_{A, B} $:
 $$
-\gamma_{A, B} \sim \text{MultiNormal}(0, \text{Rho}_{\text{block}}, \sigma_{\text{block}})
+\gamma_{A, B} \sim \text{MVN}([0,0], \text{R}_{\text{B}}, \text{S}_{\text{B}})
 $$
 
 #### Adaptive Priors:
-- Covariance parameters for sampler effects:
+- Standard deviation priors for each sampler and block in the MVN distributions:
 $$
-\text{Rho}_{\text{sampler}} \sim \text{LKJ}(4)
-$$
-$$
-\sigma_{\text{sampler}} \sim \text{Exponential}(1)
+\text{S}_{\text{S}}, \text{S}_{\text{B}} \sim \text{Exponential}(1)
 $$
 
-- Covariance parameters for block effects:
+
+- Correlation (i.e, covariance) priors for each sampler and block in the MVN distributions:
 $$
-\text{Rho}_{\text{block}} \sim \text{LKJ}(4)
-$$
-$$
-\sigma_{\text{block}} \sim \text{Exponential}(1)
+\text{R}_{\text{S}}, \text{R}_{\text{B}} \sim \text{LKJcorr}(4)
 $$
 
 
@@ -181,7 +175,7 @@ In Summary:
 The model enables the estimation of analyte-specific effects, accounting for variance and correlation in sampler methods and replication blocks. By leveraging adaptive priors and a multilevel framework, the model is designed to capture underlying patterns in water quality data while addressing the hierarchical structure of the experimental setup. Furthermore, the use of this Bayesian approach allowed for imputation of missing values from sample methods from two storm events where runoff occured, but none was collected except by the LCS.
 
 ### Create the statistical model in R
-The source code for the statistical model can be found in `2_code/analysis_wq.Rmd`. The model chosen for this study is a non-centered version of the mathematical model presented above, and is seen in the R code as `m1.4_nc` which is shown below:
+To calibrate and run the model, we will use Hamiltonian Monte Carlo (HMC) to via Stan (i.e., `cmdstanr`) and the `rethinking` package in R. The source code for the statistical model can be found in `2_code/analysis_wq.Rmd`. The model chosen for this study is a mathematically equivalent, [non-centered parameterization](https://mc-stan.org/docs/2_18/stan-users-guide/reparameterization-section.html) of the model presented above for better convergence and sampling efficacy. The is seen in the R code as `m1.4_nc` shown below:
 
 ```{r, eval=FALSE, echo=FALSE}
 # Prepare data for the model
@@ -285,7 +279,10 @@ Water quality is an important aspect of agriculture, and it is important to unde
 For more information, please [contact me](mailto:Ansley.Brown@colostate.edu)!
 
 ## References
-- **McElreath R (2023).** _rethinking: Statistical
-  Rethinking book package_. R package version 2.40.
+- **McElreath R (2023).** _rethinking: Statistical Rethinking book package_. R package version 2.40.
 
 - **McElreath R (2016).** _Statistical Rethinking: A Bayesian Course with Examples in R and Stan_. Chapman and Hall/CRC.
+
+- **Stan Development Team (2023).** _Stan Modeling Language User's Guide and Reference Manual_. Version 2.33. [https://mc-stan.org](https://mc-stan.org).
+
+- **Gabry J, Češnovar R, Johnson A, Bronder S (2024).** _cmdstanr: R Interface to 'CmdStan'. R package version 0.8.1_, https://discourse.mc-stan.org, https://mc-stan.org/cmdstanr/.
