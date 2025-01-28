@@ -490,8 +490,6 @@ Results: Model 1.2 was successful in estimating analyte and sampler effects in a
 Data simulation
 ```{r}
 simulate_model_1.3 <- function(n_per_type = 100, noise_sd = 0.2, seed = 45) {
-  library(dplyr)
-  
   # Define sampler types and their true intercepts
   sampler_types <- c("LCS", "ISCO", "GB", "GBH")
   true_intercepts <- c(LCS = 0.7, ISCO = 0.3, GB = 1.2, GBH = 1.0)
@@ -1018,8 +1016,8 @@ plot(precis(final_model, depth = 2))
 
 *Convergence Diagnostics*
 ```{r}
-traceplot(final_model)
-#trankplot(final_model)
+#traceplot(final_model)
+trankplot(final_model)
 ```
 
 *Plot Sampler Effects from Posterior*
@@ -1069,7 +1067,7 @@ plot_sampler_effects <- function(posterior_samples, sampler_types) {
 
 # Example usage
 sampler_types <- levels(as.factor(final_data$S))
-png('../figs/sampler_effects_sim.png', width = 800, height = 600, res = 300)
+png('../figs/sampler_effects_sim.png', width = 1600, height = 1200, res = 300)
 plot_sampler_effects(
   posterior_samples = final_post, 
   sampler_types = sampler_types
@@ -1135,7 +1133,7 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_types) {
 }
 
 # Example usage
-png('../figs/sampler_contrasts_sim.png', width = 800, height = 600, res = 300)
+png('../figs/sampler_contrasts_sim.png', width = 1600, height = 1200, res = 300)
 plot_sampler_contrasts(
   posterior_samples = final_post, 
   sampler_types = sampler_types
@@ -1247,7 +1245,7 @@ plot_predictions_with_observed <- function(back_transformed_predictions, data, s
 ```
 
 ```{r}
-png('../figs/predictions_with_observed_sim.png', width = 800, height = 600, res = 300)
+png('../figs/predictions_with_observed_sim.png', width = 1600, height = 1200, res = 300)
 plot_predictions_with_observed(
   back_transformed_predictions = final_post_back_transformed,
   data = final_data,
@@ -1383,8 +1381,8 @@ plot(precis(final_model, depth = 1))
 
 *Convergence Diagnostics*
 ```{r}
-traceplot(final_model)
-#trankplot(final_model)
+#traceplot(final_model)
+trankplot(final_model)
 ```
 
 *Plot Sampler Effects from Posterior*
@@ -1448,7 +1446,7 @@ plot_sampler_effects <- function(posterior_samples, sampler_mapping) {
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
-png('../figs/sampler_effects.png', width = 800, height = 600, res = 300)
+png('../figs/sampler_effects.png', width = 1600, height = 1200, res = 300)
 plot_sampler_effects(
   posterior_samples = final_post, 
   sampler_mapping = sampler_mapping
@@ -1528,7 +1526,7 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
-png('../figs/sampler_contrasts.png', width = 800, height = 600, res = 300)
+png('../figs/sampler_contrasts.png', width = 1600, height = 1200, res = 300)
 plot_sampler_contrasts(
   posterior_samples = final_post, 
   sampler_mapping = sampler_mapping
@@ -1666,7 +1664,7 @@ plot_predictions_with_observed <- function(back_transformed_predictions, data, s
 
 ```{r}
 # Example usage
-png('../figs/predictions_with_observed.png', width = 800, height = 600, res = 300)
+png('../figs/predictions_with_observed.png', width = 1600, height = 1200, res = 300)
 plot_predictions_with_observed(
   back_transformed_predictions = final_post_back_transformed, 
   data = d, 

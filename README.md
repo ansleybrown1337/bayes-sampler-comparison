@@ -232,47 +232,114 @@ m1.4_nc <- ulam(
 
 ### Test the model using the simulated data
 
-AJ UPDATE THIS
+Artificial data were simulated to represent the effect of sampler method and block on each analyte concentration.  The simulation models the effects of sampler type and block on observed concentrations for nine water quality analytes observed in the real data. Below are the key details of the simulation:
 
-Artificial values were added to the simulated data to represent the effect of sampler method, tillage treatment, irrigation event, and replication block on the observed concentration.  The model was then used to create a modified average that was then pushed through a normal distribution to represent a simulated observed concentration.  This was done twice for each combination of sampler method, tillage treatment, irrigation event, and replication block in congruence with real sampling protocol.
+#### Simulated data characteristics
 
-The modeled summary data looked like this:
+**Sampler Type Effects**
 
-![Figure 4: Simulated Data Summary for Reference](figs/summary_sim.png)
+Four sampler types were modeled, each with a "true intercept" representing its efficiency:
+- **LCS**: Intercept = 0.7, moderate underestimation.
+- **ISCO**: Intercept = 0.3, substantial underestimation.
+- **GB**: Intercept = 1.2, slight overestimation.
+- **GBH**: Intercept = 1.0, accurate measurement.
 
-*Figure 4. Simulated data summary for reference.  Bars represent average analyte concentration over all irrigations, treatments, and blocks with black error bars representing the standard deviation around the mean.*
+**Block Effects**
 
-The statistical model was then verified by running simulated data in the model where the impacts of sampler method, tillage treatement, irrigation event, and replication block were known.  The results were then compared to the known values to ensure the model was functioning properly.
+Two blocks simulate environmental conditions:
+- **Block1**: Baseline, with no adjustment to true concentrations.
+- **Block2**: A 20% reduction in concentrations compared to Block1.
 
-![Figure 5: Sampler Effect Results](figs/bS_effect_sim.png)
+**True Analyte Concentration Values**
 
-*Figure 5. Effects of Sampler Method on Observed Concentration*
+Here are the "True" mean and standard deviation values for each analyte that were to be estimated, and then modiefied by the above parameters to simulate sampler and block effects:
 
-![Figure 6: Tillage Effect Results](figs/bTRT_effect_sim.png)
+*Table 1. True means and standard deviations used in the simulated data prior to modifying it with block and sampler effects.*
+| **Analyte** | **True Mean (mg/L)** | **True Standard Deviation (mg/L)** |
+|-------------|-----------------------|-------------------------------|
+| NO3         | 8.0                  | 1.0                           |
+| NO2         | 0.1                  | 0.01                          |
+| TKN         | 5.0                  | 1.0                           |
+| pH          | 7.0                  | 0.1                           |
+| TP          | 0.8                  | 0.1                           |
+| OP          | 0.3                  | 0.05                          |
+| EC          | 0.15                 | 0.01                          |
+| TSS         | 1000.0               | 200.0                         |
+| TDS         | 500.0                | 50.0                          |
 
-*Figure 6. Effects of Tillage Treatment on Observed Concentration*
+**Observed Concentration Calculation**
+
+The true values were modified by the effects of sampler and block using the equation below. This process was repeated 50 times for each sampler, block, and analyte, resulting in **3600 rows of simulated data** (i.e., 4 samplers × 9 analytes × 2 blocks x 50 replications).
+
+$$
+\mu_{analyte} = \text{Base Mean}_{analyte} - \text{Base Mean}_{analyte} \times (1 - \text{Sampler Intercept}) - \text{Base Mean}_{analyte} \times (1 - \text{Block Effect}) + \text{Random Noise}
+$$
+
+$$
+C_{\text{obs}} \sim \text{Normal}(\mu_{analyte}, \sigma_{analyte})
+$$
+
+#### Calibration results on simulated data
+
+The model was calibrated using these simulated data, and tested to ensure that the model characterized results as expected. The modeled summary data looked like this:
+
+*Table 2. Simulated data summary showing the impact of block and sampler method on each analyte concentration.*
+
+| Analyte Name | Block   | LCS    | ISCO   | GB     | GBH    |
+|--------------|---------|--------|--------|--------|--------|
+| NO3          | Block1  | 5.50   | 2.20   | 9.67   | 7.97   |
+| NO3          | Block2  | 4.05   | 0.745  | 7.79   | 6.55   |
+| NO2          | Block1  | 0.0710 | 0.0278 | 0.118  | 0.101  |
+| NO2          | Block2  | 0.0512 | 0.00786| 0.101  | 0.0813 |
+| TKN          | Block1  | 3.41   | 1.48   | 6.02   | 5.00   |
+| TKN          | Block2  | 2.57   | 0.498  | 4.86   | 3.89   |
+| pH           | Block1  | 4.88   | 2.11   | 8.41   | 7.00   |
+| pH           | Block2  | 3.48   | 0.706  | 6.99   | 5.62   |
+| TP           | Block1  | 0.552  | 0.269  | 0.961  | 0.774  |
+| TP           | Block2  | 0.414  | 0.0890 | 0.821  | 0.629  |
+| OP           | Block1  | 0.212  | 0.0925 | 0.358  | 0.305  |
+| OP           | Block2  | 0.146  | 0.0277 | 0.301  | 0.235  |
+| EC           | Block1  | 0.104  | 0.0442 | 0.180  | 0.150  |
+| EC           | Block2  | 0.0771 | 0.0142 | 0.150  | 0.120  |
+| TSS          | Block1  | 642.   | 288.   | 1208.  | 1026.  |
+| TSS          | Block2  | 494.   | 97.0   | 980.   | 821.   |
+| TDS          | Block1  | 348.   | 153.   | 613.   | 486.   |
+| TDS          | Block2  | 242.   | 48.5   | 516.   | 397.   |
+
+
+The posterior distributions showing the impact of sampler method averaged over all blocks and anlalytes also carried the correct trends in accordance with the simulated data:
+
+![Figure 4: Sampler Effect Results](figs/sampler_effects_sim.png)
+
+*Figure 4. Effects of Sampler Method on Observed Concentration averaged over analyte and block*
+
+The final test is to push out analyte predictions using the calibrated model and plotting the 'true' simulated data values over it to see how the model performs.  The results were good, with the model accurately centering posterior predictions over the simulated 'true' values.  Here is an example of that with Nitrate (NO3):
+
+![Figure 5. Posterior NO3 Prediction](figs/predictions_with_observed_sim.png)
+
+*Figure 5. Generative model posterior prediction of nitrate concentration with "True" mean values overlain as vertical dashed lines.*
 
 ### Analyze the real data
-The real data was analyzed using the verified model.  The results can be found in `0_docs/analysis_real.html`.
+After validating the model's accuracy with simulated data, the real data was analyzed using the model.
 
-![Figure 7: Raw Data Summary for Reference](figs/summary_real.png)
 
-*Figure 7. Raw data summary for reference.  Bars represent average analyte concentration over all irrigations, treatments, and blocks with black error bars representing the standard deviation around the mean.*
-
-![Figure 8: Sampler Effect Results](figs/bS_effect_real.png)
+![Figure 6: Sampler Effect Results](figs/sampler_effects.png)
 
 *Figure 8. Effects of Sampler Method on Observed Concentration*
 
-![Figure 9: Tillage Effect Results](figs/bTRT_effect_real.png)
+![Figure 7. Posterior TSS Prediction](figs/predictions_with_observed.png)
 
-*Figure 9. Effects of Tillage Treatment on Observed Concentration*
+*Figure 7. Generative model posterior prediction of total suspended solids concentration with real data observed mean values overlain as vertical dashed lines.*
 
 ### Interpret the results
-Looking at sampler effect distributions, **the results show that the sampler method over all analytes did not have a significant effect on the observed concentration** (i.e., Figure 8 shows distributions centered around 0, meaning no effect).  This is good news, as it means that the sampler method is not a significant source of bias in the observed concentration.
 
-Looking at tillage effect distributions, **the results show that the tillage treatment over all analytes did not have a significant effect on the observed concentration** (i.e., Figure 9 shows distributions centered around 0, meaning no effect).  This is unexpected, as the tillage treatment was expected to have significant impacts on the observed water quality concentration.
+UPDATE THIS SECTION
+
+
 
 ## Conclusion
+
+UPDATE THIS SECTION
 Water quality is an important aspect of agriculture, and it is important to understand the impacts of different sampling methods and tillage treatments on agricultural water quality measurements for scalable decision making and water resource management in general.  This study used a bayesian approach, using a generative model, to estimate the impacts of sampler method and tillage treatment on observed water quality concentration.  The results showed that neither the sampler method nor the tillage treatment had significant impacts on the observed water quality concentration. Regarding sampling method, this is good news, because it means that multiple sampling methods can be used in the field without significantly impacting the observed water quality concentration. Regarding tillage, however, the results are unexpected, as the tillage treatment was expected to have significant impacts on the observed water quality concentration.  Further research is needed to understand the impacts of tillage treatment on observed water quality concentration. Future work will include a more detailed analysis of the tillage treatment impacts over multiple years, and not just 2023 data as used in this study.
 
 
