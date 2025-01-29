@@ -711,7 +711,7 @@ Results: Model 1.3 now works as expected, with block effects varying by analyte.
 Data simulation
 ```{r, eval=FALSE}
 #TBD if we want to try simulating correlations between parameters
-sim_data_1.4 <- sim_data_1.3
+sim_data_1.4 <- simulate_model_1.3()
 ```
 
 #### Centered Model
@@ -859,6 +859,19 @@ data1.4 <- list(
 )
 
 # Non-centered version of m1.4 (corrected)
+# Prepare data for the model
+data1.4 <- list(
+  C_obs = sim_data_1.4$C_obs_standardized,  # Standardized observed concentrations
+  S = as.numeric(as.factor(sim_data_1.4$S)), # Sampler type index (1-4)
+  A = sim_data_1.4$analyte_abbr,             # Analyte index (1-9)
+  B = as.numeric(as.factor(sim_data_1.4$block)), # Block index (1-2)
+  N = nrow(sim_data_1.4),                    # Number of observations
+  K_S = length(unique(sim_data_1.4$S)),      # Number of sampler types
+  K_A = length(unique(sim_data_1.4$analyte_abbr)), # Number of analytes
+  K_B = length(unique(sim_data_1.4$block))   # Number of blocks
+)
+
+# Non-centered version of m1.4 (corrected)
 m1.4_nc <- ulam(
   alist(
     # Observation model
@@ -989,12 +1002,162 @@ refined_summary_table_1.4_nc
 
 Results: The non-centered model performs better, and can accurately estimate simulated data.
 
+### Model 1.5 - same as 1.4 but with different model form to mimic simulated data - NOT AS GOOD
+Data simulation
+```{r}
+sim_data_1.5 <- simulate_model_1.3()
+```
+
+Model fit
+```{r}
+# Prepare data for the model
+data1.5 <- list(
+  C_obs = sim_data_1.5$C_obs_standardized,  # Standardized observed concentrations
+  S = as.numeric(as.factor(sim_data_1.5$S)), # Sampler type index (1-4)
+  A = sim_data_1.5$analyte_abbr,             # Analyte index (1-9)
+  B = as.numeric(as.factor(sim_data_1.5$block)), # Block index (1-2)
+  N = nrow(sim_data_1.5),                    # Number of observations
+  K_S = length(unique(sim_data_1.5$S)),      # Number of sampler types
+  K_A = length(unique(sim_data_1.5$analyte_abbr)), # Number of analytes
+  K_B = length(unique(sim_data_1.5$block))   # Number of blocks
+)
+
+# Non-centered version of m1.5 with new model form
+m1.5_nc <- ulam(
+  alist(
+    # Observation model
+    C_obs ~ dnorm(mu, sigma),
+    
+    # Mean structure with correlations between analytes, samplers, and blocks
+    mu <- alpha[A] - alpha[A] * (1 - beta[A, S]) - alpha[A] * (1 - gamma[A, B]),
+    
+    # Analyte-specific (9 levels) intercepts (non-centered parameterization)
+    transpars> vector[K_A]:alpha <<- mu_alpha + z_alpha * sigma_alpha,
+    vector[K_A]:z_alpha ~ normal(0, 1),  # Non-centered scaling
+    mu_alpha ~ normal(0, 1),  # Prior for mean intercepts
+    sigma_alpha ~ exponential(1),  # Prior for intercept variation
+    
+    # Analyte-specific (9 levels) sampler (4 levels) effects (non-centered parameterization)
+    transpars> matrix[K_A, K_S]:beta <<- mu_beta + z_beta * diag_pre_multiply(sigma_beta, L_beta),
+    transpars> matrix[K_A, K_S]:mu_beta <- rep_matrix(0, K_A, K_S),  # Center at zero
+    matrix[K_A, K_S]:z_beta ~ normal(0, 1),  # Standardized effects
+    transpars> cholesky_factor_corr[K_S]:L_beta ~ lkj_corr_cholesky(2),  # LKJ prior
+    vector[K_S]:sigma_beta ~ exponential(1),  # Prior for scaling sampler effects
+    
+    # Analyte-specific (9 levels) block (2 levels) effects (non-centered parameterization)
+    transpars> matrix[K_A, K_B]:gamma <<- mu_gamma + z_gamma * diag_pre_multiply(sigma_gamma, L_gamma),
+    transpars> matrix[K_A, K_B]:mu_gamma <- rep_matrix(0, K_A, K_B),  # Center at zero
+    matrix[K_A, K_B]:z_gamma ~ normal(0, 1),  # Standardized effects
+    transpars> cholesky_factor_corr[K_B]:L_gamma ~ lkj_corr_cholesky(2),  # LKJ prior
+    vector[K_B]:sigma_gamma ~ exponential(1),  # Prior for scaling block effects
+    
+    # Prior for measurement error
+    sigma ~ exponential(1)
+  ),
+  data = data1.5,
+  chains = 4,
+  cores = 12,
+  iter = 2000,              # Total iterations (increase this)
+  warmup = 1000             # Number of warmup iterations (optional, default is iter/2)
+)
+```
+
+Summary of results
+```{r}
+precis(m1.5_nc, depth = 2)
+```
+
+Posterior predictions
+```{r}
+# Extract posterior samples
+post1.5_nc <- extract.samples(m1.5_nc)
+
+# Updated link function for posterior predictions for m1.5_nc
+link_function_1.5_nc <- function(post1.5_nc, data) {
+  n_samples <- nrow(post1.5_nc$alpha)       # Number of posterior samples
+  n_analytes <- data$K_A                   # Number of analytes
+  n_samplers <- data$K_S                   # Number of sampler types
+  n_blocks <- data$K_B                     # Number of blocks
+
+  # Initialize predictions array
+  predictions_nc <- array(NA, dim = c(n_samples, n_analytes, n_samplers, n_blocks))
+
+  # Generate predictions
+  for (a in 1:n_analytes) {
+    for (s in 1:n_samplers) {
+      for (b in 1:n_blocks) {
+        # Compute predictions using the new mean structure
+        predictions_nc[, a, s, b] <- post1.5_nc$mu_alpha +
+                                     post1.5_nc$z_alpha[, a] * post1.5_nc$sigma_alpha -
+                                     post1.5_nc$alpha[, a] * (1 - post1.5_nc$beta[, a, s]) -
+                                     post1.5_nc$alpha[, a] * (1 - post1.5_nc$gamma[, a, b])
+      }
+    }
+  }
+
+  return(predictions_nc)
+}
+
+# Generate predictions
+posterior_predictions_1.5_nc <- link_function_1.5_nc(post1.5_nc, data1.5)
+
+# Initialize array for back-transformed predictions
+back_transformed_predictions_1.5_nc <- array(NA, dim = dim(posterior_predictions_1.5_nc))
+
+# Back-transform predictions for each analyte
+for (a in 1:data1.5$K_A) {
+  # Extract mean and SD for the analyte from `sim_data_1.5`
+  analyte_mean <- mean(sim_data_1.5$C_obs[sim_data_1.5$analyte_abbr == a])
+  analyte_sd <- sd(sim_data_1.5$C_obs[sim_data_1.5$analyte_abbr == a])
+
+  # Back-transform predictions for the analyte
+  back_transformed_predictions_1.5_nc[, a, , ] <- posterior_predictions_1.5_nc[, a, , ] * analyte_sd + analyte_mean
+}
+
+# Summarize posterior predictions
+# Initialize a summary dataframe
+prediction_summary_1.5_nc <- data.frame()
+
+# Summarize predictions for each analyte, sampler, and block
+for (a in 1:data1.5$K_A) {
+  for (s in 1:data1.5$K_S) {
+    for (b in 1:data1.5$K_B) {
+      # Extract samples for the current analyte, sampler, and block
+      samples <- back_transformed_predictions_1.5_nc[, a, s, b]
+
+      # Add summary statistics to the dataframe
+      summary_row <- data.frame(
+        analyte_abbr = a,
+        sampler_type = s,
+        block = b,
+        mean_prediction = mean(samples),
+        prediction_5.5 = quantile(samples, 0.055),
+        prediction_94.5 = quantile(samples, 0.945)
+      )
+
+      prediction_summary_1.5_nc <- rbind(prediction_summary_1.5_nc, summary_row)
+    }
+  }
+}
+
+# Refine the summary table: Rows as analytes, columns as sampler types
+refined_summary_table_1.5_nc <- prediction_summary_1.5_nc %>%
+  select(analyte_abbr, sampler_type, mean_prediction, block) %>%
+  pivot_wider(names_from = sampler_type, values_from = mean_prediction)
+
+# View the refined summary table
+refined_summary_table_1.5_nc
+
+```
+
+Results:
+
 ## Final model selection, graphing, and interpretation - TEST DATA
 *In Development*
 Select final model and 'observed data' for comparison
 ```{r}
 # Specify the model to use
-which_model <- "1.4_nc"  # Potential options: "1.0", "1.1", "1.2", "1.3", "1.4_c", "1.4_nc"
+which_model <- "1.4_nc"  # Potential options: "1.0", "1.1", "1.2", "1.3", "1.4_c", "1.4_nc", "1.5_nc"
 
 # Dynamically construct variable names and access them using get()
 final_model <- get(paste0("m", which_model))  # e.g., "m1.4_nc"
@@ -1016,8 +1179,8 @@ plot(precis(final_model, depth = 2))
 
 *Convergence Diagnostics*
 ```{r}
-#traceplot(final_model)
-trankplot(final_model)
+traceplot(final_model)
+#trankplot(final_model)
 ```
 
 *Plot Sampler Effects from Posterior*
@@ -1446,7 +1609,7 @@ plot_sampler_effects <- function(posterior_samples, sampler_mapping) {
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
-png('../figs/sampler_effects.png', width = 1600, height = 1200, res = 300)
+png('../figs/sampler_effects.png', width = 2000, height = 1200, res = 300)
 plot_sampler_effects(
   posterior_samples = final_post, 
   sampler_mapping = sampler_mapping
@@ -1526,7 +1689,7 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
-png('../figs/sampler_contrasts.png', width = 1600, height = 1200, res = 300)
+png('../figs/sampler_contrasts.png', width = 3000, height = 1200, res = 300)
 plot_sampler_contrasts(
   posterior_samples = final_post, 
   sampler_mapping = sampler_mapping
@@ -1663,16 +1826,38 @@ plot_predictions_with_observed <- function(back_transformed_predictions, data, s
 ```
 
 ```{r}
-# Example usage
-png('../figs/predictions_with_observed.png', width = 1600, height = 1200, res = 300)
+# Loop through each analyte and generate a plot
+for (analyte_name in names(analyte_mapping)) {
+  analyte_index <- analyte_mapping[[analyte_name]]  # Get the corresponding index
+
+  # Define the output file path dynamically
+  output_file <- paste0("../figs/predictions_with_observed_", analyte_name, ".png")
+
+  # Generate and save the plot
+  png(output_file, width = 1600, height = 1200, res = 300)
+  plot_predictions_with_observed(
+    back_transformed_predictions = final_post_back_transformed, 
+    data = d, 
+    sampler_mapping = sampler_mapping, 
+    analyte_index = analyte_index, 
+    block_index = 1  # Adjust block index as needed
+  )
+  dev.off()
+
+  # Print status update
+  cat("Saved:", output_file, "\n")
+}
+
+```
+
+```{r}
 plot_predictions_with_observed(
-  back_transformed_predictions = final_post_back_transformed, 
-  data = d, 
-  sampler_mapping = sampler_mapping, 
-  analyte_index = 8, 
-  block_index = 1
-)
-dev.off()
+    back_transformed_predictions = final_post_back_transformed, 
+    data = d, 
+    sampler_mapping = sampler_mapping, 
+    analyte_index = 8, 
+    block_index = 2  # Adjust block index as needed
+  )
 ```
 
 ## Conclusion
