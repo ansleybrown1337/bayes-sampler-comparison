@@ -327,10 +327,9 @@ After validating the model's accuracy with simulated data, the real data was ana
 
 *Figure 8. Effects of Sampler Method on Observed Concentration*
 
-![Figure 7. Posterior TSS Prediction](figs/predictions_with_observed.png)
+![Figure 7. Posterior Analyte Predictions](figs/merged_predictions_real.png)
 
-*Figure 7. Generative model posterior prediction of total suspended solids concentration with real data observed mean values overlain as vertical dashed lines.*
-
+*Figure 7. Generative model posterior prediction of all analytes
 ### Interpret the results
 
 UPDATE THIS SECTION
