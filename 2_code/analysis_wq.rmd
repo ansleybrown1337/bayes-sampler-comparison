@@ -1812,105 +1812,103 @@ plot(precis(updated_model_real, depth = 1))
 trankplot(updated_model_real)
 ```
 
-TODO: UPDATE HERE ON
 *Plot Sampler Effects from Posterior*
 ```{r}
 # Plot sampler effects with dynamic axis limits
 plot_sampler_effects <- function(posterior_samples, sampler_mapping) {
-  # Extract sampler effects from posterior samples
-  n_samplers <- ncol(posterior_samples$beta[1, , ])  # Number of sampler types
-  sampler_effects <- matrix(NA, nrow = nrow(posterior_samples$beta[, , 1]), ncol = n_samplers)
-  
+  n_samplers <- dim(posterior_samples$beta)[3]  # Number of sampler types
+  n_analytes <- dim(posterior_samples$beta)[2]  # Number of analytes
+  n_samples <- dim(posterior_samples$beta)[1]   # Number of posterior samples
+
+  # Detect if treatment effects are included
+  include_treatment <- "delta" %in% names(posterior_samples)
+
+  # Average sampler effects across analytes, blocks, and treatments if present
+  sampler_effects <- matrix(NA, nrow = n_samples, ncol = n_samplers)
   for (s in 1:n_samplers) {
-    # Compute the mean sampler effect (averaged over analytes)
-    sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s], na.rm = TRUE)
+    if (include_treatment) {
+      # Average over analytes and treatments
+      sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s] + apply(posterior_samples$delta, c(1, 2), mean), na.rm = TRUE)
+    } else {
+      # Average over analytes only
+      sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s], na.rm = TRUE)
+    }
   }
-  
+
   # Define dynamic axis limits
-  percent_buffer <- 0.1 # Percentage buffer for axis limits
+  percent_buffer <- 0.1
   x_min <- min(sampler_effects, na.rm = TRUE)
   x_max <- max(sampler_effects, na.rm = TRUE)
   xlim <- c(x_min - percent_buffer * abs(x_min), x_max + percent_buffer * abs(x_max))
-  
-  y_max <- 0
-  for (s in 1:n_samplers) {
-    dens_data <- density(sampler_effects[, s])
-    y_max <- max(y_max, max(dens_data$y, na.rm = TRUE))
-  }
-  ylim <- c(0, y_max * (1 + percent_buffer))
-  
-  # Map sampler numbers to their abbreviations
-  sampler_labels <- names(sampler_mapping)
-  
+
+  y_max <- max(apply(sampler_effects, 2, function(col) max(density(col)$y, na.rm = TRUE)))
+  ylim <- c(0, y_max * 1.1)
+
   # Plot posterior densities for sampler effects
-  colors <- c("#8080FF", 
-              "#F98400", 
-              "#00A08A", 
-              "#E2AD00", 
-              "#800080", 
-              "#008000", 
-              "#5BBCD6",
-              "#CC79A7", 
-              "#AAAAAA"
-             )
+  colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00")
   plot(NULL, xlim = xlim, ylim = ylim, 
-       xlab = "Sampler Effect", ylab = "Density", main = "Posterior Sampler Effects")
-  
+       xlab = "Sampler Effect (Averaged over Analytes, Blocks, and Treatments)", ylab = "Density", 
+       main = "Posterior Sampler Effects")
+
   for (s in 1:n_samplers) {
     dens(sampler_effects[, s], col = colors[s], lwd = 3, add = TRUE)
   }
-  
+
   # Add prior density line
   curve(dnorm(x, mean = 0, sd = 1), from = xlim[1], to = xlim[2], lwd = 2, lty = 2, col = "black", add = TRUE)
-  
-  # Add legend with sampler labels
-  legend("topright", legend = c(sampler_types, "Prior"), 
-         col = c(colors[1:n_samplers], "black"), 
-         lwd = 3, 
-         lty = c(rep(1, n_samplers), 2)
-         )
+
+  # Add legend
+  legend("topright", legend = c(names(sampler_mapping), "Prior"), 
+         col = c(colors[1:n_samplers], "black"), lwd = 3, lty = c(rep(1, n_samplers), 2))
 }
 
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
 png('../figs/sampler_effects.png', width = 2000, height = 1200, res = 300)
-plot_sampler_effects(
-  posterior_samples = final_post, 
-  sampler_mapping = sampler_mapping
-)
+plot_sampler_effects(posterior_samples_real, sampler_mapping)
 dev.off()
 ```
 
 *Plot Sampler Effect Contrasts*
 ```{r}
-# Plot contrasts of sampler effects with sampler abbreviations
+# Plot Sampler Effect Contrasts (Averaged over Analytes, Blocks, and Treatments)
+
 plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
-  # Extract sampler effects from posterior samples
-  n_samplers <- ncol(posterior_samples$beta[1, , ])  # Number of sampler types
-  sampler_effects <- matrix(NA, nrow = nrow(posterior_samples$beta[, , 1]), ncol = n_samplers)
-  
+  n_samplers <- dim(posterior_samples$beta)[3]  # Number of sampler types
+  n_analytes <- dim(posterior_samples$beta)[2]  # Number of analytes
+  n_samples <- dim(posterior_samples$beta)[1]   # Number of posterior samples
+
+  # Detect if treatment effects are included
+  include_treatment <- "delta" %in% names(posterior_samples)
+
+  # Average sampler effects across analytes, blocks, and treatments if present
+  sampler_effects <- matrix(NA, nrow = n_samples, ncol = n_samplers)
   for (s in 1:n_samplers) {
-    # Compute the mean sampler effect (averaged over analytes)
-    sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s], na.rm = TRUE)
+    if (include_treatment) {
+      # Average over analytes and treatments
+      sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s] + apply(posterior_samples$delta, c(1, 2), mean), na.rm = TRUE)
+    } else {
+      # Average over analytes only
+      sampler_effects[, s] <- rowMeans(posterior_samples$beta[, , s], na.rm = TRUE)
+    }
   }
-  
-  # Map numeric sampler indices to sampler abbreviations
-  sampler_labels <- names(sampler_mapping)
-  
+
   # Compute pairwise contrasts
   contrast_list <- list()
+  sampler_labels <- names(sampler_mapping)
+
   for (i in 1:(n_samplers - 1)) {
     for (j in (i + 1):n_samplers) {
-      contrast_name <- paste(sampler_labels[i], "-", sampler_labels[j])  # Use abbreviations
+      contrast_name <- paste(sampler_labels[i], "-", sampler_labels[j])
       contrast_list[[contrast_name]] <- sampler_effects[, i] - sampler_effects[, j]
     }
   }
-  
-  # Define dynamic x limits for contrasts with a minimum buffer size
+
+  # Define dynamic x limits for contrasts with buffer
   all_contrasts <- unlist(contrast_list)
   percent_buffer <- 0.1
-  min_buffer <- 0.1  # Minimum absolute buffer for padding
+  min_buffer <- 0.1  # Minimum buffer for padding
   x_min <- min(all_contrasts, na.rm = TRUE)
   x_max <- max(all_contrasts, na.rm = TRUE)
   x_range <- x_max - x_min
@@ -1918,36 +1916,24 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
     x_min - max(percent_buffer * x_range, min_buffer),
     x_max + max(percent_buffer * x_range, min_buffer)
   )
-  
-  # Define y limits dynamically
-  y_max <- 0
-  for (contrast in contrast_list) {
-    dens_data <- density(contrast)
-    y_max <- max(y_max, max(dens_data$y, na.rm = TRUE))
-  }
+
+  # Define dynamic y limits
+  y_max <- max(sapply(contrast_list, function(contrast) max(density(contrast)$y, na.rm = TRUE)))
   ylim <- c(0, y_max * 1.1)
-  
+
   # Plot posterior densities for contrasts
-  colors <- c("#8080FF", 
-              "#F98400", 
-              "#00A08A", 
-              "#E2AD00", 
-              "#800080", 
-              "#008000", 
-              "#5BBCD6",
-              "#CC79A7", 
-              "#AAAAAA"
-             )
+  colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#800080", "#008000")
   plot(NULL, xlim = xlim, ylim = ylim, 
-       xlab = "Contrast Effect", ylab = "Density", main = "Posterior Sampler Contrasts")
-  
+       xlab = "Contrast Effect", ylab = "Density", 
+       main = "Posterior Sampler Contrasts (Averaged over Analytes, Blocks, and Treatments)")
+
   contrast_index <- 1
   for (contrast_name in names(contrast_list)) {
     dens(contrast_list[[contrast_name]], col = colors[contrast_index], lwd = 3, add = TRUE)
     contrast_index <- contrast_index + 1
   }
-  
-  # Add legend with sampler contrasts
+
+  # Add legend for contrasts
   legend("topright", legend = names(contrast_list), col = colors[1:length(contrast_list)], lwd = 3)
 }
 
@@ -1955,135 +1941,95 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
 png('../figs/sampler_contrasts.png', width = 3000, height = 1200, res = 300)
-plot_sampler_contrasts(
-  posterior_samples = final_post, 
-  sampler_mapping = sampler_mapping
-)
+plot_sampler_contrasts(posterior_samples_real, sampler_mapping)
 dev.off()
 ```
 
 *Plot Concentration Predictions*
 ```{r}
-# Function to plot prediction distributions with real data overlay, including analyte dictionary
-plot_predictions_with_observed <- function(back_transformed_predictions, data, sampler_mapping, analyte_index, block_index = NULL) {
+# Function to plot prediction distributions with real data overlay, including analyte, block, treatment, and sampler selection
+plot_predictions_with_observed <- function(back_transformed_predictions, data, sampler_mapping, analyte_index, block_index = NULL, treatment_index = NULL) {
   # Create a dictionary for analyte names
-  analyte_dict <- c("NO3 (mg/L)", 
-                    "NO2 (mg/L)", 
-                    "TKN (mg/L)", 
-                    "pH", 
-                    "TP (mg/L)", 
-                    "OP (mg/L)", 
-                    "EC (dS/m)", 
-                    "TSS (mg/L)", 
-                    "TDS (mg/L)")
-  
+  analyte_dict <- c("NO3 (mg/L)", "NO2 (mg/L)", "TKN (mg/L)", "pH", "TP (mg/L)", "OP (mg/L)", "EC (dS/m)", "TSS (mg/L)", "TDS (mg/L)")
+
   # Get the analyte name from the dictionary
-  analyte_name <- ifelse(analyte_index > 0 & analyte_index <= length(analyte_dict),
-                         analyte_dict[analyte_index],
-                         "Unknown")
-  
-  # Map block levels to numeric indices
+  analyte_name <- ifelse(analyte_index > 0 & analyte_index <= length(analyte_dict), analyte_dict[analyte_index], "Unknown")
+
+  # Map block and treatment levels to numeric indices
   block_levels <- levels(data$block)
+  treatment_levels <- levels(as.factor(data$treatment))
+
   block_name <- if (!is.null(block_index) && is.character(block_index)) {
     block_index <- match(block_index, block_levels)
-    if (is.na(block_index)) stop("Invalid block_index provided.")
     block_levels[block_index]
   } else if (!is.null(block_index)) {
     block_levels[block_index]
   } else {
     "All Blocks"
   }
-  
-  # Extract predictions for the given analyte and block
-  n_samplers <- dim(back_transformed_predictions)[3]  # Number of sampler types
+
+  treatment_name <- if (!is.null(treatment_index) && is.character(treatment_index)) {
+    treatment_index <- match(treatment_index, treatment_levels)
+    treatment_levels[treatment_index]
+  } else if (!is.null(treatment_index)) {
+    treatment_levels[treatment_index]
+  } else {
+    "All Treatments"
+  }
+
+  # Extract predictions for the given analyte, block, and treatment
+  n_dims <- length(dim(back_transformed_predictions))
+  n_samplers <- dim(back_transformed_predictions)[3]
   predictions <- list()
-  sampler_labels <- names(sampler_mapping)  # Use sampler abbreviations
-  
+  sampler_labels <- names(sampler_mapping)
+
   for (s in 1:n_samplers) {
-    if (is.null(block_index)) {
-      # No block-specific effect
-      predictions[[sampler_labels[s]]] <- back_transformed_predictions[, analyte_index, s, 1]
-    } else {
-      # Include block-specific effect
+    if (n_dims == 5 && !is.null(treatment_index)) {
+      predictions[[sampler_labels[s]]] <- back_transformed_predictions[, analyte_index, s, block_index, treatment_index]
+    } else if (n_dims == 5 && is.null(treatment_index)) {
+      predictions[[sampler_labels[s]]] <- apply(back_transformed_predictions[, analyte_index, s, block_index, ], 1, mean, na.rm = TRUE)
+    } else if (n_dims == 4 && !is.null(block_index)) {
       predictions[[sampler_labels[s]]] <- back_transformed_predictions[, analyte_index, s, block_index]
+    } else {
+      predictions[[sampler_labels[s]]] <- back_transformed_predictions[, analyte_index, s, 1]
     }
   }
-  
+
   # Define dynamic axis limits
   all_predictions <- unlist(predictions)
   percent_buffer <- 0.1
   x_min <- min(all_predictions, na.rm = TRUE)
   x_max <- max(all_predictions, na.rm = TRUE)
   x_range <- x_max - x_min
-  xlim <- c(
-    x_min - max(percent_buffer * x_range, 0.1),
-    x_max + max(percent_buffer * x_range, 0.1)
-  )
-  
-  y_max <- 0
-  for (sampler in sampler_labels) {
-    dens_data <- density(predictions[[sampler]])
-    y_max <- max(y_max, max(dens_data$y, na.rm = TRUE))
-  }
+  xlim <- c(x_min - max(percent_buffer * x_range, 0.1), x_max + max(percent_buffer * x_range, 0.1))
+
+  y_max <- max(sapply(predictions, function(p) max(density(p)$y, na.rm = TRUE)))
   ylim <- c(0, y_max * 1.1)
-  
+
   # Plot posterior prediction densities
-  colors <- c("#8080FF", 
-              "#F98400", 
-              "#00A08A", 
-              "#E2AD00", 
-              "#800080", 
-              "#008000", 
-              "#5BBCD6",
-              "#CC79A7", 
-              "#AAAAAA"
-             )
+  colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#800080", "#008000", "#5BBCD6", "#CC79A7", "#AAAAAA")
   plot(NULL, xlim = xlim, ylim = ylim, 
        xlab = "Predicted Concentration", ylab = "Density", 
-       main = sprintf("Posterior Predictions with Observed Data\nAnalyte: %s, Block: %s", analyte_name, block_name))
-  
+       main = sprintf("Posterior Predictions with Observed Data\nAnalyte: %s, Block: %s, Treatment: %s", analyte_name, block_name, treatment_name))
+
   for (s in 1:n_samplers) {
     dens(predictions[[sampler_labels[s]]], col = colors[s], lwd = 3, add = TRUE)
   }
-  
-  # Add observed data points, considering block effects
+
+  # Add observed data points
   for (s in 1:n_samplers) {
-    observed_data <- data %>%
-      filter(A == analyte_index, S == sampler_mapping[sampler_labels[s]])
-    
-    if (!is.null(block_index)) {
-      observed_data <- observed_data %>% filter(block == block_levels[block_index])
-    }
-    
+    observed_data <- data %>% filter(A == analyte_index, S == sampler_mapping[sampler_labels[s]])
+
+    if (!is.null(block_index)) observed_data <- observed_data %>% filter(block == block_levels[block_index])
+    if (!is.null(treatment_index)) observed_data <- observed_data %>% filter(treatment == treatment_levels[treatment_index])
+
     observed_values <- observed_data$C_obs
-    
-    # Plot observed data points as vertical lines averaged over event
     if (length(observed_values) > 0) {
       observed_mean <- mean(observed_values, na.rm = TRUE)
-      observed_sd <- sd(observed_values, na.rm = TRUE)
-      # print analyte and mean value
-      print(paste(paste(unique(data$analyte_abbr), observed_mean), observed_sd))
-      
-      # Overlay observed mean
       abline(v = observed_mean, col = colors[s], lwd = 2, lty = 2)
-      
-      # Overlay SD as shaded region
-      # rect(
-      #   observed_mean - observed_sd, 0,
-      #   observed_mean + observed_sd, y_max * 0.1,
-      #   col = adjustcolor(colors[s], alpha.f = 0.3), border = NA
-      # )
     }
-    
-    # Plot ALL observed points - not on by default
-    # if (length(observed_values) > 0) {
-    #   # Plot each observed value as a vertical line
-    #   for (value in observed_values) {
-    #     abline(v = value, col = colors[s], lwd = 2, lty = 2)
-    #   }
-    # }
   }
-  
+
   # Add legend
   legend("topright", legend = sampler_labels, col = colors[1:n_samplers], lwd = 3)
 }
@@ -2093,7 +2039,7 @@ plot_predictions_with_observed <- function(back_transformed_predictions, data, s
 ```{r}
 # Loop through each analyte and generate a plot
 for (analyte_name in names(analyte_mapping)) {
-  analyte_index <- analyte_mapping[[analyte_name]]  # Get the corresponding index
+  analyte_index <- analyte_mapping[[analyte_name]]
 
   # Define the output file path dynamically
   output_file <- paste0("../figs/predictions_with_observed_", analyte_name, ".png")
@@ -2101,11 +2047,13 @@ for (analyte_name in names(analyte_mapping)) {
   # Generate and save the plot
   png(output_file, width = 1600, height = 1200, res = 300)
   plot_predictions_with_observed(
-    back_transformed_predictions = final_post_back_transformed, 
-    data = d, 
-    sampler_mapping = sampler_mapping, 
-    analyte_index = analyte_index, 
-    block_index = 1  # Adjust block index as needed
+    back_transformed_predictions = back_transformed_predictions_real,
+    data = d,
+    sampler_mapping = sampler_mapping,
+    analyte_index = analyte_index,
+    block_index = "Block1"#,  # Adjust block index as needed
+    #treatment_index = "CT"    # Adjust treatment index as needed
+    # commented out = avg over all treatments
   )
   dev.off()
 
@@ -2116,13 +2064,15 @@ for (analyte_name in names(analyte_mapping)) {
 ```
 
 ```{r}
+# Example: Plot specific analyte, block, and treatment
 plot_predictions_with_observed(
-    back_transformed_predictions = final_post_back_transformed, 
-    data = d, 
-    sampler_mapping = sampler_mapping, 
-    analyte_index = 8, 
-    block_index = 2  # Adjust block index as needed
-  )
+  back_transformed_predictions = back_transformed_predictions_real,
+  data = d,
+  sampler_mapping = sampler_mapping,
+  analyte_index = 8,    # 1-9
+  block_index = 1#,      # 1 or 2
+  #treatment_index = 3   # 1-3
+)
 ```
 
 ## Conclusion
