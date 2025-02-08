@@ -131,6 +131,25 @@ dat <- list(
   K_B = length(unique(d$block)),             # Number of blocks
   K_T = length(unique(d$treatment))          # Number of treatments
 )
+
+# Generate summary statistics
+summary_stats <- d %>%
+  group_by(analyte_abbr) %>%
+  summarise(
+    mean_value = mean(result, na.rm = TRUE),
+    median_value = median(result, na.rm = TRUE),
+    sd_value = sd(result, na.rm = TRUE),
+    min_value = min(result, na.rm = TRUE),
+    max_value = max(result, na.rm = TRUE),
+    count = n()
+  ) %>%
+  arrange(analyte_abbr)
+
+# Output summary statistics
+print(summary_stats)
+
+# Save summary statistics to a CSV file
+write.csv(summary_stats, "../1_data/real_data_summary_stats.csv", row.names = FALSE)
 ```
 
 ### Model 1.0 - Intercept Only
