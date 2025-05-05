@@ -51,6 +51,10 @@ d <- read.csv("../1_data/real_data.csv")
 d <- d[d$event.type != 'Inflow',]
 # we will impute the missing values for the GB, GBH, and ISCO samplers at these events
 #d <- d[!d$event.count %in% c('Storm 1', 'Storm 2'),]
+
+# drop dupes from ISCO samplers to test "plume" theory in flume
+# comment out by default
+# d <- d[!(d$duplicate == TRUE & d$method.name == "ISCO"), ]
   
 # standardize analytes
 d <- d %>%
@@ -1918,7 +1922,7 @@ plot_sampler_effects <- function(posterior_samples, sampler_mapping) {
   colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00")
   plot(NULL, xlim = xlim, ylim = ylim, 
        xlab = "Sampler Effect (Averaged over Analytes, Blocks, and Treatments)", ylab = "Density", 
-       main = "Posterior Sampler Effects")
+       main = "Posterior Sampler Effects (No ISCO Duplicates)")
 
   for (s in 1:n_samplers) {
     dens(sampler_effects[, s], col = colors[s], lwd = 3, add = TRUE)
@@ -1935,6 +1939,7 @@ plot_sampler_effects <- function(posterior_samples, sampler_mapping) {
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
+#png('../figs/sampler_effects_noDupe.png', width = 2000, height = 1200, res = 300)
 png('../figs/sampler_effects.png', width = 2000, height = 1200, res = 300)
 plot_sampler_effects(posterior_samples_real, sampler_mapping)
 dev.off()
@@ -1994,8 +1999,8 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
   # Plot posterior densities for contrasts
   colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#800080", "#008000")
   plot(NULL, xlim = xlim, ylim = ylim, 
-       xlab = "Contrast Effect", ylab = "Density", 
-       main = "Posterior Sampler Contrasts (Averaged over Analytes, Blocks, and Treatments)")
+       xlab = "Contrast Effect (Averaged over Analytes, Blocks, and Treatments)", ylab = "Density", 
+       main = "Posterior Sampler Contrasts (No ISCO Duplicates)")
 
   contrast_index <- 1
   for (contrast_name in names(contrast_list)) {
@@ -2010,6 +2015,7 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
 # Example usage
 sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 
+#png('../figs/sampler_contrasts_noDupe.png', width = 3000, height = 1200, res = 300)
 png('../figs/sampler_contrasts.png', width = 3000, height = 1200, res = 300)
 plot_sampler_contrasts(posterior_samples_real, sampler_mapping)
 dev.off()
@@ -2163,6 +2169,7 @@ for (analyte_name in names(analyte_mapping)) {
   analyte_index <- analyte_mapping[[analyte_name]]
 
   # Define the output file path dynamically
+  #output_file <- paste0("../figs/predictions_with_observed_noDupe_", analyte_name, ".png")
   output_file <- paste0("../figs/predictions_with_observed_", analyte_name, ".png")
 
   # Generate and save the plot
