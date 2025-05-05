@@ -1018,7 +1018,7 @@ refined_summary_table_1.4_nc
 
 Results: The non-centered model performs better, and can accurately estimate simulated data.
 
-### Model 1.5 - same as 1.4 but with different model form to mimic simulated data - NOT AS GOOD
+### Model 1.5 - same as 1.4 but with different model form to mimic simulated data - NOT AS GOOD AS 1.4
 Data simulation
 ```{r}
 sim_data_1.5 <- simulate_model_1.3()
@@ -1176,7 +1176,7 @@ Results:
 
 Data simulation
 ```{r, eval=FALSE}
-simulate_model_1.6 <- function(n_per_type = 100, noise_sd = 0.2, seed = 45) {
+simulate_model_1.6 <- function(n_per_type = 100, noise_sd = 0.2, seed = 42) {
   # Define sampler types and their true intercepts
   sampler_types <- c("LCS", "ISCO", "GB", "GBH")
   true_intercepts <- c(LCS = 0.7, ISCO = 0.3, GB = 1.2, GBH = 1.0)
@@ -1407,7 +1407,6 @@ refined_summary_table_1.6_nc
 Results:
 
 ## Final model selection, graphing, and interpretation - TEST DATA
-*In Development*
 Select final model and 'observed data' for comparison
 ```{r}
 # Specify the model to use
@@ -1557,6 +1556,58 @@ plot_sampler_contrasts(
 )
 dev.off()
 ```
+*Plot Treatment Effects*
+```{r}
+plot_treatment_effects <- function(posterior_samples, treatment_mapping) {
+  if (!"delta" %in% names(posterior_samples)) {
+    stop("Treatment effects 'delta' not found in posterior samples.")
+  }
+
+  n_treatments <- dim(posterior_samples$delta)[3]  # Number of treatments
+  n_analytes <- dim(posterior_samples$delta)[2]    # Number of analytes
+  n_samples <- dim(posterior_samples$delta)[1]     # Number of posterior samples
+
+  # Average treatment effects across analytes and samples
+  treatment_effects <- matrix(NA, nrow = n_samples, ncol = n_treatments)
+  for (t in 1:n_treatments) {
+    treatment_effects[, t] <- rowMeans(posterior_samples$delta[, , t], na.rm = TRUE)
+  }
+
+  # Dynamic axis limits
+  percent_buffer <- 0.1
+  x_min <- min(treatment_effects, na.rm = TRUE)
+  x_max <- max(treatment_effects, na.rm = TRUE)
+  xlim <- c(x_min - percent_buffer * abs(x_min), x_max + percent_buffer * abs(x_max))
+
+  y_max <- max(apply(treatment_effects, 2, function(col) max(density(col)$y, na.rm = TRUE)))
+  ylim <- c(0, y_max * 1.1)
+
+  # Plot posterior densities for treatment effects
+  colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#FF8080", "#80FF80")
+  plot(NULL, xlim = xlim, ylim = ylim, 
+       xlab = "Treatment Effect (Averaged over Analytes)", ylab = "Density", 
+       main = "Posterior Treatment Effects")
+
+  for (t in 1:n_treatments) {
+    dens(treatment_effects[, t], col = colors[t], lwd = 3, add = TRUE)
+  }
+
+  # Add standard normal prior line
+  curve(dnorm(x, mean = 0, sd = 1), from = xlim[1], to = xlim[2], lwd = 2, lty = 2, col = "black", add = TRUE)
+
+  # Add legend
+  legend("topright", legend = c(names(treatment_mapping), "Prior"), 
+         col = c(colors[1:n_treatments], "black"), lwd = 3, lty = c(rep(1, n_treatments), 2))
+}
+
+# Simulated data posterior
+png('../figs/treatment_effects_sim.png', width = 2000, height = 1200, res = 300)
+plot_treatment_effects(final_post, trt_mapping)
+dev.off()
+
+```
+
+
 
 *Plot Concentration Predictions*
 ```{r}
@@ -1963,6 +2014,57 @@ png('../figs/sampler_contrasts.png', width = 3000, height = 1200, res = 300)
 plot_sampler_contrasts(posterior_samples_real, sampler_mapping)
 dev.off()
 ```
+*Plot Treatment Effects*
+```{r}
+plot_treatment_effects <- function(posterior_samples, treatment_mapping) {
+  if (!"delta" %in% names(posterior_samples)) {
+    stop("Treatment effects 'delta' not found in posterior samples.")
+  }
+
+  n_treatments <- dim(posterior_samples$delta)[3]  # Number of treatments
+  n_analytes <- dim(posterior_samples$delta)[2]    # Number of analytes
+  n_samples <- dim(posterior_samples$delta)[1]     # Number of posterior samples
+
+  # Average treatment effects across analytes and samples
+  treatment_effects <- matrix(NA, nrow = n_samples, ncol = n_treatments)
+  for (t in 1:n_treatments) {
+    treatment_effects[, t] <- rowMeans(posterior_samples$delta[, , t], na.rm = TRUE)
+  }
+
+  # Dynamic axis limits
+  percent_buffer <- 0.1
+  x_min <- min(treatment_effects, na.rm = TRUE)
+  x_max <- max(treatment_effects, na.rm = TRUE)
+  xlim <- c(x_min - percent_buffer * abs(x_min), x_max + percent_buffer * abs(x_max))
+
+  y_max <- max(apply(treatment_effects, 2, function(col) max(density(col)$y, na.rm = TRUE)))
+  ylim <- c(0, y_max * 1.1)
+
+  # Plot posterior densities for treatment effects
+  colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#800080", "#008000")
+  plot(NULL, xlim = xlim, ylim = ylim, 
+       xlab = "Treatment Effect (Averaged over Analytes)", ylab = "Density", 
+       main = "Posterior Treatment Effects")
+
+  for (t in 1:n_treatments) {
+    dens(treatment_effects[, t], col = colors[t], lwd = 3, add = TRUE)
+  }
+
+  # Add standard normal prior line
+  curve(dnorm(x, mean = 0, sd = 1), from = xlim[1], to = xlim[2], lwd = 2, lty = 2, col = "black", add = TRUE)
+
+  # Add legend
+  legend("topright", legend = c(names(treatment_mapping), "Prior"), 
+         col = c(colors[1:n_treatments], "black"), lwd = 3, lty = c(rep(1, n_treatments), 2))
+}
+
+# Real data posterior
+png('../figs/treatment_effects_real.png', width = 2000, height = 1200, res = 300)
+plot_treatment_effects(posterior_samples_real, trt_mapping)
+dev.off()
+
+```
+
 
 *Plot Concentration Predictions*
 ```{r}
