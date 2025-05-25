@@ -2354,7 +2354,7 @@ for (analyte_name in names(analyte_mapping)) {
   
   # Then run once:
   # plotly::orca_available()  # should return TRUE
-  orca(fig, output_file, width = 1000, height = 800)
+  #orca(fig, output_file, width = 1000, height = 800)
 
   cat("Saved:", output_file, "\n")
 }
@@ -2366,7 +2366,7 @@ plotly_violin_predictions(
   back_transformed_predictions = back_transformed_predictions_real,
   data = d,
   sampler_mapping = sampler_mapping,
-  analyte_index = 7,     # e.g., TSS
+  analyte_index = 3,     # e.g., TSS
   block_index = 1,       # or NULL
   treatment_index = NULL # or 1-3
 )
