@@ -1272,7 +1272,8 @@ data1.6 <- list(
 m1.6_nc <- ulam(
   alist(
     # Observation model
-    C_obs ~ dnorm(mu, sigma),
+    #C_obs ~ dnorm(mu, sigma),
+    C_obs ~ normal(mu, sigma_analyte[A]),
     
     # Mean structure with correlations between analytes, samplers, and blocks
     mu <- alpha[A] + beta[A, S] + gamma[A, B] + delta[A, TRT],
@@ -1305,7 +1306,8 @@ m1.6_nc <- ulam(
     vector[K_T]:sigma_delta ~ exponential(1),  # Prior for scaling treatment effects
     
     # Prior for measurement error
-    sigma ~ exponential(1)
+    vector[K_A]:sigma_analyte ~ exponential(1)
+    #sigma ~ exponential(1)
   ),
   data = data1.6,
   chains = 4,
@@ -1425,7 +1427,7 @@ final_post_back_transformed <- get(paste0("back_transformed_predictions_", which
 final_data <- get(paste0("sim_data_", gsub("_.*", "", which_model)))  # e.g., "sim_data_1.4"
 
 # Export final data if needed
-write.csv(final_data, "../1_data/final_sim_wq_data.csv")
+#write.csv(final_data, "../1_data/final_sim_wq_data.csv")
 
 ```
 
@@ -1562,6 +1564,7 @@ plot_sampler_contrasts(
 )
 dev.off()
 ```
+
 *Plot Treatment Effects*
 ```{r}
 plot_treatment_effects <- function(posterior_samples, treatment_mapping) {
@@ -1612,7 +1615,6 @@ plot_treatment_effects(final_post, trt_mapping)
 dev.off()
 
 ```
-
 
 
 *Plot Concentration Predictions*
