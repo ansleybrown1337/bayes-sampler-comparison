@@ -142,7 +142,7 @@ Using the above DAG as a guide, we can create a statistical model to analyze the
 
 #### Observation Model:
 $$
-C_i \sim \text{Normal}(\mu_i, \sigma)
+C_i \sim \text{Normal}(\mu_i, \sigma_{A})
 $$
 
 #### Mean Structure:
@@ -156,14 +156,14 @@ Where:
 - $ \beta_{A, S} $ is the analyte-specific effect of sampler method $ S $ (centered multivariate normal)
 - $ \gamma_{A, B} $ is the analyte-specific effect of block $ B $ (centered multivariate normal)
 - $ \delta_{A, T} $ is the analyte-specific effect of treatment $ T $ (centered multivariate normal)
-- $ \sigma $ is the measurement error standard deviation
+- $ \sigma_A $ is the standard deviation for each analyte $ A $
 
 ### Priors
 
 #### Regular Priors:
 - Measurement error:
 $$
-\sigma \sim \text{Exponential}(1)
+\sigma_{A} \sim \text{Exponential}(1)
 $$
 
 #### Analyte-Specific Priors:
@@ -205,7 +205,7 @@ In Summary:
 - **Sampler Effects ($ \beta_{A, S} $)**: Variance and correlation in sampler performance across analytes.
 - **Block Effects ($ \gamma_{A, B} $)**: Variance and correlation in replication blocks across analytes.
 - **Treatment Effects ($ \delta_{A, T} $)**: Variance and correlation in tillage treatment across analytes.
-- **Measurement Error ($ \sigma $)**: The standard deviation of residual error in observed concentrations.
+- **Other Uncertainty ($ \sigma_{A} $)**: The standard deviation of residual error in observed concentrations.
 
 The model enables the estimation of analyte-specific effects, accounting for variance and correlation in sampler methods and replication blocks. By leveraging adaptive priors and a multilevel framework, the model is designed to capture underlying patterns in water quality data while addressing the hierarchical structure of the experimental setup. Furthermore, the use of this Bayesian approach allowed for imputation of missing values from sample methods from two storm events where runoff occured, but none was collected except by the LCS.
 
@@ -231,7 +231,7 @@ data1.6 <- list(
 m1.6_nc <- ulam(
   alist(
     # Observation model
-    C_obs ~ dnorm(mu, sigma),
+    C_obs ~ normal(mu, sigma_analyte[A]),
     
     # Mean structure with correlations between analytes, samplers, and blocks
     mu <- alpha[A] + beta[A, S] + gamma[A, B] + delta[A, TRT],
@@ -264,7 +264,7 @@ m1.6_nc <- ulam(
     vector[K_T]:sigma_delta ~ exponential(1),  # Prior for scaling treatment effects
     
     # Prior for measurement error
-    sigma ~ exponential(1)
+    vector[K_A]:sigma_analyte ~ exponential(1)
   ),
   data = data1.6,
   chains = 4,
