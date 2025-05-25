@@ -1923,8 +1923,9 @@ plot_sampler_effects <- function(posterior_samples, sampler_mapping) {
   # Plot posterior densities for sampler effects
   colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00")
   plot(NULL, xlim = xlim, ylim = ylim, 
-       xlab = "Sampler Effect (Averaged over Analytes, Blocks, and Treatments)", ylab = "Density", 
-       main = "Posterior Sampler Effects (No ISCO Duplicates)")
+       xlab = "Sampler Effect (Averaged over Analytes, Blocks, and Treatments)", ylab = "Density",
+       main = "Posterior Sampler Effects")
+       # main = "Posterior Sampler Effects (No ISCO Duplicates)")
 
   for (s in 1:n_samplers) {
     dens(sampler_effects[, s], col = colors[s], lwd = 3, add = TRUE)
@@ -2002,7 +2003,8 @@ plot_sampler_contrasts <- function(posterior_samples, sampler_mapping) {
   colors <- c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#800080", "#008000")
   plot(NULL, xlim = xlim, ylim = ylim, 
        xlab = "Contrast Effect (Averaged over Analytes, Blocks, and Treatments)", ylab = "Density", 
-       main = "Posterior Sampler Contrasts (No ISCO Duplicates)")
+       main = "Posterior Sampler Contrasts")
+       #main = "Posterior Sampler Contrasts (No ISCO Duplicates)")
 
   contrast_index <- 1
   for (contrast_name in names(contrast_list)) {
