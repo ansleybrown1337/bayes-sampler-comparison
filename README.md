@@ -1,6 +1,10 @@
 ![Banner Image](figs/banner.png)
 # Unveiling Biases in Water Sampling: A Bayesian Approach for Precision in Edge-of-Field Monitoring
 Repository Created by A.J. Brown, 27 Feb 2024
+
+
+[![DOI](https://zenodo.org/badge/764277323.svg)](https://doi.org/10.5281/zenodo.15532046)
+
   
 **Principal Investigators:** Ansley "AJ" Brown, Erik Wardle, Emmanuel Deleon, and Jake Ladow </br>
 **Affiliation:** Colorado State University, Agricultural Water Quality Program, Soil and Crop Sciences Department
@@ -406,6 +410,21 @@ Our findings lay a foundation for integrating Bayesian methodologies into edge-o
 
 
 For more information, please [contact me](mailto:Ansley.Brown@colostate.edu)!
+
+## How to Cite This Work
+If you use this code or the results of this analysis in your work, please cite the following:
+
+```bibtex
+@software{Brown2025,
+  author = {Ansley Brown and Emmanuel Deleon and Erik Wardle and Jacob Ladow},
+  title = {Unveiling Biases in Water Sampling: A Bayesian Approach for Precision in Edge-of-Field Monitoring},
+  version = {1.0.0},
+  date = {2025-05-27},
+  doi = {10.5281/zenodo.15532047},
+  url = {https://github.com/ansleybrown1337/bayes-sampler-comparison},
+  keywords = {Bayesian Inference, Edge-of-Field Monitoring, Water Quality, Agriculture},
+}
+```
 
 ## References
 - **McElreath R (2023).** _rethinking: Statistical Rethinking book package_. R package version 2.40.

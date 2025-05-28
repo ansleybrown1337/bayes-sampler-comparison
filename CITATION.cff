@@ -1,0 +1,24 @@
+cff-version: 1.0.0
+title: Unveiling Biases in Water Sampling: A Bayesian Approach for Precision in Edge-of-Field Monitoring
+message: 'If you use this software, please cite it as below.'
+type: software
+authors:
+  - family-names: Brown
+    given-names: Ansley
+    orcid: 'https://orcid.org/0000-0002-2803-4742'
+  - family-names: Deleon
+    given-names: Emmanuel
+  - family-names: Wardle
+    given-names: Erik
+  - family-names: Ladow
+    given-names: Jacob
+url: >-
+  https://github.com/ansleybrown1337/bayes-sampler-comparison
+keywords:
+  - Bayesian Inference
+  - Edge-of-Field Monitoring
+  - Water Quality
+  - Agriculture
+version: '1.0.0'
+date-released: '2025-05-27'
+doi: 10.5281/zenodo.15532047
