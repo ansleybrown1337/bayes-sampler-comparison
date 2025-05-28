@@ -1,8 +1,8 @@
 ![Banner Image](figs/banner.png)
-# Low-Cost IoT Technology for Runoff Water Quality Comparison with Traditional Methods
+# Unveiling Biases in Water Sampling: A Bayesian Approach for Precision in Edge-of-Field Monitoring
 Repository Created by A.J. Brown, 27 Feb 2024
   
-**Principal Investigators:** Ansley "AJ" Brown, Erik Wardle, Emmanuel Deleon, and Christina Welch  
+**Principal Investigators:** Ansley "AJ" Brown, Erik Wardle, Emmanuel Deleon, and Jake Ladow 
 **Affiliation:** Colorado State University, Agricultural Water Quality Program, Soil and Crop Sciences Department
 
 ## Abstract
