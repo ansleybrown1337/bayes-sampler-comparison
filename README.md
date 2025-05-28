@@ -2,7 +2,7 @@
 # Unveiling Biases in Water Sampling: A Bayesian Approach for Precision in Edge-of-Field Monitoring
 Repository Created by A.J. Brown, 27 Feb 2024
   
-**Principal Investigators:** Ansley "AJ" Brown, Erik Wardle, Emmanuel Deleon, and Jake Ladow 
+**Principal Investigators:** Ansley "AJ" Brown, Erik Wardle, Emmanuel Deleon, and Jake Ladow </br>
 **Affiliation:** Colorado State University, Agricultural Water Quality Program, Soil and Crop Sciences Department
 
 ## Abstract
