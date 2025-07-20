@@ -18,10 +18,7 @@ library(plotly)
 ```
 
 TODO:
-- Finish m1.4
-- Save plots as images
-- Make separate model for flow data
-- Update README with final model and results
+- investigate logNormal dists to prevent negative NO2 output
 
 ### Tools
 Tool for printing precis() results with key:
@@ -139,6 +136,13 @@ dat <- list(
   K_B = length(unique(d$block)),             # Number of blocks
   K_T = length(unique(d$treatment))          # Number of treatments
 )
+# Create observed means for each analyte and sampler type
+observed_means <- d %>%
+  group_by(
+    analyte_type = factor(A, labels = names(analyte_mapping)), 
+    sampler_type = factor(S, labels = names(sampler_mapping))
+  ) %>%
+  summarise(observed_mean = mean(C_obs, na.rm = TRUE), .groups = "drop")
 
 # Generate summary statistics
 summary_stats <- d %>%
@@ -1180,8 +1184,6 @@ Results:
 
 ### Model 1.6 - Multilevel model with sampler, analyte, TRT, and block effects with MVN distribution between analytes, samplers, treatments and blocks
 
-**In Development**
-
 Data simulation
 ```{r, eval=FALSE}
 simulate_model_1.6 <- function(n_per_type = 100, noise_sd = 0.2, seed = 42) {
@@ -1316,8 +1318,8 @@ m1.6_nc <- ulam(
   chains = 4,
   cores = 4,
   threads = 1,
-  iter = 4000,              # Total iterations (increase this)
-  warmup = 1000             # Number of warmup iterations (optional, default is iter/2)
+  iter = 1000,              # Total iterations (increase this)
+  warmup = 500             # Number of warmup iterations (optional, default is iter/2)
 )
 
 ```
@@ -1758,7 +1760,7 @@ Run selected model using real data - which imputes missing data from Storm 1,2
 # Flexible model update function
 update_model_with_real_data <- function(model_name, real_data) {
   model_object <- get(model_name)  # Retrieve the model object using its name
-  updated_model <- update(model_object, data = real_data)
+  updated_model <- update(model_object, data = real_data, iter = 4000, warmup = 1000, chains = 4, cores = 4, threads = 1)
   return(updated_model)
 }
 
@@ -2209,6 +2211,7 @@ for (analyte_name in names(analyte_mapping)) {
 
 ```
 
+**Individual tool**
 ```{r}
 # Example: Plot specific analyte, block, and treatment
 plot_predictions_with_observed(
@@ -2221,6 +2224,177 @@ plot_predictions_with_observed(
 )
 ```
 
+**Facet Plot**
+```{r}
+plot_posterior_facets <- function(
+  posterior_array, sampler_mapping, analyte_mapping, observed_means,
+  colors = c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#800080", "#008000", "#5BBCD6", "#CC79A7", "#AAAAAA"),
+  ylab = "Density", n_cols = 3
+) {
+  n_analyte <- dim(posterior_array)[2]
+  n_sampler <- dim(posterior_array)[3]
+  sampler_labels <- names(sampler_mapping)
+  
+  analyte_names <- c("NO3", "NO2", "TKN", "pH", "TP", "OP", "EC", "TSS", "TDS")
+  analyte_axis_labels <- c(
+    "mg/L", "mg/L", "mg/L", "", "mg/L", "mg/L", "dS/m", "mg/L", "mg/L"
+  )
+  
+  n_rows <- ceiling(n_analyte / n_cols)
+  
+  old_par <- par(no.readonly = TRUE)
+  on.exit(par(old_par))
+  
+  par(mfrow = c(n_rows, n_cols), mar = c(4, 3, 2, 1), oma = c(6, 3, 1, 2))
+  
+  for (a in 1:n_analyte) {
+    dens_list <- lapply(1:n_sampler, function(s) {
+      vals <- if (length(dim(posterior_array)) > 3) {
+        apply(posterior_array[, a, s, , , drop = FALSE], 1, mean, na.rm = TRUE)
+      } else {
+        posterior_array[, a, s]
+      }
+      density(vals, na.rm = TRUE)
+    })
+    xlim <- range(unlist(lapply(dens_list, function(d) d$x)), na.rm = TRUE)
+    ylim <- range(unlist(lapply(dens_list, function(d) d$y)), na.rm = TRUE)
+    plot(
+      dens_list[[1]], type = "l", lwd = 3, col = colors[1], xlim = xlim, ylim = ylim,
+      xlab = "", ylab = ylab, main = analyte_names[a], cex.main = 1.1
+    )
+    if (n_sampler > 1) {
+      for (s in 2:n_sampler) {
+        lines(dens_list[[s]], lwd = 3, col = colors[s])
+      }
+    }
+    for (s in 1:n_sampler) {
+      obs_val <- observed_means %>%
+        filter(analyte_type == analyte_names[a], sampler_type == sampler_labels[s]) %>%
+        pull(observed_mean)
+      if (length(obs_val) == 1 && !is.na(obs_val)) {
+        abline(v = obs_val, col = colors[s], lwd = 2, lty = 2)
+      }
+    }
+    mtext(analyte_axis_labels[a], side = 1, line = 2, cex = 0.9)
+  }
+  
+  # Draw global legend in outer margin (below)
+  par(xpd = NA)
+  legend(
+    x = grconvertX(-0.6, from = "npc", to = "user"),
+    y = grconvertY(-0.5, from = "npc", to = "user"),
+    legend = sampler_labels, col = colors[1:n_sampler], lwd = 3,
+    horiz = TRUE, bty = "n", cex = 1.3, xjust = 0.5
+  )
+  par(xpd = FALSE)
+}
+
+```
+
+
+```{r}
+plot_posterior_facets(
+  posterior_array = back_transformed_predictions_real,
+  sampler_mapping = sampler_mapping,
+  analyte_mapping = analyte_mapping,
+  observed_means = observed_means,
+  colors = c("#8080FF", "#F98400", "#00A08A", "#E2AD00", "#800080", "#008000", "#5BBCD6", "#CC79A7", "#AAAAAA"),
+  n_cols = 3
+)
+
+```
+
+```{r}
+jpeg(
+  filename = "../figs/posterior_predictive_facets.jpg",
+  width = 2700, height = 1950, res = 300, units = "px"
+)
+# or use png(...) for higher clarity if preferred
+
+# Call your plotting function here
+plot_posterior_facets(
+  posterior_array = back_transformed_predictions_real,
+  sampler_mapping = sampler_mapping,
+  analyte_mapping = analyte_mapping,
+  observed_means = observed_means,
+  n_cols = 3,   # or adjust as you wish
+  colors = c("#8080FF", "#F98400", "#00A08A", "#E2AD00") # add more if >4 samplers
+)
+dev.off()
+
+```
+
+*Export Predictions Summary*
+```{r}
+#' Summarize posterior predictions by sampler and analyte
+#' @param back_transformed_predictions The posterior predictive array: draws × analyte × sampler × (block) × (treatment)
+#' @param sampler_mapping Named vector or list mapping sampler indices to sampler names
+#' @param analyte_mapping Named vector or list mapping analyte indices to analyte names
+#' @param data Original data frame containing observed concentrations and sampler/analyte mappings
+#' @return Data frame with sampler, analyte, mean, lower_95ci, upper_95ci
+summarize_predictions_with_observed <- function(
+  back_transformed_predictions, sampler_mapping, analyte_mapping, data
+) {
+  n_dims <- length(dim(back_transformed_predictions))
+  draws <- dim(back_transformed_predictions)[1]
+  n_analyte <- dim(back_transformed_predictions)[2]
+  n_sampler <- dim(back_transformed_predictions)[3]
+
+  result_list <- list()
+  
+  for (a in 1:n_analyte) {
+    for (s in 1:n_sampler) {
+      # Extract posterior draws, averaged over block/treatment if needed
+      if (n_dims == 5) {
+        vals <- apply(back_transformed_predictions[, a, s, , ], 1, mean, na.rm = TRUE)
+      } else if (n_dims == 4) {
+        vals <- apply(back_transformed_predictions[, a, s, , drop = FALSE], 1, mean, na.rm = TRUE)
+      } else {
+        vals <- back_transformed_predictions[, a, s]
+      }
+      mean_pred <- mean(vals, na.rm = TRUE)
+      lower_95 <- quantile(vals, 0.025, na.rm = TRUE)
+      upper_95 <- quantile(vals, 0.975, na.rm = TRUE)
+      
+      # Compute observed mean for this sampler and analyte, averaged over all blocks/treatments
+      sampler_value <- sampler_mapping[[s]]
+      analyte_value <- analyte_mapping[[a]]
+      
+      # Filter observed data
+      obs_rows <- data[data$A == a & data$S == sampler_value, ]
+      observed_mean <- mean(obs_rows$C_obs, na.rm = TRUE)
+      
+      result_list[[length(result_list) + 1]] <- data.frame(
+        analyte_type = names(analyte_mapping)[a],
+        sampler_type = names(sampler_mapping)[s],
+        observed_mean = observed_mean,
+        mean = mean_pred,
+        lower_95ci = lower_95,
+        upper_95ci = upper_95
+      )
+    }
+  }
+  
+  results_df <- do.call(rbind, result_list)
+  return(results_df)
+}
+```
+
+
+```{r}
+results_df <- summarize_predictions_with_observed(
+  back_transformed_predictions = back_transformed_predictions_real,
+  sampler_mapping = sampler_mapping,
+  analyte_mapping = analyte_mapping,
+  data = d
+)
+  
+# view results
+print(results_df)
+# Export to CSV
+write.csv(results_df, "../1_data/posterior_predictions_summary.csv", row.names = FALSE)
+
+```
 
 *Plot Concentration Predictions as Violin Plots*
 ```{r}

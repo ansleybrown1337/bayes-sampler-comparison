@@ -361,11 +361,52 @@ After validating the model's accuracy with simulated data, the real data was ana
 
 ![Figure 6: Sampler Effect Results](figs/sampler_effects.png)
 
-*Figure 8. Effects of Sampler Method on Observed Concentration*
+*Figure 6. Effects of Sampler Method on Observed Concentration*
 
-![Figure 7. Posterior Analyte Predictions](figs/merged_predictions_real.png)
+![Figure 7. Posterior Analyte Predictions](figs/posterior_predictive_facets.jpg)
 
-*Figure 7. Generative model posterior prediction of all analytes
+*Figure 7. Generative model posterior predictive summary statistics and observed means for each analyte and sampler type, averaging over block and treatment effects. The observed mean is calculated directly from the raw sample data for each sampler and analyte, also averaged across block and treatment, and all irrigation events during the study period.*
+
+*Table 3. Generative model posterior predictive summary statistics and observed means for each analyte and sampler type. Posterior means and 95% credible intervals (CI) are derived from the model posterior distributions, averaging over block and treatment effects. The observed mean is calculated directly from the raw sample data for each sampler and analyte, also averaged across block and treatment, and all irrigation events during the study period.*
+| Analyte | Sample Method | Observed Mean | Posterior Mean | 2.5% | 97.5% |
+|---------|--------------|---------------|----------------|------|-------|
+| **NO₃ (mg/L)**  | LCS  | 6.7 | 6.8 | 6.2 | 7.3 |
+|                 | ISCO | 6.8 | 6.8 | 6.1 | 7.4 |
+|                 | GB   | 8.0 | 7.5 | 6.9 | 8.3 |
+|                 | GBH  | 7.5 | 7.6 | 6.9 | 8.4 |
+| **NO₂ (mg/L)**  | LCS  | 0.0 | 0.0 | 0.0 | 0.0 |
+|                 | ISCO | 0.0 | 0.0 | 0.0 | 0.0 |
+|                 | GB   | 0.0 | 0.0 | 0.0 | 0.0 |
+|                 | GBH  | 0.0 | 0.0 | 0.0 | 0.0 |
+| **TKN (mg/L)**  | LCS  | 4.4 | 4.0 | 2.8 | 5.3 |
+|                 | ISCO | 1.5 | 2.0 | 0.6 | 3.4 |
+|                 | GB   | 4.2 | 3.9 | 2.5 | 5.4 |
+|                 | GBH  | 4.0 | 4.3 | 2.5 | 6.0 |
+| **pH**          | LCS  | 8.1 | 8.1 | 8.1 | 8.2 |
+|                 | ISCO | 8.1 | 8.1 | 8.1 | 8.2 |
+|                 | GB   | 8.2 | 8.2 | 8.1 | 8.2 |
+|                 | GBH  | 8.2 | 8.2 | 8.1 | 8.2 |
+| **TP (mg/L)**   | LCS  | 0.7 | 0.8 | 0.6 | 1.0 |
+|                 | ISCO | 1.5 | 1.3 | 1.1 | 1.6 |
+|                 | GB   | 0.8 | 0.7 | 0.5 | 1.0 |
+|                 | GBH  | 0.6 | 0.6 | 0.3 | 0.9 |
+| **OP (mg/L)**   | LCS  | 0.3 | 0.3 | 0.2 | 0.3 |
+|                 | ISCO | 0.3 | 0.3 | 0.3 | 0.4 |
+|                 | GB   | 0.2 | 0.2 | 0.1 | 0.2 |
+|                 | GBH  | 0.1 | 0.1 | 0.1 | 0.2 |
+| **EC (dS/m)**   | LCS  | 0.7 | 0.7 | 0.6 | 0.8 |
+|                 | ISCO | 0.9 | 0.9 | 0.7 | 1.0 |
+|                 | GB   | 0.4 | 0.4 | 0.2 | 0.5 |
+|                 | GBH  | 0.2 | 0.2 | 0.0 | 0.4 |
+| **TSS (mg/L)**  | LCS  | 1618 | 1694 | 1148 | 2226 |
+|                 | ISCO | 2629 | 2481 | 1882 | 3086 |
+|                 | GB   | 1331 | 1284 | 639 | 1924 |
+|                 | GBH  | 827 | 955 | 204 | 1678 |
+| **TDS (mg/L)**  | LCS  | 1046 | 1065 | 1010 | 1118 |
+|                 | ISCO | 1094 | 1085 | 1028 | 1144 |
+|                 | GB   | 1186 | 1157 | 1098 | 1224 |
+|                 | GBH  | 1186 | 1174 | 1104 | 1247 |
+
 ### Interpret the results
 
 - All Samplers have pretty decent agreement
