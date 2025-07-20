@@ -115,30 +115,11 @@ Simulated data come from an r script specifically built to represent a similar s
 ### Create a causal model
 Produced by [dagitty.net](https://www.dagitty.net/dags.html#), the causal model is a directed acyclic graph (DAG) that represents the relationships between the variables in the study.  This model will be used to create the statistical model in R.
 
-![Figure 3: Causal Model](figs/dag.PNG)
+![Figure 3: Causal Model](figs/dag.jpg)
 *Figure 3.* DAG representing the causal model for the study.
 
+This DAG describes the relationships between analyzed variables; arrows represent directional causes. The sampler method (S), analyte type (A), tillage treatment (T), and experimental block (B) all influence the observed concentration (C). Analyte impacts may vary depending on S, T, and B. Note that u marks unknown factors that affect concentration that have not been measured. The direct effect of S on C is highlighted in red to indicate the primary relationship of interest for this study.
 
-Where sampler method (S), Analyte type (A), and experimental block (B) influence the observed analyte concentration (C). The observed concentration is also influenced by other uncertainty that is unobserved (*e*). Green nodes represent exposures, blue nodes represent outcomes, and grey nodes represent unobserved variables.
-
-Here was the code used to generate the DAG:
-
-```{r}
-dag {
-bb="-3.052,-3.426,2.385,2.376"
-"Observed Concentration" [outcome,pos="-0.456,-0.248"]
-"Other Uncertainty" [latent,pos="1.329,-2.365"]
-"Sampler Method" [exposure,pos="-1.336,-1.831"]
-Analyte [exposure,pos="-2.142,-0.196"]
-Block [exposure,pos="-1.343,1.451"]
-"Other Uncertainty" -> "Observed Concentration"
-"Sampler Method" -> "Observed Concentration"
-Analyte -> "Observed Concentration"
-Analyte -> "Sampler Method"
-Analyte -> Block
-Block -> "Observed Concentration"
-}
-```
 
 ### Create the statistical model
 ### Generalized Linear Mixed Model
