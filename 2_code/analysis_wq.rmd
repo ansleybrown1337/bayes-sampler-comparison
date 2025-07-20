@@ -128,7 +128,7 @@ d <- d %>%
 # our model uses all data at once, no need to split
 # Prepare data for the updated model
 dat <- list(
-  C_obs = d$result_mx,                      # standardized results
+  C_obs = d$result_ctr,                      # standardized results
   S = d$S,                                   # Sampler type index (1-4)
   A = d$A,                                   # Analyte index (1-9)
   B = d$B,                                   # Block index (1-2)
@@ -1276,7 +1276,6 @@ m1.6_nc <- ulam(
   alist(
     # Observation model
     #C_obs ~ dnorm(mu, sigma),
-    C_obs ~ dlnorm(mu, sigma_analyte[A]),
     C_obs ~ normal(mu, sigma_analyte[A]),
     
     # Mean structure with correlations between analytes, samplers, and blocks
@@ -1828,11 +1827,11 @@ for (a in 1:dat$K_A) {
   analyte_min <- min(d$result[d$A == a], na.rm = TRUE)
 
   if (length(dim(back_transformed_predictions_real)) == 4) {
-    # back_transformed_predictions_real[, a, , ] <- posterior_predictions_real[, a, , ] * analyte_sd + analyte_mean
-    back_transformed_predictions_real[, a, , ] <- posterior_predictions_real[, a, , ] * analyte_max # uncomment when using max transform
+    back_transformed_predictions_real[, a, , ] <- posterior_predictions_real[, a, , ] * analyte_sd + analyte_mean
+    # back_transformed_predictions_real[, a, , ] <- posterior_predictions_real[, a, , ] * analyte_max # uncomment when using max transform
   } else {
-    # back_transformed_predictions_real[, a, , , ] <- posterior_predictions_real[, a, , , ] * analyte_sd + analyte_mean
-    back_transformed_predictions_real[, a, , , ] <- posterior_predictions_real[, a, , , ] * analyte_max # uncomment when using max transform
+    back_transformed_predictions_real[, a, , , ] <- posterior_predictions_real[, a, , , ] * analyte_sd + analyte_mean
+    # back_transformed_predictions_real[, a, , , ] <- posterior_predictions_real[, a, , , ] * analyte_max # uncomment when using max transform
   }
 }
 
@@ -2216,7 +2215,7 @@ plot_predictions_with_observed(
   back_transformed_predictions = back_transformed_predictions_real,
   data = d,
   sampler_mapping = sampler_mapping,
-  analyte_index = 3,    # 1-9
+  analyte_index = 8,    # 1-9
   block_index = 1#,      # 1 or 2
   #treatment_index = 3   # 1-3
 )
