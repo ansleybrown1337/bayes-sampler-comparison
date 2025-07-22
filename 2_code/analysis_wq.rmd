@@ -162,6 +162,20 @@ print(summary_stats)
 
 # Save summary statistics to a CSV file
 write.csv(summary_stats, "../1_data/real_data_summary_stats.csv", row.names = FALSE)
+
+# Count samples collected:
+d <- d %>%
+  mutate(year = year(mdy_hm(collected)))  # if times are included
+
+actual_composite_counts <- d %>%
+  distinct(year, event.count, treatment, block, method.name, duplicate) %>%
+  count(year, event.count, name = "actual_samples") %>%
+  arrange(year, event.count)
+
+print(actual_composite_counts)
+
+# Save actual composite counts to a CSV file
+write.csv(actual_composite_counts, "../1_data/real_data_composite_counts.csv", row.names = FALSE)
 ```
 
 ### Model 1.0 - Intercept Only
