@@ -48,8 +48,8 @@ d <- read.csv("../1_data/real_data_ecfix.csv")
 
 # drop inflow rows
 d <- d[d$event.type != 'Inflow',]
-# we will impute the missing values for the GB, GBH, and ISCO samplers at these events
-#d <- d[!d$event.count %in% c('Storm 1', 'Storm 2'),]
+# we will impute the missing values for the GB, GBH, and ISCO samplers at these events, but you may drop them if you like here:
+# d <- d[!d$event.count %in% c('Storm 1', 'Storm 2'),]
 
 # drop first samples from ISCO method to test "plume" theory for sediment bias
 # commented out by default
