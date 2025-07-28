@@ -44,7 +44,7 @@ Tool for importing and prepping real data:
 ```{r}
 # load real data
 # note that this script places the working directory in the 2_code folder, not the root of the project
-d <- read.csv("../1_data/real_data.csv")
+d <- read.csv("../1_data/real_data_ecfix.csv")
 
 # drop inflow rows
 d <- d[d$event.type != 'Inflow',]
