@@ -1,8 +1,8 @@
 #cmdstan path
-cmdstanr::set_cmdstan_path("C:/Users/ansleybr/Miniconda3/envs/stan/Library/bin/cmdstan")
+cmdstanr::set_cmdstan_path("C:/Users/ansle/anaconda3/envs/stan/Library/bin/cmdstan")
 
 #tbb path - check path with Sys.getenv("PATH")
-#Sys.setenv(PATH = paste(Sys.getenv("PATH"), "C:\\Users\\ansle\\anaconda3\\envs\\stan\\Library\\bin\\cmdstan\\stan\\lib\\stan_math\\lib\\tbb", sep = ";"))
+Sys.setenv(PATH = paste(Sys.getenv("PATH"), "C:\\Users\\ansle\\anaconda3\\envs\\stan\\Library\\bin\\cmdstan\\stan\\lib\\stan_math\\lib\\tbb", sep = ";"))
 
 #g++ paths
 # in anaconda
