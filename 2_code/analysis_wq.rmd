@@ -1274,11 +1274,11 @@ sim_data_1.6 %>%
 ```{r, eval=TRUE}
 # Prepare data for the model
 data1.6 <- list(
-  C_obs = array(as.vector(sim_data_1.6$C_obs_standardized)),     # RESPONSE: array!
-  S = as.integer(as.factor(sim_data_1.6$S)),             # index
-  A = as.integer(sim_data_1.6$analyte_abbr),             # index
-  B = as.integer(as.factor(sim_data_1.6$block)),         # index
-  TRT = as.integer(as.factor(sim_data_1.6$treatment)),   # index
+  C_obs = as.numeric(sim_data_1.6$C_obs_standardized),   # Standardized observed concentrations
+  S = as.integer(as.factor(sim_data_1.6$S)),             # Sampler method
+  A = as.integer(sim_data_1.6$analyte_abbr),             # Analyte type
+  B = as.integer(as.factor(sim_data_1.6$block)),         # Block
+  TRT = as.integer(as.factor(sim_data_1.6$treatment)),   # Tillage treatment
   N = nrow(sim_data_1.6),
   K_S = length(unique(sim_data_1.6$S)),
   K_A = length(unique(sim_data_1.6$analyte_abbr)),
@@ -1976,6 +1976,8 @@ sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 png('../figs/sampler_effects.png', width = 2000, height = 1200, res = 300)
 plot_sampler_effects(posterior_samples_real, sampler_mapping)
 dev.off()
+
+plot_sampler_effects(posterior_samples_real, sampler_mapping)
 ```
 
 *Plot Sampler Effect Contrasts*
@@ -2053,6 +2055,8 @@ sampler_mapping <- c("LCS" = 1, "ISCO" = 2, "GB" = 3, "GBH" = 4)
 png('../figs/sampler_contrasts.png', width = 3000, height = 1200, res = 300)
 plot_sampler_contrasts(posterior_samples_real, sampler_mapping)
 dev.off()
+
+plot_sampler_contrasts(posterior_samples_real, sampler_mapping)
 ```
 
 *Plot Treatment Effects*
@@ -2103,6 +2107,8 @@ plot_treatment_effects <- function(posterior_samples, treatment_mapping) {
 png('../figs/treatment_effects_real.png', width = 2000, height = 1200, res = 300)
 plot_treatment_effects(posterior_samples_real, trt_mapping)
 dev.off()
+
+plot_treatment_effects(posterior_samples_real, trt_mapping)
 
 ```
 
@@ -2566,7 +2572,7 @@ plotly_violin_predictions(
   back_transformed_predictions = back_transformed_predictions_real,
   data = d,
   sampler_mapping = sampler_mapping,
-  analyte_index = 8,     # e.g., TSS
+  analyte_index = 9,     # e.g., TSS = 8
   block_index = 1,       # or NULL
   treatment_index = NULL # or 1-3
 )
