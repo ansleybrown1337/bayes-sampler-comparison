@@ -3,7 +3,7 @@
 Repository Created by A.J. Brown, 27 Feb 2024
 
 
-[![DOI](https://zenodo.org/badge/764277323.svg)](https://doi.org/10.5281/zenodo.15532046)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17654177.svg)](https://doi.org/10.5281/zenodo.17654177)
 
   
 **Principal Investigators:** Ansley "AJ" Brown, Erik Wardle, Emmanuel Deleon, and Jake Ladow </br>
