@@ -351,7 +351,7 @@ The posterior distributions showing the impact of sampler method averaged over a
 
 The final test is to push out analyte predictions using the calibrated model and plotting the 'true' simulated data values over it to see how the model performs.  The results were good, with the model accurately centering posterior predictions over the simulated 'true' values.  Here is an example of that with Nitrate (NO3):
 
-![Figure 5. Posterior NO3 Prediction](figs/predictions_with_observed_sim.png)
+![Figure 5. Posterior NO3 Prediction](figs/predictions_with_sim.png)
 
 *Figure 5. Generative model posterior prediction of nitrate concentration with "True" mean values overlain as vertical dashed lines.*
 
@@ -359,7 +359,7 @@ The final test is to push out analyte predictions using the calibrated model and
 After validating the model's accuracy with simulated data, the real data was analyzed using the model.
 
 
-![Figure 6: Sampler Effect Results](figs/sampler_effects.png)
+![Figure 6: Sampler Effect Results](figs/sampler_effects.jpg)
 
 *Figure 6. Effects of Sampler Method on Observed Concentration*
 
@@ -440,9 +440,9 @@ If you use this code or the results of this analysis in your work, please cite t
 @software{Brown2025,
   author = {Ansley Brown and Emmanuel Deleon and Erik Wardle and Jacob Ladow},
   title = {Unveiling Biases in Water Sampling: A Bayesian Approach for Precision in Edge-of-Field Monitoring},
-  version = {1.0.0},
+  version = {1.1.0},
   date = {2025-05-27},
-  doi = {10.5281/zenodo.15532047},
+  doi = {10.5281/zenodo.17654177},
   url = {https://github.com/ansleybrown1337/bayes-sampler-comparison},
   keywords = {Bayesian Inference, Edge-of-Field Monitoring, Water Quality, Agriculture},
 }
