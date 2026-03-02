@@ -9,6 +9,9 @@ Repository Created by A.J. Brown, 27 Feb 2024
 **Principal Investigators:** Ansley "AJ" Brown, Erik Wardle, Emmanuel Deleon, and Jake Ladow </br>
 **Affiliation:** Colorado State University, Agricultural Water Quality Program, Soil and Crop Sciences Department
 
+> [!TIP]
+> See our full peer-reviewed article on this research in the Journal of Environmental Quality here: [https://doi.org/10.1002/jeq2.70149](https://doi.org/10.1002/jeq2.70149)
+
 ## Abstract
 
 In Colorado and across the United States, agriculture is identified as a source of nutrient pollution in state and federal waters, with nutrients such as nitrogen and phosphorus running off farmlands into surface waterways, causing quality issues. Despite the lack of regulation for agricultural nonpoint sources in Colorado, initiatives encourage adopting Best Management Practices (BMPs) to protect surface water quality. 
